@@ -13,7 +13,7 @@ public class Main extends Application{
 	public void start(Stage primaryStage) {
 		try {
 			//Stage estagio = primaryStage;
-			URL url = new File("src/ola.fxml").toURI().toURL();
+			URL url = new File("src/sistema/gui/view/ola.fxml").toURI().toURL();
 			Parent rootMain = FXMLLoader.load(url);
 			Scene cenaMain = new Scene(rootMain);
 
