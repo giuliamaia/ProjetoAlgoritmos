@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) {
+		new Splash();
 		try {
 			//Stage estagio = primaryStage;
 			URL url = new File("src/sistema/gui/view/ola.fxml").toURI().toURL();
