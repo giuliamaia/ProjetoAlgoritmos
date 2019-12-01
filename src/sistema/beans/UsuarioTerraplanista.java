@@ -9,6 +9,10 @@ public class UsuarioTerraplanista {
 	private List<String> interesses;
 	private LocalDate dataNascimento;
 	private LocalDateTime horaCriaçãoConta;
+	private String senha;
+	private String nickName;
+	private boolean ehPastor;
+	
 	public List<UsuarioTerraplanista> getAmigos() {
 		return amigos;
 	}
@@ -32,6 +36,24 @@ public class UsuarioTerraplanista {
 	}
 	public void setHoraCriaçãoConta(LocalDateTime horaCriaçãoConta) {
 		this.horaCriaçãoConta = horaCriaçãoConta;
+	}
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public boolean isEhPastor() {
+		return ehPastor;
+	}
+	public void setEhPastor(boolean ehPastor) {
+		this.ehPastor = ehPastor;
 	}
 	
 	
