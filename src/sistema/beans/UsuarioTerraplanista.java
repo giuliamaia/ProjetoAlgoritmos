@@ -9,6 +9,7 @@ public class UsuarioTerraplanista {
 	private List<String> interesses;
 	private LocalDate dataNascimento;
 	private LocalDateTime horaCriaçãoConta;
+	
 	public List<UsuarioTerraplanista> getAmigos() {
 		return amigos;
 	}
