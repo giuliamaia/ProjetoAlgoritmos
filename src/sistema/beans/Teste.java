@@ -1,6 +1,7 @@
 package sistema.beans;
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
+import org.graphstream.ui.view.Viewer;
 
 
 public class Teste {
@@ -22,12 +23,9 @@ public class Teste {
 		grafo.addEdge("Giiu", "Romulo", "Copo");
 		grafo.addEdge("Bunda", "Copo", "Rodrigues");
 		grafo.addEdge("Bundaa", "Corpo", "Copo");
-		grafo.addAttribute("ui.stylesheet", "url('/CSS/grafo.css')");
-		grafo.display();
+		grafo.addAttribute("ui.stylesheet", "url('CSS/grafo.css')");
 		
-		
-		
-		//Viewer visualizador = grafo.display();
+		Viewer visualizador = grafo.display();
 		//View visao = visualizador.getDefaultView();
 		//visao.getCamera().setViewCenter(4, 2, 1);
 		//visualizador.close();
