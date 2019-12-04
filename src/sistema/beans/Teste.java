@@ -25,6 +25,8 @@ public class Teste {
 		grafo.addAttribute("ui.stylesheet", "url('/CSS/grafo.css')");
 		grafo.display();
 		
+		
+		
 		//Viewer visualizador = grafo.display();
 		//View visao = visualizador.getDefaultView();
 		//visao.getCamera().setViewCenter(4, 2, 1);
