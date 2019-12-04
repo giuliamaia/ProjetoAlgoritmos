@@ -1,0 +1,14 @@
+graph { fill-mode: gradient-vertical; fill-color: gray, white, white, white, white, gray; }
+
+node {
+	size: 50px, 50px;
+	size-mode: fit;
+	shape: rounded-box;
+	stroke-mode: plain;
+	fill-color: #999;
+	padding: 3px, 2px;
+}
+
+node:clicked {
+	fill-color: red;
+}
