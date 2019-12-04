@@ -18,7 +18,7 @@ public class Teste {
 		Graph grafo = new MultiGraph("Usuários");
 		File file = new File("CSS/grafo.css");
 		System.out.println(file.exists());
-		grafo.addAttribute("ui.stylesheet", "url(" + file.toURI() + ")");
+		grafo.addAttribute("ui.stylesheet", "url('CSS/grafo.css')");
 		grafo.setStrict(false);
 		grafo.setAutoCreate(true);
 		grafo.addEdge("SaGiu", "Sabrina", "Giulia");
