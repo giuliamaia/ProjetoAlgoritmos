@@ -12,5 +12,7 @@
 	<classpathentry kind="lib" path="CSS/gs-algo-1.3.jar"/>
 	<classpathentry kind="lib" path="CSS/gs-core-1.3.jar"/>
 	<classpathentry kind="lib" path="CSS/gs-ui-1.3.jar"/>
+	<classpathentry kind="lib" path="CSS/fontawesomefx-commons-9.1.2.jar"/>
+	<classpathentry kind="lib" path="CSS/fontawesomefx-fontawesome-4.7.0-9.1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

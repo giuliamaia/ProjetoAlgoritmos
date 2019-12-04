@@ -1,32 +1,15 @@
 package sistema.gui.controladores;
 
-
-import javafx.event.ActionEvent;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 
 public class TelaLoginController {
-	@FXML
-	private Label label;
 
     @FXML
-    private TextField tfVertice;
+    private JFXPasswordField pfSenha;
 
     @FXML
-    private TextField tfa2;
-
-    @FXML
-    private TextField tfa1;
-
-    @FXML
-    void addAresta(ActionEvent event) {
-    	
-    }
-
-    @FXML
-    void addVertice(ActionEvent event) {
-    	
-    }
+    private JFXTextField tfNome;
 
 }
