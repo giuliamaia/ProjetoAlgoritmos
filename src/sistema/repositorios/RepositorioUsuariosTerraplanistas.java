@@ -1,29 +1,25 @@
 package sistema.repositorios;
 
 import java.util.List;
+import org.graphstream.graph.Node;
 
+import sistema.beans.Grafo;
 import sistema.beans.UsuarioTerraplanista;
-import sistema.beans.UsuarioTerraplanistaException;
 
 public class RepositorioUsuariosTerraplanistas {
 	private List<UsuarioTerraplanista> usuarios;
-	
-	public void adicionarUsuario(UsuarioTerraplanista usuario) throws UsuarioTerraplanistaException {
-		try {
-			this.usuarios.add(usuario);
-		}catch(NullPointerException e) {
-			throw new UsuarioTerraplanistaException("Usuario não pode ser vazio!");
-		}
-		
+	private Grafo grafo = Grafo.getInstancia();
+	public void adicionarUsuario(UsuarioTerraplanista usuario) {
+		this.usuarios.add(usuario);
+		grafo.addNode(usuario.getNome());
 	}
-	public void	removerUsuario(UsuarioTerraplanista usuario) throws UsuarioTerraplanistaException {
-		try {
-			this.usuarios.remove(usuario);
-		}catch(NullPointerException e) {
-			throw new UsuarioTerraplanistaException("uat r u doing mannnnnnn!");
-		}
+	public void	removerUsuario(UsuarioTerraplanista usuario) {
+		this.usuarios.remove(usuario);
+		grafo.removeNode(usuario.getNome());
 	}
 	public void editarUsuario(UsuarioTerraplanista usuarioVelho, UsuarioTerraplanista usuarioNovo) {
 		usuarioVelho = usuarioNovo;
+		Node no = grafo.getNode(usuarioVelho.getNome());
+		no.setAttribute(usuarioVelho.getNome(), usuarioNovo.getNome());
 	}
 }
