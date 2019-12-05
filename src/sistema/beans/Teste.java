@@ -8,10 +8,6 @@ import org.graphstream.ui.view.Viewer;
 
 
 public class Teste {
-	
-	
-	
-	
 	public static void main(String[] args) throws MalformedURLException {
 		System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
 

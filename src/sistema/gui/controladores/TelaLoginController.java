@@ -22,12 +22,12 @@ public class TelaLoginController {
 
     @FXML
     void abrirRegistrarConta(ActionEvent event) {
-    	
+    	TerraPlanizer.trocarTela("registro");
     }
 
     @FXML
     void fecharTela(MouseEvent event) {
-    	TerraPlanizer.fecharTela("login");
+    	TerraPlanizer.fecharTela();
     }
 
     @FXML
@@ -37,7 +37,7 @@ public class TelaLoginController {
     
     @FXML
     void minimizarTela(MouseEvent event) {
-    	TerraPlanizer.minimizarTela("login");
+    	TerraPlanizer.minimizarTela();
     }
 
 }

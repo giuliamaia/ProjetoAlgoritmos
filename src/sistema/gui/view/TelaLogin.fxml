@@ -17,7 +17,10 @@
          <font>
             <Font name="Consolas" size="12.0" />
          </font></Text>
-      <Text fill="#5d5454" layoutX="284.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Senha" />
+      <Text fill="#5d5454" layoutX="284.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Senha">
+         <font>
+            <Font name="Consolas" size="12.0" />
+         </font></Text>
       <JFXTextField fx:id="tfNome" layoutX="319.0" layoutY="182.0" onAction="#logar" stylesheets="@../../../../CSS/sky.css" viewOrder="1.0" />
       <JFXPasswordField fx:id="pfSenha" layoutX="319.0" layoutY="212.0" onAction="#logar" stylesheets="@../../../../CSS/sky.css" viewOrder="2.0" />
       <JFXButton buttonType="RAISED" layoutX="314.0" layoutY="255.0" onAction="#logar" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" stylesheets="@../../../../CSS/sky.css" text="Login" textFill="#5d5454" viewOrder="3.0" />

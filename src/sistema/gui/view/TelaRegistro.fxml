@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="404.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema.gui.controladores.TelaRegistroController">
+   <children>
+      <Pane layoutY="-1.0" prefHeight="406.0" prefWidth="168.0" style="-fx-background-color: #7DA7D9;" />
+      <Text fill="#4d4242" layoutX="169.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Login">
+         <font>
+            <Font name="Consolas" size="12.0" />
+         </font>
+      </Text>
+      <Text fill="#5d5454" layoutX="169.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Senha">
+         <font>
+            <Font name="Consolas" size="12.0" />
+         </font></Text>
+      <JFXTextField fx:id="tfNome" layoutX="204.0" layoutY="94.0" prefHeight="25.0" prefWidth="201.0" stylesheets="@../../../../CSS/sky.css" unFocusColor="BLACK" viewOrder="1.0">
+         <font>
+            <Font name="Consolas Italic" size="12.0" />
+         </font></JFXTextField>
+      <JFXPasswordField fx:id="pfSenha" layoutX="204.0" layoutY="169.0" stylesheets="@../../../../CSS/sky.css" viewOrder="3.0" />
+      <Text fill="#6d7a7c" layoutX="168.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registre sua conta" wrappingWidth="282.0">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Text>
+      <Text fill="#607072" layoutX="169.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sua conta, milhões de amigos, apenas uma verdade." wrappingWidth="258.591796875">
+         <font>
+            <Font name="System Italic" size="11.0" />
+         </font>
+      </Text>
+      <FontAwesomeIconView glyphName="WINDOW_CLOSE" glyphStyle="-fx-fill: linear-gradient(#70b4e5 0%, #247cbc 70%, #2c85c1 85%);" layoutX="575.0" layoutY="21.0" onMouseClicked="#fecharTela" size="20" wrappingWidth="21.443359375">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </FontAwesomeIconView>
+      <FontAwesomeIconView glyphName="WINDOW_MINIMIZE" glyphStyle="-fx-fill: linear-gradient(#70b4e5 0%, #247cbc 70%, #2c85c1 85%);" layoutX="549.0" layoutY="21.0" onMouseClicked="#minimizarTela" selectionEnd="0" selectionFill="#eb0909" size="20" />
+      <JFXCheckBox fx:id="checkTermos" layoutX="171.0" layoutY="342.0" text=" " />
+      <Text fill="#5d5454" layoutX="172.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Nome">
+         <font>
+            <Font name="Consolas" size="12.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="tfLogin" layoutX="204.0" layoutY="138.0" stylesheets="@../../../../CSS/sky.css" viewOrder="2.0" />
+      <Text fill="#4d4242" layoutX="220.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Data de Nascimento">
+         <font>
+            <Font name="Consolas" size="12.0" />
+         </font>
+      </Text>
+      <ComboBox fx:id="comboInteresses" layoutX="418.0" layoutY="295.0" onAction="#addInteresse" prefHeight="28.0" prefWidth="135.0" />
+      <Text fill="#4d4242" layoutX="469.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Interesses">
+         <font>
+            <Font name="Consolas" size="12.0" />
+         </font>
+      </Text>
+      <Text fill="#4d4242" layoutX="197.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Eu declaro que li e aceito os">
+         <font>
+            <Font name="Consolas" size="12.0" />
+         </font>
+      </Text>
+      <JFXListView layoutX="418.0" layoutY="83.0" prefHeight="212.0" prefWidth="168.0" />
+      <FontAwesomeIconView glyphName="REMOVE" glyphStyle="-fx-fill: linear-gradient(#ff0101 0%, #e72020 70%, #a11a1a 85%);" layoutX="561.0" layoutY="318.0" onMouseClicked="#removerInteresse" selectionFill="#a11a1a" size="30" />
+      <Text fx:id="abrirTermosDeUso" fill="#0da1c6" layoutX="396.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Termos de uso" underline="true">
+         <font>
+            <Font name="Consolas" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <JFXButton buttonType="RAISED" defaultButton="true" layoutX="461.0" layoutY="369.0" onAction="#confirmar" text="Confirmar" />
+      <JFXButton buttonType="RAISED" cancelButton="true" layoutX="530.0" layoutY="369.0" onAction="#cancelar" text="Cancelar" />
+      <DatePicker layoutX="192.0" layoutY="238.0" />
+   </children>
+</AnchorPane>
