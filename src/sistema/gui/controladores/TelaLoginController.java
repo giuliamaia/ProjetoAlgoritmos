@@ -7,10 +7,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import sistema.controlador.Controlador;
 import sistema.gui.TerraPlanizer;
 
 public class TelaLoginController {
-	
+	Controlador controlador = Controlador.getInstancia();
     @FXML
     private JFXTextField tfNome;
 	
@@ -32,7 +33,7 @@ public class TelaLoginController {
 
     @FXML
     void logar(ActionEvent event) {
-
+    	
     }
     
     @FXML
