@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -38,6 +39,12 @@ public class TerraPlanizer extends Application{
 	}
 	public static void main(String[] args) {
 		launch(args);
+	}
+	static public File abrirFileChooser() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Resource File");
+		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Imagem", "*.jpeg", "*.jpg", "*.png"));
+		return fileChooser.showOpenDialog(estagio);
 	}
 	static public void trocarTela(String tela) {
 		switch (tela) {

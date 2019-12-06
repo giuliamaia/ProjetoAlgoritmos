@@ -1,5 +1,6 @@
 package sistema.gui.controladores;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -95,32 +96,35 @@ public class TelaRegistroController {
     }
     @FXML
     void alterarFoto1(MouseEvent event) {
-
+    	circuloImg.setFill(new ImagePattern(new Image("/images/woman128.png")));
     }
 
     @FXML
     void alterarFoto2(MouseEvent event) {
-
+    	circuloImg.setFill(new ImagePattern(new Image("/images/man128.png")));
     }
 
     @FXML
     void alterarFoto3(MouseEvent event) {
-
+    	circuloImg.setFill(new ImagePattern(new Image("/images/manbigode128.png")));
     }
 
     @FXML
     void alterarFoto4(MouseEvent event) {
-
+    	circuloImg.setFill(new ImagePattern(new Image("/images/mannegro128.png")));
     }
 
     @FXML
     void alterarFoto5(MouseEvent event) {
-
+    	circuloImg.setFill(new ImagePattern(new Image("/images/pastor128.png")));
     }
 
     @FXML
     void alterarFotoOutra(MouseEvent event) {
-
+    	File arquivo = TerraPlanizer.abrirFileChooser();
+    	if (arquivo != null && arquivo.exists()) {
+    		circuloImg.setFill(new ImagePattern(new Image(arquivo.toURI().toString())));
+    	}
     }
     private boolean verificaSeJaTem(String usuario) {
     	for (String aux : arrayListInteresses) {
@@ -165,6 +169,11 @@ public class TelaRegistroController {
 
     private boolean isTudoPreenchido() {
 		if (!tfNome.getText().isEmpty() && !tfLogin.getText().isEmpty() && !pfSenha.getText().isEmpty() && checkTermos.isSelected()&&datePickerDataNascimento.getValue() != null) {
+			//falta ver se não tem ninguem com esse login
+			if(tfNome.getText().contains(" ")) {
+				//avisar q fez merda
+				return false;
+			}
 			return true;
 		}
 		return false;
