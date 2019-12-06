@@ -75,4 +75,8 @@ public class UsuarioTerraplanista implements Serializable{
 		this.dataNascimento = dataNascimento;
 		this.horaCriaçãoConta = LocalDateTime.now();
 	}
+	public UsuarioTerraplanista(String nome) {
+		super();
+		this.nome = nome;
+	}
 }
