@@ -50,12 +50,6 @@ public class TelaRegistroController {
     private ComboBox<String> comboInteresses;
 
     @FXML
-    private Text abrirTermosDeUso;
-    
-    @FXML
-    private Rectangle escolherImagemPC;
-
-    @FXML
     private JFXTextField tfOutroInteresse;
     
     @FXML
@@ -95,7 +89,39 @@ public class TelaRegistroController {
     	}
     	
     }
-    
+    @FXML
+    void abrirTermosDeUso(MouseEvent event) {
+
+    }
+    @FXML
+    void alterarFoto1(MouseEvent event) {
+
+    }
+
+    @FXML
+    void alterarFoto2(MouseEvent event) {
+
+    }
+
+    @FXML
+    void alterarFoto3(MouseEvent event) {
+
+    }
+
+    @FXML
+    void alterarFoto4(MouseEvent event) {
+
+    }
+
+    @FXML
+    void alterarFoto5(MouseEvent event) {
+
+    }
+
+    @FXML
+    void alterarFotoOutra(MouseEvent event) {
+
+    }
     private boolean verificaSeJaTem(String usuario) {
     	for (String aux : arrayListInteresses) {
     		if (aux.toUpperCase().contentEquals(usuario.toUpperCase())) {
