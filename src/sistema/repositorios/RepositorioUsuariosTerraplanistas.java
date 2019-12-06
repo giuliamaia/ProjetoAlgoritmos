@@ -23,4 +23,8 @@ public class RepositorioUsuariosTerraplanistas {
 		Node no = grafo.getNode(usuarioVelho.getNome());
 		no.setAttribute(usuarioVelho.getNome(), usuarioNovo.getNome());
 	}
+	
+	public void pesquisarUsuario () {
+		
+	}
 }
