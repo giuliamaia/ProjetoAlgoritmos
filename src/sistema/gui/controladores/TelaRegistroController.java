@@ -193,7 +193,6 @@ public class TelaRegistroController {
 		retangulo3.setFill(new ImagePattern(new Image("/images/manbigode64.png")));
 		retangulo2.setFill(new ImagePattern(new Image("/images/man64.png")));
 		retangulo1.setFill(new ImagePattern(new Image("/images/woman64.png")));
-		
 	}
 
 	private void inicializaComboBoxInteresses() {
