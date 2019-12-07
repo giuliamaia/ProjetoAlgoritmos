@@ -9,6 +9,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
@@ -101,12 +102,16 @@
       <FontAwesomeIconView glyphName="IMAGE" glyphStyle="-fx-fill: linear-gradient(#70b4e5 0%, #247cbc 70%, #2c85c1 85%);" layoutX="425.0" layoutY="164.0" onMouseClicked="#alterarFotoOutra" size="25" wrappingWidth="12.857142448425293" />
       <JFXTextField fx:id="tfOutroInteresse" layoutX="647.0" layoutY="327.0" onAction="#addOutroInteresse" prefHeight="25.0" prefWidth="140.0" />
       <FontAwesomeIconView fx:id="iconeMais" glyphName="PLUS" glyphStyle="-fx-fill: linear-gradient(#1ee410 0%, #149a14 70%, #108c10 85%);" layoutX="796.0" layoutY="348.0" onMouseClicked="#addOutroInteresse" selectionFill="#108c10" size="25" />
-      <JFXTextField fx:id="tfRecomendacao" layoutX="450.0" layoutY="240.0" onAction="#pesquisaRecomendacao" prefHeight="25.0" prefWidth="148.0" />
-      <Text fill="#4d4242" layoutX="475.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Recomendado por">
+      <JFXTextField fx:id="tfRecomendacao" layoutX="459.0" layoutY="197.0" onAction="#pesquisaRecomendacao" prefHeight="25.0" prefWidth="148.0" />
+      <Text fill="#4d4242" layoutX="484.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Recomendado por">
          <font>
             <Font name="Consolas" size="12.0" />
          </font>
       </Text>
-      <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill: linear-gradient(#70b4e5 0%, #247cbc 70%, #2c85c1 85%);" layoutX="600.0" layoutY="262.0" onMouseClicked="#pesquisaRecomendacao" size="25" />
+      <FontAwesomeIconView glyphName="SEARCH" glyphStyle="-fx-fill: linear-gradient(#70b4e5 0%, #247cbc 70%, #2c85c1 85%);" layoutX="609.0" layoutY="219.0" onMouseClicked="#pesquisaRecomendacao" size="25" />
+      <Label fx:id="labelErroLogin" layoutX="346.0" layoutY="244.0" prefHeight="17.0" prefWidth="259.0" />
+      <Label fx:id="labelErroData" layoutX="383.0" layoutY="344.0" prefHeight="17.0" prefWidth="174.0" />
+      <Label fx:id="labelErroRecomedacao" layoutX="446.0" layoutY="181.0" prefHeight="17.0" prefWidth="174.0" />
+      <Label fx:id="labelErroGeral" layoutX="448.0" layoutY="371.0" prefHeight="62.0" prefWidth="148.0" wrapText="true" />
    </children>
 </AnchorPane>

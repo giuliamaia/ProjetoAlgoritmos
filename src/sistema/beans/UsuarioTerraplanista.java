@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javafx.scene.image.Image;
+
 public class UsuarioTerraplanista implements Serializable{
 	
 	private static final long serialVersionUID = 8939899618090534011L;
@@ -16,6 +18,7 @@ public class UsuarioTerraplanista implements Serializable{
 	private LocalDate dataNascimento;
 	private LocalDateTime horaCriaçãoConta;
 	private Grafo grafo = Grafo.getInstancia();
+	private Image image;
 	public List<UsuarioTerraplanista> getAmigos() {
 		return amigos;
 	}
@@ -67,12 +70,19 @@ public class UsuarioTerraplanista implements Serializable{
 		grafo.removeEdge(this.getNome(), exAmigo.getNome());
 	}
 	public UsuarioTerraplanista(List<String> interesses, String nome, String login, String senha,
-			LocalDate dataNascimento) {
+			LocalDate dataNascimento, Image image) {
 		this.interesses = interesses;
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;
 		this.dataNascimento = dataNascimento;
 		this.horaCriaçãoConta = LocalDateTime.now();
+		this.image = image;
+	}
+	public Image getImage() {
+		return image;
+	}
+	public void setImage(Image image) {
+		this.image = image;
 	}
 }
