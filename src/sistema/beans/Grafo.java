@@ -26,15 +26,36 @@ import org.graphstream.stream.file.FileSink;
 import org.graphstream.stream.file.FileSource;
 import org.graphstream.ui.view.Viewer;
 
+import sistema.controlador.Controlador;
+
 public class Grafo {
 	private Graph grafo;
-	
+	private Controlador controlador = Controlador.getInstancia();
 	static private Grafo instancia = new Grafo();
 	static public Grafo getInstancia() {
 		return instancia;
 	}
+	public Graph getGrafo() {
+		return grafo;
+	}
+	public void setGrafo(Graph grafo) {
+		this.grafo = grafo;
+	}
 	private Grafo () {
 		grafo = new DefaultGraph("Usuários");
+		
+		construirgrafo();
+	}
+	
+	private void construirgrafo() {
+		for (int i = 0; i < controlador.getUsuarios().size(); i++) {
+			addNode(controlador.getUsuarios().get(i).getNome());
+			for (int j = 0; controlador.getUsuarios().get(i).getAmigos() != null && j < controlador.getUsuarios().get(i).getAmigos().size(); j++) {
+				addNode(controlador.getUsuarios().get(i).getAmigos().get(j).getNome());
+				addEdge(controlador.getUsuarios().get(i).getNome() + " - " + controlador.getUsuarios().get(i).getAmigos().get(j).getNome(), controlador.getUsuarios().get(i).getNome(), controlador.getUsuarios().get(i).getAmigos().get(j).getNome());
+			}
+		}
+		
 	}
 	public <T extends Edge> T addEdge(String arg0, String arg1, String arg2)
 			throws IdAlreadyInUseException, ElementNotFoundException, EdgeRejectedException {

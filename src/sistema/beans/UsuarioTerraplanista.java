@@ -1,6 +1,7 @@
 package sistema.beans;
 
 import java.io.Serializable;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,8 +18,8 @@ public class UsuarioTerraplanista implements Serializable{
 	private String senha;
 	private LocalDate dataNascimento;
 	private LocalDateTime horaCriaçãoConta;
-	private Grafo grafo = Grafo.getInstancia();
-	private Image image;
+	transient private Grafo grafo = Grafo.getInstancia();
+	private String image;
 	private int recomendacoes = 0;
 	private boolean pastor = false;
 	public boolean isPastor() {
@@ -84,19 +85,19 @@ public class UsuarioTerraplanista implements Serializable{
 		grafo.removeEdge(this.getNome(), exAmigo.getNome());
 	}
 	public UsuarioTerraplanista(List<String> interesses, String nome, String login, String senha,
-			LocalDate dataNascimento, Image image) {
+			LocalDate dataNascimento, String string) {
 		this.interesses = interesses;
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;
 		this.dataNascimento = dataNascimento;
 		this.horaCriaçãoConta = LocalDateTime.now();
-		this.image = image;
+		this.image = string;
 	}
-	public Image getImage() {
+	public String getImage() {
 		return image;
 	}
-	public void setImage(Image image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 	public void addRecomendacao() {

@@ -179,7 +179,7 @@ public class TelaRegistroController {
     		System.out.println(tfLogin.getText());
     		System.out.println(pfSenha.getText());
     		System.out.println(datePickerDataNascimento.getValue());
-    		UsuarioTerraplanista user = new UsuarioTerraplanista(arrayListInteresses, tfNome.getText(), tfLogin.getText(), pfSenha.getText(), datePickerDataNascimento.getValue(), imageAux);
+    		UsuarioTerraplanista user = new UsuarioTerraplanista(arrayListInteresses, tfNome.getText(), tfLogin.getText(), pfSenha.getText(), datePickerDataNascimento.getValue(), imageAux.getUrl());
     		controlador.adicionarUsuario(user);
     		TerraPlanizer.trocarTela("login");
     	}
