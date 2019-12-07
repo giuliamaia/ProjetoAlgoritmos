@@ -19,6 +19,20 @@ public class UsuarioTerraplanista implements Serializable{
 	private LocalDateTime horaCriaçãoConta;
 	private Grafo grafo = Grafo.getInstancia();
 	private Image image;
+	private int recomendacoes = 0;
+	private boolean pastor = false;
+	public boolean isPastor() {
+		return pastor;
+	}
+	public void setPastor(boolean pastor) {
+		this.pastor = pastor;
+	}
+	public int getRecomendacoes() {
+		return recomendacoes;
+	}
+	public void setRecomendacoes(int recomendacoes) {
+		this.recomendacoes = recomendacoes;
+	}
 	public List<UsuarioTerraplanista> getAmigos() {
 		return amigos;
 	}
@@ -84,5 +98,8 @@ public class UsuarioTerraplanista implements Serializable{
 	}
 	public void setImage(Image image) {
 		this.image = image;
+	}
+	public void addRecomendacao() {
+		this.recomendacoes++;
 	}
 }
