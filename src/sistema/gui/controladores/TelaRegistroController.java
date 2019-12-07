@@ -317,4 +317,8 @@ public class TelaRegistroController {
     	lista.add("Outro...");
     	comboInteresses.setItems(FXCollections.observableList(lista));		
 	}
+    @FXML
+    void pagarDinheiros(MouseEvent event) {
+
+    }
 }

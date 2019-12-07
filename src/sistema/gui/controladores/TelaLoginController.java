@@ -37,7 +37,7 @@ public class TelaLoginController {
 
     @FXML
     void logar(ActionEvent event) {
-    	if(controlador.pesquisarPorLogin(tfNome.getText())!= null) {
+    	if(controlador.pesquisarPorLogin(tfNome.getText())!= null && !tfNome.getText().isEmpty()) {
     		labelTopo.setText("");
     		if (controlador.pesquisarPorLogin(tfNome.getText()).getSenha().contentEquals(pfSenha.getText())) {
     			labelDown.setText("");
@@ -47,14 +47,14 @@ public class TelaLoginController {
     		}
     		else {
     			labelDown.setText("Sua senha não corresponde");
-        		labelDown.setTextFill(Color.INDIANRED);
+        		labelDown.setTextFill(Color.DARKRED);
     		}
     		
     	}
     	else {
     		labelDown.setText("");
     		labelTopo.setText("Não existe esse login");
-    		labelTopo.setTextFill(Color.INDIANRED);
+    		labelTopo.setTextFill(Color.DARKRED);
     	}
     }
     
@@ -62,5 +62,8 @@ public class TelaLoginController {
     void minimizarTela(MouseEvent event) {
     	TerraPlanizer.minimizarTela();
     }
+    @FXML
+    void pagarDinheiros(MouseEvent event) {
 
+    }
 }
