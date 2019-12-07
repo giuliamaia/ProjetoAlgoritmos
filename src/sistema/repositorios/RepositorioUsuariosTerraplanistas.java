@@ -28,26 +28,43 @@ public class RepositorioUsuariosTerraplanistas {
 	}
 	
 	
-	 public ArrayList<UsuarioTerraplanista> pesquisarPorNome(String nome) {
+	public ArrayList<UsuarioTerraplanista> pesquisarPorNome(String nome) {
 		nome = nome.toUpperCase();
 		ArrayList<UsuarioTerraplanista> ret = new ArrayList<UsuarioTerraplanista>();
-		ArrayList<UsuarioTerraplanista> lista = new ArrayList<UsuarioTerraplanista>();
+		//essa parte aqui é só pra testar se ta funcionando, lembrar de excluir depois:
+		/*ArrayList<UsuarioTerraplanista> lista = new ArrayList<UsuarioTerraplanista>();
 		UsuarioTerraplanista fulano = new UsuarioTerraplanista("fulano");
 		UsuarioTerraplanista beltrano = new UsuarioTerraplanista("beltrano");
 		UsuarioTerraplanista ciclano = new UsuarioTerraplanista("ciclano");
 		lista.add(fulano);
 		lista.add(ciclano);
 		lista.add(beltrano);
-		
+		*/
 		if (nome == null)
 			return null;
 
-		for (UsuarioTerraplanista user : lista) {
+		for (UsuarioTerraplanista user : this.usuarios) {
 			if (user.getNome().toUpperCase().contains(nome)) {
 				ret.add(user);
 			}
 		}
 		return ret;
-	} 
+	}
+	
+	 public ArrayList<UsuarioTerraplanista> pesquisarPorLogin(String login) {
+		 login = login.toUpperCase();
+			ArrayList<UsuarioTerraplanista> ret = new ArrayList<UsuarioTerraplanista>();
+			
+			if (login == null)
+				return null;
+
+			for (UsuarioTerraplanista user : this.usuarios) {
+				if (user.getNome().toUpperCase().contains(login)) {
+					ret.add(user);
+				}
+			}
+			return ret; 
+		 
+	 }
 	 
-}
+} // this.usuarios
