@@ -42,7 +42,8 @@ public class RepositorioUsuariosTerraplanistas {
 		*/
 		if (nome == null)
 			return null;
-
+		
+		// no teste trocar esse for e no lugar de this.usuarios colocar lista
 		for (UsuarioTerraplanista user : this.usuarios) {
 			if (user.getNome().toUpperCase().contains(nome)) {
 				ret.add(user);
@@ -59,12 +60,10 @@ public class RepositorioUsuariosTerraplanistas {
 				return null;
 
 			for (UsuarioTerraplanista user : this.usuarios) {
-				if (user.getNome().toUpperCase().contains(login)) {
+				if (user.getLogin().toUpperCase().contains(login)) {
 					ret.add(user);
 				}
 			}
 			return ret; 
-		 
 	 }
-	 
-} // this.usuarios
+}
