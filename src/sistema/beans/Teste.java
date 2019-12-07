@@ -1,11 +1,16 @@
 package sistema.beans;
 
-import org.graphstream.graph.implementations.SingleGraph;
-import org.graphstream.ui.view.Viewer;
+import java.net.MalformedURLException;
+import java.time.LocalDate;
+import sistema.controlador.Controlador;
+
 
 public class Teste {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws MalformedURLException {
+		Controlador controlador = Controlador.getInstancia();
 		Grafo grafo = Grafo.getInstancia();
-		Viewer viewer = grafo.display();
+		controlador.adicionarUsuario(new UsuarioTerraplanista(null, "Isntyou", "isnobb", "123", LocalDate.of(2001, 10, 04), null));
+	    grafo.display();
+
 	}
 }

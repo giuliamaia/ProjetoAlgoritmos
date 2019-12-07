@@ -44,14 +44,19 @@ public class Grafo {
 	private Grafo () {
 		grafo = new DefaultGraph("Usuários");
 		
-		construirgrafo();
 	}
 	
 	private void construirgrafo() {
-		for (int i = 0; i < controlador.getUsuarios().size(); i++) {
+		grafo.setStrict(false);
+		grafo.setAutoCreate(true);
+		for (int i = 0; controlador.getUsuarios() != null && i < controlador.getUsuarios().size(); i++) {
 			addNode(controlador.getUsuarios().get(i).getNome());
+			getNode(controlador.getUsuarios().get(i).getNome()).addAttribute("ui.style", "text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #e09410; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
+			getNode(controlador.getUsuarios().get(i).getNome()).addAttribute("ui.label", controlador.getUsuarios().get(i).getNome());
 			for (int j = 0; controlador.getUsuarios().get(i).getAmigos() != null && j < controlador.getUsuarios().get(i).getAmigos().size(); j++) {
 				addNode(controlador.getUsuarios().get(i).getAmigos().get(j).getNome());
+				getNode(controlador.getUsuarios().get(i).getAmigos().get(j).getNome()).addAttribute("ui.style", "text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #e09410; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
+				getNode(controlador.getUsuarios().get(i).getAmigos().get(j).getNome()).addAttribute("ui.label", controlador.getUsuarios().get(i).getAmigos().get(j).getNome());
 				addEdge(controlador.getUsuarios().get(i).getNome() + " - " + controlador.getUsuarios().get(i).getAmigos().get(j).getNome(), controlador.getUsuarios().get(i).getNome(), controlador.getUsuarios().get(i).getAmigos().get(j).getNome());
 			}
 		}
@@ -67,6 +72,7 @@ public class Grafo {
 	}
 
 	public Viewer display() {
+		construirgrafo();
 		return grafo.display();
 	}
 

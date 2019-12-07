@@ -1,18 +1,13 @@
 package sistema.controlador;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.List;
 
 import sistema.beans.UsuarioTerraplanista;
 import sistema.repositorios.RepositorioUsuariosTerraplanistas;
 
 public class Controlador {
-	private RepositorioUsuariosTerraplanistas repositorioUsuarioTerraPlanistas = new RepositorioUsuariosTerraplanistas();
+	private RepositorioUsuariosTerraplanistas repositorioUsuarioTerraPlanistas;
 
 	public void adicionarUsuario(UsuarioTerraplanista usuario) {
 		repositorioUsuarioTerraPlanistas.adicionarUsuario(usuario);
@@ -35,12 +30,15 @@ public class Controlador {
 	public void carregar() throws IOException, ClassNotFoundException {
 		repositorioUsuarioTerraPlanistas.carregar();
 	}
-	static private Controlador instancia = new Controlador();
+	static private Controlador instancia = null;
 	static public Controlador getInstancia() {
+		if (instancia == null) {
+			instancia = new Controlador();
+		}
 		return instancia;
 	}
 	private Controlador () {
-		
+		repositorioUsuarioTerraPlanistas = new RepositorioUsuariosTerraplanistas();
 	}
 	
 }

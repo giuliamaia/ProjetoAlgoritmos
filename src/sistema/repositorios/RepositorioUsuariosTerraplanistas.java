@@ -26,7 +26,8 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 		this.usuarios = usuarios;
 	}
 
-	transient private Grafo grafo = Grafo.getInstancia();
+
+	private Grafo grafo = Grafo.getInstancia();
 	public void adicionarUsuario(UsuarioTerraplanista usuario) {
 		this.usuarios.add(usuario);
 		salvar();
