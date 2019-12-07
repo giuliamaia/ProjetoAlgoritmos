@@ -13,7 +13,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="513.0" prefWidth="844.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema.gui.controladores.TelaLoginController">
    <children>
       <Pane layoutY="-1.0" prefHeight="513.5" prefWidth="158.0" style="-fx-background-color: #7DA7D9;" />
-      <Text fill="#5d5454" layoutX="387.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Login">
+      <Text fill="#5d5454" layoutX="387.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Login">
          <font>
             <Font name="Consolas" size="12.0" />
          </font></Text>
@@ -21,7 +21,7 @@
          <font>
             <Font name="Consolas" size="12.0" />
          </font></Text>
-      <JFXTextField fx:id="tfNome" layoutX="431.0" layoutY="215.0" onAction="#logar" stylesheets="@../../../../CSS/sky.css" viewOrder="1.0">
+      <JFXTextField fx:id="tfNome" layoutX="431.0" layoutY="223.0" onAction="#logar" stylesheets="@../../../../CSS/sky.css" viewOrder="1.0">
          <font>
             <Font name="System Italic" size="12.0" />
          </font></JFXTextField>
@@ -46,7 +46,8 @@
             <Font size="9.0" />
          </font>
       </FontAwesomeIconView>
-      <Label fx:id="labelTopo" layoutX="319.0" layoutY="165.0" prefHeight="17.0" prefWidth="135.0" textFill="#da1111" />
+      <Label fx:id="labelTopo" layoutX="565.0" layoutY="228.0" prefHeight="17.0" prefWidth="179.0" textFill="#da1111" />
       <FontAwesomeIconView glyphName="WINDOW_MINIMIZE" glyphStyle="-fx-fill: linear-gradient(#70b4e5 0%, #247cbc 70%, #2c85c1 85%);" layoutX="791.0" layoutY="21.0" onMouseClicked="#minimizarTela" selectionEnd="0" selectionFill="#eb0909" size="20" />
+      <Label fx:id="labelDown" layoutX="565.0" layoutY="264.0" prefHeight="17.0" prefWidth="208.0" textFill="#da1111" />
    </children>
 </AnchorPane>

@@ -8,9 +8,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.graphstream.graph.Node;
-
-import sistema.beans.Grafo;
 import sistema.beans.UsuarioTerraplanista;
 
 public class RepositorioUsuariosTerraplanistas implements Serializable {
@@ -25,17 +22,17 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 	public void setUsuarios(List<UsuarioTerraplanista> usuarios) {
 		this.usuarios = usuarios;
 	}
-
-
-	private Grafo grafo = Grafo.getInstancia();
+	
 	public void adicionarUsuario(UsuarioTerraplanista usuario) {
 		this.usuarios.add(usuario);
 		salvar();
 	}
+	
 	public void	removerUsuario(UsuarioTerraplanista usuario) {
 		this.usuarios.remove(usuario);
 		salvar();
 	}
+	
 	public void editarUsuario(UsuarioTerraplanista usuarioVelho, UsuarioTerraplanista usuarioNovo) {
 		usuarioVelho = usuarioNovo;
 		salvar();
@@ -79,7 +76,32 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		this.usuarios = (ArrayList<UsuarioTerraplanista>) ois.readObject();
 		ois.close();
-
 	}
+	public ArrayList<UsuarioTerraplanista> pesquisarPorNome(String nome) {
+		nome = nome.toUpperCase();
+		ArrayList<UsuarioTerraplanista> ret = new ArrayList<UsuarioTerraplanista>();
+		if (nome == null)
+			return null;
+		
+		for (UsuarioTerraplanista user : this.usuarios) {
+			if (user.getNome().toUpperCase().contains(nome)) {
+				ret.add(user);
+			}
+		}
+		return ret;
+	}
+	
+	 public UsuarioTerraplanista pesquisarPorLogin(String login) {
+		 	login = login.toUpperCase();
+			
+			if (login == null)
+				return null;
 
+			for (UsuarioTerraplanista user : this.usuarios) {
+				if (user.getLogin().toUpperCase().contains(login)) {
+					return user;
+				}
+			}
+			return null;
+	 }
 }

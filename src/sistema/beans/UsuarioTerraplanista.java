@@ -1,13 +1,10 @@
 package sistema.beans;
 
 import java.io.Serializable;
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import javafx.scene.image.Image;
 
 public class UsuarioTerraplanista implements Serializable{
 	
@@ -101,5 +98,9 @@ public class UsuarioTerraplanista implements Serializable{
 	}
 	public void addRecomendacao() {
 		this.recomendacoes++;
+	}
+	public UsuarioTerraplanista(String nome) {
+		super();
+		this.nome = nome;
 	}
 }

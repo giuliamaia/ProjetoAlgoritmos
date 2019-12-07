@@ -1,6 +1,7 @@
 package sistema.controlador;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import sistema.beans.UsuarioTerraplanista;
@@ -29,6 +30,12 @@ public class Controlador {
 	}
 	public void carregar() throws IOException, ClassNotFoundException {
 		repositorioUsuarioTerraPlanistas.carregar();
+	}
+	public ArrayList<UsuarioTerraplanista> pesquisarPorNome(String nome) {
+		return repositorioUsuarioTerraPlanistas.pesquisarPorNome(nome);
+	}
+	public UsuarioTerraplanista pesquisarPorLogin(String login) {
+		return repositorioUsuarioTerraPlanistas.pesquisarPorLogin(login);
 	}
 	static private Controlador instancia = null;
 	static public Controlador getInstancia() {
