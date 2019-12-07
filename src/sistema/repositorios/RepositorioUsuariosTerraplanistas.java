@@ -25,6 +25,5 @@ public class RepositorioUsuariosTerraplanistas implements Serializable{
 	}
 	public void editarUsuario(UsuarioTerraplanista usuarioVelho, UsuarioTerraplanista usuarioNovo) {
 		usuarioVelho = usuarioNovo;
-		
 	}
 }
