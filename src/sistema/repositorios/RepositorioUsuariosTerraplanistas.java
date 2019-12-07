@@ -1,5 +1,6 @@
 package sistema.repositorios;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.graphstream.graph.Node;
 
@@ -7,7 +8,7 @@ import sistema.beans.Grafo;
 import sistema.beans.UsuarioTerraplanista;
 
 public class RepositorioUsuariosTerraplanistas {
-	private List<UsuarioTerraplanista> usuarios;
+	private List<UsuarioTerraplanista> usuarios = new ArrayList<UsuarioTerraplanista>();
 	private Grafo grafo = Grafo.getInstancia();
 	public void adicionarUsuario(UsuarioTerraplanista usuario) {
 		this.usuarios.add(usuario);

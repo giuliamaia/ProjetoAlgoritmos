@@ -1,14 +1,15 @@
 package sistema.gui.controladores;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -22,6 +23,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import sistema.beans.UsuarioTerraplanista;
 import sistema.controlador.Controlador;
 import sistema.gui.TerraPlanizer;
 
@@ -47,12 +49,6 @@ public class TelaRegistroController {
 
     @FXML
     private ComboBox<String> comboInteresses;
-
-    @FXML
-    private Text abrirTermosDeUso;
-    
-    @FXML
-    private Rectangle escolherImagemPC;
 
     @FXML
     private JFXTextField tfOutroInteresse;
@@ -94,7 +90,42 @@ public class TelaRegistroController {
     	}
     	
     }
-    
+    @FXML
+    void abrirTermosDeUso(MouseEvent event) {
+    	TerraPlanizer.abrirTermosDeUso();
+    }
+    @FXML
+    void alterarFoto1(MouseEvent event) {
+    	circuloImg.setFill(new ImagePattern(new Image("/images/woman128.png")));
+    }
+
+    @FXML
+    void alterarFoto2(MouseEvent event) {
+    	circuloImg.setFill(new ImagePattern(new Image("/images/man128.png")));
+    }
+
+    @FXML
+    void alterarFoto3(MouseEvent event) {
+    	circuloImg.setFill(new ImagePattern(new Image("/images/manbigode128.png")));
+    }
+
+    @FXML
+    void alterarFoto4(MouseEvent event) {
+    	circuloImg.setFill(new ImagePattern(new Image("/images/mannegro128.png")));
+    }
+
+    @FXML
+    void alterarFoto5(MouseEvent event) {
+    	circuloImg.setFill(new ImagePattern(new Image("/images/pastor128.png")));
+    }
+
+    @FXML
+    void alterarFotoOutra(MouseEvent event) {
+    	File arquivo = TerraPlanizer.abrirFileChooser();
+    	if (arquivo != null && arquivo.exists()) {
+    		circuloImg.setFill(new ImagePattern(new Image(arquivo.toURI().toString())));
+    	}
+    }
     private boolean verificaSeJaTem(String usuario) {
     	for (String aux : arrayListInteresses) {
     		if (aux.toUpperCase().contentEquals(usuario.toUpperCase())) {
@@ -124,11 +155,25 @@ public class TelaRegistroController {
 
     @FXML
     void confirmar(ActionEvent event) {
-    	System.out.println(isTudoPreenchido());
+    	if(isTudoPreenchido()) {
+    		System.out.println(arrayListInteresses);
+    		System.out.println(tfNome.getText());
+    		System.out.println(tfLogin.getText());
+    		System.out.println(pfSenha.getText());
+    		System.out.println(datePickerDataNascimento.getValue());
+    		UsuarioTerraplanista user = new UsuarioTerraplanista(arrayListInteresses, tfNome.getText(), tfLogin.getText(), pfSenha.getText(), datePickerDataNascimento.getValue());
+    		controlador.adicionarUsuario(user);
+    		TerraPlanizer.trocarTela("login");
+    	}
     }
 
     private boolean isTudoPreenchido() {
-		if (!tfNome.getText().isEmpty() && !tfLogin.getText().isEmpty() && !pfSenha.getText().isEmpty() && checkTermos.isSelected()) {
+		if (!tfNome.getText().isEmpty() && !tfLogin.getText().isEmpty() && !pfSenha.getText().isEmpty() && checkTermos.isSelected()&&datePickerDataNascimento.getValue() != null) {
+			//falta ver se não tem ninguem com esse login
+			if(tfNome.getText().contains(" ")) {
+				//avisar q fez merda
+				return false;
+			}
 			return true;
 		}
 		return false;
@@ -166,15 +211,23 @@ public class TelaRegistroController {
     void initialize() {
     	
     	inicializaComboBoxInteresses();
-    	//inicializaFotos();
+    	inicializaFotos();
     	atualizarListaInteresses();
     }
 
 	private void inicializaFotos() {
-		Image imagem = new Image("/images/educator.png");
 		circuloImg.setStroke(Color.LIGHTSKYBLUE);
-		circuloImg.setFill(new ImagePattern(imagem));
-		//retangulo1.setFill(new ImagePattern(imagem));
+		retangulo1.setStroke(Color.LIGHTSKYBLUE);
+		retangulo2.setStroke(Color.LIGHTSKYBLUE);
+		retangulo3.setStroke(Color.LIGHTSKYBLUE);
+		retangulo4.setStroke(Color.LIGHTSKYBLUE);
+		retangulo5.setStroke(Color.LIGHTSKYBLUE);
+		circuloImg.setFill(new ImagePattern(new Image("/images/user.png")));
+		retangulo5.setFill(new ImagePattern(new Image("/images/pastor64.png")));
+		retangulo4.setFill(new ImagePattern(new Image("/images/mannegro64.png")));
+		retangulo3.setFill(new ImagePattern(new Image("/images/manbigode64.png")));
+		retangulo2.setFill(new ImagePattern(new Image("/images/man64.png")));
+		retangulo1.setFill(new ImagePattern(new Image("/images/woman64.png")));
 	}
 
 	private void inicializaComboBoxInteresses() {

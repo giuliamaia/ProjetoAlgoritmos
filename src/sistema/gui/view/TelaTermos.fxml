@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="-116.0" layoutY="-120.0" prefHeight="650.0" prefWidth="500.0" styleClass="-fx">
+         <children>
+            <Text fill="#6d7a7c" layoutX="222.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Termos de uso">
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+            </Text>
+            <Text fill="#7da7d9" layoutX="250.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saudações irmão(ã)!" wrappingWidth="143.556640625">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="188.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saiba que ao aceitar esses termos você estará concordando com os seguintes tópicos:" wrappingWidth="252.53515625" />
+            <Text layoutX="190.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Todo mês terá que contribuir com nossa comunidade doando 15% de sua renda, para atuais e futuras pesquisas na área do terraplanismo;" wrappingWidth="252.53515625" />
+            <Text layoutX="188.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. Você, como bom terrasalamandrista, sabe o quanto valorizamos a devoção, faça o que está ao seu alcance para espalhar nosso conhecimento e nossas crenças pelo mundo;" wrappingWidth="252.53515625" />
+            <Text layoutX="188.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. Ao fim de sua vida todo seu patrimônio pertencerá à comunidade;" wrappingWidth="252.53515625" />
+            <Text layoutX="190.0" layoutY="533.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4. Ao concordar com esses termos todos os seus dados serão usados em prol da comunidade;" wrappingWidth="252.53515625" />
+            <Text fill="#7da7d9" layoutX="239.0" layoutY="609.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bem-vindo(a)! Aproveite!">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

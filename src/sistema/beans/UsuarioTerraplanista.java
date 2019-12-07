@@ -73,5 +73,6 @@ public class UsuarioTerraplanista implements Serializable{
 		this.login = login;
 		this.senha = senha;
 		this.dataNascimento = dataNascimento;
+		this.horaCriaçãoConta = LocalDateTime.now();
 	}
 }
