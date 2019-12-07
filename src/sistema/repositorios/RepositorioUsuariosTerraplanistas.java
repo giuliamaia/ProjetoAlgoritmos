@@ -31,18 +31,14 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 	public void adicionarUsuario(UsuarioTerraplanista usuario) {
 		this.usuarios.add(usuario);
 		salvar();
-		grafo.addNode(usuario.getNome());
 	}
 	public void	removerUsuario(UsuarioTerraplanista usuario) {
 		this.usuarios.remove(usuario);
 		salvar();
-		grafo.removeNode(usuario.getNome());
 	}
 	public void editarUsuario(UsuarioTerraplanista usuarioVelho, UsuarioTerraplanista usuarioNovo) {
 		usuarioVelho = usuarioNovo;
 		salvar();
-		Node no = grafo.getNode(usuarioVelho.getNome());
-		no.setAttribute(usuarioVelho.getNome(), usuarioNovo.getNome());
 	}
 	public RepositorioUsuariosTerraplanistas() {
 		try {

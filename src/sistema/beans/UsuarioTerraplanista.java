@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.image.Image;
@@ -11,14 +12,13 @@ import javafx.scene.image.Image;
 public class UsuarioTerraplanista implements Serializable{
 	
 	private static final long serialVersionUID = 8939899618090534011L;
-	private List<UsuarioTerraplanista> amigos;
+	private List<UsuarioTerraplanista> amigos = new ArrayList<UsuarioTerraplanista>();
 	private List<String> interesses;
 	private String nome;
 	private String login;
 	private String senha;
 	private LocalDate dataNascimento;
 	private LocalDateTime horaCriaçãoConta;
-	transient private Grafo grafo = Grafo.getInstancia();
 	private String image;
 	private int recomendacoes = 0;
 	private boolean pastor = false;
@@ -78,11 +78,10 @@ public class UsuarioTerraplanista implements Serializable{
 	}
 	public void addAmigo(UsuarioTerraplanista amigo) {
 		amigos.add(amigo);
-		grafo.addEdge(this.getNome() + " - " +amigo.getNome(), this.getNome(), amigo.getNome());
+		amigo.getAmigos().add(this);
 	}
 	public void removerAmigo(UsuarioTerraplanista exAmigo) {
 		amigos.remove(exAmigo);
-		grafo.removeEdge(this.getNome(), exAmigo.getNome());
 	}
 	public UsuarioTerraplanista(List<String> interesses, String nome, String login, String senha,
 			LocalDate dataNascimento, String string) {
