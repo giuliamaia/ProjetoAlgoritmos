@@ -1,16 +1,16 @@
 package sistema.beans;
-import java.io.File;
-import java.net.MalformedURLException;
 
-import org.graphstream.graph.*;
-import org.graphstream.graph.implementations.*;
-import org.graphstream.ui.view.Viewer;
+import java.net.MalformedURLException;
+import java.time.LocalDate;
+
+import sistema.controlador.Controlador;
 
 import javafx.scene.paint.Color;
 
 
 public class Teste {
 	public static void main(String[] args) throws MalformedURLException {
+<<<<<<< HEAD
 		System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
 	    SingleGraph graph = new SingleGraph("Use");
 	    graph.addNode("A");
@@ -33,5 +33,21 @@ public class Teste {
 	    e1.addAttribute("ui.style", "text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #e09410; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
 	    e1.addAttribute("ui.label", "A");
 	    graph.display();
+=======
+		
+		Controlador controlador = Controlador.getInstancia();
+		Grafo grafo = Grafo.getInstancia();
+		UsuarioTerraplanista user2 = new UsuarioTerraplanista(null, "Tiranossauro", "Advinha", "123", LocalDate.of(2001, 10, 04), null);
+		
+		UsuarioTerraplanista user1 = new UsuarioTerraplanista(null, "Regialdin", "Ademir", "123", LocalDate.of(2001, 10, 04), null);
+		controlador.adicionarUsuario(user1);
+		controlador.adicionarUsuario(user2);
+		user1.addAmigo(user2);
+		for (int i = 0; i < controlador.getUsuarios().size(); i ++) {
+			System.out.println(controlador.getUsuarios().get(i).getNome());
+		}
+	    grafo.display();
+
+>>>>>>> refs/remotes/origin/Rodrigues
 	}
 }

@@ -26,15 +26,43 @@ import org.graphstream.stream.file.FileSink;
 import org.graphstream.stream.file.FileSource;
 import org.graphstream.ui.view.Viewer;
 
+import sistema.controlador.Controlador;
+
 public class Grafo {
 	private Graph grafo;
-	
+	private Controlador controlador = Controlador.getInstancia();
 	static private Grafo instancia = new Grafo();
 	static public Grafo getInstancia() {
 		return instancia;
 	}
+	public Graph getGrafo() {
+		return grafo;
+	}
+	public void setGrafo(Graph grafo) {
+		this.grafo = grafo;
+	}
 	private Grafo () {
 		grafo = new DefaultGraph("Usuários");
+		
+	}
+	
+	private void construirgrafo() {
+		grafo.setStrict(false);
+		grafo.setAutoCreate(true);
+		for (int i = 0; controlador.getUsuarios() != null && i < controlador.getUsuarios().size(); i++) {
+			addNode(controlador.getUsuarios().get(i).getNome() +" ("+controlador.getUsuarios().get(i).getLogin()+")");
+			Node no1 = getNode(controlador.getUsuarios().get(i).getNome() +" ("+controlador.getUsuarios().get(i).getLogin()+")");
+			no1.addAttribute("ui.style", "text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #e09410; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
+			no1.addAttribute("ui.label", controlador.getUsuarios().get(i).getNome() +" ("+controlador.getUsuarios().get(i).getLogin()+")");
+			for (int j = 0; controlador.getUsuarios().get(i).getAmigos() != null && j < controlador.getUsuarios().get(i).getAmigos().size(); j++) {
+				addNode(controlador.getUsuarios().get(i).getAmigos().get(j).getNome() +" ("+controlador.getUsuarios().get(i).getAmigos().get(j).getLogin()+")");
+				Node no2 =getNode(controlador.getUsuarios().get(i).getAmigos().get(j).getNome()+" ("+controlador.getUsuarios().get(i).getAmigos().get(j).getLogin()+")"); 
+				no2.addAttribute("ui.style", "text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #e09410; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
+				no2.addAttribute("ui.label", controlador.getUsuarios().get(i).getAmigos().get(j).getNome()+" ("+controlador.getUsuarios().get(i).getAmigos().get(j).getLogin()+")");
+				addEdge(no1.getId() + "   " + no2.getId(), no1, no2);
+			}
+		}
+		
 	}
 	public <T extends Edge> T addEdge(String arg0, String arg1, String arg2)
 			throws IdAlreadyInUseException, ElementNotFoundException, EdgeRejectedException {
@@ -46,6 +74,7 @@ public class Grafo {
 	}
 
 	public Viewer display() {
+		construirgrafo();
 		return grafo.display();
 	}
 
