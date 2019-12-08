@@ -7,6 +7,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
@@ -17,27 +19,27 @@
    <children>
       <Pane layoutY="-1.0" prefHeight="513.5" prefWidth="158.0" style="-fx-background-color: #7DA7D9;">
          <children>
-            <JFXButton fx:id="bnt_chat" alignment="TOP_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="16.0" onAction="#telaFuncional" prefHeight="33.0" prefWidth="145.0" text="Chat">
+            <JFXButton fx:id="bnt_chat" alignment="CENTER" contentDisplay="TOP" graphicTextGap="15.0" layoutX="-1.0" layoutY="224.0" onAction="#telaFuncional" prefHeight="33.0" prefWidth="145.0" text="Chat" textFill="#f8f4f4">
                <graphic>
                   <FontAwesomeIconView fill="#f2f2f2" glyphName="COMMENTS" size="25" wrappingWidth="24.220703125" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="bnt_amigos" alignment="TOP_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="49.0" onAction="#telaFuncional" prefHeight="33.0" prefWidth="145.0" text="Amigos">
+            <JFXButton fx:id="bnt_amigos" alignment="CENTER" contentDisplay="TOP" graphicTextGap="15.0" layoutX="-1.0" layoutY="122.0" onAction="#telaFuncional" prefHeight="33.0" prefWidth="145.0" text="Amigos" textFill="#f8f4f4">
                <graphic>
                   <FontAwesomeIconView fill="#f5eded" glyphName="GROUP" size="25" wrappingWidth="24.220703125" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="bnt_doaçao" alignment="TOP_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="82.0" onAction="#telaFuncional" prefHeight="33.0" prefWidth="145.0" text="Doação">
+            <JFXButton fx:id="bnt_doaçao" alignment="CENTER" contentDisplay="TOP" graphicTextGap="15.0" layoutX="-1.0" layoutY="325.0" onAction="#telaFuncional" prefHeight="33.0" prefWidth="145.0" text="Doação" textFill="#f8f4f4">
                <graphic>
                   <FontAwesomeIconView fill="#fcf3f3" glyphName="CREDIT_CARD" size="25" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="bnt_perfil" alignment="TOP_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="115.0" onAction="#telaFuncional" prefHeight="33.0" prefWidth="145.0" text="Perfil">
+            <JFXButton fx:id="bnt_perfil" alignment="CENTER" contentDisplay="TOP" graphicTextGap="15.0" layoutX="-1.0" layoutY="24.0" onAction="#telaFuncional" prefHeight="33.0" prefWidth="145.0" text="Perfil" textFill="#f8f4f4">
                <graphic>
                   <FontAwesomeIconView fill="#f8f1f1" glyphName="USER_CIRCLE" size="25" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="bnt_contrato" alignment="TOP_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="449.0" onAction="#telaFuncional" prefHeight="33.0" prefWidth="145.0" text="Contrato">
+            <JFXButton fx:id="bnt_contrato" alignment="CENTER" contentDisplay="TOP" graphicTextGap="15.0" layoutX="-1.0" layoutY="435.0" onAction="#telaFuncional" prefHeight="33.0" prefWidth="145.0" text="Contrato" textFill="#f8f4f4">
                <graphic>
                   <FontAwesomeIconView fill="#fcf3f3" glyphName="FILE_TEXT" size="25" />
                </graphic>
@@ -46,20 +48,52 @@
          <effect>
             <DropShadow color="#e4dddd" height="19.395" radius="8.79625" width="17.79" />
          </effect></Pane>
-      <Pane fx:id="pane_contrato" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
+      <Pane fx:id="pane_doaçao" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
          <children>
-            <Text fill="#08209a" layoutX="302.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONTRATO">
+            <Text fill="#6d7a7c" layoutX="15.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Doação" wrappingWidth="282.0">
                <font>
-                  <Font name="System Bold" size="21.0" />
+                  <Font name="System Bold" size="32.0" />
                </font>
             </Text>
-            <Text layoutX="173.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Só pra lembrar o que você concordou aceitando os Termos de Uso:" />
-            <Text layoutX="65.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temos livre acesso aos seus dados pessoais, pondendo usá-los de acordo com as necessidades da comunidade;" />
-            <Text layoutX="63.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Você tem a melhor e mais importante obrigação da sua vida que é divulgar os pensamentos da nossa comunidade, além de ajudar à desenvolver nossas pesquisas e estudos importantíssimos para a humanidade;" textAlignment="JUSTIFY" wrappingWidth="591.1523437500001" />
-            <Text layoutX="133.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seu principal dever como salamandrista é prover capital para a nossa comunidade:" />
-            <Text layoutX="65.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Todo mês terá que contribuir com nossa comunidade doando 15% de sua renda, para atuais e futuras pesquisas na área do terraplanismo;" textAlignment="JUSTIFY" wrappingWidth="591.1523437500001" />
-            <Text layoutX="65.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2.  Ao fim de sua vida todo seu patrimônio pertencerá à comunidade;" />
-            <Text layoutX="468.0" layoutY="462.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sr. Salamandra agradece sua devoção!" />
+            <Text fill="#607072" layoutX="16.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cumpra suas obrigações!" wrappingWidth="258.591796875">
+               <font>
+                  <Font name="System Italic" size="11.0" />
+               </font>
+            </Text>
+            <JFXButton fx:id="bnt_minimizar" layoutX="557.0" layoutY="14.0" onAction="#minimizar" text="Minimizar">
+               <graphic>
+                  <FontAwesomeIconView fill="#3f12f2" glyphName="MINUS" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="bnt_sair" layoutX="636.0" layoutY="14.0" onAction="#sair" text="Sair">
+               <graphic>
+                  <FontAwesomeIconView fill="#f81010" glyphName="POWER_OFF" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </Pane>
+      <Pane fx:id="pane_chat" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Text fill="#6d7a7c" layoutX="21.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat" wrappingWidth="282.0">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Text>
+            <Text fill="#607072" layoutX="22.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lugar de discussão sobre as verdades da vida..." wrappingWidth="258.591796875">
+               <font>
+                  <Font name="System Italic" size="11.0" />
+               </font>
+            </Text>
+            <JFXButton fx:id="bnt_minimizar2" layoutX="561.0" layoutY="13.0" onAction="#minimizar" text="Minimizar">
+               <graphic>
+                  <FontAwesomeIconView fill="#2411f2" glyphName="MINUS" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="bnt_sair2" layoutX="640.0" layoutY="13.0" onAction="#sair" text="Sair">
+               <graphic>
+                  <FontAwesomeIconView fill="#ee0a0a" glyphName="POWER_OFF" />
+               </graphic>
+            </JFXButton>
          </children>
       </Pane>
       <Pane fx:id="pane_amigos" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
@@ -77,7 +111,7 @@
             </Text>
             <JFXTextField fx:id="tf_pesquisa" layoutX="448.0" layoutY="105.0" prefHeight="25.0" prefWidth="172.0" />
             <JFXListView fx:id="lv_pesquisa" layoutX="448.0" layoutY="142.0" prefHeight="266.0" prefWidth="203.0" />
-            <FontAwesomeIconView fx:id="icon_lupa" glyphName="SEARCH" layoutX="632.0" layoutY="124.0" size="20" />
+            <FontAwesomeIconView fx:id="icon_lupa" fill="#1d12e3" glyphName="SEARCH" layoutX="632.0" layoutY="124.0" size="20" />
             <Text fill="#607072" layoutX="442.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Em busca de novas amizades..." wrappingWidth="184.591796875">
                <font>
                   <Font name="System Italic" size="11.0" />
@@ -85,75 +119,110 @@
             </Text>
             <JFXButton fx:id="bnt_remover" graphicTextGap="10.0" layoutX="555.0" layoutY="415.0" text="Remover">
                <graphic>
-                  <FontAwesomeIconView glyphName="USER_TIMES" size="20" />
+                  <FontAwesomeIconView fill="#f50707" glyphName="USER_TIMES" size="20" />
                </graphic>
             </JFXButton>
             <JFXButton fx:id="bnt_add" graphicTextGap="10.0" layoutX="448.0" layoutY="415.0" text="Adicionar">
                <graphic>
-                  <FontAwesomeIconView glyphName="USER_PLUS" size="20" />
+                  <FontAwesomeIconView fill="#15eb09" glyphName="USER_PLUS" size="20" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="bnt_minimizar" layoutX="562.0" layoutY="10.0" onAction="#minimizar" text="Minimizar">
+               <graphic>
+                  <FontAwesomeIconView fill="#2215d0" glyphName="MINUS" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="bnt_sair" layoutX="641.0" layoutY="10.0" onAction="#sair" text="Sair">
+               <graphic>
+                  <FontAwesomeIconView fill="#fc1414" glyphName="POWER_OFF" />
                </graphic>
             </JFXButton>
          </children>
       </Pane>
-      <Pane fx:id="pane_chat" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
+      <Pane fx:id="pane_contrato" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
          <children>
-            <Text fill="#6d7a7c" layoutX="21.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat" wrappingWidth="282.0">
+            <Text fill="#08209a" layoutX="294.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONTRATO">
                <font>
-                  <Font name="System Bold" size="32.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <Text fill="#607072" layoutX="22.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lugar de discurssão sobre as verdades da vida..." wrappingWidth="258.591796875">
+            <Text layoutX="160.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Só pra lembrar o que você concordou aceitando os Termos de Uso:">
                <font>
-                  <Font name="System Italic" size="11.0" />
-               </font>
-            </Text>
-         </children>
-      </Pane>
-      <Pane fx:id="pane_doaçao" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
-         <children>
-            <Text fill="#6d7a7c" layoutX="15.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Doação" wrappingWidth="282.0">
+                  <Font name="System Italic" size="13.0" />
+               </font></Text>
+            <Text layoutX="52.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temos livre acesso aos seus dados pessoais, pondendo usá-los de acordo com as necessidades da comunidade;">
                <font>
-                  <Font name="System Bold" size="32.0" />
-               </font>
-            </Text>
-            <Text fill="#607072" layoutX="16.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cumpra suas obrigações!" wrappingWidth="258.591796875">
+                  <Font name="System Italic" size="13.0" />
+               </font></Text>
+            <Text layoutX="50.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Você tem a melhor e mais importante obrigação da sua vida que é divulgar os pensamentos da nossa comunidade, além de ajudar à desenvolver nossas pesquisas e estudos importantíssimos para a humanidade;" textAlignment="JUSTIFY" wrappingWidth="591.1523437500001">
                <font>
-                  <Font name="System Italic" size="11.0" />
-               </font>
-            </Text>
+                  <Font name="System Italic" size="13.0" />
+               </font></Text>
+            <Text layoutX="50.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seu principal dever como salamandrista é prover capital para a nossa comunidade:">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font></Text>
+            <Text layoutX="50.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Todo mês terá que contribuir com nossa comunidade doando 15% de sua renda, para atuais e futuras pesquisas na área do terraplanismo;" textAlignment="JUSTIFY" wrappingWidth="591.1523437500001">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font></Text>
+            <Text layoutX="50.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2.  Ao fim de sua vida todo seu patrimônio pertencerá à comunidade;">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font></Text>
+            <Text layoutX="437.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sr. Salamandra agradece sua devoção!">
+               <font>
+                  <Font name="System Italic" size="13.0" />
+               </font></Text>
+            <JFXButton fx:id="bnt_minimizar" layoutX="557.0" layoutY="14.0" onAction="#minimizar" text="Minimizar">
+               <graphic>
+                  <FontAwesomeIconView fill="#200dee" glyphName="MINUS" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="bnt_sair" layoutX="636.0" layoutY="14.0" onAction="#sair" text="Sair">
+               <graphic>
+                  <FontAwesomeIconView fill="#ee0707" glyphName="POWER_OFF" />
+               </graphic>
+            </JFXButton>
+            <ImageView fitHeight="194.0" fitWidth="185.0" layoutX="260.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/srsalamandra.png" />
+               </image>
+            </ImageView>
+            <FontAwesomeIconView fill="#0eeec1" glyphName="CHECK_CIRCLE" layoutX="33.0" layoutY="139.0" size="13" />
+            <FontAwesomeIconView fill="#0eeec1" glyphName="CHECK_CIRCLE" layoutX="33.0" layoutY="165.0" size="13" />
+            <FontAwesomeIconView fill="#0eeec1" glyphName="CHECK_CIRCLE" layoutX="33.0" layoutY="226.0" size="13" />
          </children>
       </Pane>
       <Pane fx:id="pane_perfil" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
          <children>
-            <Circle fill="DODGERBLUE" layoutX="166.0" layoutY="191.0" radius="90.0" stroke="BLACK" strokeType="INSIDE" />
-            <Text layoutX="46.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Label fx:id="label_name" layoutX="74.0" layoutY="303.0" prefHeight="28.0" prefWidth="131.0" />
-            <Label fx:id="label_login" layoutX="74.0" layoutY="341.0" prefHeight="28.0" prefWidth="131.0" />
-            <Label fx:id="label_senha" layoutX="66.0" layoutY="377.0" prefHeight="28.0" prefWidth="131.0" />
-            <FontAwesomeIconView glyphName="USER_CIRCLE" layoutX="34.0" layoutY="323.0" size="15" text="" />
-            <FontAwesomeIconView glyphName="AT" layoutX="33.0" layoutY="360.0" size="15" />
-            <FontAwesomeIconView glyphName="LOCK" layoutX="35.0" layoutY="396.0" size="15" />
-            <FontAwesomeIconView glyphName="BIRTHDAY_CAKE" layoutX="33.0" layoutY="430.0" size="15" />
-            <Label fx:id="lavel_data" layoutX="74.0" layoutY="411.0" prefHeight="28.0" prefWidth="131.0" />
-            <Text layoutX="477.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Interesses:" />
-            <JFXListView layoutX="469.0" layoutY="159.0" prefHeight="194.0" prefWidth="200.0" />
-            <FontAwesomeIconView glyphName="REMOVE" layoutX="498.0" layoutY="416.0" size="20" />
-            <FontAwesomeIconView glyphName="PLUS" layoutX="469.0" layoutY="418.0" size="20" />
-            <JFXButton fx:id="bnt_minimizar" layoutX="557.0" layoutY="474.0" onAction="#minimizar" text="Minimizar">
+            <Circle fx:id="circleFoto" fill="#6eabe4" layoutX="155.0" layoutY="176.0" radius="58.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text layoutX="66.0" layoutY="333.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Label fx:id="label_name" layoutX="94.0" layoutY="270.0" prefHeight="28.0" prefWidth="131.0" />
+            <Label fx:id="label_login" layoutX="94.0" layoutY="308.0" prefHeight="28.0" prefWidth="131.0" />
+            <FontAwesomeIconView fill="#5b5555" glyphName="USER_CIRCLE" layoutX="54.0" layoutY="290.0" size="15" text="" />
+            <FontAwesomeIconView fill="#5b5555" glyphName="AT" layoutX="53.0" layoutY="327.0" size="15" />
+            <FontAwesomeIconView fill="#5b5555" glyphName="LOCK" layoutX="55.0" layoutY="363.0" size="15" />
+            <FontAwesomeIconView fill="#5b5555" glyphName="BIRTHDAY_CAKE" layoutX="53.0" layoutY="397.0" size="15" />
+            <Label fx:id="lavel_data" layoutX="94.0" layoutY="378.0" prefHeight="28.0" prefWidth="131.0" />
+            <JFXListView layoutX="457.0" layoutY="176.0" prefHeight="194.0" prefWidth="200.0" />
+            <FontAwesomeIconView fill="#f21919" glyphName="REMOVE" layoutX="486.0" layoutY="433.0" size="20" />
+            <FontAwesomeIconView fill="#31c620" glyphName="PLUS" layoutX="457.0" layoutY="435.0" size="20" />
+            <JFXButton fx:id="bnt_minimizar" layoutX="557.0" layoutY="14.0" onAction="#minimizar" text="Minimizar">
                <graphic>
-                  <FontAwesomeIconView glyphName="MINUS" />
+                  <FontAwesomeIconView fill="#0618e1" glyphName="MINUS" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="bnt_sair" layoutX="636.0" layoutY="474.0" onAction="#sair" text="Sair">
+            <JFXButton fx:id="bnt_sair" layoutX="636.0" layoutY="14.0" onAction="#sair" text="Sair">
                <graphic>
-                  <FontAwesomeIconView glyphName="POWER_OFF" />
+                  <FontAwesomeIconView fill="#ee0707" glyphName="POWER_OFF" />
                </graphic>
             </JFXButton>
-            <ComboBox layoutX="469.0" layoutY="363.0" prefHeight="25.0" prefWidth="200.0" promptText="Interessado(a) em algo mais?" />
-            <JFXTextField layoutX="527.0" layoutY="391.0" />
-            <JFXButton layoutX="32.0" layoutY="462.0" text="Editar">
+            <ComboBox layoutX="457.0" layoutY="380.0" prefHeight="25.0" prefWidth="200.0" promptText="Interessado(a) em algo mais?" />
+            <JFXTextField layoutX="515.0" layoutY="408.0" />
+            <JFXButton layoutX="52.0" layoutY="429.0" text="Editar">
                <graphic>
-                  <FontAwesomeIconView glyphName="PENCIL" size="20" />
+                  <FontAwesomeIconView fill="#5b5555" glyphName="PENCIL" size="20" />
                </graphic>
             </JFXButton>
             <Text fill="#6d7a7c" layoutX="25.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sua conta" wrappingWidth="282.0">
@@ -162,6 +231,12 @@
                </font>
             </Text>
             <Text fill="#607072" layoutX="26.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seus preciosos dados, agora nossos..." wrappingWidth="258.591796875">
+               <font>
+                  <Font name="System Italic" size="11.0" />
+               </font>
+            </Text>
+            <Label fx:id="label_senha" layoutX="86.0" layoutY="344.0" prefHeight="28.0" prefWidth="131.0" />
+            <Text fill="#607072" layoutX="457.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscando novas áreas de estudo/discussão..." wrappingWidth="184.591796875">
                <font>
                   <Font name="System Italic" size="11.0" />
                </font>

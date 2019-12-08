@@ -9,7 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import sistema.beans.UsuarioTerraplanista;
+import javafx.scene.shape.Circle;
+//import sistema.beans.UsuarioTerraplanista;
 import sistema.controlador.Controlador;
 import sistema.gui.TerraPlanizer;
 
@@ -80,7 +81,10 @@ public class TelaLogadaController {
 
     @FXML
     private JFXButton bnt_sair;
-
+    
+    @FXML
+    private Circle circleFoto;
+    
     @FXML
     void sair(ActionEvent e) {
     	TerraPlanizer.trocarTela("login");
@@ -94,6 +98,7 @@ public class TelaLogadaController {
     
     @FXML
     void telaFuncional(ActionEvent e) {
+    	pane_perfil.toFront();
     	if(e.getSource() == bnt_chat) {
 			pane_chat.toFront();
 		}
@@ -109,6 +114,11 @@ public class TelaLogadaController {
 		else if(e.getSource() == bnt_doaçao) {
 			pane_doaçao.toFront();
 		}
+    }
+    
+    @FXML
+    void initialize() {
+    	
     }
     
 }
