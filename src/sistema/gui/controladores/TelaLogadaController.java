@@ -98,7 +98,6 @@ public class TelaLogadaController {
     
     @FXML
     void telaFuncional(ActionEvent e) {
-    	pane_perfil.toFront();
     	if(e.getSource() == bnt_chat) {
 			pane_chat.toFront();
 		}
