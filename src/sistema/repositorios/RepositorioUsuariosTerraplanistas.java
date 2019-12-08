@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -114,18 +115,61 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 			Map<String, UsuarioTerraplanista> mapa = new TreeMap<String, UsuarioTerraplanista>();
 			
 			for(int i = 0; i<this.usuarios.size(); i++) { //percorrendo a lista de todos os usuários
-				for(int j = 0; j<this.usuarios.get(i).getInteresses().size(); j++) { //percorrendo a lista de interesses de um determinado usuário
-					for(int k = 0; k<user.getInteresses().size(); k++) { //percorrer a lista de interesses do usuário que queremos recomendar
-						if(this.usuarios.get(i).getInteresses().get(j).equalsIgnoreCase(user.getInteresses().get(k))){
-							temp++;
+				if(!(this.usuarios.get(i).equals(user))) {
+					for(int j = 0; j<this.usuarios.get(i).getInteresses().size(); j++) { //percorrendo a lista de interesses de um determinado usuário
+						for(int k = 0; k<user.getInteresses().size(); k++) { //percorrer a lista de interesses do usuário que queremos recomendar
+							if(this.usuarios.get(i).getInteresses().get(j).equalsIgnoreCase(user.getInteresses().get(k))){
+								temp++;
+							}
 						}
 					}
+					while(!(mapa.containsValue(this.usuarios.get(i)))) {
+						if(mapa.containsKey(Integer.toString(temp))) {
+							temp = temp * 10;
+						}
+						else{
+							mapa.put(Integer.toString(temp), this.usuarios.get(i));
+							temp = 0;
+						}
+					}
+					
 				}
-				mapa.put(Integer.toString(temp), this.usuarios.get(i));
-				temp = 0;
 			}
 			
 			List<UsuarioTerraplanista> indicados = new ArrayList<UsuarioTerraplanista>(mapa.values());
+			Collections.reverse(indicados);
+			return indicados;
+		}
+		
+		public List<UsuarioTerraplanista> indicacaoAmigoComum(UsuarioTerraplanista user)
+		{
+			int temp = 0;
+			
+			Map<String, UsuarioTerraplanista> mapa = new TreeMap<String, UsuarioTerraplanista>();
+			
+			for(int i = 0; i<this.usuarios.size(); i++) { //percorrendo a lista de todos os usuários
+				if(!(this.usuarios.get(i).equals(user))) {
+					for(int j = 0; j<this.usuarios.get(i).getAmigos().size(); j++) { //percorrendo a lista de amigos de um determinado usuário
+							for(int k = 0; k<user.getAmigos().size(); k++) { //percorrer a lista de amigos do usuário que queremos recomendar
+								if(this.usuarios.get(i).getAmigos().get(j).equals(user.getAmigos().get(k))){
+									temp++;
+								}
+							}
+						}
+					while(!(mapa.containsValue(this.usuarios.get(i)))) {
+						if(mapa.containsKey(Integer.toString(temp))) {
+							temp = temp * 10;
+						}
+						else{
+							mapa.put(Integer.toString(temp), this.usuarios.get(i));
+							temp = 0;
+						}
+					}
+				}
+			}	
+			
+			List<UsuarioTerraplanista> indicados = new ArrayList<UsuarioTerraplanista>(mapa.values());
+			Collections.reverse(indicados);
 			return indicados;
 		}
 }
