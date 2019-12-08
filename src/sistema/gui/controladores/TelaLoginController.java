@@ -42,6 +42,7 @@ public class TelaLoginController {
     		if (controlador.pesquisarPorLogin(tfNome.getText()).getSenha().contentEquals(pfSenha.getText())) {
     			labelDown.setText("");
     			controlador.setUsuarioLogado(controlador.pesquisarPorLogin(tfNome.getText()));
+    			TerraPlanizer.initLogada();
     			TerraPlanizer.trocarTela("logada");
     		}
     		else {

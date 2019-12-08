@@ -26,8 +26,8 @@ public class TerraPlanizer extends Application{
 	static private Parent rootLogada;
 	static private Parent rootRegistro;
 	static private Stage telaPagamento;
-	private double xOffset = 0;
-    private double yOffset = 0;
+	static private double xOffset = 0;
+    static private double yOffset = 0;
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -95,8 +95,16 @@ public class TerraPlanizer extends Application{
             }
         });
         telaRegistro = new Scene(rootRegistro);
-        
-        rootLogada = FXMLLoader.load(new File("src/sistema/gui/view/TelaLogada.fxml").toURI().toURL());
+       
+	}
+	public static void initLogada() {
+		 
+        try {
+			rootLogada = FXMLLoader.load(new File("src/sistema/gui/view/TelaLogada.fxml").toURI().toURL());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		rootLogada.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

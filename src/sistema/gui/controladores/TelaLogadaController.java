@@ -19,7 +19,7 @@ public class TelaLogadaController {
 	
 	Controlador controlador = Controlador.getInstancia();
 	UsuarioTerraplanista contaLogada;
-	@FXML
+		@FXML
 	    private JFXButton bnt_chat;
 
 	    @FXML
@@ -150,9 +150,8 @@ public class TelaLogadaController {
     @FXML
     void initialize() {
     	pane_perfil.toFront();
-    	if(controlador.getUsuarioLogado()!=null) {
-    		label_name.setText(controlador.getUsuarioLogado().getNome());
-    	}
+    	label_name.setText(controlador.getUsuarioLogado().getNome());
+    	
     	
     	
     }
