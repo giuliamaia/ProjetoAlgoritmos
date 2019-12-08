@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+   <children>
+      <AnchorPane layoutX="-9.0" layoutY="-7.0" prefHeight="513.0" prefWidth="844.0">
+         <children>
+            <Circle fill="DODGERBLUE" layoutX="177.0" layoutY="135.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text layoutX="144.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="rô legal é  lindo" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

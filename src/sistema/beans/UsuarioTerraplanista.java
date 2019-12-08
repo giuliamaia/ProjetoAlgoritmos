@@ -103,4 +103,17 @@ public class UsuarioTerraplanista implements Serializable{
 		super();
 		this.nome = nome;
 	}
+	public void removerAmigo(UsuarioTerraplanista exAmigo) {
+		amigos.remove(exAmigo);
+		grafo.removeEdge(this.getNome(), exAmigo.getNome());
+	}
+	public UsuarioTerraplanista(List<String> interesses, String nome, String login, String senha,
+			LocalDate dataNascimento) {
+		this.interesses = interesses;
+		this.nome = nome;
+		this.login = login;
+		this.senha = senha;
+		this.dataNascimento = dataNascimento;
+		this.horaCriaçãoConta = LocalDateTime.now();
+	}
 }

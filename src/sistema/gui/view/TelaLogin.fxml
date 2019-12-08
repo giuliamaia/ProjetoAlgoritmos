@@ -12,6 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="513.0" prefWidth="844.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema.gui.controladores.TelaLoginController">
    <children>
+<<<<<<< HEAD
       <Pane layoutY="-1.0" prefHeight="513.5" prefWidth="158.0" style="-fx-background-color: #7DA7D9;">
          <children>
             <Pane layoutY="24.0" onMouseClicked="#pagarDinheiros" prefHeight="57.0" prefWidth="158.0" style="-fx-background-color: #fcb603;">
@@ -107,5 +108,43 @@
             <Label fx:id="labelTopo" layoutX="29.0" layoutY="145.0" prefHeight="17.0" prefWidth="179.0" textFill="#da1111" />
             <Label fx:id="labelDown" layoutX="28.0" layoutY="145.0" prefHeight="17.0" prefWidth="208.0" textFill="#da1111" />
          </children></Pane>
+=======
+      <Pane layoutY="-1.0" prefHeight="513.5" prefWidth="158.0" style="-fx-background-color: #7DA7D9;" />
+      <Text fill="#5d5454" layoutX="387.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Login">
+         <font>
+            <Font name="Consolas" size="12.0" />
+         </font></Text>
+      <Text fill="#5d5454" layoutX="387.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Senha">
+         <font>
+            <Font name="Consolas" size="12.0" />
+         </font></Text>
+      <JFXTextField fx:id="tfNome" layoutX="431.0" layoutY="215.0" onAction="#logar" stylesheets="@../../../../CSS/sky.css" viewOrder="1.0">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font></JFXTextField>
+      <JFXPasswordField fx:id="pfSenha" layoutX="431.0" layoutY="260.0" onAction="#logar" stylesheets="@../../../../CSS/sky.css" viewOrder="2.0">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font></JFXPasswordField>
+      <JFXButton buttonType="RAISED" layoutX="426.0" layoutY="290.0" onAction="#logar" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" stylesheets="@../../../../CSS/sky.css" text="Login" textFill="#5d5454" viewOrder="3.0" />
+      <JFXButton buttonType="RAISED" layoutX="498.0" layoutY="290.0" onAction="#abrirRegistrarConta" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}" stylesheets="@../../../../CSS/sky.css" text="Registrar" textFill="#5d5454" viewOrder="4.0" />
+      <Text fill="#6d7a7c" layoutX="168.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entre na sua conta" wrappingWidth="282.0">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Text>
+      <Text fill="#607072" layoutX="169.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vislumbre de todo o plano terrestre nas suas mãos!" wrappingWidth="258.591796875">
+         <font>
+            <Font name="System Italic" size="11.0" />
+         </font>
+      </Text>
+      <FontAwesomeIconView glyphName="WINDOW_CLOSE" glyphStyle="-fx-fill: linear-gradient(#70b4e5 0%, #247cbc 70%, #2c85c1 85%);" layoutX="817.0" layoutY="21.0" onMouseClicked="#fecharTela" size="20" wrappingWidth="21.443359375">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </FontAwesomeIconView>
+      <Label fx:id="labelTopo" layoutX="319.0" layoutY="165.0" prefHeight="17.0" prefWidth="135.0" textFill="#da1111" />
+      <FontAwesomeIconView glyphName="WINDOW_MINIMIZE" glyphStyle="-fx-fill: linear-gradient(#70b4e5 0%, #247cbc 70%, #2c85c1 85%);" layoutX="791.0" layoutY="21.0" onMouseClicked="#minimizarTela" selectionEnd="0" selectionFill="#eb0909" size="20" />
+>>>>>>> refs/remotes/origin/Giulia
    </children>
 </AnchorPane>

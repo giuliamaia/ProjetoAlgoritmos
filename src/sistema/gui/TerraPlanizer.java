@@ -6,6 +6,7 @@ import java.net.URL;
 
 
 import javafx.application.Application;
+<<<<<<< HEAD
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,10 +21,13 @@ import javafx.stage.StageStyle;
 public class TerraPlanizer extends Application{
 	static private Scene telaLogin;
 	static private Scene telaRegistro;
+	static private Scene telaLogada;
 	static private Stage estagio;
+	static private Parent rootLogada;
 	static private Parent rootLogin;
 	static private Parent rootRegistro;
 	static private Stage telaPagamento;
+	
 	private double xOffset = 0;
     private double yOffset = 0;
 	@Override
@@ -93,6 +97,23 @@ public class TerraPlanizer extends Application{
             }
         });
         telaRegistro = new Scene(rootRegistro);
+        
+        rootLogada = FXMLLoader.load(new File("src/sistema/gui/view/TelaLogada.fxml").toURI().toURL());
+		rootLogada.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+        rootRegistro.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                estagio.setX(event.getScreenX() - xOffset);
+                estagio.setY(event.getScreenY() - yOffset);
+            }
+        });
+        telaLogada = new Scene(rootLogada);
 	}
 	public static void main(String[] args) {
 		launch(args);
@@ -107,9 +128,10 @@ public class TerraPlanizer extends Application{
 		switch (tela) {
 		case "login": estagio.setScene(telaLogin); break;
 		case "registro": estagio.setScene(telaRegistro); break;
+		case "logada": estagio.setScene(telaLogada); break;
 		default: 
-			System.out.println("Não foi possivel achar essa tela para fechar, favor use um dos seguintes: (login, registro)");
-	}
+			System.out.println("Não foi possivel achar essa tela para fechar, favor use um dos seguintes: (login, registro, logada)");
+		}
 		
 	}
 	static public void abrirTermosDeUso() {
@@ -145,6 +167,20 @@ public class TerraPlanizer extends Application{
 		telaPagamento=novo;
 		novo.showAndWait();
 	}
+
+	static public void abrirTermosDeUso() {
+		try {
+			URL url = new File("src/sistema/gui/view/TelaTermos.fxml").toURI().toURL();
+			Parent rootTermos = FXMLLoader.load(url);
+			Scene cenaTermos = new Scene(rootTermos);
+			Stage estagioTermos = new Stage();
+			estagioTermos.setTitle("Termos de uso");
+			estagioTermos.setScene(cenaTermos);
+			estagioTermos.initModality(Modality.WINDOW_MODAL);
+			estagioTermos.showAndWait();
+		}catch(Exception e) {
+			System.out.println("tela termos n carregada!");
+		}
 	static public void fecharTelaPagamento () {
 		telaPagamento.close();
 	}
@@ -154,4 +190,6 @@ public class TerraPlanizer extends Application{
 	static public void minimizarTela () {
 		estagio.setIconified(true);
 	}
+	
 }
+
