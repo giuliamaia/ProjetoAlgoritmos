@@ -190,7 +190,7 @@ public class TelaLogadaController {
 		g1.construirgrafo(true);
 		g.setAttribute("ui.antialias");
 		g.setAttribute("ui.quality");
-		g.setAttribute("ui.stylesheet", "graph {padding: 60px;}");
+		g.setAttribute("ui.stylesheet", "graph {fill-color: #DDD; padding: 60px;}");
 		v.enableAutoLayout();
 		FxViewPanel panel = (FxViewPanel)v.addDefaultView(false, new FxGraphRenderer());
 		
