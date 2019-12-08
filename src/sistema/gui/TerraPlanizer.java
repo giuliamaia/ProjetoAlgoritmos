@@ -110,6 +110,21 @@ public class TerraPlanizer extends Application{
 		default: 
 			System.out.println("Não foi possivel achar essa tela para fechar, favor use um dos seguintes: (login, registro)");
 	}
+		
+	}
+	static public void abrirTermosDeUso() {
+		try {
+			URL url = new File("src/sistema/gui/view/TelaTermos.fxml").toURI().toURL();
+			Parent rootTermos = FXMLLoader.load(url);
+			Scene cenaTermos = new Scene(rootTermos);
+			Stage estagioTermos = new Stage();
+			estagioTermos.setTitle("Termos de uso");
+			estagioTermos.setScene(cenaTermos);
+			estagioTermos.initModality(Modality.WINDOW_MODAL);
+			estagioTermos.showAndWait();
+		}catch(Exception e) {
+			System.out.println("tela termos n carregada!");
+		}
 	}
 	static public void abrirPagamentoDialog() {
 		AnchorPane conteudoDialog = null;
