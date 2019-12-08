@@ -21,6 +21,7 @@ public class TerraPlanizer extends Application{
 	static private Stage estagio;
 	@Override
 	public void start(Stage primaryStage) {
+		//new Splash();
 		try {
 			
 			inicializa();
