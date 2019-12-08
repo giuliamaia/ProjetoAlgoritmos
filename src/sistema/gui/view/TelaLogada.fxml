@@ -15,29 +15,29 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="513.0" prefWidth="844.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema.gui.controladores.TelaLogadaController">
    <children>
-      <Pane layoutY="-1.0" prefHeight="514.0" prefWidth="145.0" style="-fx-background-color: #7DA7D9;">
+      <Pane layoutY="-1.0" prefHeight="513.5" prefWidth="158.0" style="-fx-background-color: #7DA7D9;">
          <children>
-            <JFXButton fx:id="bnt_chat" graphicTextGap="15.0" layoutX="31.0" layoutY="234.0" onAction="#telaFuncional" text="Chat">
+            <JFXButton fx:id="bnt_chat" alignment="TOP_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="16.0" onAction="#telaFuncional" prefHeight="33.0" prefWidth="145.0" text="Chat">
                <graphic>
                   <FontAwesomeIconView fill="#f2f2f2" glyphName="COMMENTS" size="25" wrappingWidth="24.220703125" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="bnt_amigos" graphicTextGap="15.0" layoutX="25.0" layoutY="142.0" onAction="#telaFuncional" text="Amigos">
+            <JFXButton fx:id="bnt_amigos" alignment="TOP_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="49.0" onAction="#telaFuncional" prefHeight="33.0" prefWidth="145.0" text="Amigos">
                <graphic>
                   <FontAwesomeIconView fill="#f5eded" glyphName="GROUP" size="25" wrappingWidth="24.220703125" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="bnt_doaçao" graphicTextGap="15.0" layoutX="21.0" layoutY="329.0" onAction="#telaFuncional" text="Doação">
+            <JFXButton fx:id="bnt_doaçao" alignment="TOP_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="82.0" onAction="#telaFuncional" prefHeight="33.0" prefWidth="145.0" text="Doação">
                <graphic>
                   <FontAwesomeIconView fill="#fcf3f3" glyphName="CREDIT_CARD" size="25" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="bnt_perfil" graphicTextGap="15.0" layoutX="31.0" layoutY="44.0" onAction="#telaFuncional" text="Perfil">
+            <JFXButton fx:id="bnt_perfil" alignment="TOP_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="115.0" onAction="#telaFuncional" prefHeight="33.0" prefWidth="145.0" text="Perfil">
                <graphic>
                   <FontAwesomeIconView fill="#f8f1f1" glyphName="USER_CIRCLE" size="25" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="bnt_contrato" graphicTextGap="15.0" layoutX="23.0" layoutY="435.0" onAction="#telaFuncional" text="Contrato">
+            <JFXButton fx:id="bnt_contrato" alignment="TOP_LEFT" graphicTextGap="15.0" layoutX="-1.0" layoutY="449.0" onAction="#telaFuncional" prefHeight="33.0" prefWidth="145.0" text="Contrato">
                <graphic>
                   <FontAwesomeIconView fill="#fcf3f3" glyphName="FILE_TEXT" size="25" />
                </graphic>

@@ -2,6 +2,7 @@ package sistema.gui.controladores;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -195,7 +196,7 @@ public class TelaRegistroController {
     		System.out.println(tfLogin.getText());
     		System.out.println(pfSenha.getText());
     		System.out.println(datePickerDataNascimento.getValue());
-    		UsuarioTerraplanista user = new UsuarioTerraplanista(arrayListInteresses, tfNome.getText(), tfLogin.getText(), pfSenha.getText(), datePickerDataNascimento.getValue(), imageAux==null? null:imageAux.getUrl());
+    		UsuarioTerraplanista user = new UsuarioTerraplanista(new ArrayList<UsuarioTerraplanista>(), arrayListInteresses, tfNome.getText(), tfLogin.getText(), pfSenha.getText(), datePickerDataNascimento.getValue(), LocalDateTime.now(), imageAux==null? null:imageAux.getUrl(), 0, false);
     		controlador.adicionarUsuario(user);
     		TerraPlanizer.trocarTela("login");
     	}

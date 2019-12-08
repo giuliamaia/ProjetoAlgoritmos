@@ -9,7 +9,13 @@ import sistema.repositorios.RepositorioUsuariosTerraplanistas;
 
 public class Controlador {
 	private RepositorioUsuariosTerraplanistas repositorioUsuarioTerraPlanistas;
-
+	private UsuarioTerraplanista usuarioLogado;
+	public UsuarioTerraplanista getUsuarioLogado() {
+		return usuarioLogado;
+	}
+	public void setUsuarioLogado(UsuarioTerraplanista usuarioLogado) {
+		this.usuarioLogado = usuarioLogado;
+	}
 	public void adicionarUsuario(UsuarioTerraplanista usuario) {
 		repositorioUsuarioTerraPlanistas.adicionarUsuario(usuario);
 		

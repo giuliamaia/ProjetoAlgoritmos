@@ -9,7 +9,7 @@ import java.util.List;
 public class UsuarioTerraplanista implements Serializable{
 	
 	private static final long serialVersionUID = 8939899618090534011L;
-	private List<UsuarioTerraplanista> amigos = new ArrayList<UsuarioTerraplanista>();
+	private List<UsuarioTerraplanista> amigos;
 	private List<String> interesses;
 	private String nome;
 	private String login;
@@ -80,15 +80,21 @@ public class UsuarioTerraplanista implements Serializable{
 	public void removerAmigo(UsuarioTerraplanista exAmigo) {
 		amigos.remove(exAmigo);
 	}
-	public UsuarioTerraplanista(List<String> interesses, String nome, String login, String senha,
-			LocalDate dataNascimento, String string) {
+	
+	public UsuarioTerraplanista(List<UsuarioTerraplanista> amigos, List<String> interesses, String nome, String login,
+			String senha, LocalDate dataNascimento, LocalDateTime horaCriaçãoConta, String image, int recomendacoes,
+			boolean pastor) {
+		super();
+		this.amigos = amigos;
 		this.interesses = interesses;
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;
 		this.dataNascimento = dataNascimento;
-		this.horaCriaçãoConta = LocalDateTime.now();
-		this.image = string;
+		this.horaCriaçãoConta = horaCriaçãoConta;
+		this.image = image;
+		this.recomendacoes = recomendacoes;
+		this.pastor = pastor;
 	}
 	public String getImage() {
 		return image;

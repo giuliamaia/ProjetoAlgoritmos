@@ -9,6 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import sistema.beans.UsuarioTerraplanista;
+import sistema.gui.TerraPlanizer;
 
 public class TelaLogadaController {
 
@@ -80,12 +82,12 @@ public class TelaLogadaController {
 
     @FXML
     void sair(ActionEvent e) {
-    	
+    	TerraPlanizer.trocarTela("login");
     }
     
     @FXML
     void minimizar(ActionEvent e) {
-    	
+    	TerraPlanizer.minimizarTela();
     }
     
     @FXML
@@ -106,5 +108,5 @@ public class TelaLogadaController {
 			pane_doaçao.toFront();
 		}
     }
-
+    
 }
