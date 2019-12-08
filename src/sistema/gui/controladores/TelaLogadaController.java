@@ -7,84 +7,116 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
-//import sistema.beans.UsuarioTerraplanista;
+import sistema.beans.UsuarioTerraplanista;
 import sistema.controlador.Controlador;
 import sistema.gui.TerraPlanizer;
 
 public class TelaLogadaController {
+	
 	Controlador controlador = Controlador.getInstancia();
-    @FXML
-    private JFXButton bnt_chat;
+	UsuarioTerraplanista contaLogada;
+	@FXML
+	    private JFXButton bnt_chat;
 
-    @FXML
-    private JFXButton bnt_amigos;
+	    @FXML
+	    private JFXButton bnt_amigos;
 
-    @FXML
-    private JFXButton bnt_doaçao;
+	    @FXML
+	    private JFXButton bnt_doaçao;
 
-    @FXML
-    private JFXButton bnt_perfil;
+	    @FXML
+	    private JFXButton bnt_perfil;
 
-    @FXML
-    private JFXButton bnt_contrato;
+	    @FXML
+	    private JFXButton bnt_contrato;
 
-    @FXML
-    private Pane pane_contrato;
+	    @FXML
+	    private Pane pane_doaçao;
 
-    @FXML
-    private Pane pane_amigos;
+	    @FXML
+	    private JFXButton bnt_minimizar;
 
-    @FXML
-    private JFXListView<?> llv_amigos;
+	    @FXML
+	    private JFXButton bnt_sair;
 
-    @FXML
-    private JFXTextField tf_pesquisa;
+	    @FXML
+	    private Pane pane_chat;
 
-    @FXML
-    private JFXListView<?> lv_pesquisa;
+	    @FXML
+	    private JFXButton bnt_minimizar2;
 
-    @FXML
-    private FontAwesomeIconView icon_lupa;
+	    @FXML
+	    private JFXButton bnt_sair2;
 
-    @FXML
-    private JFXButton bnt_remover;
+	    @FXML
+	    private Pane pane_amigos;
 
-    @FXML
-    private JFXButton bnt_add;
+	    @FXML
+	    private JFXListView<?> llv_amigos;
 
-    @FXML
-    private Pane pane_chat;
+	    @FXML
+	    private JFXTextField tf_pesquisa;
 
-    @FXML
-    private Pane pane_doaçao;
+	    @FXML
+	    private JFXListView<String> lv_pesquisa;
 
-    @FXML
-    private Pane pane_perfil;
+	    @FXML
+	    private FontAwesomeIconView icon_lupa;
 
-    @FXML
-    private Label label_name;
+	    @FXML
+	    private JFXButton bnt_remover;
 
-    @FXML
-    private Label label_login;
+	    @FXML
+	    private JFXButton bnt_add;
 
-    @FXML
-    private Label label_senha;
+	    @FXML
+	    private Pane pane_contrato;
 
-    @FXML
-    private Label lavel_data;
+	    @FXML
+	    private Pane pane_perfil;
 
-    @FXML
-    private JFXButton bnt_minimizar;
+	    @FXML
+	    private Circle circleFoto;
 
-    @FXML
-    private JFXButton bnt_sair;
+	    @FXML
+	    private Label label_name;
+
+	    @FXML
+	    private Label label_login;
+
+	    @FXML
+	    private Label lavel_data;
+
+	    @FXML
+	    private JFXListView<String> lvInteresses;
+
+	    @FXML
+	    private FontAwesomeIconView removeInteresses;
+
+	    @FXML
+	    private FontAwesomeIconView addInteresses;
+
+	    @FXML
+	    private ComboBox<String> comboboxInteresses;
+
+	    @FXML
+	    private JFXTextField tfOutro;
+
+	    @FXML
+	    private JFXButton bnt_editar;
+
+	    @FXML
+	    private Label label_senha;
     
-    @FXML
-    private Circle circleFoto;
-    
+	    
+	public void setarContaLogada(UsuarioTerraplanista contaLogada) {
+		this.contaLogada = contaLogada;
+	}
+	
     @FXML
     void sair(ActionEvent e) {
     	TerraPlanizer.trocarTela("login");
@@ -117,6 +149,11 @@ public class TelaLogadaController {
     
     @FXML
     void initialize() {
+    	pane_perfil.toFront();
+    	if(controlador.getUsuarioLogado()!=null) {
+    		label_name.setText(controlador.getUsuarioLogado().getNome());
+    	}
+    	
     	
     }
     

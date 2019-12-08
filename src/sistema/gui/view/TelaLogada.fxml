@@ -72,30 +72,6 @@
             </JFXButton>
          </children>
       </Pane>
-      <Pane fx:id="pane_chat" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
-         <children>
-            <Text fill="#6d7a7c" layoutX="21.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat" wrappingWidth="282.0">
-               <font>
-                  <Font name="System Bold" size="32.0" />
-               </font>
-            </Text>
-            <Text fill="#607072" layoutX="22.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lugar de discussão sobre as verdades da vida..." wrappingWidth="258.591796875">
-               <font>
-                  <Font name="System Italic" size="11.0" />
-               </font>
-            </Text>
-            <JFXButton fx:id="bnt_minimizar2" layoutX="561.0" layoutY="13.0" onAction="#minimizar" text="Minimizar">
-               <graphic>
-                  <FontAwesomeIconView fill="#2411f2" glyphName="MINUS" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="bnt_sair2" layoutX="640.0" layoutY="13.0" onAction="#sair" text="Sair">
-               <graphic>
-                  <FontAwesomeIconView fill="#ee0a0a" glyphName="POWER_OFF" />
-               </graphic>
-            </JFXButton>
-         </children>
-      </Pane>
       <Pane fx:id="pane_amigos" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
          <children>
             <JFXListView fx:id="llv_amigos" layoutX="23.0" layoutY="99.0" prefHeight="373.0" prefWidth="221.0" />
@@ -205,9 +181,9 @@
             <FontAwesomeIconView fill="#5b5555" glyphName="LOCK" layoutX="55.0" layoutY="363.0" size="15" />
             <FontAwesomeIconView fill="#5b5555" glyphName="BIRTHDAY_CAKE" layoutX="53.0" layoutY="397.0" size="15" />
             <Label fx:id="lavel_data" layoutX="94.0" layoutY="378.0" prefHeight="28.0" prefWidth="131.0" />
-            <JFXListView layoutX="457.0" layoutY="176.0" prefHeight="194.0" prefWidth="200.0" />
-            <FontAwesomeIconView fill="#f21919" glyphName="REMOVE" layoutX="486.0" layoutY="433.0" size="20" />
-            <FontAwesomeIconView fill="#31c620" glyphName="PLUS" layoutX="457.0" layoutY="435.0" size="20" />
+            <JFXListView fx:id="lvInteresses" layoutX="457.0" layoutY="176.0" prefHeight="194.0" prefWidth="200.0" />
+            <FontAwesomeIconView fx:id="removeInteresses" fill="#f21919" glyphName="REMOVE" layoutX="486.0" layoutY="433.0" size="20" />
+            <FontAwesomeIconView fx:id="addInteresses" fill="#31c620" glyphName="PLUS" layoutX="457.0" layoutY="435.0" size="20" />
             <JFXButton fx:id="bnt_minimizar" layoutX="557.0" layoutY="14.0" onAction="#minimizar" text="Minimizar">
                <graphic>
                   <FontAwesomeIconView fill="#0618e1" glyphName="MINUS" />
@@ -218,9 +194,9 @@
                   <FontAwesomeIconView fill="#ee0707" glyphName="POWER_OFF" />
                </graphic>
             </JFXButton>
-            <ComboBox layoutX="457.0" layoutY="380.0" prefHeight="25.0" prefWidth="200.0" promptText="Interessado(a) em algo mais?" />
-            <JFXTextField layoutX="515.0" layoutY="408.0" />
-            <JFXButton layoutX="52.0" layoutY="429.0" text="Editar">
+            <ComboBox fx:id="comboboxInteresses" layoutX="457.0" layoutY="380.0" prefHeight="25.0" prefWidth="200.0" promptText="Interessado(a) em algo mais?" />
+            <JFXTextField fx:id="tfOutro" layoutX="515.0" layoutY="408.0" />
+            <JFXButton fx:id="bnt_editar" layoutX="52.0" layoutY="429.0" text="Editar">
                <graphic>
                   <FontAwesomeIconView fill="#5b5555" glyphName="PENCIL" size="20" />
                </graphic>
@@ -241,6 +217,30 @@
                   <Font name="System Italic" size="11.0" />
                </font>
             </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="pane_chat" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Text fill="#6d7a7c" layoutX="21.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat" wrappingWidth="282.0">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Text>
+            <Text fill="#607072" layoutX="22.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lugar de discussão sobre as verdades da vida..." wrappingWidth="258.591796875">
+               <font>
+                  <Font name="System Italic" size="11.0" />
+               </font>
+            </Text>
+            <JFXButton fx:id="bnt_minimizar2" layoutX="561.0" layoutY="13.0" onAction="#minimizar" text="Minimizar">
+               <graphic>
+                  <FontAwesomeIconView fill="#2411f2" glyphName="MINUS" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="bnt_sair2" layoutX="640.0" layoutY="13.0" onAction="#sair" text="Sair">
+               <graphic>
+                  <FontAwesomeIconView fill="#ee0a0a" glyphName="POWER_OFF" />
+               </graphic>
+            </JFXButton>
          </children>
       </Pane>
    </children>
