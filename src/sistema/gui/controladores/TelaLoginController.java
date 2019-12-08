@@ -41,7 +41,7 @@ public class TelaLoginController {
     		labelTopo.setText("");
     		if (controlador.pesquisarPorLogin(tfNome.getText()).getSenha().contentEquals(pfSenha.getText())) {
     			labelDown.setText("");
-    			//TODO : Logar
+    			TerraPlanizer.trocarTela("logada");
     			
     			
     		}

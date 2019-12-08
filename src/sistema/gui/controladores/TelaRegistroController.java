@@ -112,7 +112,7 @@ public class TelaRegistroController {
     }
     @FXML
     void abrirTermosDeUso(MouseEvent event) {
-
+    	TerraPlanizer.abrirTermosDeUso();
     }
     @FXML
     void alterarFoto1(MouseEvent event) {

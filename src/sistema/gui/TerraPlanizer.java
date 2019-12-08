@@ -20,8 +20,10 @@ import javafx.stage.StageStyle;
 public class TerraPlanizer extends Application{
 	static private Scene telaLogin;
 	static private Scene telaRegistro;
+	static private Scene telaLogada;
 	static private Stage estagio;
 	static private Parent rootLogin;
+	static private Parent rootLogada;
 	static private Parent rootRegistro;
 	static private Stage telaPagamento;
 	private double xOffset = 0;
@@ -93,6 +95,23 @@ public class TerraPlanizer extends Application{
             }
         });
         telaRegistro = new Scene(rootRegistro);
+        
+        rootLogada = FXMLLoader.load(new File("src/sistema/gui/view/TelaLogada.fxml").toURI().toURL());
+		rootLogada.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+        rootLogada.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                estagio.setX(event.getScreenX() - xOffset);
+                estagio.setY(event.getScreenY() - yOffset);
+            }
+        });
+        telaLogada = new Scene(rootLogada);
 	}
 	public static void main(String[] args) {
 		launch(args);
@@ -107,6 +126,7 @@ public class TerraPlanizer extends Application{
 		switch (tela) {
 		case "login": estagio.setScene(telaLogin); break;
 		case "registro": estagio.setScene(telaRegistro); break;
+		case "logada": estagio.setScene(telaLogada); break;
 		default: 
 			System.out.println("Não foi possivel achar essa tela para fechar, favor use um dos seguintes: (login, registro)");
 	}
