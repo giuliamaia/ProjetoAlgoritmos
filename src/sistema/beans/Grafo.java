@@ -1,9 +1,6 @@
 package sistema.beans;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +48,7 @@ public class Grafo {
 		//construirgrafo();
 	}
 	
-	public void construirgrafo() {
+	public void construirgrafo(boolean éEstilizado) {
 		try {
 			controlador.carregar();
 		} catch (ClassNotFoundException e) {
@@ -61,7 +58,7 @@ public class Grafo {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		setarNos();
+		setarNos(éEstilizado);
 		setarArestas();
 		
 	}
@@ -75,17 +72,19 @@ public class Grafo {
 		}
 		
 	}
-	private void setarNos() {
+	private void setarNos(boolean éEstilizado) {
 		for (UsuarioTerraplanista u : controlador.getUsuarios()) {
 			Node no = addNode(u.getLogin());
-			if(u.isPastor()) {
-				no.setAttribute("ui.style", "fill-color: #5eb5a8; text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #A7CC; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
+			if(éEstilizado) {
+				if(u.isPastor()) {
+					no.setAttribute("ui.style", "fill-color: #5eb5a8; text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #A7CC; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
+				}
+				else {
+					no.setAttribute("ui.style", "fill-color: #292725; text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #A7CC; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
+				}
+				
+				no.setAttribute("ui.label", u.getNome() + " (" + u.getLogin()+ ")");
 			}
-			else {
-				no.setAttribute("ui.style", "fill-color: #292725; text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #A7CC; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
-			}
-			
-			no.setAttribute("ui.label", u.getNome() + " (" + u.getLogin()+ ")");
 			
 		}
 		

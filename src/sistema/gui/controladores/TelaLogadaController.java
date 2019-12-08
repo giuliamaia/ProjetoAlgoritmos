@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.graphstream.graph.Graph;
+import org.graphstream.ui.fx_viewer.FxViewPanel;
+import org.graphstream.ui.fx_viewer.FxViewer;
+import org.graphstream.ui.javafx.FxGraphRenderer;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
@@ -19,6 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import sistema.beans.Grafo;
 import sistema.beans.UsuarioTerraplanista;
 import sistema.controlador.Controlador;
 import sistema.gui.TerraPlanizer;
@@ -28,7 +34,9 @@ public class TelaLogadaController {
 	Controlador controlador = Controlador.getInstancia();
 	UsuarioTerraplanista contaLogada;
 	List <String> listaInteresses = controlador.getUsuarioLogado().getInteresses();
-	
+    @FXML
+    private Pane painel;
+
 		@FXML
 	    private JFXButton bnt_chat;
 
@@ -172,8 +180,34 @@ public class TelaLogadaController {
     		circleFoto.setFill(new ImagePattern(new Image(controlador.getUsuarioLogado().getImage())));
     	}
     	lvInteresses.setItems(FXCollections.observableList(controlador.getUsuarioLogado().getInteresses()));
+    	inicializaPane();
     }
 
+	private void inicializaPane() {
+		Grafo g1= Grafo.getInstancia();
+		Graph g = g1.getGrafo();
+		FxViewer v = new FxViewer(g, FxViewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
+		g1.construirgrafo(true);
+		g.setAttribute("ui.antialias");
+		g.setAttribute("ui.quality");
+		g.setAttribute("ui.stylesheet", "graph {padding: 60px;}");
+		v.enableAutoLayout();
+		FxViewPanel panel = (FxViewPanel)v.addDefaultView(false, new FxGraphRenderer());
+		
+		//GIULIA AQUI
+		panel.setPrefHeight(200);
+		panel.setPrefWidth(200);
+		
+		
+		Pane newLoadedPane =  panel;
+		painel.getChildren().add(newLoadedPane);	
+			
+	}
+    @FXML
+    void abrirGrafoGrande(MouseEvent event) {
+    	
+    	TerraPlanizer.abrirGrafo();
+    }
 	private void inicializaComboBoxInteresses() {
 		addInteresses.setDisable(true);
 		tfOutro.setDisable(true);

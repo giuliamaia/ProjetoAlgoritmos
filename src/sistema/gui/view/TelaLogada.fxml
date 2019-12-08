@@ -241,6 +241,11 @@
                   <Font name="System Italic" size="11.0" />
                </font>
             </Text>
+            <Pane layoutX="229.0" layoutY="15.0" prefHeight="207.0" prefWidth="210.0" style="-fx-background-color: black;">
+               <children>
+                  <Pane fx:id="painel" layoutX="5.0" layoutY="3.0" onMouseClicked="#abrirGrafoGrande" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>

@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.graphstream.graph.Graph;
+import org.graphstream.ui.fx_viewer.FxViewPanel;
+import org.graphstream.ui.fx_viewer.FxViewer;
+import org.graphstream.ui.javafx.FxGraphRenderer;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -16,6 +20,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import sistema.beans.Grafo;
 
 public class TerraPlanizer extends Application{
 	static private Scene telaLogin;
@@ -172,6 +177,23 @@ public class TerraPlanizer extends Application{
 		novo.setScene(cena);
 		telaPagamento=novo;
 		novo.showAndWait();
+	}
+	static public void abrirGrafo() {
+		Grafo g1= Grafo.getInstancia();
+		Graph g = g1.getGrafo();
+		FxViewer v = new FxViewer(g, FxViewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
+		g1.construirgrafo(true);
+		g.setAttribute("ui.antialias");
+		g.setAttribute("ui.quality");
+		g.setAttribute("ui.stylesheet", "graph {padding: 60px;}");
+		v.enableAutoLayout();
+		FxViewPanel panel = (FxViewPanel)v.addDefaultView(false, new FxGraphRenderer());
+		Scene scene = new Scene(panel, 800, 600);
+  		Stage estagio = new Stage();
+  		estagio.setScene(scene);
+  		estagio.setTitle("Grafo");
+  		estagio.initModality(Modality.WINDOW_MODAL);
+		estagio.showAndWait();
 	}
 	static public void fecharTelaPagamento () {
 		telaPagamento.close();
