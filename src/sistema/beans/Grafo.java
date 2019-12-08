@@ -26,7 +26,6 @@ import org.graphstream.stream.file.FileSink;
 import org.graphstream.stream.file.FileSource;
 import org.graphstream.ui.view.Viewer;
 
-<<<<<<< HEAD
 import sistema.controlador.Controlador;
 
 public class Grafo {
