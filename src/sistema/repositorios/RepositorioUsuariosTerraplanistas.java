@@ -8,6 +8,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import sistema.beans.UsuarioTerraplanista;
 
 public class RepositorioUsuariosTerraplanistas implements Serializable {
@@ -104,4 +107,25 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 			}
 			return null;
 	 }
+	 public List<UsuarioTerraplanista> indicacaoPorInteresse(UsuarioTerraplanista user)
+		{
+			int temp = 0;
+			
+			Map<String, UsuarioTerraplanista> mapa = new TreeMap<String, UsuarioTerraplanista>();
+			
+			for(int i = 0; i<this.usuarios.size(); i++) { //percorrendo a lista de todos os usuários
+				for(int j = 0; j<this.usuarios.get(i).getInteresses().size(); j++) { //percorrendo a lista de interesses de um determinado usuário
+					for(int k = 0; k<user.getInteresses().size(); k++) { //percorrer a lista de interesses do usuário que queremos recomendar
+						if(this.usuarios.get(i).getInteresses().get(j).equalsIgnoreCase(user.getInteresses().get(k))){
+							temp++;
+						}
+					}
+				}
+				mapa.put(Integer.toString(temp), this.usuarios.get(i));
+				temp = 0;
+			}
+			
+			List<UsuarioTerraplanista> indicados = new ArrayList<UsuarioTerraplanista>(mapa.values());
+			return indicados;
+		}
 }
