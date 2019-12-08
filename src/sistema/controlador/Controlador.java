@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import sistema.beans.Grafo;
 import sistema.beans.UsuarioTerraplanista;
 import sistema.repositorios.RepositorioUsuariosTerraplanistas;
 
