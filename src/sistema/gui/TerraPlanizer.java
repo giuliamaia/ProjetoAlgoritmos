@@ -121,7 +121,7 @@ public class TerraPlanizer extends Application{
 		}
 
 		Stage novo = new Stage();
-		novo.setTitle("Novo Jogador");
+		novo.setTitle("TelaDeEnganaçãoDeTrouxas.exe");
 		novo.initModality(Modality.WINDOW_MODAL);
 		novo.setResizable(false);
 		novo.initOwner(estagio);

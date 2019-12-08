@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema.gui.controladores.TelaPagamentoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="714.0" style="-fx-background-color: #a7d1b6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema.gui.controladores.TelaPagamentoController">
    <children>
       <Pane layoutX="31.0" layoutY="68.0" prefHeight="229.0" prefWidth="376.0" style="-fx-background-color: #28d4c8;">
          <children>
@@ -68,7 +68,7 @@
       <FontAwesomeIconView fill="#2e9a33" glyphName="BANK" layoutX="620.0" layoutY="46.0" size="40" />
       <JFXButton cancelButton="true" layoutX="643.0" layoutY="549.0" onAction="#cancelar" text="Cancelar" />
       <JFXButton defaultButton="true" layoutX="568.0" layoutY="549.0" onAction="#confirmar" text="Confirmar" />
-      <Text fill="#ab9494" layoutX="513.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Em breve...">
+      <Text fill="#807b7b" layoutX="513.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Em breve...">
          <font>
             <Font size="32.0" />
          </font>
