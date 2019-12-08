@@ -10,10 +10,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import sistema.beans.UsuarioTerraplanista;
+import sistema.controlador.Controlador;
 import sistema.gui.TerraPlanizer;
 
 public class TelaLogadaController {
-
+	Controlador controlador = Controlador.getInstancia();
     @FXML
     private JFXButton bnt_chat;
 
@@ -83,6 +84,7 @@ public class TelaLogadaController {
     @FXML
     void sair(ActionEvent e) {
     	TerraPlanizer.trocarTela("login");
+    	controlador.setUsuarioLogado(null);
     }
     
     @FXML
