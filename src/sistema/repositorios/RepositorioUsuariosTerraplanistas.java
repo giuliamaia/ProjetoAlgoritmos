@@ -1,31 +1,23 @@
 package sistema.repositorios;
 
-<<<<<<< HEAD
-=======
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
->>>>>>> refs/remotes/origin/Rodrigues
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.graphstream.graph.Node;
+import java.util.Map;
+import java.util.TreeMap;
 
-import sistema.beans.Grafo;
 import sistema.beans.UsuarioTerraplanista;
 
-<<<<<<< HEAD
-public class RepositorioUsuariosTerraplanistas implements Serializable{
-	private static final long serialVersionUID = 1L;
-=======
 public class RepositorioUsuariosTerraplanistas implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 132234234L;
->>>>>>> refs/remotes/origin/Rodrigues
 	private List<UsuarioTerraplanista> usuarios = new ArrayList<UsuarioTerraplanista>();
 	public List<UsuarioTerraplanista> getUsuarios() {
 		return usuarios;
@@ -33,30 +25,20 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 	public void setUsuarios(List<UsuarioTerraplanista> usuarios) {
 		this.usuarios = usuarios;
 	}
-
-
-	private Grafo grafo = Grafo.getInstancia();
+	
 	public void adicionarUsuario(UsuarioTerraplanista usuario) {
 		this.usuarios.add(usuario);
-<<<<<<< HEAD
-		grafo.addNode(usuario.getNome());
-		Node no = grafo.getNode(usuario.getNome());
-		no.addAttribute("ui.style", "text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #e09410; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
-		no.addAttribute("ui.label", usuario.getNome());
-=======
 		salvar();
->>>>>>> refs/remotes/origin/Rodrigues
 	}
+	
 	public void	removerUsuario(UsuarioTerraplanista usuario) {
 		this.usuarios.remove(usuario);
 		salvar();
 	}
+	
 	public void editarUsuario(UsuarioTerraplanista usuarioVelho, UsuarioTerraplanista usuarioNovo) {
 		usuarioVelho = usuarioNovo;
-<<<<<<< HEAD
-=======
 		salvar();
->>>>>>> refs/remotes/origin/Rodrigues
 	}
 	public RepositorioUsuariosTerraplanistas() {
 		try {
@@ -97,7 +79,53 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		this.usuarios = (ArrayList<UsuarioTerraplanista>) ois.readObject();
 		ois.close();
-
 	}
+	public ArrayList<UsuarioTerraplanista> pesquisarPorNome(String nome) {
+		nome = nome.toUpperCase();
+		ArrayList<UsuarioTerraplanista> ret = new ArrayList<UsuarioTerraplanista>();
+		if (nome == null)
+			return null;
+		
+		for (UsuarioTerraplanista user : this.usuarios) {
+			if (user.getNome().toUpperCase().contains(nome)) {
+				ret.add(user);
+			}
+		}
+		return ret;
+	}
+	
+	 public UsuarioTerraplanista pesquisarPorLogin(String login) {
+		 	login = login.toUpperCase();
+			
+			if (login == null)
+				return null;
 
+			for (UsuarioTerraplanista user : this.usuarios) {
+				if (user.getLogin().toUpperCase().equals(login)) {
+					return user;
+				}
+			}
+			return null;
+	 }
+	 public List<UsuarioTerraplanista> indicacaoPorInteresse(UsuarioTerraplanista user)
+		{
+			int temp = 0;
+			
+			Map<String, UsuarioTerraplanista> mapa = new TreeMap<String, UsuarioTerraplanista>();
+			
+			for(int i = 0; i<this.usuarios.size(); i++) { //percorrendo a lista de todos os usuários
+				for(int j = 0; j<this.usuarios.get(i).getInteresses().size(); j++) { //percorrendo a lista de interesses de um determinado usuário
+					for(int k = 0; k<user.getInteresses().size(); k++) { //percorrer a lista de interesses do usuário que queremos recomendar
+						if(this.usuarios.get(i).getInteresses().get(j).equalsIgnoreCase(user.getInteresses().get(k))){
+							temp++;
+						}
+					}
+				}
+				mapa.put(Integer.toString(temp), this.usuarios.get(i));
+				temp = 0;
+			}
+			
+			List<UsuarioTerraplanista> indicados = new ArrayList<UsuarioTerraplanista>(mapa.values());
+			return indicados;
+		}
 }

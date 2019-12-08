@@ -1,6 +1,7 @@
 package sistema.gui.controladores;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +19,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -28,9 +30,11 @@ import sistema.controlador.Controlador;
 import sistema.gui.TerraPlanizer;
 
 public class TelaRegistroController {
+	private static final int AlturaELargura = 256;
 	Controlador controlador = Controlador.getInstancia();
 	List <String> arrayListInteresses = new ArrayList<String>(); 
 	Image imageAux;
+	
     @FXML
     private JFXTextField tfNome;
 
@@ -64,7 +68,8 @@ public class TelaRegistroController {
     
     @FXML
     private JFXTextField tfRecomendacao;
-    
+    @FXML
+    private Label labelErroNome;
     @FXML
     private Circle circuloImg;
 
@@ -73,6 +78,8 @@ public class TelaRegistroController {
 
     @FXML
     private Rectangle retangulo2;
+    @FXML
+    private Label labelErroTermos;
 
     @FXML
     private Rectangle retangulo3;
@@ -140,8 +147,16 @@ public class TelaRegistroController {
     @FXML
     void alterarFotoOutra(MouseEvent event) {
     	File arquivo = TerraPlanizer.abrirFileChooser();
+    	if(arquivo == null) {
+    		return;
+    	}
+    	ImageView imageView = new ImageView(new Image(arquivo.toURI().toString()));
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageView.setFitWidth(AlturaELargura);
+        imageView.setFitHeight(AlturaELargura);
     	if (arquivo != null && arquivo.exists()) {
-    		circuloImg.setFill(new ImagePattern(new Image(arquivo.toURI().toString())));
+    		circuloImg.setFill(new ImagePattern(imageView.snapshot(null, null)));
     	}
     }
     private boolean verificaSeJaTem(String usuario) {
@@ -155,9 +170,10 @@ public class TelaRegistroController {
 
 	@FXML
     void addOutroInteresse() {
-    	if (!verificaSeJaTem(tfOutroInteresse.getText())) {
+    	if (!verificaSeJaTem(tfOutroInteresse.getText())&&!tfOutroInteresse.getText().isEmpty()) {
     		arrayListInteresses.add(tfOutroInteresse.getText());
     		atualizarListaInteresses();
+    		tfOutroInteresse.setText("");
     	}
     }
     
@@ -179,29 +195,48 @@ public class TelaRegistroController {
     		System.out.println(tfLogin.getText());
     		System.out.println(pfSenha.getText());
     		System.out.println(datePickerDataNascimento.getValue());
-    		UsuarioTerraplanista user = new UsuarioTerraplanista(arrayListInteresses, tfNome.getText(), tfLogin.getText(), pfSenha.getText(), datePickerDataNascimento.getValue(), imageAux.getUrl());
+    		UsuarioTerraplanista user = new UsuarioTerraplanista(arrayListInteresses, tfNome.getText(), tfLogin.getText(), pfSenha.getText(), datePickerDataNascimento.getValue(), imageAux==null? null:imageAux.getUrl());
     		controlador.adicionarUsuario(user);
     		TerraPlanizer.trocarTela("login");
     	}
     }
 
     private boolean isTudoPreenchido() {
-    	/*
-    	if(tfLogin.getText().contains(" ")||!tfLogin.getText().matches("[A-Z][a-z][1-9] ")) {
-			labelErroLogin.setText("Seu login não deve possuir caracteres especiais");
-			return false;
-		}
-		*/
+    	if (tfNome.getText().isEmpty()) {
+    		labelErroNome.setText("Adicione um nome válido");
+    		labelErroNome.setTextFill(Color.INDIANRED);
+    		return false;
+    	}
+    	labelErroNome.setText("");
+    	if(tfLogin.getText().isEmpty()) {
+    		labelErroLogin.setText("Adicione um login válido");
+    		labelErroLogin.setTextFill(Color.INDIANRED);
+    		return false;
+    	}
+    	if(controlador.pesquisarPorLogin(tfLogin.getText())!=null)
+    	{
+    		labelErroLogin.setText("Já existe esse login!");
+    		labelErroLogin.setTextFill(Color.INDIANRED);
+    		return false;
+    	}
     	labelErroLogin.setText("");
-    	if(datePickerDataNascimento.getValue() == null) {
+    	if(datePickerDataNascimento.getValue() == null||datePickerDataNascimento.getValue().isAfter(LocalDate.now())) {
     		labelErroData.setText("Sua data não é válida");
+    		labelErroData.setTextFill(Color.INDIANRED);
     		return false;
     	}
     	labelErroData.setText("");
-    	//if(tfRecomendacao.getText())
-    	labelErroRecomedacao.setText("");
+    	if(!checkTermos.isSelected()) {
+    		labelErroTermos.setText("Você deve assinar esse pacto.");
+    		labelErroTermos.setTextFill(Color.INDIANRED);
+    		return false;
+    	}
+    	labelErroTermos.setText("");
     	if (!tfNome.getText().isEmpty() && !tfLogin.getText().isEmpty() && !pfSenha.getText().isEmpty() && checkTermos.isSelected()&&datePickerDataNascimento.getValue() != null) {
-			return true;
+			if(pesquisaRecomendacao()) {
+				controlador.pesquisarPorLogin(tfRecomendacao.getText()).addRecomendacao();
+			}
+    		return true;
 		}
 
     	labelErroGeral.setText("Algo deu errado, revise se tudo está preenchido.");
@@ -230,11 +265,20 @@ public class TelaRegistroController {
     }
     
     @FXML
-    void pesquisaRecomendacao(MouseEvent event) {
+    boolean pesquisaRecomendacao() {
     	
     	if (!tfRecomendacao.getText().isEmpty()) {
-    		//pesquisar se existe esse cara no controlador
+    		if(controlador.pesquisarPorLogin(tfRecomendacao.getText())!=null) {
+    			labelErroRecomedacao.setText("Adicionado com sucesso.");
+    			labelErroRecomedacao.setTextFill(Color.DARKSEAGREEN);
+    			return true;
+    		}
+    		else{
+    			labelErroRecomedacao.setText("Não existe esse login");
+    			labelErroRecomedacao.setTextFill(Color.INDIANRED);
+    		}
     	}
+    	return false;
     }
     @FXML
     void initialize() {
@@ -274,4 +318,8 @@ public class TelaRegistroController {
     	lista.add("Outro...");
     	comboInteresses.setItems(FXCollections.observableList(lista));		
 	}
+    @FXML
+    void pagarDinheiros(MouseEvent event) {
+    	TerraPlanizer.abrirPagamentoDialog();
+    }
 }
