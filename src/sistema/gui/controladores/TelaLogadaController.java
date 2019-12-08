@@ -1,15 +1,23 @@
 
 package sistema.gui.controladores;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import sistema.beans.UsuarioTerraplanista;
 import sistema.controlador.Controlador;
@@ -19,6 +27,8 @@ public class TelaLogadaController {
 	
 	Controlador controlador = Controlador.getInstancia();
 	UsuarioTerraplanista contaLogada;
+	List <String> listaInteresses = controlador.getUsuarioLogado().getInteresses();
+	
 		@FXML
 	    private JFXButton bnt_chat;
 
@@ -150,10 +160,81 @@ public class TelaLogadaController {
     @FXML
     void initialize() {
     	pane_perfil.toFront();
+    	inicializaComboBoxInteresses();
     	label_name.setText(controlador.getUsuarioLogado().getNome());
-    	
-    	
+    	label_login.setText(controlador.getUsuarioLogado().getLogin());
+    	label_senha.setText(controlador.getUsuarioLogado().getSenha());
+    	lavel_data.setText(controlador.getUsuarioLogado().getDataNascimento().toString());
+    	if(controlador.getUsuarioLogado().getImage()==null) {
+        	circleFoto.setFill(new ImagePattern(new Image("/images/user.png")));
+    	}
+    	else {
+    		circleFoto.setFill(new ImagePattern(new Image(controlador.getUsuarioLogado().getImage())));
+    	}
+    	lvInteresses.setItems(FXCollections.observableList(controlador.getUsuarioLogado().getInteresses()));
+    }
+
+	private void inicializaComboBoxInteresses() {
+		addInteresses.setDisable(true);
+		tfOutro.setDisable(true);
+		List<String> lista = new ArrayList<String>();
+    	lista.add("Domo terrestre");
+    	lista.add("Densidade");
+    	lista.add("Tratado da Antártida");
+    	lista.add("Resfriamento global");
+    	lista.add("FlatCon");
+    	lista.add("Geocentrismo");
+    	lista.add("Salamandras");
+    	Collections.sort(lista);
+    	lista.add("Outro...");
+    	comboboxInteresses.setItems(FXCollections.observableList(lista));		
+	}
+	
+	@FXML
+    void addInteresse(ActionEvent event) {
+    	if(comboboxInteresses.getSelectionModel().getSelectedItem().contentEquals("Outro...")) {
+    		addInteresses.setDisable(false);
+    		tfOutro.setDisable(false);
+    	}
+    	else if (!verificaSeJaTem(comboboxInteresses.getSelectionModel().getSelectedItem())) {
+    		listaInteresses.add(comboboxInteresses.getSelectionModel().getSelectedItem());
+    		atualizarListaInteresses();
+    		addInteresses.setDisable(true);
+    		tfOutro.setDisable(true);
+    	}
     	
     }
+	private boolean verificaSeJaTem(String usuario) {
+    	for (String aux : listaInteresses) {
+    		if (aux.toUpperCase().contentEquals(usuario.toUpperCase())) {
+    			return true;
+    		}
+    	}
+		return false;
+	}
+	@FXML
+    void addOutroInteresse() {
+    	if (!verificaSeJaTem(tfOutro.getText())&&!tfOutro.getText().isEmpty()) {
+    		listaInteresses.add(tfOutro.getText());
+    		atualizarListaInteresses();
+    		tfOutro.setText("");
+    	}
+    }
+    
+    void atualizarListaInteresses() {
+    	Collections.sort(listaInteresses);
+    	lvInteresses.setItems(FXCollections.observableList(listaInteresses));
+    }
+    @FXML
+    void removerInteresse(MouseEvent event) {
+    	if(lvInteresses.getSelectionModel().getSelectedItem()!=null) {
+    		listaInteresses.remove(lvInteresses.getSelectionModel().getSelectedItem());
+        	atualizarListaInteresses();
+    	}
+    	else {
+    		//Avisar em alguma label que tem q selecionar
+    	}
+    }
+    
     
 }
