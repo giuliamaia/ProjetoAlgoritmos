@@ -25,8 +25,8 @@
                <children>
                   <Pane layoutY="24.0" onMouseClicked="#pagarDinheiros" prefHeight="57.0" prefWidth="158.0" style="-fx-background-color: #fcb603;">
                      <children>
-                        <FontAwesomeIconView fill="#20b371" glyphName="CREDIT_CARD" layoutX="14.0" layoutY="42.0" onMouseClicked="#pagarDinheiros" size="40" text="" />
-                        <Label alignment="TOP_LEFT" layoutX="66.0" layoutY="10.0" onMouseClicked="#pagarDinheiros" prefHeight="43.0" prefWidth="112.0" text="PAGUE SEU DÍZIMO!" wrapText="true">
+                        <FontAwesomeIconView fill="#20b371" glyphName="CREDIT_CARD" layoutX="14.0" layoutY="42.0" size="40" text="" />
+                        <Label alignment="TOP_LEFT" layoutX="66.0" layoutY="10.0" prefHeight="43.0" prefWidth="112.0" text="PAGUE SEU DÍZIMO!" wrapText="true">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -35,32 +35,32 @@
                   </Pane>
                   <Pane layoutY="99.0" onMouseClicked="#pagarDinheiros" prefHeight="57.0" prefWidth="158.0" style="-fx-background-color: #fcb603;">
                      <children>
-                        <Label alignment="TOP_LEFT" layoutX="66.0" layoutY="10.0" onMouseClicked="#pagarDinheiros" prefHeight="43.0" prefWidth="112.0" text="CURE SUA DOENÇA!" wrapText="true">
+                        <Label alignment="TOP_LEFT" layoutX="66.0" layoutY="10.0" prefHeight="43.0" prefWidth="112.0" text="CURE SUA DOENÇA!" wrapText="true">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <FontAwesomeIconView fill="#20b371" glyphName="MONEY" layoutX="14.0" layoutY="42.0" onMouseClicked="#pagarDinheiros" size="40" text="" />
+                        <FontAwesomeIconView fill="#20b371" glyphName="MONEY" layoutX="14.0" layoutY="42.0" size="40" text="" />
                      </children>
                   </Pane>
                   <Pane layoutY="174.0" onMouseClicked="#pagarDinheiros" prefHeight="57.0" prefWidth="158.0" style="-fx-background-color: #fcb603;">
                      <children>
-                        <Label alignment="TOP_LEFT" layoutX="60.0" layoutY="11.0" onMouseClicked="#pagarDinheiros" prefHeight="43.0" prefWidth="96.0" text="TENHA SUA VAGA NO CÉU!" wrapText="true">
+                        <Label alignment="TOP_LEFT" layoutX="60.0" layoutY="11.0" prefHeight="43.0" prefWidth="96.0" text="TENHA SUA VAGA NO CÉU!" wrapText="true">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <FontAwesomeIconView fill="#20b371" glyphName="BITCOIN" layoutX="21.0" layoutY="42.0" onMouseClicked="#pagarDinheiros" size="40" />
+                        <FontAwesomeIconView fill="#20b371" glyphName="BITCOIN" layoutX="21.0" layoutY="42.0" size="40" />
                      </children>
                   </Pane>
                   <Pane layoutY="249.0" onMouseClicked="#pagarDinheiros" prefHeight="57.0" prefWidth="158.0" style="-fx-background-color: #fcb603;">
                      <children>
-                        <Label alignment="TOP_LEFT" layoutX="61.0" layoutY="10.0" onMouseClicked="#pagarDinheiros" prefHeight="43.0" prefWidth="96.0" text="NOS DÊ SEU DINHEIRO!" wrapText="true">
+                        <Label alignment="TOP_LEFT" layoutX="61.0" layoutY="10.0" prefHeight="43.0" prefWidth="96.0" text="NOS DÊ SEU DINHEIRO!" wrapText="true">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <FontAwesomeIconView fill="#20b371" glyphName="DOLLAR" layoutX="24.0" layoutY="42.0" onMouseClicked="#pagarDinheiros" size="40" text="" />
+                        <FontAwesomeIconView fill="#20b371" glyphName="DOLLAR" layoutX="24.0" layoutY="42.0" size="40" text="" />
                      </children>
                   </Pane>
                </children>

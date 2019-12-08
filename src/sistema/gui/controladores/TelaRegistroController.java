@@ -173,6 +173,7 @@ public class TelaRegistroController {
     	if (!verificaSeJaTem(tfOutroInteresse.getText())&&!tfOutroInteresse.getText().isEmpty()) {
     		arrayListInteresses.add(tfOutroInteresse.getText());
     		atualizarListaInteresses();
+    		tfOutroInteresse.setText("");
     	}
     }
     
@@ -319,6 +320,6 @@ public class TelaRegistroController {
 	}
     @FXML
     void pagarDinheiros(MouseEvent event) {
-
+    	TerraPlanizer.abrirPagamentoDialog();
     }
 }

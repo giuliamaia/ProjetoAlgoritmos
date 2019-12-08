@@ -98,7 +98,7 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 				return null;
 
 			for (UsuarioTerraplanista user : this.usuarios) {
-				if (user.getLogin().toUpperCase().contains(login)) {
+				if (user.getLogin().toUpperCase().equals(login)) {
 					return user;
 				}
 			}

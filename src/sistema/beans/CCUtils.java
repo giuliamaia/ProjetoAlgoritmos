@@ -16,7 +16,8 @@ public class CCUtils {
     /**
      * Valid a Credit Card number
      */
-    public static boolean validCC(String number) throws Exception {
+    @SuppressWarnings("unused")
+	public static boolean validCC(String number) throws Exception {
         int CardID;
         if ((CardID = getCardID(number)) != -1)
             return validCCNumber(number);
@@ -84,7 +85,8 @@ public class CCUtils {
 
     }
 
-    public static boolean isNumber(String n) {
+    @SuppressWarnings("unused")
+	public static boolean isNumber(String n) {
         try {
             double d = Double.valueOf(n).doubleValue();
             return true;

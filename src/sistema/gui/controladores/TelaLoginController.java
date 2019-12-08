@@ -64,6 +64,6 @@ public class TelaLoginController {
     }
     @FXML
     void pagarDinheiros(MouseEvent event) {
-
+    	TerraPlanizer.abrirPagamentoDialog();
     }
 }

@@ -11,7 +11,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -21,7 +23,7 @@ public class TerraPlanizer extends Application{
 	static private Stage estagio;
 	static private Parent rootLogin;
 	static private Parent rootRegistro;
-	
+	static private Stage telaPagamento;
 	private double xOffset = 0;
     private double yOffset = 0;
 	@Override
@@ -50,6 +52,7 @@ public class TerraPlanizer extends Application{
 			primaryStage.setScene(cenaMain);
 			
 			primaryStage.initStyle(StageStyle.UNDECORATED);
+			//new Splash();
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -107,6 +110,28 @@ public class TerraPlanizer extends Application{
 		default: 
 			System.out.println("Não foi possivel achar essa tela para fechar, favor use um dos seguintes: (login, registro)");
 	}
+	}
+	static public void abrirPagamentoDialog() {
+		AnchorPane conteudoDialog = null;
+		try {
+			conteudoDialog = (AnchorPane) FXMLLoader.load(new File("src/sistema/gui/view/TelaPagamento.fxml").toURI().toURL());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Stage novo = new Stage();
+		novo.setTitle("Novo Jogador");
+		novo.initModality(Modality.WINDOW_MODAL);
+		novo.setResizable(false);
+		novo.initOwner(estagio);
+		Scene cena = new Scene(conteudoDialog);
+		novo.setScene(cena);
+		telaPagamento=novo;
+		novo.showAndWait();
+	}
+	static public void fecharTelaPagamento () {
+		telaPagamento.close();
 	}
 	static public void fecharTela () {
 		estagio.close();

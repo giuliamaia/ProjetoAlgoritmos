@@ -11,7 +11,7 @@ import javax.swing.SwingConstants;
 public class Splash {
 	private final int LARGURA_SPLASH = 650;
 	private final int ALTURA_SPLASH = 470;
-	private final int TEMPO_SPLASH = 9000;
+	private final int TEMPO_SPLASH = 6000;
 	private final String CAMINHO_SPLASH = "/images/terraplana.gif";
 	
 	public Splash() {
