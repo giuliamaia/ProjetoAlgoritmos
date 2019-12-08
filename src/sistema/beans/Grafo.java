@@ -43,11 +43,40 @@ public class Grafo {
 	}
 	private Grafo () {
 		grafo = new DefaultGraph("Usuários");
-		
+		setStrict(false);
+		setAutoCreate(true);
+		grafo.addAttribute("ui.stylesheet", "graph { fill-color: #DCC; }");
+		construirgrafo();
 	}
 	
-	private void construirgrafo() {
-		//TODO montar grafo
+	public void construirgrafo() {
+		setarNos();
+		setarArestas();
+	}
+	private void setarArestas() {
+		for(UsuarioTerraplanista u : controlador.getUsuarios()) {
+			for(UsuarioTerraplanista a : u.getAmigos()) {
+				addEdge(u.getLogin() + " - " + a.getLogin(), u.getLogin(), a.getLogin());
+				Edge aresta = getEdge(u.getLogin() + " - " + a.getLogin());
+				if(aresta != null)aresta.addAttribute("ui.style", "shape: cubic-curve;");
+			}
+		}
+		
+	}
+	private void setarNos() {
+		for (UsuarioTerraplanista u : controlador.getUsuarios()) {
+			Node no = addNode(u.getLogin());
+			if(u.isPastor()) {
+				no.addAttribute("ui.style", "fill-color: #5eb5a8; text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #A7CC; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
+			}
+			else {
+				no.addAttribute("ui.style", "fill-color: #292725; text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #A7CC; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
+			}
+			
+			no.addAttribute("ui.label", u.getNome() + " (" + u.getLogin()+ ")");
+			
+		}
+		
 	}
 	public <T extends Edge> T addEdge(String arg0, String arg1, String arg2)
 			throws IdAlreadyInUseException, ElementNotFoundException, EdgeRejectedException {
