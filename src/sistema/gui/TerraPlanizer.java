@@ -27,6 +27,7 @@ public class TerraPlanizer extends Application{
 	static private Scene telaRegistro;
 	static private Scene telaLogada;
 	static private Stage estagio;
+	static private Stage estagioGrafo = new Stage();
 	static private Parent rootLogin;
 	static private Parent rootLogada;
 	static private Parent rootRegistro;
@@ -179,21 +180,24 @@ public class TerraPlanizer extends Application{
 		novo.showAndWait();
 	}
 	static public void abrirGrafo() {
-		Grafo g1= Grafo.getInstancia();
-		Graph g = g1.getGrafo();
-		FxViewer v = new FxViewer(g, FxViewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
-		g1.construirgrafo(true);
-		g.setAttribute("ui.antialias");
-		g.setAttribute("ui.quality");
-		g.setAttribute("ui.stylesheet", "graph {padding: 60px;}");
-		v.enableAutoLayout();
-		FxViewPanel panel = (FxViewPanel)v.addDefaultView(false, new FxGraphRenderer());
-		Scene scene = new Scene(panel, 800, 600);
-  		Stage estagio = new Stage();
-  		estagio.setScene(scene);
-  		estagio.setTitle("Grafo");
-  		estagio.initModality(Modality.WINDOW_MODAL);
-		estagio.showAndWait();
+		
+		if(!estagioGrafo.isShowing()) {
+			Grafo g1= Grafo.getInstancia();
+			Graph g = g1.getGrafo();
+			FxViewer v = new FxViewer(g, FxViewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
+			g1.construirgrafo(true);
+			g.setAttribute("ui.antialias");
+			g.setAttribute("ui.quality");
+			g.setAttribute("ui.stylesheet", "graph {padding: 60px;}");
+			v.enableAutoLayout();
+			FxViewPanel panel = (FxViewPanel)v.addDefaultView(false, new FxGraphRenderer());
+			Scene scene = new Scene(panel, 800, 600);
+	  		
+			estagioGrafo.setScene(scene);
+			estagioGrafo.setTitle("Grafo");
+			estagioGrafo.initModality(Modality.WINDOW_MODAL);
+			estagioGrafo.showAndWait();
+		}
 	}
 	static public void fecharTelaPagamento () {
 		telaPagamento.close();

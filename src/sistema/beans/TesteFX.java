@@ -1,34 +1,19 @@
 package sistema.beans;
 
-import javafx.application.Application;
-import org.graphstream.graph.Graph;
+import java.util.List;
 
-import org.graphstream.ui.fx_viewer.FxViewPanel;
-import org.graphstream.ui.fx_viewer.FxViewer;
-import org.graphstream.ui.javafx.FxGraphRenderer;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import sistema.controlador.Controlador;
 
-public class TesteFX extends Application{
+public class TesteFX {
 	public static void main(String[] args) {
-		Application.launch(TesteFX.class, args);
-	}
-	
-	protected String styleSheet = "graph {padding: 60px;}";
-
-	public void start(Stage primaryStage) throws Exception {
-		Grafo g1= Grafo.getInstancia();
-		Graph g = g1.getGrafo();
-		FxViewer v = new FxViewer(g, FxViewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
-		g1.construirgrafo(true);
-		g.setAttribute("ui.antialias");
-		g.setAttribute("ui.quality");
-		g.setAttribute("ui.stylesheet", "graph {padding: 60px;}");
-		v.enableAutoLayout();
-		FxViewPanel panel = (FxViewPanel)v.addDefaultView(false, new FxGraphRenderer());
-		Scene scene = new Scene(panel, 800, 600);
-  		primaryStage.setScene(scene);
-  		
-		primaryStage.show();
+		System.out.println("oi");
+		
+		Controlador controlador = Controlador.getInstancia();
+		UsuarioTerraplanista user = controlador.pesquisarPorLogin("adm");
+		user.addAmigo(controlador.pesquisarPorLogin("roro"));
+		System.out.println( "oi");
+		//List<UsuarioTerraplanista> recomendados = controlador.indicacaoAmigoComum(controlador.pesquisarPorLogin("adm"));
+		//List<UsuarioTerraplanista> recomendados = controlador.indicacaoPorInteresse(controlador.pesquisarPorLogin("adm"));
+		System.out.println("Recomendados: " + "Looping infinito");
 	}
 }
