@@ -93,7 +93,7 @@ public class TelaLoginController {
     	verSenha.setDisable(false);
     	System.out.println(verSenha.isPressed());
     	paneNaoVerSenha.toFront();
-    	pfSenha.forward();;
+    	pfSenha.forward();
     }
     
     @FXML
