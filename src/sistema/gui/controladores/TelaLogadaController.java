@@ -17,6 +17,9 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -24,6 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import sistema.beans.CCUtils;
 import sistema.beans.Grafo;
 import sistema.beans.UsuarioTerraplanista;
 import sistema.controlador.Controlador;
@@ -39,7 +43,32 @@ public class TelaLogadaController {
 	List <UsuarioTerraplanista> listaDeUsuarios = new ArrayList<UsuarioTerraplanista>();
     @FXML
     private Pane painel;
+    @FXML
+    private JFXTextField tfNumCartao;
 
+    @FXML
+    private JFXTextField tfNomeTitular;
+
+    @FXML
+    private JFXTextField tfMes;
+
+    @FXML
+    private JFXTextField tfAno;
+
+    @FXML
+    private Label labelNumero;
+
+    @FXML
+    private Label labelNome;
+
+    @FXML
+    private Label labelMesAno;
+
+    @FXML
+    private JFXTextField tfCVV;
+
+    @FXML
+    private Label labelCVV;
 	@FXML
     private JFXButton bnt_chat;
 
@@ -132,7 +161,85 @@ public class TelaLogadaController {
     
     @FXML
     private Label labelAvisoInteresses;
-    
+//PAGAMENTO ABAIXO
+	
+    @FXML
+    void confirmar() {
+    	try {
+			if(isTudoVálido()) {
+				if(confirmaTela()) {
+					Alert alerta = new Alert(AlertType.INFORMATION);
+					alerta.setTitle("Obrigado por se juntar ao Salamandrismo. Kifflom.");
+					alerta.setHeaderText("Você adiquiriu paz, amor e vida eterna!");
+					alerta.setContentText("Obrigado por garantir seu lugar no reino dos anfíbios.\nAutomáticamente detectamos seu salário com as informações que roubamos suas e cobramos 15% de acordo com o mês pelo seu cartão, sem burocracias ou preenchimentos.");
+					alerta.showAndWait();
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    @FXML
+    private void habilitarEdicao() {
+    	//TODO
+    }
+	private boolean confirmaTela() {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setContentText("Confirme para prosseguir com o pagamento!");
+		alert.setHeaderText("Seu cartão é um " + CCUtils.getCardName(CCUtils.getCardID(tfNumCartao.getText()))+", confirma?");
+		alert.showAndWait();
+		if(alert.getResult()==ButtonType.OK) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
+    @FXML
+    void tentaPular() {
+    	//TODO
+    }
+	private boolean isTudoVálido() throws Exception {
+		
+		if(tfNumCartao.getText().isEmpty()||!CCUtils.isNumber(tfNumCartao.getText())) {
+			labelNumero.setText("Cartão Inválido, o Salamandra se entristece.");
+			return false;
+		}
+		else if (!CCUtils.validCCNumber(tfNumCartao.getText())){
+			labelNumero.setText("Infelizmente não é válido este cartão");
+			return false;
+		}
+		else if (CCUtils.validCCNumber(tfNumCartao.getText())&&!CCUtils.validCC(tfNumCartao.getText())) {
+			labelNumero.setText("Infelizmente não aceitamos essa bandeira.");
+			return false;
+		}
+		else if(CCUtils.validCC(tfNumCartao.getText())){
+			labelNumero.setText("");
+			if(!tfNomeTitular.getText().isEmpty()) {
+				labelNome.setText("");
+				if(!tfMes.getText().isEmpty()&&!tfAno.getText().isEmpty()&&CCUtils.isNumber(tfMes.getText()) && CCUtils.isNumber(tfAno.getText()) && Integer.parseInt(tfMes.getText()) <= 12 && Integer.parseInt(tfMes.getText()) >= 1 &&Integer.parseInt(tfAno.getText()) <= 99 && Integer.parseInt(tfAno.getText()) >= 20) {
+					labelMesAno.setText("");
+					if(!tfCVV.getText().isEmpty()&&CCUtils.isNumber(tfCVV.getText())&&Integer.parseInt(tfCVV.getText()) <= 999&&Integer.parseInt(tfCVV.getText()) >= 001) {
+						labelCVV.setText("");
+						return true;
+					}
+					else {
+						labelCVV.setText("CVV inválido");
+					}
+				}
+				else {
+					labelMesAno.setText("Data inválida");
+				}
+			}
+			else {
+				labelNome.setText("Nome não pode ser vazio");
+			}
+		}
+		return false;
+	}
+	//PAGAMENTO ACIMA
 	public void setarContaLogada(UsuarioTerraplanista contaLogada) {
 		this.contaLogada = contaLogada;
 	}

@@ -130,6 +130,7 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 						else{
 							mapa.put(Integer.toString(temp), this.usuarios.get(i));
 							temp = 0;
+							break;
 						}
 					}
 					
@@ -153,17 +154,19 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 							for(int k = 0; k<user.getAmigos().size(); k++) { //percorrer a lista de amigos do usuário que queremos recomendar
 								if(this.usuarios.get(i).getAmigos().get(j).equals(user.getAmigos().get(k))){
 									temp++;
+									System.out.println(i + "" + j + "" + k);
 								}
 							}
 						}
 					while(!(mapa.containsValue(this.usuarios.get(i)))) {
-						if(mapa.containsKey(Integer.toString(temp))) {
+						if(mapa.containsKey(temp +"")) {
 							temp = temp * 10;
 							System.out.println("oi");
 						}
 						else{
 							mapa.put(Integer.toString(temp), this.usuarios.get(i));
 							temp = 0;
+							break;
 						}
 						
 					}
