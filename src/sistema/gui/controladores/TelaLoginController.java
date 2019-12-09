@@ -3,10 +3,12 @@ package sistema.gui.controladores;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import sistema.controlador.Controlador;
 import sistema.gui.TerraPlanizer;
@@ -26,7 +28,19 @@ public class TelaLoginController {
     private Label labelDown;
     
     @FXML
-    void abrirRegistrarConta(ActionEvent event) {
+    private Pane paneVerSenha;
+
+    @FXML
+    private FontAwesomeIconView verSenha;
+
+    @FXML
+    private Pane paneNaoVerSenha;
+
+    @FXML
+    private FontAwesomeIconView naoVerSenha;
+
+    @FXML
+    void abrirRegistrarConta(MouseEvent event) {
     	TerraPlanizer.trocarTela("registro");
     }
 
@@ -71,5 +85,23 @@ public class TelaLoginController {
     @FXML
     void pagarDinheiros(MouseEvent event) {
     	TerraPlanizer.abrirPagamentoDialog();
+    }
+    
+    @FXML
+    void verSenha(MouseEvent event) {
+    	//TODO fazer esta mierda funcionar neste carai
+    	verSenha.setDisable(false);
+    	System.out.println(verSenha.isPressed());
+    	paneNaoVerSenha.toFront();
+    	pfSenha.forward();;
+    }
+    
+    @FXML
+    void naoVerSenha(MouseEvent event) {
+    	//TODO fazer esta mierda funcionar neste carai
+    	naoVerSenha.setDisable(false);
+    	System.out.println(naoVerSenha.isPressed());
+    	paneVerSenha.toFront();
+    	pfSenha.backward();
     }
 }
