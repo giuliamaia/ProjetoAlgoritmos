@@ -49,6 +49,12 @@ public class Controlador {
 		}
 		return instancia;
 	}
+	public List<UsuarioTerraplanista> indicacaoPorInteresse(UsuarioTerraplanista user) {
+		return repositorioUsuarioTerraPlanistas.indicacaoPorInteresse(user);
+	}
+	public List<UsuarioTerraplanista> indicacaoAmigoComum(UsuarioTerraplanista user) {
+		return repositorioUsuarioTerraPlanistas.indicacaoAmigoComum(user);
+	}
 	private Controlador () {
 		repositorioUsuarioTerraPlanistas = new RepositorioUsuariosTerraplanistas();
 	}

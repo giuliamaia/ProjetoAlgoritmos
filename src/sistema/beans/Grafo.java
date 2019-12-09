@@ -67,7 +67,7 @@ public class Grafo {
 			for(UsuarioTerraplanista a : u.getAmigos()) {
 				Edge aresta = grafo.addEdge(u.getLogin()  + a.getLogin(), u.getLogin(), a.getLogin());
 				System.out.println(aresta);
-				//if(aresta != null)aresta.setAttribute("ui.style", "shape: cubic-curve;");
+				if(aresta != null)aresta.setAttribute("ui.style", "shape: cubic-curve;");
 			}
 		}
 		
@@ -88,6 +88,9 @@ public class Grafo {
 			
 		}
 		
+	}
+	private void setarNosRecomendacao() {
+		//TODO 
 	}
 	public void addAttributeSink(AttributeSink arg0) {
 		grafo.addAttributeSink(arg0);

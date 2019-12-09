@@ -159,11 +159,13 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 					while(!(mapa.containsValue(this.usuarios.get(i)))) {
 						if(mapa.containsKey(Integer.toString(temp))) {
 							temp = temp * 10;
+							System.out.println("oi");
 						}
 						else{
 							mapa.put(Integer.toString(temp), this.usuarios.get(i));
 							temp = 0;
 						}
+						
 					}
 				}
 			}	

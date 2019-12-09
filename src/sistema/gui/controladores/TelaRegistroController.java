@@ -26,6 +26,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import sistema.beans.Grafo;
 import sistema.beans.UsuarioTerraplanista;
 import sistema.controlador.Controlador;
 import sistema.gui.TerraPlanizer;
@@ -196,8 +197,11 @@ public class TelaRegistroController {
     		System.out.println(tfLogin.getText());
     		System.out.println(pfSenha.getText());
     		System.out.println(datePickerDataNascimento.getValue());
+    		Grafo grafo = Grafo.getInstancia();
+    		
     		UsuarioTerraplanista user = new UsuarioTerraplanista(new ArrayList<UsuarioTerraplanista>(), arrayListInteresses, tfNome.getText(), tfLogin.getText(), pfSenha.getText(), datePickerDataNascimento.getValue(), LocalDateTime.now(), imageAux==null? null:imageAux.getUrl(), 0, false);
     		controlador.adicionarUsuario(user);
+    		grafo.construirgrafo(true);
     		TerraPlanizer.trocarTela("login");
     	}
     }

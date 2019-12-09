@@ -24,12 +24,12 @@
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="tfMes" focusColor="BLACK" layoutX="229.0" layoutY="170.0" prefHeight="30.0" prefWidth="32.0" promptText="Mês" unFocusColor="#545151">
+            <JFXTextField fx:id="tfMes" focusColor="BLACK" layoutX="229.0" layoutY="170.0" onKeyReleased="#tentaPular" prefHeight="30.0" prefWidth="32.0" promptText="Mês" unFocusColor="#545151">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="tfAno" focusColor="BLACK" layoutX="275.0" layoutY="170.0" prefHeight="30.0" prefWidth="32.0" promptText="Ano" unFocusColor="#545151">
+            <JFXTextField fx:id="tfAno" focusColor="BLACK" layoutX="275.0" layoutY="170.0" onKeyReleased="#tentaPular" prefHeight="30.0" prefWidth="32.0" promptText="Ano" unFocusColor="#545151">
                <font>
                   <Font size="14.0" />
                </font>
@@ -49,7 +49,7 @@
       <Pane layoutX="31.0" layoutY="332.0" prefHeight="229.0" prefWidth="376.0" style="-fx-background-color: #28d4c8;">
          <children>
             <Pane layoutY="42.0" prefHeight="44.0" prefWidth="376.0" style="-fx-background-color: #1c1b1a;" />
-            <JFXTextField fx:id="tfCVV" focusColor="BLACK" layoutX="115.0" layoutY="150.0" prefHeight="25.0" prefWidth="43.0" promptText="CVV" unFocusColor="#575756" />
+            <JFXTextField fx:id="tfCVV" focusColor="BLACK" layoutX="115.0" layoutY="150.0" onKeyReleased="#tentaPular" prefHeight="25.0" prefWidth="43.0" promptText="CVV" unFocusColor="#575756" />
             <Label fx:id="labelCVV" layoutX="111.0" layoutY="125.0" prefHeight="25.0" prefWidth="51.0" />
          </children>
       </Pane>
