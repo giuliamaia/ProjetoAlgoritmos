@@ -12,6 +12,7 @@ import org.graphstream.ui.javafx.FxGraphRenderer;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
@@ -20,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
@@ -41,13 +43,12 @@ public class TelaLogadaController {
 	List <String> listaInteresses = controlador.getUsuarioLogado().getInteresses();
 	List <UsuarioTerraplanista> listaAmigos = new ArrayList<UsuarioTerraplanista>();
 	List <UsuarioTerraplanista> listaDeUsuarios = new ArrayList<UsuarioTerraplanista>();
-    @FXML
-    private Pane painel;
 
-	@FXML
+
+    @FXML
     private JFXButton bnt_chat;
 
-	@FXML
+    @FXML
     private JFXButton bnt_amigos;
 
     @FXML
@@ -60,7 +61,31 @@ public class TelaLogadaController {
     private JFXButton bnt_contrato;
 
     @FXML
-    private Pane pane_doaçao;
+    private Pane pane_perfil;
+    
+    @FXML
+    private Pane pane_editar;
+
+    @FXML
+    private Circle circleFoto;
+
+    @FXML
+    private Label label_name;
+
+    @FXML
+    private Label label_login;
+
+    @FXML
+    private Label lavel_data;
+
+    @FXML
+    private JFXListView<String> lvInteresses;
+
+    @FXML
+    private FontAwesomeIconView removeInteresses;
+
+    @FXML
+    private FontAwesomeIconView addInteresses;
 
     @FXML
     private JFXButton bnt_minimizar;
@@ -69,16 +94,31 @@ public class TelaLogadaController {
     private JFXButton bnt_sair;
 
     @FXML
+    private ComboBox<String> comboboxInteresses;
+
+    @FXML
+    private JFXTextField tfOutro;
+
+    @FXML
+    private JFXButton bnt_editar;
+
+    @FXML
+    private JFXPasswordField pf_senha;
+
+    @FXML
+    private Label labelAvisoInteresses;
+
+    @FXML
     private Pane pane_chat;
 
     @FXML
-    private Pane pane_amigos;
+    private Pane painel;
 
     @FXML
-    private JFXListView<UsuarioTerraplanista> lv_amigos;
+    private Pane pane_contrato;
 
     @FXML
-	private JFXTextField tf_pesquisa;
+    private Pane pane_doaçao;
 
     @FXML
     private JFXTextField tfNumCartao;
@@ -108,10 +148,28 @@ public class TelaLogadaController {
     private Label labelCVV;
 
     @FXML
-    private JFXListView<UsuarioTerraplanista> lv_pesquisa;
+    private Pane pane_amigos;
+    
+    @FXML
+    private Label label_name1;
 
-	@FXML
-    private FontAwesomeIconView icon_lupa;
+    @FXML
+    private Label label_login1;
+
+    @FXML
+    private Label lavel_data1;
+
+    @FXML
+    private Label label_senha1;
+
+    @FXML
+    private JFXListView<UsuarioTerraplanista> lv_amigos;
+
+    @FXML
+    private JFXTextField tf_pesquisa;
+
+    @FXML
+    private JFXListView<UsuarioTerraplanista> lv_pesquisa;
 
     @FXML
     private JFXButton bnt_remover;
@@ -120,49 +178,25 @@ public class TelaLogadaController {
     private JFXButton bnt_add;
 
     @FXML
-    private Pane pane_contrato;
-
-    @FXML
-    private Pane pane_perfil;
-
-    @FXML
-    private Circle circleFoto;
-
-    @FXML
-    private Label label_name;
-
-    @FXML
-    private Label label_login;
-
-    @FXML
-    private Label lavel_data;
-
-    @FXML
-    private JFXListView<String> lvInteresses;
-
-    @FXML
-    private FontAwesomeIconView removeInteresses;
-
-    @FXML
-    private FontAwesomeIconView addInteresses;
-
-    @FXML
-    private ComboBox<String> comboboxInteresses;
-
-    @FXML
-    private JFXTextField tfOutro;
-
-    @FXML
-    private JFXButton bnt_editar;
-
-    @FXML
-    private Label label_senha;
-    
-    @FXML
     private Label labelAvisoAmigos;
+
+    @FXML
+    private JFXButton bnt_removeGeral;
+
+    @FXML
+    private JFXButton bnt_addGeral;
     
     @FXML
-    private Label labelAvisoInteresses;
+    private JFXTextField tfNovoNome;
+
+    @FXML
+    private JFXTextField tfNovoLogin;
+
+    @FXML
+    private JFXPasswordField pfNovaSenha;
+
+    @FXML
+    private DatePicker dpDataNascimentoNova;
     
 	public void setarContaLogada(UsuarioTerraplanista contaLogada) {
 		this.contaLogada = contaLogada;
@@ -234,10 +268,12 @@ public class TelaLogadaController {
 		}
 		
 	}
+	
     @FXML
     void tentaPular() {
     	//TODO
     }
+    
 	private boolean isTudoVálido() throws Exception {
 		
 		if(tfNumCartao.getText().isEmpty()||!CCUtils.isNumber(tfNumCartao.getText())) {
@@ -276,6 +312,7 @@ public class TelaLogadaController {
 		}
 		return false;
 	}
+	
     //PAGAMENTO ACIMA
     @FXML
     void initialize() {
@@ -284,7 +321,22 @@ public class TelaLogadaController {
     	inicializaPerfil();
     	inicializaPane();
     	inicializaAmigos();
+    	inicializaEditar();
     	
+    }
+    
+    private void inicializaEditar() {
+    	//TODO tem q setar null dps q volta dnv pra tela editar
+    	label_name1.setText(controlador.getUsuarioLogado().getNome());
+    	label_login1.setText(controlador.getUsuarioLogado().getLogin());
+    	label_senha1.setText(controlador.getUsuarioLogado().getSenha());
+    	lavel_data1.setText(controlador.getUsuarioLogado().getDataNascimento().toString());
+    	tfNovoLogin.clear();
+    	tfNovoLogin.setPromptText("Digite seu novo login");
+    	tfNovoNome.clear();
+    	tfNovoNome.setPromptText("Digite seu novo nome");
+    	pfNovaSenha.clear();
+    	pfNovaSenha.setPromptText("Digite sua nova senha");
     }
     
     private void inicializaAmigos() {
@@ -298,7 +350,8 @@ public class TelaLogadaController {
     private void inicializaPerfil() {
     	label_name.setText(controlador.getUsuarioLogado().getNome());
     	label_login.setText(controlador.getUsuarioLogado().getLogin());
-    	label_senha.setText(controlador.getUsuarioLogado().getSenha());
+    	pf_senha.setText(controlador.getUsuarioLogado().getSenha());
+    	pf_senha.setDisable(true);
     	lavel_data.setText(controlador.getUsuarioLogado().getDataNascimento().toString());
     	if(controlador.getUsuarioLogado().getImage()==null) {
         	circleFoto.setFill(new ImagePattern(new Image("/images/user.png")));
@@ -403,57 +456,87 @@ public class TelaLogadaController {
     	}
     }
     
+
     @FXML
     void removerAmigo() {
     	if(lv_amigos.getSelectionModel().getSelectedItem()!=null) {
     		labelAvisoAmigos.setText("");
-    		listaAmigos.remove(retornaIndice(lv_amigos.getSelectionModel().getSelectedItem()));
+    		listaAmigos.remove(retornaIndice(lv_amigos.getSelectionModel().getSelectedItem(), listaAmigos));
     		listaDeUsuarios.add(lv_amigos.getSelectionModel().getSelectedItem());
     		atualizarListaAmigos();
+    		atualizarListaUsuarios();
     		grafo.construirgrafo(true);
     		controlador.salvar();
     		
     	}
     	else {
-    		labelAvisoAmigos.setText("Você só pode remover um amigo!");
+    		labelAvisoAmigos.setText("Selecione alguém para remover!");
     		
     	}
     }
     
     @FXML 
-    void removerTodoMundo() {
+    void removeGeral() {
+    	if(!listaAmigos.isEmpty()) {
+    		labelAvisoAmigos.setText("");
+    		listaDeUsuarios.addAll(listaAmigos);
+        	listaAmigos.removeAll(listaAmigos);
+        	atualizarListaAmigos();
+        	atualizarListaUsuarios();
+        	grafo.construirgrafo(true);
+    		controlador.salvar();
+    	}
+    	else {
+    		labelAvisoAmigos.setText("Sua lista de amigos já está vazia!");
+    	}
     	
     }
     
     @FXML 
-    void addTodoMundo() {
-    	
+    void addGeral() {
+    	if(!listaDeUsuarios.isEmpty()) {
+    		labelAvisoAmigos.setText("");
+    		listaAmigos.addAll(listaDeUsuarios);
+        	listaDeUsuarios.removeAll(listaDeUsuarios);
+        	atualizarListaAmigos();
+        	atualizarListaUsuarios();
+        	grafo.construirgrafo(true);
+    		controlador.salvar();
+    	}
+    	else {
+    		labelAvisoAmigos.setText("Não tem mais ninguém para adicionar!");
+    	}
     }
-    
-    @FXML
+
+    @FXML 
     void addAmigo() {
-    	//TODO criar uma funçao de verificar
     	if(isAmigo(lv_pesquisa.getSelectionModel().getSelectedItem())) {
     		labelAvisoAmigos.setText("Essa pessoa já está na sua lista de amigos!");
+    	}
+    	else if(lv_pesquisa.getSelectionModel().getSelectedItem()==null) {
+    		labelAvisoAmigos.setText("Selecione alguém para adicionar!");
     	}
     	else {
     		labelAvisoAmigos.setText("");
     		listaAmigos.add(lv_pesquisa.getSelectionModel().getSelectedItem());
-    		listaDeUsuarios.remove(retornaIndice(lv_pesquisa.getSelectionModel().getSelectedItem()));
+    		listaDeUsuarios.remove(retornaIndice(lv_pesquisa.getSelectionModel().getSelectedItem(), listaDeUsuarios));
     		atualizarListaAmigos();
+    		atualizarListaUsuarios();
     		grafo.construirgrafo(true);
     		controlador.salvar();
     	}
     }
+
     
     void atualizarListaAmigos() {
+    	//TODO fazer funcionar collections
     	//Collections.sort(listaAmigos);
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
     }
     
     
     void atualizarListaUsuarios() {
-    	
+    	//TODO fazer funcionar collections
     	//Collections.sort(listaDeUsuarios);
     	lv_pesquisa.setItems(FXCollections.observableList(listaDeUsuarios));
     }
@@ -467,12 +550,84 @@ public class TelaLogadaController {
     	return false;
     }
     
-    int retornaIndice(UsuarioTerraplanista usuario) {
-    	for(int i=0; i<listaAmigos.size(); i++) {
-    		if(listaAmigos.get(i).equals(usuario)) {
+    int retornaIndice(UsuarioTerraplanista usuario, List<UsuarioTerraplanista> e) {
+    	for(int i=0; i<e.size(); i++) {
+    		if(e.get(i).equals(usuario)) {
     			return i;
     		}
     	}
     	return -1;
     }
+    
+    @FXML
+    void pesquisar() {
+    	
+    	if(tf_pesquisa.getText()!=null && !tf_pesquisa.getText().isEmpty()) {
+    		lv_pesquisa.setItems(FXCollections.observableList(pesquisando(tf_pesquisa.getText(), listaDeUsuarios)));
+    	
+    	}
+    	else {
+    		atualizarListaUsuarios();
+    		labelAvisoAmigos.setText("Para procurar você precisa escrever o nome ou login de alguem!");
+    	}
+    }
+    
+    
+    
+    List<UsuarioTerraplanista> pesquisando(String nomeoulogin, List<UsuarioTerraplanista> lista){
+    	List<UsuarioTerraplanista> ret = new ArrayList<UsuarioTerraplanista>();
+    	for(int i=0; i<lista.size(); i++) {
+    		lista.get(i).getLogin().toUpperCase();
+    		lista.get(i).getNome().toUpperCase();
+    		nomeoulogin.toUpperCase();
+    		if(lista.get(i).getLogin().contains(nomeoulogin)||lista.get(i).getNome().contains(nomeoulogin)) {
+    			ret.add(lista.get(i));
+    		}
+    	}
+    	return ret;
+    }
+    
+    @FXML
+    void editar() {
+    	pane_editar.toFront();
+    }
+    
+    
+    @FXML
+    void cancelar() {
+    	pane_perfil.toFront();
+    	
+    }
+    
+    @FXML
+    void confirmarEdiçao() {
+    	//TODO ajeitar data e imagem pra serem editadas tbm 
+    	
+    	/*
+    	UsuarioTerraplanista editadoTerraplanista = new UsuarioTerraplanista(listaAmigos, listaInteresses, tfNovoNome.getText(), 
+    			tfNovoLogin.getText(), pfNovaSenha.getText(), contaLogada.getDataNascimento(), contaLogada.getHoraCriaçãoConta(), 
+    			contaLogada.getImage(), contaLogada.getRecomendacoes(), contaLogada.isPastor());
+    	
+    	
+    	controlador.editarUsuario(contaLogada, editadoTerraplanista);
+    	inicializaPerfil();
+    	*/
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
 }
+

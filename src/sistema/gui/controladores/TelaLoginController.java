@@ -58,7 +58,12 @@ public class TelaLoginController {
     	}
     }
     
-    
+    @FXML
+    void initialize() {
+    	tfNome.setPromptText("Digite seu login");
+    	pfSenha.setPromptText("Digite sua senha");
+    	
+    }
     @FXML
     void minimizarTela(MouseEvent event) {
     	TerraPlanizer.minimizarTela();

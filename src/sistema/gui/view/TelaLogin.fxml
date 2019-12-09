@@ -73,7 +73,7 @@
       <FontAwesomeIconView glyphName="WINDOW_MINIMIZE" glyphStyle="-fx-fill: linear-gradient(#70b4e5 0%, #247cbc 70%, #2c85c1 85%);" layoutX="791.0" layoutY="21.0" onMouseClicked="#minimizarTela" selectionEnd="0" selectionFill="#eb0909" size="20" />
       <Pane layoutX="362.0" layoutY="108.0" prefHeight="77.0" prefWidth="237.0" style="-fx-background-color: #7DA7D9;">
          <children>
-            <Text fill="WHITE" layoutX="7.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Login">
+            <Text fill="WHITE" layoutX="7.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
                <font>
                   <Font name="Monospaced Bold Italic" size="74.0" />
                </font>
@@ -82,12 +82,12 @@
       </Pane>
       <Pane layoutX="362.0" layoutY="191.0" prefHeight="200.0" prefWidth="237.0" style="-fx-background-color: #7DA7D9;">
          <children>
-            <Text fill="WHITE" layoutX="21.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Login">
+            <Text fill="WHITE" layoutX="21.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
                <font>
                   <Font name="Consolas" size="12.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="21.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Senha">
+            <Text fill="WHITE" layoutX="21.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Senha">
                <font>
                   <Font name="Consolas" size="12.0" />
                </font>
@@ -102,8 +102,8 @@
                   <Font name="System Italic" size="12.0" />
                </font>
             </JFXPasswordField>
-            <JFXButton buttonType="RAISED" layoutX="60.0" layoutY="120.0" onAction="#logar" ripplerFill="#171717" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" stylesheets="@../../../../CSS/sky.css" text="Login" textFill="WHITE" viewOrder="3.0" />
-            <JFXButton buttonType="RAISED" layoutX="132.0" layoutY="120.0" onAction="#abrirRegistrarConta" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}" stylesheets="@../../../../CSS/sky.css" text="Registrar" textFill="WHITE" viewOrder="4.0" />
+            <JFXButton buttonType="RAISED" layoutX="60.0" layoutY="120.0" onAction="#logar" ripplerFill="#171717" stylesheets="@../../../../CSS/sky.css" text="Login" textFill="WHITE" viewOrder="3.0" />
+            <JFXButton buttonType="RAISED" layoutX="132.0" layoutY="120.0" onAction="#abrirRegistrarConta" stylesheets="@../../../../CSS/sky.css" text="Registrar" textFill="WHITE" viewOrder="4.0" />
             <Label fx:id="labelTopo" layoutX="29.0" layoutY="145.0" prefHeight="17.0" prefWidth="179.0" textFill="#da1111" />
             <Label fx:id="labelDown" layoutX="28.0" layoutY="145.0" prefHeight="17.0" prefWidth="208.0" textFill="#da1111" />
          </children></Pane>
