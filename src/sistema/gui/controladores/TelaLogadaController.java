@@ -18,10 +18,10 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -43,32 +43,7 @@ public class TelaLogadaController {
 	List <UsuarioTerraplanista> listaDeUsuarios = new ArrayList<UsuarioTerraplanista>();
     @FXML
     private Pane painel;
-    @FXML
-    private JFXTextField tfNumCartao;
 
-    @FXML
-    private JFXTextField tfNomeTitular;
-
-    @FXML
-    private JFXTextField tfMes;
-
-    @FXML
-    private JFXTextField tfAno;
-
-    @FXML
-    private Label labelNumero;
-
-    @FXML
-    private Label labelNome;
-
-    @FXML
-    private Label labelMesAno;
-
-    @FXML
-    private JFXTextField tfCVV;
-
-    @FXML
-    private Label labelCVV;
 	@FXML
     private JFXButton bnt_chat;
 
@@ -104,6 +79,33 @@ public class TelaLogadaController {
 
     @FXML
 	private JFXTextField tf_pesquisa;
+
+    @FXML
+    private JFXTextField tfNumCartao;
+
+    @FXML
+    private JFXTextField tfNomeTitular;
+
+    @FXML
+    private JFXTextField tfMes;
+
+    @FXML
+    private JFXTextField tfAno;
+
+    @FXML
+    private Label labelNumero;
+
+    @FXML
+    private Label labelNome;
+
+    @FXML
+    private Label labelMesAno;
+
+    @FXML
+    private JFXTextField tfCVV;
+
+    @FXML
+    private Label labelCVV;
 
     @FXML
     private JFXListView<UsuarioTerraplanista> lv_pesquisa;
@@ -161,17 +163,55 @@ public class TelaLogadaController {
     
     @FXML
     private Label labelAvisoInteresses;
-//PAGAMENTO ABAIXO
+    
+	public void setarContaLogada(UsuarioTerraplanista contaLogada) {
+		this.contaLogada = contaLogada;
+	}
 	
+    @FXML
+    void sair(ActionEvent e) {
+    	TerraPlanizer.trocarTela("login");
+    	controlador.setUsuarioLogado(null);
+    }
+    
+    @FXML
+    void minimizar(ActionEvent e) {
+    	TerraPlanizer.minimizarTela();
+    }
+    
+    @FXML
+    void telaFuncional(ActionEvent e) {
+    	if(e.getSource() == bnt_chat) {
+			pane_chat.toFront();
+		}
+		else if(e.getSource() == bnt_amigos) {
+			pane_amigos.toFront();
+		}
+		else if(e.getSource() == bnt_contrato) {
+			pane_contrato.toFront();
+		}
+		else if(e.getSource() == bnt_perfil) {
+			pane_perfil.toFront();
+		}
+		else if(e.getSource() == bnt_doaçao) {
+			pane_doaçao.toFront();
+		}
+    }
+    //PAGAMENTO ABAIXO
     @FXML
     void confirmar() {
     	try {
 			if(isTudoVálido()) {
 				if(confirmaTela()) {
+					tfAno.setText("");
+					tfCVV.setText("");
+					tfMes.setText("");
+					tfNomeTitular.setText("");
+					tfNumCartao.setText("");
 					Alert alerta = new Alert(AlertType.INFORMATION);
-					alerta.setTitle("Obrigado por se juntar ao Salamandrismo. Kifflom.");
-					alerta.setHeaderText("Você adiquiriu paz, amor e vida eterna!");
-					alerta.setContentText("Obrigado por garantir seu lugar no reino dos anfíbios.\nAutomáticamente detectamos seu salário com as informações que roubamos suas e cobramos 15% de acordo com o mês pelo seu cartão, sem burocracias ou preenchimentos.");
+					alerta.setHeaderText("Você alcançou o sossego, a concentração e a paz interior.");
+					alerta.setContentText("Obrigado por garantir seu lugar no reino dos anfíbios.\nNosso sistema não possui nenhum tipo de burocracia, já roubamos todas suas informações automaticamente e descontaremos 15% do seu salário todo mês pelo seu cartão, tudo isso pensado para seu conforto e praticidade.");
+					alerta.setTitle("Bem-Vindo, novo Salamandrista. Kifflom.");
 					alerta.showAndWait();
 				}
 			}
@@ -180,10 +220,7 @@ public class TelaLogadaController {
 			e.printStackTrace();
 		}
     }
-    @FXML
-    private void habilitarEdicao() {
-    	//TODO
-    }
+
 	private boolean confirmaTela() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setContentText("Confirme para prosseguir com o pagamento!");
@@ -219,7 +256,7 @@ public class TelaLogadaController {
 			labelNumero.setText("");
 			if(!tfNomeTitular.getText().isEmpty()) {
 				labelNome.setText("");
-				if(!tfMes.getText().isEmpty()&&!tfAno.getText().isEmpty()&&CCUtils.isNumber(tfMes.getText()) && CCUtils.isNumber(tfAno.getText()) && Integer.parseInt(tfMes.getText()) <= 12 && Integer.parseInt(tfMes.getText()) >= 1 &&Integer.parseInt(tfAno.getText()) <= 99 && Integer.parseInt(tfAno.getText()) >= 20) {
+				if(!tfAno.getText().isEmpty()&&!tfMes.getText().isEmpty()&&CCUtils.isNumber(tfMes.getText()) && CCUtils.isNumber(tfAno.getText()) && Integer.parseInt(tfMes.getText()) <= 12 && Integer.parseInt(tfMes.getText()) >= 1 &&Integer.parseInt(tfAno.getText()) <= 99 && Integer.parseInt(tfAno.getText()) >= 20) {
 					labelMesAno.setText("");
 					if(!tfCVV.getText().isEmpty()&&CCUtils.isNumber(tfCVV.getText())&&Integer.parseInt(tfCVV.getText()) <= 999&&Integer.parseInt(tfCVV.getText()) >= 001) {
 						labelCVV.setText("");
@@ -239,41 +276,7 @@ public class TelaLogadaController {
 		}
 		return false;
 	}
-	//PAGAMENTO ACIMA
-	public void setarContaLogada(UsuarioTerraplanista contaLogada) {
-		this.contaLogada = contaLogada;
-	}
-	
-    @FXML
-    void sair(ActionEvent e) {
-    	TerraPlanizer.trocarTela("login");
-    	controlador.setUsuarioLogado(null);
-    }
-    
-    @FXML
-    void minimizar(ActionEvent e) {
-    	TerraPlanizer.minimizarTela();
-    }
-    
-    @FXML
-    void telaFuncional(ActionEvent e) {
-    	if(e.getSource() == bnt_chat) {
-			pane_chat.toFront();
-		}
-		else if(e.getSource() == bnt_amigos) {
-			pane_amigos.toFront();
-		}
-		else if(e.getSource() == bnt_contrato) {
-			pane_contrato.toFront();
-		}
-		else if(e.getSource() == bnt_perfil) {
-			pane_perfil.toFront();
-		}
-		else if(e.getSource() == bnt_doaçao) {
-			pane_doaçao.toFront();
-		}
-    }
-    
+    //PAGAMENTO ACIMA
     @FXML
     void initialize() {
     	pane_perfil.toFront();
