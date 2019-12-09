@@ -6,14 +6,18 @@ import sistema.controlador.Controlador;
 
 public class TesteFX {
 	public static void main(String[] args) {
-		System.out.println("oi");
-		
+	
 		Controlador controlador = Controlador.getInstancia();
 		UsuarioTerraplanista user = controlador.pesquisarPorLogin("adm");
 		user.addAmigo(controlador.pesquisarPorLogin("roro"));
-		System.out.println( "oi");
-		//List<UsuarioTerraplanista> recomendados = controlador.indicacaoAmigoComum(controlador.pesquisarPorLogin("adm"));
+		user.addAmigo(controlador.pesquisarPorLogin("bb"));
+		controlador.pesquisarPorLogin("roro").addAmigo(controlador.pesquisarPorLogin("rororo"));
+		controlador.pesquisarPorLogin("bb").addAmigo(controlador.pesquisarPorLogin("sdf"));
+		
+		List<UsuarioTerraplanista> recomendados = controlador.indicacaoAmigoComum(controlador.pesquisarPorLogin("adm"));
 		//List<UsuarioTerraplanista> recomendados = controlador.indicacaoPorInteresse(controlador.pesquisarPorLogin("adm"));
-		System.out.println("Recomendados: " + "Looping infinito");
+		System.out.println(recomendados);
+		System.out.println(controlador.pesquisarPorLogin("adm").getAmigos());
+		System.out.println(controlador.pesquisarPorLogin("roro").getAmigos());
 	}
 }

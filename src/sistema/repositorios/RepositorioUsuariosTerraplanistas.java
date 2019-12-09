@@ -110,12 +110,18 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 	 }
 	 public List<UsuarioTerraplanista> indicacaoPorInteresse(UsuarioTerraplanista user)
 		{
-			int temp = 0;
-			
 			Map<String, UsuarioTerraplanista> mapa = new TreeMap<String, UsuarioTerraplanista>();
 			
+			if(user.getInteresses() == null) {
+				System.out.println("Não há interesses para comparar");
+				return null;
+			}
+			
 			for(int i = 0; i<this.usuarios.size(); i++) { //percorrendo a lista de todos os usuários
-				if(!(this.usuarios.get(i).equals(user))) {
+				
+				int temp = 1;
+				
+				if(!(this.usuarios.get(i).equals(user)) && user.getInteresses() != null && this.usuarios.get(i).getInteresses() != null) {
 					for(int j = 0; j<this.usuarios.get(i).getInteresses().size(); j++) { //percorrendo a lista de interesses de um determinado usuário
 						for(int k = 0; k<user.getInteresses().size(); k++) { //percorrer a lista de interesses do usuário que queremos recomendar
 							if(this.usuarios.get(i).getInteresses().get(j).equalsIgnoreCase(user.getInteresses().get(k))){
@@ -123,16 +129,17 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 							}
 						}
 					}
+					
 					while(!(mapa.containsValue(this.usuarios.get(i)))) {
 						if(mapa.containsKey(Integer.toString(temp))) {
 							temp = temp * 10;
 						}
 						else{
 							mapa.put(Integer.toString(temp), this.usuarios.get(i));
-							temp = 0;
+							temp = 1;
 						}
+						
 					}
-					
 				}
 			}
 			
@@ -143,27 +150,25 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 		
 		public List<UsuarioTerraplanista> indicacaoAmigoComum(UsuarioTerraplanista user)
 		{
-			int temp = 0;
+			int temp = 1;
 			
 			Map<String, UsuarioTerraplanista> mapa = new TreeMap<String, UsuarioTerraplanista>();
 			
 			for(int i = 0; i<this.usuarios.size(); i++) { //percorrendo a lista de todos os usuários
-				if(!(this.usuarios.get(i).equals(user))) {
+				if(!(this.usuarios.get(i).equals(user)) && !(user.getAmigos().contains(this.usuarios.get(i)))) {
 					for(int j = 0; j<this.usuarios.get(i).getAmigos().size(); j++) { //percorrendo a lista de amigos de um determinado usuário
-							for(int k = 0; k<user.getAmigos().size(); k++) { //percorrer a lista de amigos do usuário que queremos recomendar
-								if(this.usuarios.get(i).getAmigos().get(j).equals(user.getAmigos().get(k))){
-									temp++;
-								}
+							if(user.getAmigos().contains(this.usuarios.get(i).getAmigos().get(j))) {
+								temp++;
 							}
 						}
+					
 					while(!(mapa.containsValue(this.usuarios.get(i)))) {
 						if(mapa.containsKey(Integer.toString(temp))) {
 							temp = temp * 10;
-							System.out.println("oi");
 						}
 						else{
 							mapa.put(Integer.toString(temp), this.usuarios.get(i));
-							temp = 0;
+							temp = 1;
 						}
 						
 					}
