@@ -33,9 +33,10 @@ public class TelaLogadaController {
 	
 	Controlador controlador = Controlador.getInstancia();
 	UsuarioTerraplanista contaLogada;
+	Grafo grafo= Grafo.getInstancia();
 	List <String> listaInteresses = controlador.getUsuarioLogado().getInteresses();
-	List <String> listaAmigos = new ArrayList<String>();
-	List <String> listaDeUsuarios = new ArrayList<String>();
+	List <UsuarioTerraplanista> listaAmigos = new ArrayList<UsuarioTerraplanista>();
+	List <UsuarioTerraplanista> listaDeUsuarios = new ArrayList<UsuarioTerraplanista>();
     @FXML
     private Pane painel;
 
@@ -70,13 +71,13 @@ public class TelaLogadaController {
     private Pane pane_amigos;
 
     @FXML
-    private JFXListView<String> lv_amigos;
+    private JFXListView<UsuarioTerraplanista> lv_amigos;
 
     @FXML
 	private JFXTextField tf_pesquisa;
 
     @FXML
-    private JFXListView<String> lv_pesquisa;
+    private JFXListView<UsuarioTerraplanista> lv_pesquisa;
 
 	@FXML
     private FontAwesomeIconView icon_lupa;
@@ -177,8 +178,9 @@ public class TelaLogadaController {
     }
     
     private void inicializaAmigos() {
+    	listaAmigos = controlador.getUsuarioLogado().getAmigos();
+    	listaDeUsuarios = controlador.getUsuarios();
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
-    	listaDeNomesDeUsuariosEmGeral();
     	lv_pesquisa.setItems(FXCollections.observableList(listaDeUsuarios));
     	
     }
@@ -198,10 +200,10 @@ public class TelaLogadaController {
     }
     
 	private void inicializaPane() {
-		Grafo g1= Grafo.getInstancia();
-		Graph g = g1.getGrafo();
+		
+		Graph g = grafo.getGrafo();
 		FxViewer v = new FxViewer(g, FxViewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
-		g1.construirgrafo(true);
+		grafo.construirgrafo(true);
 		g.setAttribute("ui.antialias");
 		g.setAttribute("ui.quality");
 		g.setAttribute("ui.stylesheet", "graph {fill-color: white; padding: 60px;}");
@@ -216,7 +218,6 @@ public class TelaLogadaController {
 	
     @FXML
     void abrirGrafoGrande(MouseEvent event) {
-    	
     	TerraPlanizer.abrirGrafo();
     }
     
@@ -242,6 +243,7 @@ public class TelaLogadaController {
     	if(comboboxInteresses.getSelectionModel().getSelectedItem().contentEquals("Outro...")) {
     		addInteresses.setDisable(false);
     		tfOutro.setDisable(false);
+    		controlador.salvar();
     	}
     	else if (!verificaSeJaTem(comboboxInteresses.getSelectionModel().getSelectedItem())) {
     		listaInteresses.add(comboboxInteresses.getSelectionModel().getSelectedItem());
@@ -267,6 +269,7 @@ public class TelaLogadaController {
     		listaInteresses.add(tfOutro.getText());
     		atualizarListaInteresses();
     		tfOutro.setText("");
+    		controlador.salvar();
     	}
     }
     
@@ -281,6 +284,7 @@ public class TelaLogadaController {
     	if(lvInteresses.getSelectionModel().getSelectedItem()!=null) {
     		listaInteresses.remove(lvInteresses.getSelectionModel().getSelectedItem());
         	atualizarListaInteresses();
+        	controlador.salvar();
         	
     	}
     	else {
@@ -291,65 +295,69 @@ public class TelaLogadaController {
     
     @FXML
     void removerAmigo() {
-    	if(isAmigo(lv_pesquisa.getSelectionModel().getSelectedItem())) {
-    		if(retornaIndice(lv_pesquisa.getSelectionModel().getSelectedItem())!=-1){
-    			listaAmigos.remove(retornaIndice(lv_pesquisa.getSelectionModel().getSelectedItem()));
-    		}
-    		else {
-    			System.out.println("qqqqqqqqqqqqqq");
-    		}
+    	if(lv_amigos.getSelectionModel().getSelectedItem()!=null) {
+    		labelAvisoAmigos.setText("");
+    		listaAmigos.remove(retornaIndice(lv_amigos.getSelectionModel().getSelectedItem()));
+    		listaDeUsuarios.add(lv_amigos.getSelectionModel().getSelectedItem());
     		atualizarListaAmigos();
+    		grafo.construirgrafo(true);
+    		controlador.salvar();
+    		
     	}
     	else {
     		labelAvisoAmigos.setText("Você só pode remover um amigo!");
     		
     	}
     }
+    /*
+    @FXML 
+    void removerTodoMundo() {
+    	
+    }
     
+    @FXML 
+    void addTodoMundo() {
+    	
+    }*/
     @FXML
     void addAmigo() {
-    	if(verificaSeJaTem(lv_pesquisa.getSelectionModel().getSelectedItem())) {
+    	//TODO criar uma funçao de verificar
+    	if(isAmigo(lv_pesquisa.getSelectionModel().getSelectedItem())) {
     		labelAvisoAmigos.setText("Essa pessoa já está na sua lista de amigos!");
     	}
     	else {
+    		labelAvisoAmigos.setText("");
     		listaAmigos.add(lv_pesquisa.getSelectionModel().getSelectedItem());
+    		listaDeUsuarios.remove(retornaIndice(lv_pesquisa.getSelectionModel().getSelectedItem()));
     		atualizarListaAmigos();
-    	}
-    }
-    
-    void listaDeNomesDeAmigosDoLogado() {
-    	for(int i=0; i<controlador.getUsuarioLogado().getAmigos().size(); i++) {
-    		listaAmigos.add(controlador.getUsuarioLogado().getAmigos().get(i).getLogin());
-    	}
-    }
-    void listaDeNomesDeUsuariosEmGeral() {
-    	for(int i=0; i<controlador.getUsuarios().size(); i++) {
-    		if(controlador.getUsuarios().get(i).getLogin().contentEquals(controlador.getUsuarioLogado().getLogin())) {
-    			
-    		}
-    		else {
-    			listaDeUsuarios.add(controlador.getUsuarios().get(i).getLogin());
-    		}
+    		grafo.construirgrafo(true);
+    		controlador.salvar();
     	}
     }
     
     void atualizarListaAmigos() {
-    	Collections.sort(listaAmigos);
+    	//Collections.sort(listaAmigos);
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
     }
     
-    boolean isAmigo(String login) {
+    void atualizarListaUsuarios() {
+    	
+    	//Collections.sort(listaDeUsuarios);
+    	lv_pesquisa.setItems(FXCollections.observableList(listaDeUsuarios));
+    }
+    
+    boolean isAmigo(UsuarioTerraplanista usuario) {
     	for(int i=0; i<listaAmigos.size(); i++) {
-    		if(listaAmigos.get(i).contentEquals(login)) {
+    		if(listaAmigos.get(i).equals(usuario)) {
     			return true;
     		}
     	}
     	return false;
     }
     
-    int retornaIndice(String login) {
+    int retornaIndice(UsuarioTerraplanista usuario) {
     	for(int i=0; i<listaAmigos.size(); i++) {
-    		if(listaAmigos.get(i).contentEquals(login)) {
+    		if(listaAmigos.get(i).equals(usuario)) {
     			return i;
     		}
     	}

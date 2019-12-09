@@ -223,12 +223,12 @@
                   <Font name="System Italic" size="11.0" />
                </font>
             </Text>
-            <JFXButton fx:id="bnt_remover" graphicTextGap="10.0" layoutX="555.0" layoutY="415.0" onAction="#removerAmigo" text="Remover">
+            <JFXButton fx:id="bnt_remover" graphicTextGap="10.0" layoutX="14.0" layoutY="478.0" onAction="#removerAmigo" prefHeight="28.0" prefWidth="108.0" text="Remover">
                <graphic>
                   <FontAwesomeIconView fill="#f50707" glyphName="USER_TIMES" size="20" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="bnt_add" graphicTextGap="10.0" layoutX="448.0" layoutY="415.0" onAction="#addAmigo" text="Adicionar">
+            <JFXButton fx:id="bnt_add" graphicTextGap="10.0" layoutX="423.0" layoutY="417.0" onAction="#addAmigo" prefHeight="28.0" prefWidth="108.0" text="Adicionar">
                <graphic>
                   <FontAwesomeIconView fill="#15eb09" glyphName="USER_PLUS" size="20" />
                </graphic>
@@ -244,6 +244,16 @@
                </graphic>
             </JFXButton>
             <Label fx:id="labelAvisoAmigos" layoutX="448.0" layoutY="455.0" prefHeight="17.0" prefWidth="200.0" textFill="#f70c91" />
+            <JFXButton graphicTextGap="10.0" layoutX="122.0" layoutY="478.0" prefHeight="28.0" prefWidth="131.0" text="Remover todos">
+               <graphic>
+                  <FontAwesomeIconView fill="#f50707" glyphName="USERS" size="20" />
+               </graphic>
+            </JFXButton>
+            <JFXButton graphicTextGap="10.0" layoutX="541.0" layoutY="417.0" prefHeight="28.0" prefWidth="135.0" text="Adicionar todos">
+               <graphic>
+                  <FontAwesomeIconView fill="#15eb09" glyphName="USERS" size="20" />
+               </graphic>
+            </JFXButton>
          </children>
       </Pane>
    </children>

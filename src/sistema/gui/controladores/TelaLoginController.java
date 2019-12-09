@@ -57,6 +57,8 @@ public class TelaLoginController {
     		labelTopo.setTextFill(Color.DARKRED);
     	}
     }
+    
+    
     @FXML
     void minimizarTela(MouseEvent event) {
     	TerraPlanizer.minimizarTela();
