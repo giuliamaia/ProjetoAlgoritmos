@@ -290,7 +290,7 @@ public class TelaLogadaController {
     }
     
     @FXML
-    void removerAmigo(MouseEvent event) {
+    void removerAmigo() {
     	if(isAmigo(lv_pesquisa.getSelectionModel().getSelectedItem())) {
     		if(retornaIndice(lv_pesquisa.getSelectionModel().getSelectedItem())!=-1){
     			listaAmigos.remove(retornaIndice(lv_pesquisa.getSelectionModel().getSelectedItem()));
@@ -301,16 +301,14 @@ public class TelaLogadaController {
     		atualizarListaAmigos();
     	}
     	else {
-    		labelAvisoAmigos.setText("");
     		labelAvisoAmigos.setText("Você só pode remover um amigo!");
     		
     	}
     }
     
     @FXML
-    void addAmigo(MouseEvent event) {
+    void addAmigo() {
     	if(verificaSeJaTem(lv_pesquisa.getSelectionModel().getSelectedItem())) {
-    		labelAvisoAmigos.setText("");
     		labelAvisoAmigos.setText("Essa pessoa já está na sua lista de amigos!");
     	}
     	else {

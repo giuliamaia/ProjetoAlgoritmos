@@ -228,7 +228,7 @@
                   <FontAwesomeIconView fill="#f50707" glyphName="USER_TIMES" size="20" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="bnt_add" graphicTextGap="10.0" layoutX="448.0" layoutY="415.0" onAction="#removerAmigo" text="Adicionar">
+            <JFXButton fx:id="bnt_add" graphicTextGap="10.0" layoutX="448.0" layoutY="415.0" onAction="#addAmigo" text="Adicionar">
                <graphic>
                   <FontAwesomeIconView fill="#15eb09" glyphName="USER_PLUS" size="20" />
                </graphic>
