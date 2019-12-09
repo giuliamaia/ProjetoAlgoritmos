@@ -309,7 +309,7 @@ public class TelaLogadaController {
     		
     	}
     }
-    /*
+    
     @FXML 
     void removerTodoMundo() {
     	
@@ -318,7 +318,8 @@ public class TelaLogadaController {
     @FXML 
     void addTodoMundo() {
     	
-    }*/
+    }
+    
     @FXML
     void addAmigo() {
     	//TODO criar uma funçao de verificar
@@ -339,6 +340,7 @@ public class TelaLogadaController {
     	//Collections.sort(listaAmigos);
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
     }
+    
     
     void atualizarListaUsuarios() {
     	
