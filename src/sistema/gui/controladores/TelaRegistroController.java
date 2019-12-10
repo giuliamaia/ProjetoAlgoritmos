@@ -193,20 +193,32 @@ public class TelaRegistroController {
     @FXML
     void confirmar(ActionEvent event) {
     	if(isTudoPreenchido()) {
-    		System.out.println(arrayListInteresses);
-    		System.out.println(tfNome.getText());
-    		System.out.println(tfLogin.getText());
-    		System.out.println(pfSenha.getText());
-    		System.out.println(datePickerDataNascimento.getValue());
     		Grafo grafo = Grafo.getInstancia();
     		
     		UsuarioTerraplanista user = new UsuarioTerraplanista(new ArrayList<UsuarioTerraplanista>(), arrayListInteresses, tfNome.getText(), tfLogin.getText(), pfSenha.getText(), datePickerDataNascimento.getValue(), LocalDateTime.now(), imageAux==null? null:imageAux.getUrl(), 0, false);
     		controlador.adicionarUsuario(user);
     		grafo.construirgrafo(true);
     		TerraPlanizer.trocarTela("login");
+    		limparTelaDeRegistro();
     	}
     }
-
+    
+    private void limparTelaDeRegistro() {
+    	inicializaFotos();
+		tfLogin.setText("");
+    	tfNome.setText("");
+    	tfOutroInteresse.setText("");
+    	tfRecomendacao.setText("");
+    	pfSenha.setText("");
+    	datePickerDataNascimento.getEditor().clear();
+    	listaInteresses.getItems().clear();
+    	labelErroData.setText("");
+    	labelErroGeral.setText("");
+    	labelErroLogin.setText("");
+    	labelErroNome.setText("");
+    	labelErroRecomedacao.setText("");
+    	labelErroTermos.setText("");
+    }
     private boolean isTudoPreenchido() {
     	if (tfNome.getText().isEmpty()) {
     		labelErroNome.setText("Adicione um nome válido");
@@ -288,6 +300,7 @@ public class TelaRegistroController {
     }
     @FXML
     void initialize() {
+    	
     	
     	inicializaComboBoxInteresses();
     	inicializaFotos();

@@ -333,9 +333,6 @@ public class TelaLogadaController {
     	inicializaPane();
     	inicializaAmigos();
     	inicializaEditar();
-    	System.out.println(contaLogada.getNome());
-    	System.out.println(contaLogada.getAmigos());
-    	System.out.println(contaLogada.getInteresses());
     	
     }
     
@@ -356,6 +353,7 @@ public class TelaLogadaController {
     }
     
     private List<UsuarioTerraplanista> copiandoListasDoRep(List<UsuarioTerraplanista> lista){
+    	
     	List<UsuarioTerraplanista> ret = new ArrayList<UsuarioTerraplanista>();
     	for(int i=0; i<lista.size(); i++) {
     		ret.add(lista.get(i));
@@ -437,13 +435,11 @@ public class TelaLogadaController {
     		addInteresses.setDisable(false);
     		tfOutro.setDisable(false);
     		controlador.salvar();
-    		System.out.println(controlador.getUsuarioLogado().getInteresses());
     	}
     	else if (!verificaSeJaTem(comboboxInteresses.getSelectionModel().getSelectedItem())) {
     		System.out.println(comboboxInteresses.getSelectionModel().getSelectedItem());
     		controlador.getUsuarioLogado().getInteresses().add(comboboxInteresses.getSelectionModel().getSelectedItem());
     		controlador.salvar();
-    		System.out.println(controlador.getUsuarioLogado().getInteresses());
     		listaInteresses.add(comboboxInteresses.getSelectionModel().getSelectedItem());
     		atualizarListaInteresses();
     		addInteresses.setDisable(true);
@@ -466,7 +462,6 @@ public class TelaLogadaController {
     	if (!verificaSeJaTem(tfOutro.getText())&&!tfOutro.getText().isEmpty()) {
     		controlador.getUsuarioLogado().getInteresses().add(tfOutro.getText());
     		controlador.salvar();
-    		System.out.println(controlador.getUsuarioLogado().getInteresses());
     		listaInteresses.add(tfOutro.getText());
     		atualizarListaInteresses();
     		tfOutro.setText("");
@@ -484,7 +479,6 @@ public class TelaLogadaController {
     	if(lvInteresses.getSelectionModel().getSelectedItem()!=null) {
     		controlador.getUsuarioLogado().getInteresses().remove(retornaIndice2(lvInteresses.getSelectionModel().getSelectedItem(), controlador.getUsuarioLogado().getInteresses()));
     		controlador.salvar();
-    		System.out.println(controlador.getUsuarioLogado().getInteresses());
     		listaInteresses.remove(lvInteresses.getSelectionModel().getSelectedItem());
         	atualizarListaInteresses();
         	
@@ -503,7 +497,6 @@ public class TelaLogadaController {
     		labelAvisoAmigos.setText("");
     		controlador.getUsuarioLogado().getAmigos().remove(retornaIndice(lv_amigos.getSelectionModel().getSelectedItem(), controlador.getUsuarioLogado().getAmigos()));
     		controlador.salvar();
-    		System.out.println(contaLogada.getAmigos());
     		listaAmigos.remove(retornaIndice(lv_amigos.getSelectionModel().getSelectedItem(), listaAmigos));
     		listaDeUsuarios.add(lv_amigos.getSelectionModel().getSelectedItem());
     		atualizarListaAmigos();
@@ -541,7 +534,6 @@ public class TelaLogadaController {
     		labelAvisoAmigos.setText("");
     		controlador.getUsuarioLogado().getAmigos().addAll(listaDeUsuarios);
     		controlador.salvar();
-    		System.out.println(contaLogada.getAmigos());
     		listaAmigos.addAll(listaDeUsuarios);
         	listaDeUsuarios.removeAll(listaDeUsuarios);
         	atualizarListaAmigos();
@@ -563,10 +555,8 @@ public class TelaLogadaController {
     	}
     	else {
     		labelAvisoAmigos.setText("");
-    		System.out.println(contaLogada);
     		contaLogada.addAmigo(lv_pesquisa.getSelectionModel().getSelectedItem());
     		controlador.salvar();
-    		System.out.println(contaLogada.getAmigos());
     		listaAmigos.add(lv_pesquisa.getSelectionModel().getSelectedItem());
     		listaDeUsuarios.remove(retornaIndice(lv_pesquisa.getSelectionModel().getSelectedItem(), listaDeUsuarios));
     		atualizarListaAmigos();
@@ -577,7 +567,18 @@ public class TelaLogadaController {
     	}
     }
 
-    
+    private List<UsuarioTerraplanista> recriandoListaUsuarios(List<UsuarioTerraplanista> e) {
+    	List<UsuarioTerraplanista> ret = e;
+    	for(int i=0; i<e.size(); i++) {
+    		for(int j=0; j<listaAmigos.size(); j++) {
+    			if(e.get(i).equals(contaLogada) || e.get(i).equals(listaAmigos.get(j))) {
+    				ret.remove(e.get(i));
+    			}
+    		}
+    	}
+    	
+    	return ret;
+    }
     void atualizarListaAmigos() {
     	//TODO fazer funcionar collections
     	//Collections.sort(listaAmigos);
@@ -589,6 +590,7 @@ public class TelaLogadaController {
     void atualizarListaUsuarios() {
     	//TODO fazer funcionar collections
     	//Collections.sort(listaDeUsuarios);
+    	
     	lv_pesquisa.setItems(FXCollections.observableList(listaDeUsuarios));
     	grafo.construirgrafo(true);
     }
@@ -651,6 +653,10 @@ public class TelaLogadaController {
     @FXML
     void editar() {
     	pane_editar.toFront();
+    	tfNovoNome.setText(contaLogada.getNome());
+    	tfNovoLogin.setText(contaLogada.getLogin());
+    	pfNovaSenha.setText(contaLogada.getSenha());
+    	dpDataNascimentoNova.setValue(contaLogada.getDataNascimento());;
     }
     
     
@@ -669,15 +675,13 @@ public class TelaLogadaController {
     	//TODO ajeitar data e imagem pra serem editadas tbm 
     	
     	
-    	UsuarioTerraplanista editadoTerraplanista = new UsuarioTerraplanista(listaAmigos, listaInteresses, tfNovoNome.getText(), 
-    			tfNovoLogin.getText(), pfNovaSenha.getText(), contaLogada.getDataNascimento(), contaLogada.getHoraCriaçãoConta(), 
-    			contaLogada.getImage(), contaLogada.getRecomendacoes(), contaLogada.isPastor());
-    	
+    	UsuarioTerraplanista editadoTerraplanista = new UsuarioTerraplanista(contaLogada.getAmigos(), contaLogada.getInteresses(), tfNovoNome.getText(), tfNovoLogin.getText(), pfNovaSenha.getText(), dpDataNascimentoNova.getValue(), contaLogada.getHoraCriaçãoConta(), contaLogada.getImage(), contaLogada.getRecomendacoes(), contaLogada.isPastor());
     	
     	controlador.editarUsuario(contaLogada, editadoTerraplanista);
     	inicializaPerfil();
     	
     	controlador.salvar();
+    	pane_perfil.toFront();
     }
 
     @FXML
