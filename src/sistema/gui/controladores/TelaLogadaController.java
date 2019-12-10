@@ -40,7 +40,7 @@ public class TelaLogadaController {
 	Controlador controlador = Controlador.getInstancia();
 	UsuarioTerraplanista contaLogada = controlador.getUsuarioLogado();
 	Grafo grafo= Grafo.getInstancia();
-	List <String> listaInteresses = controlador.getUsuarioLogado().getInteresses();
+	List <String> listaInteresses = copiandoListasDoRep2(controlador.getUsuarioLogado().getInteresses());
 	List <UsuarioTerraplanista> listaAmigos;
 	List <UsuarioTerraplanista> listaDeUsuarios;
 
@@ -326,25 +326,36 @@ public class TelaLogadaController {
     }
     
     private void inicializaEditar() {
-    	//TODO tem q setar null dps q volta dnv pra tela editar
     	label_name1.setText(controlador.getUsuarioLogado().getNome());
     	label_login1.setText(controlador.getUsuarioLogado().getLogin());
     	label_senha1.setText(controlador.getUsuarioLogado().getSenha());
     	lavel_data1.setText(controlador.getUsuarioLogado().getDataNascimento().toString());
-    	tfNovoLogin.clear();
     	tfNovoLogin.setPromptText("Digite seu novo login");
-    	tfNovoNome.clear();
     	tfNovoNome.setPromptText("Digite seu novo nome");
-    	pfNovaSenha.clear();
     	pfNovaSenha.setPromptText("Digite sua nova senha");
     }
     
     private void inicializaAmigos() {
-    	listaAmigos = controlador.getUsuarioLogado().getAmigos();
-    	listaDeUsuarios = controlador.getUsuarios();
+    	listaAmigos = copiandoListasDoRep(controlador.getUsuarioLogado().getAmigos());
+    	listaDeUsuarios = copiandoListasDoRep(controlador.getUsuarios());
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
     	lv_pesquisa.setItems(FXCollections.observableList(listaDeUsuarios));
-    	
+    }
+    
+    private List<UsuarioTerraplanista> copiandoListasDoRep(List<UsuarioTerraplanista> lista){
+    	List<UsuarioTerraplanista> ret = new ArrayList<UsuarioTerraplanista>();
+    	for(int i=0; i<lista.size(); i++) {
+    		ret.add(lista.get(i));
+    	}
+    	return ret;
+    }
+    
+    private List<String> copiandoListasDoRep2(List<String> lista){
+    	List<String> ret = new ArrayList<String>();
+    	for(int i=0; i<lista.size(); i++) {
+    		ret.add(lista.get(i));
+    	}
+    	return ret;
     }
     
     private void inicializaPerfil() {
@@ -359,11 +370,10 @@ public class TelaLogadaController {
     	else {
     		circleFoto.setFill(new ImagePattern(new Image(controlador.getUsuarioLogado().getImage())));
     	}
-    	lvInteresses.setItems(FXCollections.observableList(controlador.getUsuarioLogado().getInteresses()));
+    	lvInteresses.setItems(FXCollections.observableList(listaInteresses));
     }
     
 	private void inicializaPane() {
-		
 		Graph g = grafo.getGrafo();
 		FxViewer v = new FxViewer(g, FxViewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
 		grafo.construirgrafo(true);
@@ -376,7 +386,6 @@ public class TelaLogadaController {
 		panel.setPrefWidth(550);
 		Pane newLoadedPane =  panel;
 		painel.getChildren().add(newLoadedPane);	
-			
 	}
 	
     @FXML
@@ -429,10 +438,11 @@ public class TelaLogadaController {
 	@FXML
     void addOutroInteresse() {
     	if (!verificaSeJaTem(tfOutro.getText())&&!tfOutro.getText().isEmpty()) {
+    		controlador.getUsuarioLogado().getInteresses().add(tfOutro.getText());
     		listaInteresses.add(tfOutro.getText());
     		atualizarListaInteresses();
-    		tfOutro.setText("");
     		controlador.salvar();
+    		tfOutro.setText("");
     	}
     }
     
