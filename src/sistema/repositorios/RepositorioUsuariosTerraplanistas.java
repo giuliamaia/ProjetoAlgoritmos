@@ -154,7 +154,11 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 			
 			List<UsuarioTerraplanista> indicados = new ArrayList<UsuarioTerraplanista>(mapa.values());
 			Collections.reverse(indicados);
-			
+			for(UsuarioTerraplanista a:user.getAmigos()) {
+				if(indicados.contains(a)) {
+					indicados.remove(a);
+				}
+			}
 			return indicados;
 		}
 		

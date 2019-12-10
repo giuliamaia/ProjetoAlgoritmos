@@ -298,34 +298,6 @@
             <FontAwesomeIconView fill="#1d12e3" glyphName="SEARCH" layoutX="626.0" layoutY="124.0" onMouseClicked="#pesquisar" size="20" />
          </children>
       </Pane>
-      <Pane fx:id="pane_chat" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Text fill="#6d7a7c" layoutX="21.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grafo" wrappingWidth="282.0">
-               <font>
-                  <Font name="System Bold" size="32.0" />
-               </font>
-            </Text>
-            <Text fill="#607072" layoutX="22.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="À pedido do nosso Deus Sr Salamandra" wrappingWidth="258.591796875">
-               <font>
-                  <Font name="System Italic" size="11.0" />
-               </font>
-            </Text>
-            <JFXButton fx:id="bnt_minimizar" layoutX="561.0" layoutY="12.0" onAction="#minimizar" text="Minimizar">
-               <graphic>
-                  <FontAwesomeIconView fill="#2411f2" glyphName="MINUS" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="bnt_sair" layoutX="640.0" layoutY="12.0" onAction="#sair" text="Sair">
-               <graphic>
-                  <FontAwesomeIconView fill="#ee0a0a" glyphName="POWER_OFF" />
-               </graphic>
-            </JFXButton>
-            <Pane fx:id="painel" layoutX="22.0" layoutY="90.0" onMouseClicked="#abrirGrafoGrande" prefHeight="361.0" prefWidth="634.0" style="-fx-background-color: blue;" />
-            <JFXTextField fx:id="tfRecomendacaoGrafo" layoutX="95.0" layoutY="469.0" onAction="#recomendarAmigosGrafo" promptText="Recomendação de amigo" />
-            <JFXToggleButton fx:id="toggleSeitasGrafo" layoutX="430.0" layoutY="453.0" onAction="#verSeitasGrafo" text="Ver possiveis seitas" />
-            <Label fx:id="labelNaoAchouLoginGrafo" layoutX="241.0" layoutY="474.0" prefHeight="17.0" prefWidth="150.0" />
-         </children>
-      </Pane>
       <Pane fx:id="pane_editar" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
          <children>
             <Text layoutX="438.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" />
@@ -405,6 +377,35 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafdff" height="43.0" layoutX="320.0" layoutY="180.0" onMouseClicked="#alterarFotoOutra" stroke="LIGHTSKYBLUE" strokeType="INSIDE" width="47.0" />
             <FontAwesomeIconView glyphName="IMAGE" glyphStyle="-fx-fill: linear-gradient(#70b4e5 0%, #247cbc 70%, #2c85c1 85%);" layoutX="330.0" layoutY="211.0" onMouseClicked="#alterarFotoOutra" size="25" wrappingWidth="12.857142448425293" />
             <JFXTextField fx:id="pfNovaSenha" layoutX="452.0" layoutY="366.0" prefHeight="10.0" prefWidth="150.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="pane_chat" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text fill="#6d7a7c" layoutX="21.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grafo" wrappingWidth="282.0">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Text>
+            <Text fill="#607072" layoutX="22.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="À pedido do nosso Deus Sr Salamandra" wrappingWidth="258.591796875">
+               <font>
+                  <Font name="System Italic" size="11.0" />
+               </font>
+            </Text>
+            <JFXButton fx:id="bnt_minimizar" layoutX="561.0" layoutY="12.0" onAction="#minimizar" text="Minimizar">
+               <graphic>
+                  <FontAwesomeIconView fill="#2411f2" glyphName="MINUS" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="bnt_sair" layoutX="640.0" layoutY="12.0" onAction="#sair" text="Sair">
+               <graphic>
+                  <FontAwesomeIconView fill="#ee0a0a" glyphName="POWER_OFF" />
+               </graphic>
+            </JFXButton>
+            <Pane fx:id="painel" layoutX="22.0" layoutY="90.0" onMouseClicked="#abrirGrafoGrande" prefHeight="361.0" prefWidth="634.0" style="-fx-background-color: blue;" />
+            <JFXTextField fx:id="tfRecomendacaoGrafo" layoutX="95.0" layoutY="469.0" onAction="#recomendarAmigosGrafo" promptText="Recomendação de amigo" />
+            <JFXToggleButton fx:id="toggleSeitasGrafo" layoutX="430.0" layoutY="453.0" onAction="#verSeitasGrafo" text="Ver possiveis seitas" />
+            <Label fx:id="labelNaoAchouLoginGrafo" layoutX="241.0" layoutY="474.0" prefHeight="17.0" prefWidth="150.0" />
+            <JFXToggleButton fx:id="toggleArestasBonitas" layoutX="253.0" layoutY="453.0" onAction="#verArestasBonitas" text="Ver aresta bonita" />
          </children>
       </Pane>
    </children>

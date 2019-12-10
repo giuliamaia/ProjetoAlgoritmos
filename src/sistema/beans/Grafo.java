@@ -50,24 +50,37 @@ public class Grafo {
 	
 	public void construirgrafo(boolean éEstilizado) {
 		clear();
-		setarNos(éEstilizado);
-		setarArestas();
+		setarNos();
+		setarArestas(éEstilizado);
 		
 	}
-	private void setarArestas() {
+	public void setarArestas(boolean éBonito) {
 		for(UsuarioTerraplanista u : controlador.getUsuarios()) {
 			for(UsuarioTerraplanista a : u.getAmigos()) {
-				Edge aresta = grafo.addEdge(u.getLogin()  + a.getLogin(), u.getLogin(), a.getLogin());
+				Edge aresta;
+				if(getEdge(u.getLogin()  + a.getLogin())==null)
+					aresta = grafo.addEdge(u.getLogin()  + a.getLogin(), u.getLogin(), a.getLogin());
+				else
+					aresta = getEdge(u.getLogin()  + a.getLogin());
 				//System.out.println(aresta);
-				if(aresta != null)aresta.setAttribute("ui.style", "shape: cubic-curve;");
+				if(aresta != null) {
+					if(éBonito)
+						aresta.setAttribute("ui.style", "shape: cubic-curve;");
+					else
+						aresta.setAttribute("ui.style", "");
+				}
 			}
 		}
 		
 	}
-	private void setarNos(boolean éEstilizado) {
+	public void setarNos() {
 		for (UsuarioTerraplanista u : controlador.getUsuarios()) {
-			Node no = addNode(u.getLogin());
-			if(éEstilizado) {
+			Node no;
+			if(getNode(u.getLogin())==null)
+				no = addNode(u.getLogin());
+			else
+				no = getNode(u.getLogin());
+			if(true) {
 				if(u.isPastor()) {
 					no.setAttribute("ui.style", "fill-color: #5eb5a8; text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #A7CC; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
 				}
@@ -88,6 +101,9 @@ public class Grafo {
 			getNode(u.getLogin()).setAttribute("ui.style", "fill-color: #1fad3c; text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #A7CC; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
 		}
 		
+	}
+	public void setarArestas() {
+		//TODO
 	}
 	public void addAttributeSink(AttributeSink arg0) {
 		grafo.addAttributeSink(arg0);

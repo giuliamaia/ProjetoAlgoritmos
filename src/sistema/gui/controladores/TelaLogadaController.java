@@ -51,7 +51,7 @@ public class TelaLogadaController {
 	List <UsuarioTerraplanista> listaAmigos = copiandoListasDoRep(controlador.getUsuarioLogado().getAmigos());
 	List <UsuarioTerraplanista> listaDeUsuarios = copiandoListasDoRep(controlador.getUsuarios());
 	private Image imageAux;
-
+	private boolean arestasBonitas = true;
     @FXML
     private JFXButton bnt_chat;
 
@@ -225,6 +225,9 @@ public class TelaLogadaController {
 
     @FXML
     private DatePicker dpDataNascimentoNova;
+    
+    @FXML
+    private JFXToggleButton toggleArestasBonitas;
 
     @FXML
     private Label labelNaoAchouLoginGrafo;
@@ -354,6 +357,7 @@ public class TelaLogadaController {
     	inicializaAmigos();
     	inicializaEditar();
     	inicializaFotos();
+    	toggleArestasBonitas.setSelected(true);
     }
     @FXML
     void alterarFoto1(MouseEvent event) {
@@ -605,7 +609,7 @@ public class TelaLogadaController {
         	listaDeUsuarios.removeAll(listaDeUsuarios);
         	atualizarListaAmigos();
         	atualizarListaUsuarios();
-        	grafo.construirgrafo(true);
+        	grafo.construirgrafo(arestasBonitas);
     	}
     	else {
     		labelAvisoAmigos.setText("Não tem mais ninguém para adicionar!");
@@ -656,7 +660,7 @@ public class TelaLogadaController {
             }        
         });
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
-    	grafo.construirgrafo(true);
+    	grafo.construirgrafo(arestasBonitas);
     }
     
     
@@ -671,7 +675,7 @@ public class TelaLogadaController {
         });
     	
     	lv_pesquisa.setItems(FXCollections.observableList(listaDeUsuarios));
-    	grafo.construirgrafo(true);
+    	grafo.construirgrafo(arestasBonitas);
     }
     
     boolean isAmigo(UsuarioTerraplanista usuario) {
@@ -795,14 +799,14 @@ public class TelaLogadaController {
     @FXML
     void verSeitasGrafo(ActionEvent event) {
     	if(toggleSeitasGrafo.isSelected()) {
-    		grafo.construirgrafo(true);
+    		grafo.construirgrafo(arestasBonitas);
     		//TODO pesquisar
     	}
     }
 
     @FXML
     void recomendarAmigosGrafo(ActionEvent event) {
-    	grafo.construirgrafo(true);
+    	grafo.construirgrafo(arestasBonitas);
     	if(!tfRecomendacaoGrafo.getText().isEmpty()) {
     		if(controlador.pesquisarPorLogin(tfRecomendacaoGrafo.getText() )!= null){
     			grafo.setarNosRecomendacao(controlador.pesquisarPorLogin(tfRecomendacaoGrafo.getText()));
@@ -811,6 +815,12 @@ public class TelaLogadaController {
     			labelNaoAchouLoginGrafo.setText("Não foi possivel achar usuario com esse login");
     		}
     	}
+    }
+
+    @FXML
+    void verArestasBonitas() {
+    	arestasBonitas=toggleArestasBonitas.isSelected();
+    	grafo.setarArestas(arestasBonitas);
     }
 }
 
