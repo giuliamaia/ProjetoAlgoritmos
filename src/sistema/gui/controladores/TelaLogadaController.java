@@ -647,6 +647,7 @@ public class TelaLogadaController {
 
     void atualizarRecomendados() {
     	
+    	
     	recomendados = controlador.recomendacoesPara(contaLogada);
     	try{
     		lvRecomendacaoAmigos.setItems(FXCollections.observableList(recomendados));

@@ -161,7 +161,27 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 			}
 			return indicados;
 		}
+	 
+	 /*
+		public List<UsuarioTerraplanista> indicadosAmigosRodrigues(UsuarioTerraplanista user){
+			
+			List<UsuarioTerraplanista> lista = new ArrayList<>();
+			HashMap<String, Integer> mapa = new HashMap<>();
+			for(UsuarioTerraplanista u : user.getAmigos()) {
+				if(!mapa.containsKey(u.getLogin())) {
+					mapa.put(u.getLogin(), 0);
+				}
+				else {
+					mapa.replace(u.getLogin(), mapa.get(u.getLogin())+1);
+				}
+			}
+			
+			return null;
+		}
 		
+		*/
+	 
+	 
 		public List<UsuarioTerraplanista> indicacaoAmigoComum(UsuarioTerraplanista user)
 		{
 			int temp = 1;
