@@ -130,7 +130,7 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 				
 				int temp = 1;
 				
-				if(!(this.usuarios.get(i).equals(user)) && user.getInteresses() != null && this.usuarios.get(i).getInteresses() != null) {
+				if(!(this.usuarios.get(i).equals(user)) && user.getInteresses() != null && this.usuarios.get(i).getInteresses() != null && !(user.getAmigos().contains(this.usuarios.get(i)))) {
 					for(int j = 0; j<this.usuarios.get(i).getInteresses().size(); j++) { //percorrendo a lista de interesses de um determinado usuário
 						for(int k = 0; k<user.getInteresses().size(); k++) { //percorrer a lista de interesses do usuário que queremos recomendar
 							if(this.usuarios.get(i).getInteresses().get(j).equalsIgnoreCase(user.getInteresses().get(k))){
