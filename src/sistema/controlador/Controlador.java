@@ -30,6 +30,9 @@ public class Controlador {
 	public List<UsuarioTerraplanista> getUsuarios() {
 		return repositorioUsuarioTerraPlanistas.getUsuarios();
 	}
+	public List<UsuarioTerraplanista> recomendacoesPara(UsuarioTerraplanista usuarioTerraplanista) {
+		return repositorioUsuarioTerraPlanistas.recomendacoesPara(usuarioTerraplanista);
+	}
 	public void salvar() {
 		repositorioUsuarioTerraPlanistas.salvar();
 	}

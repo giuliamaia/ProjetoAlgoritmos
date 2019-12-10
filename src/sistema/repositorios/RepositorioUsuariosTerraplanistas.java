@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -186,5 +187,50 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 			List<UsuarioTerraplanista> indicados = new ArrayList<UsuarioTerraplanista>(mapa.values());
 			Collections.reverse(indicados);
 			return indicados;
+		}
+		public List<UsuarioTerraplanista> recomendacoesPara(UsuarioTerraplanista usuarioTerraplanista){
+			
+			List<UsuarioTerraplanista> retorno = new ArrayList<UsuarioTerraplanista>();
+			List<UsuarioTerraplanista> lista1 = new ArrayList<>();
+			HashMap<String, Integer> mapa = new HashMap<>();
+			if(usuarioTerraplanista.getAmigos().size()>0) {
+				lista1 = indicacaoAmigoComum(usuarioTerraplanista);
+				for(int i = 0; i < lista1.size() ; i++) {
+					mapa.put(lista1.get(i).getLogin(), 50 - i);
+				}
+			}
+			if(usuarioTerraplanista.getInteresses().size()>0){
+				List<UsuarioTerraplanista> lista2 = indicacaoPorInteresse(usuarioTerraplanista);
+				for(int i = 0; i < lista2.size() ; i++) {
+					
+					if(usuarioTerraplanista.getAmigos().size()>0&&mapa.containsKey(lista2.get(i).getLogin())){
+						mapa.replace(lista2.get(i).getLogin(), mapa.get(lista2.get(i).getLogin())+50-i);
+					}
+					else {
+						mapa.put(lista2.get(i).getLogin(), 50 - i);
+					}
+				}
+			}
+			
+			List<String> logins = new ArrayList<>(mapa.keySet());
+			List<Integer> valores = new ArrayList<>(mapa.values());
+			Collections.sort(valores);
+			Collections.reverse(valores);
+			//System.out.println(valores);
+			//.out.println(logins);
+			for(int i = 0; i<valores.size(); i++) {
+				for(int j = 0; j < logins.size(); j ++) {
+					//System.out.println(mapa.get(logins.get(j)));
+					if (mapa.get(logins.get(j))==valores.get(i)) {
+						retorno.add(pesquisarPorLogin(logins.get(j)));
+						logins.remove(j);
+						j-=1;
+					}
+					
+				}
+				valores.remove(i);
+				i-=1;
+			}
+			return retorno;
 		}
 }
