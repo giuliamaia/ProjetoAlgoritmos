@@ -66,24 +66,24 @@
                </children>
             </Pane>
          </children></Pane>
-      <Text fill="#4d4242" layoutX="167.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Login">
+      <Text fill="#4d4242" layoutX="167.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
          <font>
             <Font name="Consolas" size="12.0" />
          </font>
       </Text>
-      <Text fill="#5d5454" layoutX="167.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Senha">
+      <Text fill="#5d5454" layoutX="167.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Senha">
          <font>
             <Font name="Consolas" size="12.0" />
          </font></Text>
-      <JFXTextField fx:id="tfNome" layoutX="210.0" layoutY="204.0" prefHeight="25.0" prefWidth="201.0" stylesheets="@../../../../CSS/sky.css" unFocusColor="BLACK" viewOrder="1.0">
+      <JFXTextField fx:id="tfNome" layoutX="210.0" layoutY="204.0" prefHeight="25.0" prefWidth="201.0" unFocusColor="BLACK" viewOrder="1.0">
          <font>
             <Font name="Consolas Italic" size="12.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="tfLogin" layoutX="210.0" layoutY="236.0" stylesheets="@../../../../CSS/sky.css" viewOrder="2.0">
+      <JFXTextField fx:id="tfLogin" layoutX="210.0" layoutY="236.0" viewOrder="2.0">
          <font>
             <Font name="System Italic" size="12.0" />
          </font></JFXTextField>
-      <JFXPasswordField fx:id="pfSenha" layoutX="210.0" layoutY="267.0" stylesheets="@../../../../CSS/sky.css" viewOrder="3.0">
+      <JFXPasswordField fx:id="pfSenha" layoutX="210.0" layoutY="267.0" viewOrder="3.0">
          <font>
             <Font name="System Italic" size="12.0" />
          </font></JFXPasswordField>
@@ -108,29 +108,29 @@
          </font>
       </FontAwesomeIconView>
       <FontAwesomeIconView glyphName="WINDOW_MINIMIZE" glyphStyle="-fx-fill: linear-gradient(#70b4e5 0%, #247cbc 70%, #2c85c1 85%);" layoutX="793.0" layoutY="21.0" onMouseClicked="#minimizarTela" selectionEnd="0" selectionFill="#eb0909" size="20" />
-      <Text fill="#5d5454" layoutX="169.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Nome">
+      <Text fill="#5d5454" layoutX="169.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome">
          <font>
             <Font name="Consolas" size="12.0" />
          </font>
       </Text>
-      <Text fill="#4d4242" layoutX="228.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Data de Nascimento">
+      <Text fill="#4d4242" layoutX="228.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data de Nascimento">
          <font>
             <Font name="Consolas" size="12.0" />
          </font>
       </Text>
-      <Text fill="#4d4242" layoutX="698.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Interesses">
+      <Text fill="#4d4242" layoutX="698.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Interesses">
          <font>
             <Font name="Consolas" size="12.0" />
          </font>
       </Text>
-      <Text fill="#4d4242" layoutX="197.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Eu declaro que li e aceito os">
+      <Text fill="#4d4242" layoutX="197.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eu declaro que li e aceito os">
          <font>
             <Font name="Consolas" size="12.0" />
          </font>
       </Text>
       <JFXListView fx:id="listaInteresses" layoutX="647.0" layoutY="83.0" prefHeight="212.0" prefWidth="168.0" />
       <FontAwesomeIconView glyphName="REMOVE" glyphStyle="-fx-fill: linear-gradient(#ff0101 0%, #e72020 70%, #a11a1a 85%);" layoutX="795.0" layoutY="316.0" onMouseClicked="#removerInteresse" selectionFill="#176112" size="27" />
-      <Text fill="#0da1c6" layoutX="396.0" layoutY="456.0" onMouseClicked="#abrirTermosDeUso" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Termos de uso" underline="true">
+      <Text fill="#0da1c6" layoutX="396.0" layoutY="456.0" onMouseClicked="#abrirTermosDeUso" strokeType="OUTSIDE" strokeWidth="0.0" text="Termos de uso" underline="true">
          <font>
             <Font name="Consolas" size="12.0" />
          </font>
@@ -149,7 +149,7 @@
       <JFXTextField fx:id="tfOutroInteresse" layoutX="647.0" layoutY="327.0" onAction="#addOutroInteresse" prefHeight="25.0" prefWidth="140.0" />
       <FontAwesomeIconView fx:id="iconeMais" glyphName="PLUS" glyphStyle="-fx-fill: linear-gradient(#1ee410 0%, #149a14 70%, #108c10 85%);" layoutX="796.0" layoutY="348.0" onMouseClicked="#addOutroInteresse" selectionFill="#108c10" size="25" />
       <JFXTextField fx:id="tfRecomendacao" layoutX="459.0" layoutY="197.0" onAction="#pesquisaRecomendacao" prefHeight="25.0" prefWidth="148.0" />
-      <Text fill="#4d4242" layoutX="484.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="\@font-face {    font-family: 'Roboto';    src: url('Roboto-Medium.ttf');}.text {    -fx-font-family: &quot;Roboto&quot;;}" text="Recomendado por">
+      <Text fill="#4d4242" layoutX="484.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recomendado por">
          <font>
             <Font name="Consolas" size="12.0" />
          </font>

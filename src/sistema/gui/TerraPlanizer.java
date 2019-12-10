@@ -185,7 +185,7 @@ public class TerraPlanizer extends Application{
 			Grafo g1= Grafo.getInstancia();
 			Graph g = g1.getGrafo();
 			FxViewer v = new FxViewer(g, FxViewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
-			g1.construirgrafo(true);
+			//g1.construirgrafo(true);
 			g.setAttribute("ui.antialias");
 			g.setAttribute("ui.quality");
 			g.setAttribute("ui.stylesheet", "graph {padding: 60px;}");
@@ -195,7 +195,7 @@ public class TerraPlanizer extends Application{
 	  		
 			estagioGrafo.setScene(scene);
 			estagioGrafo.setTitle("Grafo");
-
+			
 			estagioGrafo.showAndWait();
 		}
 	}

@@ -612,7 +612,7 @@ public class TelaLogadaController {
     void confirmarEdiçao() {
     	//TODO ajeitar data e imagem pra serem editadas tbm 
     	
-    	/*
+    	
     	UsuarioTerraplanista editadoTerraplanista = new UsuarioTerraplanista(listaAmigos, listaInteresses, tfNovoNome.getText(), 
     			tfNovoLogin.getText(), pfNovaSenha.getText(), contaLogada.getDataNascimento(), contaLogada.getHoraCriaçãoConta(), 
     			contaLogada.getImage(), contaLogada.getRecomendacoes(), contaLogada.isPastor());
@@ -620,7 +620,7 @@ public class TelaLogadaController {
     	
     	controlador.editarUsuario(contaLogada, editadoTerraplanista);
     	inicializaPerfil();
-    	*/
+    	
     	controlador.salvar();
     }
 }
