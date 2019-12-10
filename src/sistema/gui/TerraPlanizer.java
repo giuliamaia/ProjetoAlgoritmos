@@ -142,7 +142,7 @@ public class TerraPlanizer extends Application{
 		case "registro": estagio.setScene(telaRegistro); break;
 		case "logada": estagio.setScene(telaLogada); break;
 		default: 
-			System.out.println("Não foi possivel achar essa tela para fechar, favor use um dos seguintes: (login, registro)");
+			System.out.println("Não foi possivel achar essa tela para fechar, favor use um dos seguintes: (login, registro, logada)");
 	}
 		
 	}
@@ -195,7 +195,7 @@ public class TerraPlanizer extends Application{
 	  		
 			estagioGrafo.setScene(scene);
 			estagioGrafo.setTitle("Grafo");
-			estagioGrafo.initModality(Modality.WINDOW_MODAL);
+
 			estagioGrafo.showAndWait();
 		}
 	}

@@ -3,6 +3,7 @@ package sistema.gui.controladores;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import sistema.controlador.Controlador;
 import sistema.gui.TerraPlanizer;
 
 public class TelaLoginController {
+	boolean deveVerSenha = false;
 	Controlador controlador = Controlador.getInstancia();
     @FXML
     private JFXTextField tfNome;
@@ -89,19 +91,16 @@ public class TelaLoginController {
     
     @FXML
     void verSenha(MouseEvent event) {
-    	//TODO fazer esta mierda funcionar neste carai
-    	verSenha.setDisable(false);
-    	System.out.println(verSenha.isPressed());
-    	paneNaoVerSenha.toFront();
-    	pfSenha.forward();
+    	deveVerSenha = !deveVerSenha;
+    	if(deveVerSenha) {
+    		verSenha.setIcon(FontAwesomeIcon.EYE);
+    		pfSenha.setVisible(false);
+    	}
+    	else {
+    		verSenha.setIcon(FontAwesomeIcon.EYE_SLASH);
+    		pfSenha.setVisible(true);
+    	}
+    	
     }
-    
-    @FXML
-    void naoVerSenha(MouseEvent event) {
-    	//TODO fazer esta mierda funcionar neste carai
-    	naoVerSenha.setDisable(false);
-    	System.out.println(naoVerSenha.isPressed());
-    	paneVerSenha.toFront();
-    	pfSenha.backward();
-    }
+   
 }

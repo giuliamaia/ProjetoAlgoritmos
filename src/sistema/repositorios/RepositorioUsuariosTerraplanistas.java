@@ -38,7 +38,15 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 	}
 	
 	public void editarUsuario(UsuarioTerraplanista usuarioVelho, UsuarioTerraplanista usuarioNovo) {
-		usuarioVelho = usuarioNovo;
+		
+		usuarioVelho.setAmigos(usuarioNovo.getAmigos());
+		usuarioVelho.setDataNascimento(usuarioNovo.getDataNascimento());
+		usuarioVelho.setImage(usuarioNovo.getImage());
+		usuarioVelho.setInteresses(usuarioNovo.getInteresses());
+		usuarioVelho.setLogin(usuarioNovo.getLogin());
+		usuarioVelho.setNome(usuarioNovo.getNome());
+		usuarioVelho.setRecomendacoes(usuarioNovo.getRecomendacoes());
+		usuarioVelho.setSenha(usuarioNovo.getSenha());
 		salvar();
 	}
 	public RepositorioUsuariosTerraplanistas() {

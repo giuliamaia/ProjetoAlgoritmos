@@ -38,11 +38,11 @@ import sistema.gui.TerraPlanizer;
 public class TelaLogadaController {
 	
 	Controlador controlador = Controlador.getInstancia();
-	UsuarioTerraplanista contaLogada;
+	UsuarioTerraplanista contaLogada = controlador.getUsuarioLogado();
 	Grafo grafo= Grafo.getInstancia();
 	List <String> listaInteresses = controlador.getUsuarioLogado().getInteresses();
-	List <UsuarioTerraplanista> listaAmigos = new ArrayList<UsuarioTerraplanista>();
-	List <UsuarioTerraplanista> listaDeUsuarios = new ArrayList<UsuarioTerraplanista>();
+	List <UsuarioTerraplanista> listaAmigos;
+	List <UsuarioTerraplanista> listaDeUsuarios;
 
 
     @FXML
@@ -465,8 +465,8 @@ public class TelaLogadaController {
     		listaDeUsuarios.add(lv_amigos.getSelectionModel().getSelectedItem());
     		atualizarListaAmigos();
     		atualizarListaUsuarios();
-    		grafo.construirgrafo(true);
     		controlador.salvar();
+    		grafo.construirgrafo(true);
     		
     	}
     	else {
@@ -483,8 +483,9 @@ public class TelaLogadaController {
         	listaAmigos.removeAll(listaAmigos);
         	atualizarListaAmigos();
         	atualizarListaUsuarios();
+        	controlador.salvar();
         	grafo.construirgrafo(true);
-    		controlador.salvar();
+    		
     	}
     	else {
     		labelAvisoAmigos.setText("Sua lista de amigos já está vazia!");
@@ -500,8 +501,8 @@ public class TelaLogadaController {
         	listaDeUsuarios.removeAll(listaDeUsuarios);
         	atualizarListaAmigos();
         	atualizarListaUsuarios();
+        	controlador.salvar();
         	grafo.construirgrafo(true);
-    		controlador.salvar();
     	}
     	else {
     		labelAvisoAmigos.setText("Não tem mais ninguém para adicionar!");
@@ -518,12 +519,16 @@ public class TelaLogadaController {
     	}
     	else {
     		labelAvisoAmigos.setText("");
+    		System.out.println(contaLogada);
+    		contaLogada.addAmigo(lv_pesquisa.getSelectionModel().getSelectedItem());
+    		System.out.println(contaLogada.getAmigos());
     		listaAmigos.add(lv_pesquisa.getSelectionModel().getSelectedItem());
     		listaDeUsuarios.remove(retornaIndice(lv_pesquisa.getSelectionModel().getSelectedItem(), listaDeUsuarios));
     		atualizarListaAmigos();
     		atualizarListaUsuarios();
-    		grafo.construirgrafo(true);
     		controlador.salvar();
+    		grafo.construirgrafo(true);
+    		
     	}
     }
 
@@ -595,8 +600,12 @@ public class TelaLogadaController {
     
     @FXML
     void cancelar() {
-    	pane_perfil.toFront();
     	
+    	pane_perfil.toFront();
+    	tfNovoNome.setText("");
+    	tfNovoLogin.setText("");
+    	pfNovaSenha.setText("");
+    	dpDataNascimentoNova.getEditor().clear();
     }
     
     @FXML
@@ -612,22 +621,7 @@ public class TelaLogadaController {
     	controlador.editarUsuario(contaLogada, editadoTerraplanista);
     	inicializaPerfil();
     	*/
+    	controlador.salvar();
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
 }
 

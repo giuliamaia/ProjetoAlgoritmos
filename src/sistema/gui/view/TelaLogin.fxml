@@ -107,15 +107,6 @@
          </font>
       </Text>
       <FontAwesomeIconView fill="#7da7d9" glyphName="USER" layoutX="438.0" layoutY="268.0" size="20" />
-      <Pane fx:id="paneVerSenha" layoutX="414.0" layoutY="290.0" onMouseClicked="#verSenha" prefHeight="32.0" prefWidth="43.0">
-         <children>
-            <FontAwesomeIconView fx:id="verSenha" fill="#7da7d9" glyphName="EYE" layoutX="22.0" layoutY="20.0" onMouseClicked="#verSenha" size="20" />
-         </children>
-      </Pane>
-      <Pane fx:id="paneNaoVerSenha" layoutX="427.0" layoutY="293.0" onMouseClicked="#naoVerSenha" prefHeight="32.0" prefWidth="29.0" style="-fx-background-color: white;">
-         <children>
-            <FontAwesomeIconView fx:id="naoVerSenha" fill="#7da7d9" glyphName="EYE_SLASH" layoutX="9.0" layoutY="17.0" onMouseClicked="#naoVerSenha" size="20" />
-         </children>
-      </Pane>
+      <FontAwesomeIconView fx:id="verSenha" fill="#7da7d9" glyphName="EYE_SLASH" layoutX="436.0" layoutY="302.0" onMouseClicked="#verSenha" size="20" />
    </children>
 </AnchorPane>
