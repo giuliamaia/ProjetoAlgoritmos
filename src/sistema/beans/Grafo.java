@@ -52,6 +52,7 @@ public class Grafo {
 		clear();
 		setarNos(éEstilizado);
 		setarArestas();
+		
 	}
 	private void setarArestas() {
 		for(UsuarioTerraplanista u : controlador.getUsuarios()) {
@@ -80,8 +81,13 @@ public class Grafo {
 		}
 		
 	}
-	private void setarNosRecomendacao() {
-		//TODO 
+	public void setarNosRecomendacao(UsuarioTerraplanista usuario) {
+		List<UsuarioTerraplanista> recomendação = controlador.recomendacoesPara(usuario);
+		getNode(usuario.getLogin()).setAttribute("ui.style", "fill-color: #c9e322; text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #A7CC; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
+		for(UsuarioTerraplanista u : recomendação) {
+			getNode(u.getLogin()).setAttribute("ui.style", "fill-color: #1fad3c; text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #A7CC; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
+		}
+		
 	}
 	public void addAttributeSink(AttributeSink arg0) {
 		grafo.addAttributeSink(arg0);

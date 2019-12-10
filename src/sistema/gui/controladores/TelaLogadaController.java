@@ -14,6 +14,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToggleButton;
+
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -180,6 +182,11 @@ public class TelaLogadaController {
 
     @FXML
     private Label labelAvisoAmigos;
+    @FXML
+    private JFXTextField tfRecomendacaoGrafo;
+
+    @FXML
+    private JFXToggleButton toggleSeitasGrafo;
 
     @FXML
     private JFXButton bnt_removeGeral;
@@ -198,7 +205,9 @@ public class TelaLogadaController {
 
     @FXML
     private DatePicker dpDataNascimentoNova;
-    
+
+    @FXML
+    private Label labelNaoAchouLoginGrafo;
 	public void setarContaLogada(UsuarioTerraplanista contaLogada) {
 		this.contaLogada = contaLogada;
 	}
@@ -394,8 +403,8 @@ public class TelaLogadaController {
 		g.setAttribute("ui.stylesheet", "graph {fill-color: white; padding: 60px;}");
 		v.enableAutoLayout();
 		FxViewPanel panel = (FxViewPanel)v.addDefaultView(false, new FxGraphRenderer());
-		panel.setPrefHeight(400);
-		panel.setPrefWidth(550);
+		panel.setPrefHeight(361);
+		panel.setPrefWidth(634);
 		Pane newLoadedPane =  panel;
 		painel.getChildren().add(newLoadedPane);	
 	}
@@ -669,6 +678,27 @@ public class TelaLogadaController {
     	inicializaPerfil();
     	
     	controlador.salvar();
+    }
+
+    @FXML
+    void verSeitasGrafo(ActionEvent event) {
+    	if(toggleSeitasGrafo.isSelected()) {
+    		grafo.construirgrafo(true);
+    		//pesquisar
+    	}
+    }
+
+    @FXML
+    void recomendarAmigosGrafo(ActionEvent event) {
+    	grafo.construirgrafo(true);
+    	if(!tfRecomendacaoGrafo.getText().isEmpty()) {
+    		if(controlador.pesquisarPorLogin(tfRecomendacaoGrafo.getText() )!= null){
+    			grafo.setarNosRecomendacao(controlador.pesquisarPorLogin(tfRecomendacaoGrafo.getText()));
+    		}
+    		else {
+    			labelNaoAchouLoginGrafo.setText("Não foi possivel achar usuario com esse login");
+    		}
+    	}
     }
 }
 

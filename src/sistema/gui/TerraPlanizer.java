@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -58,7 +59,7 @@ public class TerraPlanizer extends Application{
 			estagio = primaryStage;
 			primaryStage.setTitle("Teste de Algoritmos");
 			primaryStage.setScene(cenaMain);
-			
+			primaryStage.getIcons().add(new Image("/images/icon1.png"));
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 			//new Splash();
 			primaryStage.show();
@@ -152,6 +153,7 @@ public class TerraPlanizer extends Application{
 			Parent rootTermos = FXMLLoader.load(url);
 			Scene cenaTermos = new Scene(rootTermos);
 			Stage estagioTermos = new Stage();
+			estagioTermos.getIcons().add(new Image("/images/icon1.png"));
 			estagioTermos.setTitle("Termos de uso");
 			estagioTermos.setScene(cenaTermos);
 			estagioTermos.initModality(Modality.WINDOW_MODAL);
@@ -174,6 +176,7 @@ public class TerraPlanizer extends Application{
 		novo.initModality(Modality.WINDOW_MODAL);
 		novo.setResizable(false);
 		novo.initOwner(estagio);
+		novo.getIcons().add(new Image("/images/icon1.png"));
 		Scene cena = new Scene(conteudoDialog);
 		novo.setScene(cena);
 		telaPagamento=novo;
@@ -194,7 +197,7 @@ public class TerraPlanizer extends Application{
 			v.enableAutoLayout();
 			FxViewPanel panel = (FxViewPanel)v.addDefaultView(false, new FxGraphRenderer());
 			Scene scene = new Scene(panel, 800, 600);
-			
+			estagioGrafo.getIcons().add(new Image("/images/icon1.png"));
 			estagioGrafo.setScene(scene);
 			estagioGrafo.setTitle("Grafo");
 			
