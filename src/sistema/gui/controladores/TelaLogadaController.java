@@ -513,7 +513,6 @@ public class TelaLogadaController {
     		labelAvisoAmigos.setText("");
     		controlador.getUsuarioLogado().getAmigos().removeAll(listaAmigos);
     		controlador.salvar();
-
     		listaDeUsuarios.addAll(listaAmigos);
         	listaAmigos.removeAll(listaAmigos);
         	atualizarListaAmigos();
