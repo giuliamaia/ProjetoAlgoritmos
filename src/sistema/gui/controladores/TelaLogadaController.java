@@ -25,6 +25,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
@@ -368,7 +369,15 @@ public class TelaLogadaController {
         	circleFoto.setFill(new ImagePattern(new Image("/images/user.png")));
     	}
     	else {
-    		circleFoto.setFill(new ImagePattern(new Image(controlador.getUsuarioLogado().getImage())));
+    		if(contaLogada.getImage().contains("128.png"))circleFoto.setFill(new ImagePattern(new Image(controlador.getUsuarioLogado().getImage())));
+    		else {
+    			ImageView imageView = new ImageView(new Image(contaLogada.getImage()));
+    	        imageView.setPreserveRatio(true);
+    	        imageView.setSmooth(true);
+    	        imageView.setFitWidth(256);
+    	        imageView.setFitHeight(256);
+    	    	circleFoto.setFill(new ImagePattern(imageView.snapshot(null, null)));
+    		}
     	}
     	lvInteresses.setItems(FXCollections.observableList(listaInteresses));
     }

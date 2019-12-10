@@ -14,6 +14,6 @@
 	<classpathentry kind="lib" path="CSS/fontawesomefx-commons-9.1.2.jar"/>
 	<classpathentry kind="lib" path="CSS/fontawesomefx-fontawesome-4.7.0-9.1.2.jar"/>
 	<classpathentry kind="lib" path="CSS/gs-ui-javafx-2.0-alpha.jar"/>
-	<classpathentry kind="lib" path="CSS/gs-core-2.0-alpha.jar"/>
+	<classpathentry kind="lib" path="CSS/gs-core-2.0-alpha.jar" sourcepath="CSS/gs-core-2.0-alpha.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

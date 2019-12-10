@@ -160,6 +160,7 @@ public class TelaRegistroController {
     	if (arquivo != null && arquivo.exists()) {
     		circuloImg.setFill(new ImagePattern(imageView.snapshot(null, null)));
     	}
+    	imageAux = new Image(arquivo.toURI().toString());
     }
     private boolean verificaSeJaTem(String usuario) {
     	for (String aux : arrayListInteresses) {

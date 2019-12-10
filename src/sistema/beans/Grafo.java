@@ -49,6 +49,7 @@ public class Grafo {
 	}
 	
 	public void construirgrafo(boolean éEstilizado) {
+		clear();
 		try {
 			controlador.carregar();
 		} catch (ClassNotFoundException e) {
@@ -60,7 +61,6 @@ public class Grafo {
 		}
 		setarNos(éEstilizado);
 		setarArestas();
-		
 	}
 	private void setarArestas() {
 		for(UsuarioTerraplanista u : controlador.getUsuarios()) {

@@ -183,16 +183,18 @@ public class TerraPlanizer extends Application{
 		
 		if(!estagioGrafo.isShowing()) {
 			Grafo g1= Grafo.getInstancia();
+			
 			Graph g = g1.getGrafo();
+			
 			FxViewer v = new FxViewer(g, FxViewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
-			//g1.construirgrafo(true);
+			g1.construirgrafo(true);
 			g.setAttribute("ui.antialias");
 			g.setAttribute("ui.quality");
 			g.setAttribute("ui.stylesheet", "graph {padding: 60px;}");
 			v.enableAutoLayout();
 			FxViewPanel panel = (FxViewPanel)v.addDefaultView(false, new FxGraphRenderer());
 			Scene scene = new Scene(panel, 800, 600);
-	  		
+			
 			estagioGrafo.setScene(scene);
 			estagioGrafo.setTitle("Grafo");
 			
