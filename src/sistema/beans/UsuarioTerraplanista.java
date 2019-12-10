@@ -74,7 +74,7 @@ public class UsuarioTerraplanista implements Serializable{
 	}
 	public void addAmigo(UsuarioTerraplanista amigo) {
 		amigos.add(amigo);
-		amigo.getAmigos().add(this);
+		//amigo.getAmigos().add(this);
 	}
 	public void removerAmigo(UsuarioTerraplanista exAmigo) {
 		amigos.remove(exAmigo);

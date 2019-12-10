@@ -207,6 +207,7 @@ public class TelaLogadaController {
     void sair(ActionEvent e) {
     	TerraPlanizer.trocarTela("login");
     	controlador.setUsuarioLogado(null);
+    	controlador.salvar();
     }
     
     @FXML
@@ -387,7 +388,7 @@ public class TelaLogadaController {
 	private void inicializaPane() {
 		Graph g = grafo.getGrafo();
 		FxViewer v = new FxViewer(g, FxViewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
-		grafo.construirgrafo(true);
+		atualizarListaAmigos();
 		g.setAttribute("ui.antialias");
 		g.setAttribute("ui.quality");
 		g.setAttribute("ui.stylesheet", "graph {fill-color: white; padding: 60px;}");
@@ -498,7 +499,7 @@ public class TelaLogadaController {
     		listaDeUsuarios.add(lv_amigos.getSelectionModel().getSelectedItem());
     		atualizarListaAmigos();
     		atualizarListaUsuarios();
-    		grafo.construirgrafo(true);
+    		
     		
     	}
     	else {
@@ -517,7 +518,6 @@ public class TelaLogadaController {
         	listaAmigos.removeAll(listaAmigos);
         	atualizarListaAmigos();
         	atualizarListaUsuarios();
-        	grafo.construirgrafo(true);
     		
     	}
     	else {
@@ -562,8 +562,8 @@ public class TelaLogadaController {
     		listaDeUsuarios.remove(retornaIndice(lv_pesquisa.getSelectionModel().getSelectedItem(), listaDeUsuarios));
     		atualizarListaAmigos();
     		atualizarListaUsuarios();
+
     		
-    		grafo.construirgrafo(true);
     		
     	}
     }
@@ -573,6 +573,7 @@ public class TelaLogadaController {
     	//TODO fazer funcionar collections
     	//Collections.sort(listaAmigos);
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
+    	grafo.construirgrafo(true);
     }
     
     
@@ -580,6 +581,7 @@ public class TelaLogadaController {
     	//TODO fazer funcionar collections
     	//Collections.sort(listaDeUsuarios);
     	lv_pesquisa.setItems(FXCollections.observableList(listaDeUsuarios));
+    	grafo.construirgrafo(true);
     }
     
     boolean isAmigo(UsuarioTerraplanista usuario) {

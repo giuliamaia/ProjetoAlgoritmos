@@ -50,15 +50,6 @@ public class Grafo {
 	
 	public void construirgrafo(boolean éEstilizado) {
 		clear();
-		try {
-			controlador.carregar();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		setarNos(éEstilizado);
 		setarArestas();
 	}
@@ -66,7 +57,7 @@ public class Grafo {
 		for(UsuarioTerraplanista u : controlador.getUsuarios()) {
 			for(UsuarioTerraplanista a : u.getAmigos()) {
 				Edge aresta = grafo.addEdge(u.getLogin()  + a.getLogin(), u.getLogin(), a.getLogin());
-				System.out.println(aresta);
+				//System.out.println(aresta);
 				if(aresta != null)aresta.setAttribute("ui.style", "shape: cubic-curve;");
 			}
 		}
