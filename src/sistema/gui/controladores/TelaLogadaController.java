@@ -51,7 +51,7 @@ public class TelaLogadaController {
 	List <UsuarioTerraplanista> listaAmigos = copiandoListasDoRep(controlador.getUsuarioLogado().getAmigos());
 	List <UsuarioTerraplanista> listausuarios = copiandoListasDoRep(controlador.getUsuarios());
 	List <UsuarioTerraplanista> listaDeUsuarios = recriandoListaUsuarios(listausuarios);
-	List <UsuarioTerraplanista> recomendados = copiandoListasDoRep(controlador.recomendacoesPara(contaLogada));
+	List <UsuarioTerraplanista> recomendados = controlador.recomendacoesPara(contaLogada);
 	private Image imageAux;
 	private boolean arestasBonitas = true;
     @FXML
@@ -241,7 +241,7 @@ public class TelaLogadaController {
     private JFXButton bntRecomendacao;
 
     @FXML
-    private JFXButton bntRecomendaçaoTodos;
+    private JFXButton bntRecomendacaoTodos;
     
     
     
@@ -268,6 +268,7 @@ public class TelaLogadaController {
 		}
 		else if(e.getSource() == bnt_amigos) {
 			pane_amigos.toFront();
+			atualizarRecomendados();
 		}
 		else if(e.getSource() == bnt_contrato) {
 			pane_contrato.toFront();
@@ -371,6 +372,7 @@ public class TelaLogadaController {
     	inicializaAmigos();
     	inicializaEditar();
     	inicializaFotos();
+    	atualizarRecomendados();
     	toggleArestasBonitas.setSelected(true);
     }
     @FXML
@@ -467,6 +469,7 @@ public class TelaLogadaController {
     	else {
     		if(contaLogada.getImage().contains("128.png"))circleFoto.setFill(new ImagePattern(new Image(controlador.getUsuarioLogado().getImage())));
     		else {
+    			
     			ImageView imageView = new ImageView(new Image(contaLogada.getImage()));
     	        imageView.setPreserveRatio(true);
     	        imageView.setSmooth(true);
@@ -582,13 +585,16 @@ public class TelaLogadaController {
     void removerAmigo() {
     	if(lv_amigos.getSelectionModel().getSelectedItem()!=null) {
     		labelAvisoAmigos.setText("");
+    		if(recomendados.contains(lv_amigos.getSelectionModel().getSelectedItem())) {
+    			recomendados.remove(lv_amigos.getSelectionModel().getSelectedItem());
+    		}
     		controlador.getUsuarioLogado().getAmigos().remove(retornaIndice(lv_amigos.getSelectionModel().getSelectedItem(), controlador.getUsuarioLogado().getAmigos()));
     		controlador.salvar();
     		listaAmigos.remove(retornaIndice(lv_amigos.getSelectionModel().getSelectedItem(), listaAmigos));
     		listaDeUsuarios.add(lv_amigos.getSelectionModel().getSelectedItem());
     		atualizarListaAmigos();
     		atualizarListaUsuarios();
-    		
+    		atualizarRecomendados();
     		
     	}
     	else {
@@ -603,11 +609,16 @@ public class TelaLogadaController {
     		labelAvisoAmigos.setText("");
     		controlador.getUsuarioLogado().getAmigos().removeAll(listaAmigos);
     		controlador.salvar();
+    		for(UsuarioTerraplanista u : listaAmigos) {
+    			if(recomendados.contains(u)) {
+    				recomendados.remove(u);
+    			}
+    		}
     		listaDeUsuarios.addAll(listaAmigos);
         	listaAmigos.removeAll(listaAmigos);
         	atualizarListaAmigos();
         	atualizarListaUsuarios();
-    		
+    		atualizarRecomendados();
     	}
     	else {
     		labelAvisoAmigos.setText("Sua lista de amigos já está vazia!");
@@ -623,25 +634,27 @@ public class TelaLogadaController {
     	else {
     		contaLogada.addAmigo(lvRecomendacaoAmigos.getSelectionModel().getSelectedItem());
     		controlador.salvar();
+    		if(listaDeUsuarios.contains(lvRecomendacaoAmigos.getSelectionModel().getSelectedItem())) {
+    			listaDeUsuarios.remove(lvRecomendacaoAmigos.getSelectionModel().getSelectedItem());
+    		}
     		listaAmigos.add(lvRecomendacaoAmigos.getSelectionModel().getSelectedItem());
     		recomendados.remove(lvRecomendacaoAmigos.getSelectionModel().getSelectedItem());
     		atualizarListaAmigos();
     		atualizarRecomendados();
-    		
+    		atualizarListaUsuarios();
     	}
     }
 
     void atualizarRecomendados() {
-    	Collections.sort(recomendados, new Comparator<UsuarioTerraplanista>()
-        {
-            public int compare(UsuarioTerraplanista f1, UsuarioTerraplanista f2)
-            {
-                return f1.toString().compareTo(f2.toString());
-            }        
-        });
-    	lvRecomendacaoAmigos.setItems(FXCollections.observableList(recomendados));
+    	
+    	recomendados = controlador.recomendacoesPara(contaLogada);
+    	try{
+    		lvRecomendacaoAmigos.setItems(FXCollections.observableList(recomendados));
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
     	grafo.construirgrafo(arestasBonitas);
-		
+		lvRecomendacaoAmigos.refresh();
 	}
 
 	@FXML
@@ -649,10 +662,17 @@ public class TelaLogadaController {
     	if(!recomendados.isEmpty()) {
     		contaLogada.getAmigos().addAll(recomendados);
     		controlador.salvar();
+    		for(UsuarioTerraplanista u:recomendados) {
+    			if(listaDeUsuarios.contains(u))
+    				listaDeUsuarios.remove(u);
+    		}
     		listaAmigos.addAll(recomendados);
     		recomendados.removeAll(recomendados);
+    		
     		atualizarListaAmigos();
     		atualizarRecomendados();
+    		atualizarListaUsuarios();
+    		
     	}
     	else {
     		//TODO label
@@ -669,6 +689,7 @@ public class TelaLogadaController {
         	listaDeUsuarios.removeAll(listaDeUsuarios);
         	atualizarListaAmigos();
         	atualizarListaUsuarios();
+        	atualizarRecomendados();
         	grafo.construirgrafo(arestasBonitas);
     	}
     	else {
@@ -692,7 +713,7 @@ public class TelaLogadaController {
     		listaDeUsuarios.remove(retornaIndice(lv_pesquisa.getSelectionModel().getSelectedItem(), listaDeUsuarios));
     		atualizarListaAmigos();
     		atualizarListaUsuarios();
-
+    		atualizarRecomendados();
     		
     		
     	}
@@ -717,13 +738,15 @@ public class TelaLogadaController {
     			e.remove(listaAmigos.get(i));
     		}
     	}
-    	
-    	for(int i=0; i<recomendados.size(); i++) {
-    		if(e.contains(recomendados.get(i))) {
-    			e.remove(recomendados.get(i));
+    	recomendados = controlador.recomendacoesPara(contaLogada);
+    	/*System.out.println(recomendados);
+    	System.out.println(e);
+    	for(UsuarioTerraplanista u : recomendados) {
+    		if(e.contains(u)) {
+    			e.remove(u);
     		}
     	}
-    	
+    	*/
     	
     	return ret;
     }
@@ -738,6 +761,7 @@ public class TelaLogadaController {
         });
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
     	grafo.construirgrafo(arestasBonitas);
+    	lv_amigos.refresh();
     }
     
     
@@ -753,6 +777,7 @@ public class TelaLogadaController {
     	
     	lv_pesquisa.setItems(FXCollections.observableList(listaDeUsuarios));
     	grafo.construirgrafo(arestasBonitas);
+    	lv_pesquisa.refresh();
     }
     
     boolean isAmigo(UsuarioTerraplanista usuario) {
@@ -816,10 +841,13 @@ public class TelaLogadaController {
 		retangulo3.setStroke(Color.LIGHTSKYBLUE);
 		retangulo4.setStroke(Color.LIGHTSKYBLUE);
 		retangulo5.setStroke(Color.LIGHTSKYBLUE);
-		if(contaLogada.getImage() == null)
+		if(controlador.getUsuarioLogado().getImage() == null || controlador.getUsuarioLogado().getImage().isEmpty())
 			circuloImg.setFill(new ImagePattern(new Image("/images/user.png")));
-		else 
-			circuloImg.setFill(new ImagePattern(new Image(contaLogada.getImage())));
+		else {
+			circuloImg.setFill(new ImagePattern(new Image(controlador.getUsuarioLogado().getImage())));
+			imageAux=new Image(controlador.getUsuarioLogado().getImage());
+			
+		}
 		retangulo5.setFill(new ImagePattern(new Image("/images/pastor64.png")));
 		retangulo4.setFill(new ImagePattern(new Image("/images/mannegro64.png")));
 		retangulo3.setFill(new ImagePattern(new Image("/images/manbigode64.png")));
@@ -833,7 +861,7 @@ public class TelaLogadaController {
     	tfNovoNome.setText(contaLogada.getNome());
     	tfNovoLogin.setText(contaLogada.getLogin());
     	pfNovaSenha.setText(contaLogada.getSenha());
-    	dpDataNascimentoNova.getEditor().clear();
+    	
     	dpDataNascimentoNova.setValue(contaLogada.getDataNascimento());
     }
     

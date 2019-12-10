@@ -294,7 +294,7 @@
                   <FontAwesomeIconView fill="#d70808" glyphName="TIMES_CIRCLE" size="20" />
                </graphic>
             </JFXButton>
-            <JFXButton defaultButton="true" layoutX="519.0" layoutY="473.0" onAction="#confirmarEdiçao" text="Confirmar">
+            <JFXButton layoutX="519.0" layoutY="473.0" onAction="#confirmarEdiçao" text="Confirmar">
                <graphic>
                   <FontAwesomeIconView fill="#1482f5" glyphName="SAVE" size="20" />
                </graphic>
@@ -417,7 +417,7 @@
                   <FontAwesomeIconView fill="#15eb09" glyphName="USER_PLUS" size="20" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="bntRecomendaçaoTodos" graphicTextGap="10.0" layoutX="508.0" layoutY="469.0" onAction="#addGeralRecomendados" prefHeight="28.0" prefWidth="135.0" text="Adicionar todos">
+            <JFXButton fx:id="bntRecomendacaoTodos" graphicTextGap="10.0" layoutX="508.0" layoutY="469.0" onAction="#addGeralRecomendados" prefHeight="28.0" prefWidth="135.0" text="Adicionar todos">
                <graphic>
                   <FontAwesomeIconView fill="#15eb09" glyphName="USERS" size="20" />
                </graphic>
