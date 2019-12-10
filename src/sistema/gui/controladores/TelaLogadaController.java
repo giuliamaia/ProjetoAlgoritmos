@@ -42,9 +42,9 @@ public class TelaLogadaController {
 	UsuarioTerraplanista contaLogada = controlador.getUsuarioLogado();
 	Grafo grafo= Grafo.getInstancia();
 	List <String> listaInteresses = copiandoListasDoRep2(controlador.getUsuarioLogado().getInteresses());
-	List <UsuarioTerraplanista> listaAmigos;
-	List <UsuarioTerraplanista> listaDeUsuarios;
-
+	List <UsuarioTerraplanista> listaAmigos = copiandoListasDoRep(controlador.getUsuarioLogado().getAmigos());
+	List <UsuarioTerraplanista> listaDeUsuarios = copiandoListasDoRep(controlador.getUsuarios());
+	
 
     @FXML
     private JFXButton bnt_chat;
@@ -323,6 +323,9 @@ public class TelaLogadaController {
     	inicializaPane();
     	inicializaAmigos();
     	inicializaEditar();
+    	System.out.println(contaLogada.getNome());
+    	System.out.println(contaLogada.getAmigos());
+    	System.out.println(contaLogada.getInteresses());
     	
     }
     
@@ -337,8 +340,7 @@ public class TelaLogadaController {
     }
     
     private void inicializaAmigos() {
-    	listaAmigos = copiandoListasDoRep(controlador.getUsuarioLogado().getAmigos());
-    	listaDeUsuarios = copiandoListasDoRep(controlador.getUsuarios());
+    	
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
     	lv_pesquisa.setItems(FXCollections.observableList(listaDeUsuarios));
     }
@@ -425,8 +427,13 @@ public class TelaLogadaController {
     		addInteresses.setDisable(false);
     		tfOutro.setDisable(false);
     		controlador.salvar();
+    		System.out.println(controlador.getUsuarioLogado().getInteresses());
     	}
     	else if (!verificaSeJaTem(comboboxInteresses.getSelectionModel().getSelectedItem())) {
+    		System.out.println(comboboxInteresses.getSelectionModel().getSelectedItem());
+    		controlador.getUsuarioLogado().getInteresses().add(comboboxInteresses.getSelectionModel().getSelectedItem());
+    		controlador.salvar();
+    		System.out.println(controlador.getUsuarioLogado().getInteresses());
     		listaInteresses.add(comboboxInteresses.getSelectionModel().getSelectedItem());
     		atualizarListaInteresses();
     		addInteresses.setDisable(true);
@@ -448,9 +455,10 @@ public class TelaLogadaController {
     void addOutroInteresse() {
     	if (!verificaSeJaTem(tfOutro.getText())&&!tfOutro.getText().isEmpty()) {
     		controlador.getUsuarioLogado().getInteresses().add(tfOutro.getText());
+    		controlador.salvar();
+    		System.out.println(controlador.getUsuarioLogado().getInteresses());
     		listaInteresses.add(tfOutro.getText());
     		atualizarListaInteresses();
-    		controlador.salvar();
     		tfOutro.setText("");
     	}
     }
@@ -464,9 +472,12 @@ public class TelaLogadaController {
     void removerInteresse(MouseEvent event) {
     	labelAvisoInteresses.setText("");
     	if(lvInteresses.getSelectionModel().getSelectedItem()!=null) {
+    		controlador.getUsuarioLogado().getInteresses().remove(retornaIndice2(lvInteresses.getSelectionModel().getSelectedItem(), controlador.getUsuarioLogado().getInteresses()));
+    		controlador.salvar();
+    		System.out.println(controlador.getUsuarioLogado().getInteresses());
     		listaInteresses.remove(lvInteresses.getSelectionModel().getSelectedItem());
         	atualizarListaInteresses();
-        	controlador.salvar();
+        	
         	
     	}
     	else {
@@ -480,11 +491,13 @@ public class TelaLogadaController {
     void removerAmigo() {
     	if(lv_amigos.getSelectionModel().getSelectedItem()!=null) {
     		labelAvisoAmigos.setText("");
+    		controlador.getUsuarioLogado().getAmigos().remove(retornaIndice(lv_amigos.getSelectionModel().getSelectedItem(), controlador.getUsuarioLogado().getAmigos()));
+    		controlador.salvar();
+    		System.out.println(contaLogada.getAmigos());
     		listaAmigos.remove(retornaIndice(lv_amigos.getSelectionModel().getSelectedItem(), listaAmigos));
     		listaDeUsuarios.add(lv_amigos.getSelectionModel().getSelectedItem());
     		atualizarListaAmigos();
     		atualizarListaUsuarios();
-    		controlador.salvar();
     		grafo.construirgrafo(true);
     		
     	}
@@ -498,11 +511,13 @@ public class TelaLogadaController {
     void removeGeral() {
     	if(!listaAmigos.isEmpty()) {
     		labelAvisoAmigos.setText("");
+    		controlador.getUsuarioLogado().getAmigos().removeAll(listaAmigos);
+    		controlador.salvar();
+
     		listaDeUsuarios.addAll(listaAmigos);
         	listaAmigos.removeAll(listaAmigos);
         	atualizarListaAmigos();
         	atualizarListaUsuarios();
-        	controlador.salvar();
         	grafo.construirgrafo(true);
     		
     	}
@@ -516,11 +531,13 @@ public class TelaLogadaController {
     void addGeral() {
     	if(!listaDeUsuarios.isEmpty()) {
     		labelAvisoAmigos.setText("");
+    		controlador.getUsuarioLogado().getAmigos().addAll(listaDeUsuarios);
+    		controlador.salvar();
+    		System.out.println(contaLogada.getAmigos());
     		listaAmigos.addAll(listaDeUsuarios);
         	listaDeUsuarios.removeAll(listaDeUsuarios);
         	atualizarListaAmigos();
         	atualizarListaUsuarios();
-        	controlador.salvar();
         	grafo.construirgrafo(true);
     	}
     	else {
@@ -540,12 +557,13 @@ public class TelaLogadaController {
     		labelAvisoAmigos.setText("");
     		System.out.println(contaLogada);
     		contaLogada.addAmigo(lv_pesquisa.getSelectionModel().getSelectedItem());
+    		controlador.salvar();
     		System.out.println(contaLogada.getAmigos());
     		listaAmigos.add(lv_pesquisa.getSelectionModel().getSelectedItem());
     		listaDeUsuarios.remove(retornaIndice(lv_pesquisa.getSelectionModel().getSelectedItem(), listaDeUsuarios));
     		atualizarListaAmigos();
     		atualizarListaUsuarios();
-    		controlador.salvar();
+    		
     		grafo.construirgrafo(true);
     		
     	}
@@ -575,6 +593,15 @@ public class TelaLogadaController {
     }
     
     int retornaIndice(UsuarioTerraplanista usuario, List<UsuarioTerraplanista> e) {
+    	for(int i=0; i<e.size(); i++) {
+    		if(e.get(i).equals(usuario)) {
+    			return i;
+    		}
+    	}
+    	return -1;
+    }
+    
+    int retornaIndice2(String usuario, List<String> e) {
     	for(int i=0; i<e.size(); i++) {
     		if(e.get(i).equals(usuario)) {
     			return i;
