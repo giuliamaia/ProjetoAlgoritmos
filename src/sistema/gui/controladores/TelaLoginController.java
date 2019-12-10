@@ -8,6 +8,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -37,6 +38,8 @@ public class TelaLoginController {
 
     @FXML
     private Pane paneNaoVerSenha;
+    @FXML
+    private JFXTextField tfSenha;
 
     @FXML
     private FontAwesomeIconView naoVerSenha;
@@ -73,12 +76,20 @@ public class TelaLoginController {
     		labelTopo.setTextFill(Color.DARKRED);
     	}
     }
-    
+    @FXML
+    void digitar() {
+    	pfSenha.setText(tfSenha.getText());
+    }
+    @FXML
+    void digitar1() {
+    	tfSenha.setText(pfSenha.getText());
+    }
     @FXML
     void initialize() {
     	tfNome.setPromptText("Digite seu login");
     	pfSenha.setPromptText("Digite sua senha");
-    	
+    	tfSenha.setPromptText("Digite sua senha");
+    	tfSenha.setVisible(false);
     }
     @FXML
     void minimizarTela(MouseEvent event) {
@@ -95,10 +106,12 @@ public class TelaLoginController {
     	if(deveVerSenha) {
     		verSenha.setIcon(FontAwesomeIcon.EYE);
     		pfSenha.setVisible(false);
+    		tfSenha.setVisible(true);
     	}
     	else {
     		verSenha.setIcon(FontAwesomeIcon.EYE_SLASH);
     		pfSenha.setVisible(true);
+    		tfSenha.setVisible(false);
     	}
     	
     }

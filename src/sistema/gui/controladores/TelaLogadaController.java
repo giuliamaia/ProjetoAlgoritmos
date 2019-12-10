@@ -1,8 +1,10 @@
 
 package sistema.gui.controladores;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.graphstream.graph.Graph;
@@ -30,6 +32,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import sistema.beans.CCUtils;
@@ -37,6 +40,7 @@ import sistema.beans.Grafo;
 import sistema.beans.UsuarioTerraplanista;
 import sistema.controlador.Controlador;
 import sistema.gui.TerraPlanizer;
+import javafx.scene.shape.Rectangle;
 
 public class TelaLogadaController {
 	
@@ -46,7 +50,7 @@ public class TelaLogadaController {
 	List <String> listaInteresses = copiandoListasDoRep2(controlador.getUsuarioLogado().getInteresses());
 	List <UsuarioTerraplanista> listaAmigos = copiandoListasDoRep(controlador.getUsuarioLogado().getAmigos());
 	List <UsuarioTerraplanista> listaDeUsuarios = copiandoListasDoRep(controlador.getUsuarios());
-	
+	private Image imageAux;
 
     @FXML
     private JFXButton bnt_chat;
@@ -86,7 +90,23 @@ public class TelaLogadaController {
 
     @FXML
     private FontAwesomeIconView removeInteresses;
+    @FXML
+    private Circle circuloImg;
 
+    @FXML
+    private Rectangle retangulo1;
+
+    @FXML
+    private Rectangle retangulo2;
+
+    @FXML
+    private Rectangle retangulo3;
+
+    @FXML
+    private Rectangle retangulo4;
+
+    @FXML
+    private Rectangle retangulo5;
     @FXML
     private FontAwesomeIconView addInteresses;
 
@@ -201,7 +221,7 @@ public class TelaLogadaController {
     private JFXTextField tfNovoLogin;
 
     @FXML
-    private JFXPasswordField pfNovaSenha;
+    private JFXTextField pfNovaSenha;
 
     @FXML
     private DatePicker dpDataNascimentoNova;
@@ -261,7 +281,7 @@ public class TelaLogadaController {
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
     }
@@ -333,9 +353,54 @@ public class TelaLogadaController {
     	inicializaPane();
     	inicializaAmigos();
     	inicializaEditar();
-    	
+    	inicializaFotos();
     }
-    
+    @FXML
+    void alterarFoto1(MouseEvent event) {
+    	circuloImg.setFill(new ImagePattern(new Image("/images/woman128.png")));
+    	imageAux = new Image("/images/woman128.png");
+    }
+
+    @FXML
+    void alterarFoto2(MouseEvent event) {
+    	circuloImg.setFill(new ImagePattern(new Image("/images/man128.png")));
+    	imageAux = new Image("/images/man128.png");
+    }
+
+    @FXML
+    void alterarFoto3(MouseEvent event) {
+    	circuloImg.setFill(new ImagePattern(new Image("/images/manbigode128.png")));
+    	imageAux = new Image("/images/manbigode128.png");
+    }
+
+    @FXML
+    void alterarFoto4(MouseEvent event) {
+    	circuloImg.setFill(new ImagePattern(new Image("/images/mannegro128.png")));
+    	imageAux = new Image("/images/mannegro128.png");
+    }
+
+    @FXML
+    void alterarFoto5(MouseEvent event) {
+    	circuloImg.setFill(new ImagePattern(new Image("/images/pastor128.png")));
+    	imageAux = new Image("/images/pastor128.png");
+    }
+
+    @FXML
+    void alterarFotoOutra(MouseEvent event) {
+    	File arquivo = TerraPlanizer.abrirFileChooser();
+    	if(arquivo == null) {
+    		return;
+    	}
+    	ImageView imageView = new ImageView(new Image(arquivo.toURI().toString()));
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageView.setFitWidth(256);
+        imageView.setFitHeight(256);
+    	if (arquivo != null && arquivo.exists()) {
+    		circuloImg.setFill(new ImagePattern(imageView.snapshot(null, null)));
+    	}
+    	imageAux = new Image(arquivo.toURI().toString());
+    }
     private void inicializaEditar() {
     	label_name1.setText(controlador.getUsuarioLogado().getNome());
     	label_login1.setText(controlador.getUsuarioLogado().getLogin());
@@ -374,6 +439,7 @@ public class TelaLogadaController {
     	label_login.setText(controlador.getUsuarioLogado().getLogin());
     	pf_senha.setText(controlador.getUsuarioLogado().getSenha());
     	pf_senha.setDisable(true);
+    	circleFoto.setStroke(Color.LIGHTSKYBLUE);
     	lavel_data.setText(controlador.getUsuarioLogado().getDataNascimento().toString());
     	if(controlador.getUsuarioLogado().getImage()==null) {
         	circleFoto.setFill(new ImagePattern(new Image("/images/user.png")));
@@ -405,6 +471,7 @@ public class TelaLogadaController {
 		panel.setPrefWidth(634);
 		Pane newLoadedPane =  panel;
 		painel.getChildren().add(newLoadedPane);	
+		
 	}
 	
     @FXML
@@ -580,16 +647,28 @@ public class TelaLogadaController {
     	return ret;
     }
     void atualizarListaAmigos() {
-    	//TODO fazer funcionar collections
-    	//Collections.sort(listaAmigos);
+    	
+    	Collections.sort(listaAmigos, new Comparator<UsuarioTerraplanista>()
+        {
+            public int compare(UsuarioTerraplanista f1, UsuarioTerraplanista f2)
+            {
+                return f1.toString().compareTo(f2.toString());
+            }        
+        });
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
     	grafo.construirgrafo(true);
     }
     
     
     void atualizarListaUsuarios() {
-    	//TODO fazer funcionar collections
-    	//Collections.sort(listaDeUsuarios);
+    	
+    	Collections.sort(listaDeUsuarios, new Comparator<UsuarioTerraplanista>()
+        {
+            public int compare(UsuarioTerraplanista f1, UsuarioTerraplanista f2)
+            {
+                return f1.toString().compareTo(f2.toString());
+            }        
+        });
     	
     	lv_pesquisa.setItems(FXCollections.observableList(listaDeUsuarios));
     	grafo.construirgrafo(true);
@@ -649,14 +728,32 @@ public class TelaLogadaController {
     	}
     	return ret;
     }
-    
+    private void inicializaFotos() {
+		circuloImg.setStroke(Color.LIGHTSKYBLUE);
+		retangulo1.setStroke(Color.LIGHTSKYBLUE);
+		retangulo2.setStroke(Color.LIGHTSKYBLUE);
+		retangulo3.setStroke(Color.LIGHTSKYBLUE);
+		retangulo4.setStroke(Color.LIGHTSKYBLUE);
+		retangulo5.setStroke(Color.LIGHTSKYBLUE);
+		if(contaLogada.getImage() == null)
+			circuloImg.setFill(new ImagePattern(new Image("/images/user.png")));
+		else 
+			circuloImg.setFill(new ImagePattern(new Image(contaLogada.getImage())));
+		retangulo5.setFill(new ImagePattern(new Image("/images/pastor64.png")));
+		retangulo4.setFill(new ImagePattern(new Image("/images/mannegro64.png")));
+		retangulo3.setFill(new ImagePattern(new Image("/images/manbigode64.png")));
+		retangulo2.setFill(new ImagePattern(new Image("/images/man64.png")));
+		retangulo1.setFill(new ImagePattern(new Image("/images/woman64.png")));
+	}
+
     @FXML
     void editar() {
     	pane_editar.toFront();
     	tfNovoNome.setText(contaLogada.getNome());
     	tfNovoLogin.setText(contaLogada.getLogin());
     	pfNovaSenha.setText(contaLogada.getSenha());
-    	dpDataNascimentoNova.setValue(contaLogada.getDataNascimento());;
+    	dpDataNascimentoNova.getEditor().clear();
+    	dpDataNascimentoNova.setValue(contaLogada.getDataNascimento());
     }
     
     
@@ -667,17 +764,28 @@ public class TelaLogadaController {
     	tfNovoNome.setText("");
     	tfNovoLogin.setText("");
     	pfNovaSenha.setText("");
-    	dpDataNascimentoNova.getEditor().clear();
+    	
     }
     
     @FXML
     void confirmarEdiçao() {
-    	//TODO ajeitar data e imagem pra serem editadas tbm 
     	
+    	try{
+    		UsuarioTerraplanista editadoTerraplanista = new UsuarioTerraplanista(contaLogada.getAmigos(), 
+    				contaLogada.getInteresses(), 
+    				tfNovoNome.getText(), 
+    				tfNovoLogin.getText(), 
+    				pfNovaSenha.getText(),
+    				dpDataNascimentoNova.getValue(), 
+    				contaLogada.getHoraCriaçãoConta(), 
+        			imageAux!=null? imageAux.getUrl(): null, 
+        			contaLogada.getRecomendacoes(), 
+        			contaLogada.isPastor());
+    		controlador.editarUsuario(contaLogada, editadoTerraplanista);
+    	}catch(NullPointerException e) {
+    		e.printStackTrace();
+    	}
     	
-    	UsuarioTerraplanista editadoTerraplanista = new UsuarioTerraplanista(contaLogada.getAmigos(), contaLogada.getInteresses(), tfNovoNome.getText(), tfNovoLogin.getText(), pfNovaSenha.getText(), dpDataNascimentoNova.getValue(), contaLogada.getHoraCriaçãoConta(), contaLogada.getImage(), contaLogada.getRecomendacoes(), contaLogada.isPastor());
-    	
-    	controlador.editarUsuario(contaLogada, editadoTerraplanista);
     	inicializaPerfil();
     	
     	controlador.salvar();
@@ -688,7 +796,7 @@ public class TelaLogadaController {
     void verSeitasGrafo(ActionEvent event) {
     	if(toggleSeitasGrafo.isSelected()) {
     		grafo.construirgrafo(true);
-    		//pesquisar
+    		//TODO pesquisar
     	}
     }
 

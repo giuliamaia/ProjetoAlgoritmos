@@ -200,8 +200,8 @@ public class TerraPlanizer extends Application{
 			estagioGrafo.getIcons().add(new Image("/images/icon1.png"));
 			estagioGrafo.setScene(scene);
 			estagioGrafo.setTitle("Grafo");
-			
 			estagioGrafo.showAndWait();
+			
 		}
 	}
 	static public void fecharTelaPagamento () {
@@ -209,6 +209,7 @@ public class TerraPlanizer extends Application{
 	}
 	static public void fecharTela () {
 		estagio.close();
+		System.exit(0); 
 	}
 	static public void minimizarTela () {
 		estagio.setIconified(true);
