@@ -244,60 +244,6 @@
             <FontAwesomeIconView fill="#0eeec1" glyphName="CHECK_CIRCLE" layoutX="33.0" layoutY="226.0" size="13" />
          </children>
       </Pane>
-      <Pane fx:id="pane_amigos" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <JFXListView fx:id="lv_amigos" layoutX="23.0" layoutY="99.0" prefHeight="352.0" prefWidth="221.0" />
-            <Text fill="#6d7a7c" layoutX="29.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amizades" wrappingWidth="282.0">
-               <font>
-                  <Font name="System Bold" size="32.0" />
-               </font>
-            </Text>
-            <Text fill="#607072" layoutX="30.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seus milhões de amigos..." wrappingWidth="258.591796875">
-               <font>
-                  <Font name="System Italic" size="11.0" />
-               </font>
-            </Text>
-            <JFXTextField fx:id="tf_pesquisa" layoutX="448.0" layoutY="105.0" onKeyReleased="#pesquisar" prefHeight="25.0" prefWidth="172.0" />
-            <JFXListView fx:id="lv_pesquisa" layoutX="448.0" layoutY="142.0" prefHeight="287.0" prefWidth="203.0" />
-            <Text fill="#607072" layoutX="442.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Em busca de novas amizades..." wrappingWidth="184.591796875">
-               <font>
-                  <Font name="System Italic" size="11.0" />
-               </font>
-            </Text>
-            <JFXButton fx:id="bnt_remover" graphicTextGap="10.0" layoutX="14.0" layoutY="458.0" onAction="#removerAmigo" prefHeight="28.0" prefWidth="108.0" text="Remover">
-               <graphic>
-                  <FontAwesomeIconView fill="#f50707" glyphName="USER_TIMES" size="20" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="bnt_add" graphicTextGap="10.0" layoutX="423.0" layoutY="438.0" onAction="#addAmigo" prefHeight="28.0" prefWidth="108.0" text="Adicionar">
-               <graphic>
-                  <FontAwesomeIconView fill="#15eb09" glyphName="USER_PLUS" size="20" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="bnt_minimizar" layoutX="553.0" layoutY="12.0" onAction="#minimizar" text="Minimizar">
-               <graphic>
-                  <FontAwesomeIconView fill="#2215d0" glyphName="MINUS" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="bnt_sair" layoutX="635.0" layoutY="12.0" onAction="#sair" text="Sair">
-               <graphic>
-                  <FontAwesomeIconView fill="#fc1414" glyphName="POWER_OFF" />
-               </graphic>
-            </JFXButton>
-            <Label fx:id="labelAvisoAmigos" layoutX="407.0" layoutY="469.0" prefHeight="35.0" prefWidth="282.0" textFill="#f70c91" />
-            <JFXButton fx:id="bnt_removeGeral" graphicTextGap="10.0" layoutX="122.0" layoutY="458.0" onAction="#removeGeral" prefHeight="28.0" prefWidth="131.0" text="Remover todos">
-               <graphic>
-                  <FontAwesomeIconView fill="#f50707" glyphName="USERS" size="20" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="bnt_addGeral" graphicTextGap="10.0" layoutX="541.0" layoutY="438.0" onAction="#addGeral" prefHeight="28.0" prefWidth="135.0" text="Adicionar todos">
-               <graphic>
-                  <FontAwesomeIconView fill="#15eb09" glyphName="USERS" size="20" />
-               </graphic>
-            </JFXButton>
-            <FontAwesomeIconView fill="#1d12e3" glyphName="SEARCH" layoutX="626.0" layoutY="124.0" onMouseClicked="#pesquisar" size="20" />
-         </children>
-      </Pane>
       <Pane fx:id="pane_editar" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
          <children>
             <Text layoutX="438.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" />
@@ -406,6 +352,76 @@
             <JFXToggleButton fx:id="toggleSeitasGrafo" layoutX="430.0" layoutY="453.0" onAction="#verSeitasGrafo" text="Ver possiveis seitas" />
             <Label fx:id="labelNaoAchouLoginGrafo" layoutX="241.0" layoutY="474.0" prefHeight="17.0" prefWidth="150.0" />
             <JFXToggleButton fx:id="toggleArestasBonitas" layoutX="253.0" layoutY="453.0" onAction="#verArestasBonitas" text="Ver aresta bonita" />
+         </children>
+      </Pane>
+      <Pane fx:id="pane_amigos" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXListView fx:id="lv_amigos" layoutX="23.0" layoutY="99.0" prefHeight="318.0" prefWidth="192.0" />
+            <Text fill="#6d7a7c" layoutX="29.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amizades" wrappingWidth="282.0">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Text>
+            <Text fill="#607072" layoutX="29.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seus milhões de amigos..." wrappingWidth="160.24609375">
+               <font>
+                  <Font name="System Italic" size="11.0" />
+               </font>
+            </Text>
+            <JFXTextField fx:id="tf_pesquisa" layoutX="249.0" layoutY="94.0" onKeyReleased="#pesquisar" prefHeight="25.0" prefWidth="172.0" />
+            <JFXListView fx:id="lv_pesquisa" layoutX="249.0" layoutY="131.0" prefHeight="287.0" prefWidth="192.0" />
+            <Text fill="#607072" layoutX="250.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Em busca de novas amizades..." wrappingWidth="184.591796875">
+               <font>
+                  <Font name="System Italic" size="11.0" />
+               </font>
+            </Text>
+            <JFXButton fx:id="bnt_remover" graphicTextGap="10.0" layoutX="65.0" layoutY="430.0" onAction="#removerAmigo" prefHeight="28.0" prefWidth="108.0" text="Remover">
+               <graphic>
+                  <FontAwesomeIconView fill="#f50707" glyphName="USER_TIMES" size="20" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="bnt_add" graphicTextGap="10.0" layoutX="288.0" layoutY="430.0" onAction="#addAmigo" prefHeight="28.0" prefWidth="108.0" text="Adicionar">
+               <graphic>
+                  <FontAwesomeIconView fill="#15eb09" glyphName="USER_PLUS" size="20" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="bnt_minimizar" layoutX="553.0" layoutY="12.0" onAction="#minimizar" text="Minimizar">
+               <graphic>
+                  <FontAwesomeIconView fill="#2215d0" glyphName="MINUS" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="bnt_sair" layoutX="635.0" layoutY="12.0" onAction="#sair" text="Sair">
+               <graphic>
+                  <FontAwesomeIconView fill="#fc1414" glyphName="POWER_OFF" />
+               </graphic>
+            </JFXButton>
+            <Label fx:id="labelAvisoAmigos" layoutX="204.0" layoutY="30.0" prefHeight="35.0" prefWidth="330.0" textFill="#f70c91" />
+            <JFXButton fx:id="bnt_removeGeral" graphicTextGap="10.0" layoutX="54.0" layoutY="465.0" onAction="#removeGeral" prefHeight="28.0" prefWidth="131.0" text="Remover todos">
+               <graphic>
+                  <FontAwesomeIconView fill="#f50707" glyphName="USERS" size="20" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="bnt_addGeral" graphicTextGap="10.0" layoutX="278.0" layoutY="465.0" onAction="#addGeral" prefHeight="28.0" prefWidth="135.0" text="Adicionar todos">
+               <graphic>
+                  <FontAwesomeIconView fill="#15eb09" glyphName="USERS" size="20" />
+               </graphic>
+            </JFXButton>
+            <FontAwesomeIconView fill="#1d12e3" glyphName="SEARCH" layoutX="427.0" layoutY="113.0" onMouseClicked="#pesquisar" size="20" />
+            <JFXListView fx:id="lvRecomendacaoAmigos" layoutX="475.0" layoutY="103.0" prefHeight="318.0" prefWidth="200.0" />
+            <Text fill="#607072" layoutX="475.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pessoas recomendadas pra você" wrappingWidth="184.591796875">
+               <font>
+                  <Font name="System Italic" size="11.0" />
+               </font>
+            </Text>
+            <JFXButton fx:id="bntRecomendacao" graphicTextGap="10.0" layoutX="518.0" layoutY="434.0" onAction="#addAmigoRecomendado" prefHeight="28.0" prefWidth="108.0" text="Adicionar">
+               <graphic>
+                  <FontAwesomeIconView fill="#15eb09" glyphName="USER_PLUS" size="20" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="bntRecomendaçaoTodos" graphicTextGap="10.0" layoutX="508.0" layoutY="469.0" onAction="#addGeralRecomendados" prefHeight="28.0" prefWidth="135.0" text="Adicionar todos">
+               <graphic>
+                  <FontAwesomeIconView fill="#15eb09" glyphName="USERS" size="20" />
+               </graphic>
+            </JFXButton>
          </children>
       </Pane>
    </children>

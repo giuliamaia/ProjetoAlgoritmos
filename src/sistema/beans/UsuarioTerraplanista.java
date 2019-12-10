@@ -110,6 +110,6 @@ public class UsuarioTerraplanista implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return  nome + "(" +login + ")";
+		return  nome + " (" +login + ")";
 	}
 }
