@@ -25,6 +25,7 @@ public class TesteFX {
 		//System.out.println(recomendados);
 		//System.out.println(user.getAmigos());
 		//System.out.println(controlador.pesquisarPorLogin("roro").getAmigos());
+		
 		System.out.println(controlador.recomendacoesPara(controlador.pesquisarPorLogin("adm")));
 	}
 }
