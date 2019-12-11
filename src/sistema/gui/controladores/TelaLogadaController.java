@@ -244,6 +244,9 @@ public class TelaLogadaController {
     private JFXListView<UsuarioTerraplanista> lvRecomendacaoAmigos;
 
     @FXML
+    private JFXListView<UsuarioTerraplanista> lvConvites;
+    
+    @FXML
     private JFXButton bntRecomendacao;
 
     @FXML
@@ -956,11 +959,15 @@ public class TelaLogadaController {
     	grafo.setarArestas(arestasBonitas);
     	grafo.construirgrafo(toggleArestasBonitas.isSelected());
     }
+    
     @FXML
     void abrirTelaConvite() {
     	paneConvites.toFront();
     }
     
-   
+    @FXML
+    void recusarConvite() {
+
+    }
 }
 
