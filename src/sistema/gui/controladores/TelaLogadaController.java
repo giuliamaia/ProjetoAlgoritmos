@@ -954,8 +954,9 @@ public class TelaLogadaController {
     void verArestasBonitas() {
     	arestasBonitas=toggleArestasBonitas.isSelected();
     	grafo.setarArestas(arestasBonitas);
+    	grafo.construirgrafo(toggleArestasBonitas.isSelected());
     }
-    
+    @FXML
     void abrirTelaConvite() {
     	paneConvites.toFront();
     }
