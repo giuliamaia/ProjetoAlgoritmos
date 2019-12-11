@@ -36,6 +36,24 @@ public class Controlador {
 	public List<UsuarioTerraplanista> indicacaoAmigoComum(UsuarioTerraplanista user) {
 		return repositorioUsuarioTerraPlanistas.indicacaoAmigoComum(user);
 	}
+	public boolean temConvitePara(UsuarioTerraplanista user) {
+		return repositorioUsuarioTerraPlanistas.temConvitePara(user);
+	}
+	public void enviarConvite(UsuarioTerraplanista desseCara, UsuarioTerraplanista praEsseCara) {
+		repositorioUsuarioTerraPlanistas.enviarConvite(desseCara, praEsseCara);
+	}
+	public void salvarConvites() {
+		repositorioUsuarioTerraPlanistas.salvarConvites();
+	}
+	public void carregarConvites() throws IOException, ClassNotFoundException {
+		repositorioUsuarioTerraPlanistas.carregarConvites();
+	}
+	public boolean removerConvite(UsuarioTerraplanista desseCara, UsuarioTerraplanista praEsseCara) {
+		return repositorioUsuarioTerraPlanistas.removerConvite(desseCara, praEsseCara);
+	}
+	public List<UsuarioTerraplanista> convitesPara(UsuarioTerraplanista usuario) {
+		return repositorioUsuarioTerraPlanistas.convitesPara(usuario);
+	}
 	public List<UsuarioTerraplanista> recomendacoesPara(UsuarioTerraplanista usuarioTerraplanista) {
 		return repositorioUsuarioTerraPlanistas.recomendacoesPara(usuarioTerraplanista);
 	}

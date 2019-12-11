@@ -21,6 +21,52 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 	 */
 	private static final long serialVersionUID = 132234234L;
 	private List<UsuarioTerraplanista> usuarios = new ArrayList<UsuarioTerraplanista>();
+	private HashMap<String, String> convites = new HashMap<String, String>();
+	
+	public boolean temConvitePara(UsuarioTerraplanista user) {
+		if(convites.keySet().contains(user.getLogin())) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public void enviarConvite(UsuarioTerraplanista desseCara, UsuarioTerraplanista praEsseCara) {
+		if(convites.containsKey(praEsseCara.getLogin())) {
+			convites.put(praEsseCara.getLogin(), convites.get(praEsseCara.getLogin())+","+desseCara.getLogin());
+		}
+		else{
+			convites.put(praEsseCara.getLogin(), ","+desseCara.getLogin());
+		}
+		salvarConvites();
+	}
+	public boolean removerConvite(UsuarioTerraplanista desseCara, UsuarioTerraplanista praEsseCara) {
+		try{
+			String[] convidados = convites.get(praEsseCara.getLogin()).split(",");
+			if(convidados.length>2) {
+				convites.put(praEsseCara.getLogin(), convites.get(praEsseCara.getLogin()).replace("," + desseCara.getLogin(), ""));
+			}
+			else {
+				convites.remove(praEsseCara.getLogin());
+			}
+			salvarConvites();
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
+	}
+	public List<UsuarioTerraplanista> convitesPara(UsuarioTerraplanista usuario){
+		List<UsuarioTerraplanista> retorno = new ArrayList<UsuarioTerraplanista>();
+		if(convites.containsKey(usuario.getLogin())) {
+			String[] pessoas = convites.get(usuario.getLogin()).split(",");
+			for(String a : pessoas) {
+				if(!a.isEmpty()) {
+					retorno.add(pesquisarPorLogin(a));
+				}
+			}
+		}
+		return retorno;
+	}
 	public List<UsuarioTerraplanista> getUsuarios() {
 		return usuarios;
 	}
@@ -53,6 +99,7 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 	public RepositorioUsuariosTerraplanistas() {
 		try {
 			carregar();
+			carregarConvites();
 		} catch (ClassNotFoundException | IOException e) {
 			System.out.println("deu rim no carregar");
 		}
@@ -88,6 +135,39 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 		FileInputStream fis = new FileInputStream("Repositorios.hnf");
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		this.usuarios = (ArrayList<UsuarioTerraplanista>) ois.readObject();
+		ois.close();
+	}
+	public void salvarConvites()  {
+		
+		FileOutputStream fos = null;
+		
+		ObjectOutputStream oos = null;
+		
+		try {
+			fos = new FileOutputStream("Convites.hnf");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(convites);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				oos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	public void carregarConvites() throws IOException, ClassNotFoundException {
+
+		FileInputStream fis = new FileInputStream("Convites.hnf");
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		this.convites =  (HashMap<String, String>) ois.readObject();
 		ois.close();
 	}
 	public ArrayList<UsuarioTerraplanista> pesquisarPorNome(String nome) {
