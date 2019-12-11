@@ -25,7 +25,7 @@
       <FontAwesomeIconView fill="#28d4c8" glyphName="CREDIT_CARD_ALT" layoutX="367.0" layoutY="53.0" size="40" />
       <Pane layoutY="-1.0" prefHeight="513.5" prefWidth="158.0" style="-fx-background-color: #7DA7D9;">
          <children>
-            <JFXButton fx:id="bnt_chat" alignment="CENTER" contentDisplay="TOP" graphicTextGap="15.0" layoutX="-1.0" layoutY="224.0" onAction="#telaFuncional" prefHeight="33.0" prefWidth="145.0" text="Grafo" textFill="#f8f4f4">
+            <JFXButton fx:id="bnt_grafo" alignment="CENTER" contentDisplay="TOP" graphicTextGap="15.0" layoutX="-1.0" layoutY="224.0" onAction="#telaFuncional" prefHeight="33.0" prefWidth="145.0" text="Grafo" textFill="#f8f4f4">
                <graphic>
                   <FontAwesomeIconView fill="#f2f2f2" glyphName="CONNECTDEVELOP" size="25" wrappingWidth="24.220703125" />
                </graphic>
@@ -325,7 +325,7 @@
             <JFXTextField fx:id="pfNovaSenha" layoutX="452.0" layoutY="366.0" prefHeight="10.0" prefWidth="150.0" />
          </children>
       </Pane>
-      <Pane fx:id="pane_chat" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="pane_grafo" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="144.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Text fill="#6d7a7c" layoutX="21.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grafo" wrappingWidth="282.0">
                <font>

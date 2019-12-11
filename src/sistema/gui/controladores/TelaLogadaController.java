@@ -55,7 +55,7 @@ public class TelaLogadaController {
 	private Image imageAux;
 	private boolean arestasBonitas = true;
     @FXML
-    private JFXButton bnt_chat;
+    private JFXButton bnt_grafo;
 
     @FXML
     private JFXButton bnt_amigos;
@@ -134,7 +134,7 @@ public class TelaLogadaController {
     private Label labelAvisoInteresses;
 
     @FXML
-    private Pane pane_chat;
+    private Pane pane_grafo;
 
     @FXML
     private Pane painel;
@@ -263,8 +263,18 @@ public class TelaLogadaController {
     
     @FXML
     void telaFuncional(ActionEvent e) {
-    	if(e.getSource() == bnt_chat) {
-			pane_chat.toFront();
+    	if(e.getSource() == bnt_grafo) {
+			if(contaLogada.isPastor()==true) {
+				pane_grafo.toFront();
+			}
+			else {
+				pane_doaçao.toFront();
+				Alert alerta = new Alert(AlertType.WARNING);
+				alerta.setContentText("Enquanto isso, faça uma doação... Vai que Ele fica feliz e lhe dá autorização. :)");
+				alerta.setHeaderText("Para ele deixar, você precisa ser uma pessoa influente na comunidade.");
+				alerta.setTitle("Sr Salamandra ainda não deixa você visualizar essa página!");
+				alerta.showAndWait();
+			}
 		}
 		else if(e.getSource() == bnt_amigos) {
 			pane_amigos.toFront();
@@ -365,6 +375,7 @@ public class TelaLogadaController {
     //PAGAMENTO ACIMA
     @FXML
     void initialize() {
+    	
     	pane_perfil.toFront();
     	inicializaComboBoxInteresses();
     	inicializaPerfil();
