@@ -139,15 +139,17 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 						}
 					}
 					
-					while(!(mapa.containsValue(this.usuarios.get(i)))) {
-						if(mapa.containsKey(Integer.toString(temp))) {
-							temp = temp * 10;
+					if(temp > 1) {
+						while(!(mapa.containsValue(this.usuarios.get(i)))) {
+							if(mapa.containsKey(Integer.toString(temp))) {
+								temp = temp * 10;
+							}
+							else{
+								mapa.put(Integer.toString(temp), this.usuarios.get(i));
+								temp = 1;
+							}
+							
 						}
-						else{
-							mapa.put(Integer.toString(temp), this.usuarios.get(i));
-							temp = 1;
-						}
-						
 					}
 				}
 			}
@@ -184,6 +186,11 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 	 
 		public List<UsuarioTerraplanista> indicacaoAmigoComum(UsuarioTerraplanista user)
 		{
+			if(user.getAmigos() == null) {
+				System.out.println("Não há amigos para comparar");
+				return null;
+			}
+
 			int temp = 1;
 			
 			Map<String, UsuarioTerraplanista> mapa = new TreeMap<String, UsuarioTerraplanista>();
@@ -196,15 +203,17 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 							}
 						}
 					
-					while(!(mapa.containsValue(this.usuarios.get(i)))) {
-						if(mapa.containsKey(Integer.toString(temp))) {
-							temp = temp * 10;
+					if(temp > 1) {
+						while(!(mapa.containsValue(this.usuarios.get(i)))) {
+							if(mapa.containsKey(Integer.toString(temp))) {
+								temp = temp * 10;
+							}
+							else{
+								mapa.put(Integer.toString(temp), this.usuarios.get(i));
+								temp = 1;
+							}
+							
 						}
-						else{
-							mapa.put(Integer.toString(temp), this.usuarios.get(i));
-							temp = 1;
-						}
-						
 					}
 				}
 			}	
