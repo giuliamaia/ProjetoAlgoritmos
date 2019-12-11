@@ -7,6 +7,9 @@ import sistema.beans.UsuarioTerraplanista;
 import sistema.repositorios.RepositorioUsuariosTerraplanistas;
 
 public class Controlador {
+	public int numeroDeConvitesPara(UsuarioTerraplanista esseCara) {
+		return repositorioUsuarioTerraPlanistas.numeroDeConvitesPara(esseCara);
+	}
 	private RepositorioUsuariosTerraplanistas repositorioUsuarioTerraPlanistas;
 	private UsuarioTerraplanista usuarioLogado;
 	public UsuarioTerraplanista getUsuarioLogado() {

@@ -23,8 +23,8 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 	private List<UsuarioTerraplanista> usuarios = new ArrayList<UsuarioTerraplanista>();
 	private HashMap<String, String> convites = new HashMap<String, String>();
 	
-	public boolean temConvitePara(UsuarioTerraplanista user) {
-		if(convites.keySet().contains(user.getLogin())) {
+	public boolean temConvitePara(UsuarioTerraplanista esseCara) {
+		if(convites.keySet().contains(esseCara.getLogin())) {
 			return true;
 		}
 		else {
@@ -55,10 +55,10 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 			return false;
 		}
 	}
-	public List<UsuarioTerraplanista> convitesPara(UsuarioTerraplanista usuario){
+	public List<UsuarioTerraplanista> convitesPara(UsuarioTerraplanista esseCara){
 		List<UsuarioTerraplanista> retorno = new ArrayList<UsuarioTerraplanista>();
-		if(convites.containsKey(usuario.getLogin())) {
-			String[] pessoas = convites.get(usuario.getLogin()).split(",");
+		if(convites.containsKey(esseCara.getLogin())) {
+			String[] pessoas = convites.get(esseCara.getLogin()).split(",");
 			for(String a : pessoas) {
 				if(!a.isEmpty()) {
 					retorno.add(pesquisarPorLogin(a));
@@ -66,6 +66,11 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 			}
 		}
 		return retorno;
+	}
+	public int numeroDeConvitesPara(UsuarioTerraplanista esseCara) {
+		
+		String[] pessoas = convites.get(esseCara.getLogin()).split(",");
+		return pessoas.length-1;
 	}
 	public List<UsuarioTerraplanista> getUsuarios() {
 		return usuarios;
