@@ -35,7 +35,7 @@ public class TelaRegistroController {
 	private static final int AlturaELargura = 256;
 	Controlador controlador = Controlador.getInstancia();
 	List <String> arrayListInteresses = new ArrayList<String>(); 
-	Image imageAux;
+	String imageAux = "/images/user.png";
 	
     @FXML
     private JFXTextField tfNome;
@@ -119,31 +119,31 @@ public class TelaRegistroController {
     @FXML
     void alterarFoto1(MouseEvent event) {
     	circuloImg.setFill(new ImagePattern(new Image("/images/woman128.png")));
-    	imageAux = new Image("/images/woman128.png");
+    	imageAux = "/images/woman128.png";
     }
 
     @FXML
     void alterarFoto2(MouseEvent event) {
     	circuloImg.setFill(new ImagePattern(new Image("/images/man128.png")));
-    	imageAux = new Image("/images/man128.png");
+    	imageAux = "/images/man128.png";
     }
 
     @FXML
     void alterarFoto3(MouseEvent event) {
     	circuloImg.setFill(new ImagePattern(new Image("/images/manbigode128.png")));
-    	imageAux = new Image("/images/manbigode128.png");
+    	imageAux = "/images/manbigode128.png";
     }
 
     @FXML
     void alterarFoto4(MouseEvent event) {
     	circuloImg.setFill(new ImagePattern(new Image("/images/mannegro128.png")));
-    	imageAux = new Image("/images/mannegro128.png");
+    	imageAux = "/images/mannegro128.png";
     }
 
     @FXML
     void alterarFoto5(MouseEvent event) {
     	circuloImg.setFill(new ImagePattern(new Image("/images/pastor128.png")));
-    	imageAux = new Image("/images/pastor128.png");
+    	imageAux = "/images/pastor128.png";
     }
 
     @FXML
@@ -160,7 +160,7 @@ public class TelaRegistroController {
     	if (arquivo != null && arquivo.exists()) {
     		circuloImg.setFill(new ImagePattern(imageView.snapshot(null, null)));
     	}
-    	imageAux = new Image(arquivo.toURI().toString());
+    	imageAux = arquivo.toURI().toString();
     }
     private boolean verificaSeJaTem(String usuario) {
     	for (String aux : arrayListInteresses) {
@@ -195,7 +195,15 @@ public class TelaRegistroController {
     	if(isTudoPreenchido()) {
     		Grafo grafo = Grafo.getInstancia();
     		
-    		UsuarioTerraplanista user = new UsuarioTerraplanista(new ArrayList<UsuarioTerraplanista>(), arrayListInteresses, tfNome.getText(), tfLogin.getText(), pfSenha.getText(), datePickerDataNascimento.getValue(), LocalDateTime.now(), imageAux==null? null:imageAux.getUrl(), 0, false);
+    		UsuarioTerraplanista user = new UsuarioTerraplanista(new ArrayList<UsuarioTerraplanista>(), 
+    				arrayListInteresses, tfNome.getText(), 
+    				tfLogin.getText(), 
+    				pfSenha.getText(), 
+    				datePickerDataNascimento.getValue(), 
+    				LocalDateTime.now(), 
+    				imageAux, 
+    						0, 
+    						false);
     		controlador.adicionarUsuario(user);
     		grafo.construirgrafo(true);
     		TerraPlanizer.trocarTela("login");

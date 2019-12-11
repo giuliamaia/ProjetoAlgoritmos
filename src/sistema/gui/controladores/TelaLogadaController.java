@@ -52,7 +52,7 @@ public class TelaLogadaController {
 	List <UsuarioTerraplanista> listausuarios = copiandoListasDoRep(controlador.getUsuarios());
 	List <UsuarioTerraplanista> listaDeUsuarios = recriandoListaUsuarios(listausuarios);
 	List <UsuarioTerraplanista> recomendados = controlador.recomendacoesPara(contaLogada);
-	private Image imageAux;
+	private String imageAux ="/images/user.png";
 	private boolean arestasBonitas = true;
     @FXML
     private JFXButton bnt_grafo;
@@ -389,31 +389,31 @@ public class TelaLogadaController {
     @FXML
     void alterarFoto1(MouseEvent event) {
     	circuloImg.setFill(new ImagePattern(new Image("/images/woman128.png")));
-    	imageAux = new Image("/images/woman128.png");
+    	imageAux = "/images/woman128.png";
     }
 
     @FXML
     void alterarFoto2(MouseEvent event) {
     	circuloImg.setFill(new ImagePattern(new Image("/images/man128.png")));
-    	imageAux = new Image("/images/man128.png");
+    	imageAux = "/images/man128.png";
     }
 
     @FXML
     void alterarFoto3(MouseEvent event) {
     	circuloImg.setFill(new ImagePattern(new Image("/images/manbigode128.png")));
-    	imageAux = new Image("/images/manbigode128.png");
+    	imageAux = "/images/manbigode128.png";
     }
 
     @FXML
     void alterarFoto4(MouseEvent event) {
     	circuloImg.setFill(new ImagePattern(new Image("/images/mannegro128.png")));
-    	imageAux = new Image("/images/mannegro128.png");
+    	imageAux = "/images/mannegro128.png";
     }
 
     @FXML
     void alterarFoto5(MouseEvent event) {
     	circuloImg.setFill(new ImagePattern(new Image("/images/pastor128.png")));
-    	imageAux = new Image("/images/pastor128.png");
+    	imageAux = "/images/pastor128.png";
     }
 
     @FXML
@@ -430,7 +430,7 @@ public class TelaLogadaController {
     	if (arquivo != null && arquivo.exists()) {
     		circuloImg.setFill(new ImagePattern(imageView.snapshot(null, null)));
     	}
-    	imageAux = new Image(arquivo.toURI().toString());
+    	imageAux = arquivo.toURI().toString();
     }
     private void inicializaEditar() {
     	label_name1.setText(controlador.getUsuarioLogado().getNome());
@@ -857,7 +857,7 @@ public class TelaLogadaController {
 			circuloImg.setFill(new ImagePattern(new Image("/images/user.png")));
 		else {
 			circuloImg.setFill(new ImagePattern(new Image(controlador.getUsuarioLogado().getImage())));
-			imageAux=new Image(controlador.getUsuarioLogado().getImage());
+			imageAux=controlador.getUsuarioLogado().getImage();
 			
 		}
 		retangulo5.setFill(new ImagePattern(new Image("/images/pastor64.png")));
@@ -899,7 +899,7 @@ public class TelaLogadaController {
     				pfNovaSenha.getText(),
     				dpDataNascimentoNova.getValue(), 
     				contaLogada.getHoraCriaçãoConta(), 
-        			imageAux!=null? imageAux.getUrl(): null, 
+        			imageAux,
         			contaLogada.getRecomendacoes(), 
         			contaLogada.isPastor());
     		if(tfNovoLogin.getText().isEmpty()) {
