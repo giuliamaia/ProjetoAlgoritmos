@@ -44,9 +44,10 @@ import sistema.beans.UsuarioTerraplanista;
 import sistema.controlador.Controlador;
 import sistema.gui.TerraPlanizer;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Callback;
+//import javafx.util.Callback;
 
 public class TelaLogadaController {
+	
 	
 	Controlador controlador = Controlador.getInstancia();
 	UsuarioTerraplanista contaLogada = controlador.getUsuarioLogado();
@@ -60,7 +61,7 @@ public class TelaLogadaController {
 	
 	private String imageAux ="/images/user.png";
 	private boolean arestasBonitas = true;
-	Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>> callback = new Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>>() {
+	/*Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>> callback = new Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>>() {
 		
 		@Override
 		public ListCell<UsuarioTerraplanista> call(ListView<UsuarioTerraplanista> arg0) {
@@ -82,7 +83,7 @@ public class TelaLogadaController {
 			};
 			return cell;
 		}
-	};
+	};*/
 	
     
 	@FXML
@@ -490,7 +491,7 @@ public class TelaLogadaController {
     }
     
     private void inicializaAmigos() {
-    	lv_pesquisa.setCellFactory(callback);
+    	//lv_pesquisa.setCellFactory(callback);
     	//lv_amigos.setCellFactory(callback);
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
     	lv_pesquisa.setItems(FXCollections.observableList(listaDeUsuarios));
