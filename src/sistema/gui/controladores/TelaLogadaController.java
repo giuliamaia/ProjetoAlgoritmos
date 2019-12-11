@@ -68,7 +68,13 @@ public class TelaLogadaController {
 
     @FXML
     private JFXButton bnt_contrato;
-
+    
+    @FXML
+    private JFXButton bntConvite;
+    
+    @FXML
+    private Pane paneConvites;
+    
     @FXML
     private Pane pane_perfil;
     
@@ -385,6 +391,7 @@ public class TelaLogadaController {
     	inicializaFotos();
     	atualizarRecomendados();
     	toggleArestasBonitas.setSelected(true);
+    	
     }
     @FXML
     void alterarFoto1(MouseEvent event) {
@@ -948,5 +955,11 @@ public class TelaLogadaController {
     	arestasBonitas=toggleArestasBonitas.isSelected();
     	grafo.setarArestas(arestasBonitas);
     }
+    
+    void abrirTelaConvite() {
+    	paneConvites.toFront();
+    }
+    
+   
 }
 
