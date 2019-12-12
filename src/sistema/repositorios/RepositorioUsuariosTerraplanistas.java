@@ -468,10 +468,14 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 					}
 				}
 				
-				//temp = tratarPanelinha(temp);
+				temp = tratarPanelinha(temp);
 				panelinhas.add(temp);
 			}
 			return panelinhas;
+		}
+		
+		public void panelinhas() {
+			
 		}
 		
 }
