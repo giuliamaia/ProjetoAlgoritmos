@@ -3,7 +3,10 @@ package sistema.controlador;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import sistema.beans.UsuarioTerraplanista;
 import sistema.repositorios.RepositorioUsuariosTerraplanistas;
 
@@ -98,6 +101,9 @@ public class Controlador {
 	}
 	public List<UsuarioTerraplanista> possiveisPastores() {
 		return repositorioUsuarioTerraPlanistas.possiveisPastores();
+	}
+	public List<List<UsuarioTerraplanista>> getSeitas() {
+		return repositorioUsuarioTerraPlanistas.maxCliques();
 	}
 	
 }

@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
+import java.util.Set;
+import java.util.HashSet;
 
 import sistema.beans.UsuarioTerraplanista;
 
@@ -26,6 +28,7 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 	private static final long serialVersionUID = 132234234L;
 	private List<UsuarioTerraplanista> usuarios = new ArrayList<UsuarioTerraplanista>();
 	private HashMap<String, String> convites = new HashMap<String, String>();
+	private Set<Set<UsuarioTerraplanista>> cliques;
 	
 	public boolean temConvitePara(UsuarioTerraplanista esseCara) {
 		if(convites.keySet().contains(esseCara.getLogin())) {
@@ -570,7 +573,90 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 			Collections.reverse(retorno);
 			return retorno;
 		}
-		public void teste(){
-			System.out.println("lalala");
-		}
+		
+		public List<List<UsuarioTerraplanista>> maxCliques(){
+	        cliques = new HashSet<>();
+	        List<UsuarioTerraplanista> potential_clique = new ArrayList<UsuarioTerraplanista>();
+	        List<UsuarioTerraplanista> candidates = new ArrayList<UsuarioTerraplanista>();
+	        List<UsuarioTerraplanista> already_found = new ArrayList<UsuarioTerraplanista>();
+	        candidates.addAll(this.usuarios);
+	        findCliques(potential_clique,candidates,already_found);
+	        
+	        List<List<UsuarioTerraplanista>> clique = new ArrayList<List<UsuarioTerraplanista>>();
+	        
+	        for(Set<UsuarioTerraplanista> c : cliques) {
+	        	if(c.size() >= 3) {
+		        	List<UsuarioTerraplanista> temp = new ArrayList<UsuarioTerraplanista>(c);
+		        	clique.add(temp);
+	        	}
+	        }
+	        
+	        return clique;
+	    }
+	    
+	    private void findCliques(List<UsuarioTerraplanista> potential_clique, List<UsuarioTerraplanista> candidates, List<UsuarioTerraplanista> already_found) {
+	    	List<UsuarioTerraplanista> candidates_array = new ArrayList(candidates);
+	        if (!end(candidates, already_found)) {
+	            // for each candidate_node in candidates do
+	            for (UsuarioTerraplanista candidate : candidates_array) {
+	                List<UsuarioTerraplanista> new_candidates = new ArrayList<UsuarioTerraplanista>();
+	                List<UsuarioTerraplanista> new_already_found = new ArrayList<UsuarioTerraplanista>();
+
+	                // move candidate node to potential_clique
+	                potential_clique.add(candidate);
+	                candidates.remove(candidate);
+
+	                // create new_candidates by removing nodes in candidates not
+	                // connected to candidate node
+	                for (UsuarioTerraplanista new_candidate : candidates) {
+	                    if (candidate.getAmigos().contains(new_candidate))
+	                    {
+	                        new_candidates.add(new_candidate);
+	                    }
+	                }
+
+	                // create new_already_found by removing nodes in already_found
+	                // not connected to candidate node
+	                for (UsuarioTerraplanista new_found : already_found) {
+	                    if (candidate.getAmigos().contains(new_found)) {
+	                        new_already_found.add(new_found);
+	                    }
+	                }
+
+	                // if new_candidates and new_already_found are empty
+	                if (new_candidates.isEmpty() && new_already_found.isEmpty()) {
+	                    // potential_clique is maximal_clique
+	                    cliques.add(new HashSet<UsuarioTerraplanista>(potential_clique));
+	                }
+	                else {
+	                    findCliques(
+	                        potential_clique,
+	                        new_candidates,
+	                        new_already_found);
+	                }
+
+	                // move candidate_node from potential_clique to already_found;
+	                already_found.add(candidate);
+	                potential_clique.remove(candidate);
+	            }
+	        }
+	    }
+	    private boolean end(List<UsuarioTerraplanista> candidates, List<UsuarioTerraplanista> already_found)
+	    {
+	        // if a node in already_found is connected to all nodes in candidates
+	        boolean end = false;
+	        int edgecounter;
+	        for (UsuarioTerraplanista found : already_found) {
+	            edgecounter = 0;
+	            for (UsuarioTerraplanista candidate : candidates) {
+	                if (found.getAmigos().contains(candidate)) {
+	                    edgecounter++;
+	                }
+	            }
+	            if (edgecounter == candidates.size()) {
+	                end = true;
+	            }
+	        }
+	        return end;
+	    }
 }
