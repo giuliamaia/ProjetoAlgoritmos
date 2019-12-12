@@ -48,6 +48,7 @@ import sistema.beans.UsuarioTerraplanista;
 import sistema.controlador.Controlador;
 import sistema.gui.TerraPlanizer;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class TelaLogadaController {
@@ -386,6 +387,7 @@ public class TelaLogadaController {
 				alerta.setContentText("Deixe de ser mão de vaca, SrSalamandra não gosta disso.");
 				alerta.setHeaderText("Você ainda não doou o suficiente para obter essa função.");
 				alerta.setTitle("Sr Salamandra ainda não deixa você visualizar essa página, doe mais!");
+				((Stage)alerta.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/images/icon1.png"));
 				alerta.showAndWait();
 				pane_doaçao.toFront();
 			}
@@ -418,6 +420,7 @@ public class TelaLogadaController {
 					tfNumCartao.setText("");
 					Alert alerta = new Alert(AlertType.INFORMATION);
 					alerta.setHeaderText("Você alcançou o sossego, a concentração e a paz interior.");
+					((Stage)alerta.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/images/icon1.png"));
 					alerta.setContentText("Obrigado por garantir seu lugar no reino dos anfíbios.\nNosso sistema não possui nenhum tipo de burocracia, já roubamos todas suas informações automaticamente e descontaremos 15% do seu salário todo mês pelo seu cartão, tudo isso pensado para seu conforto e praticidade.");
 					alerta.setTitle("Bem-Vindo, novo Salamandrista. Kifflom.");
 					alerta.showAndWait();
@@ -997,6 +1000,7 @@ public class TelaLogadaController {
     	case 1:{
     		Alert alerta = new Alert(AlertType.CONFIRMATION);
     		alerta.setTitle("Remover convite");
+    		((Stage)alerta.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/images/icon1.png"));
     		alerta.setHeaderText("Deseja realmente excluir o convite de " + usuarioTerraplanista.toString() + "?");
     		alerta.setContentText("Confirme a remoção do convite.");
     		alerta.getButtonTypes().remove(ButtonType.CANCEL);
@@ -1017,6 +1021,7 @@ public class TelaLogadaController {
     		alerta1.setHeaderText("Deseja realmente excluir "+usuarioTerraplanista.toString()+"?");
     		alerta1.setContentText("Confirme a remoção do amigo.");
     		alerta1.getButtonTypes().remove(ButtonType.CANCEL);
+    		((Stage)alerta1.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/images/icon1.png"));
     		alerta1.getButtonTypes().remove(ButtonType.OK);
     		alerta1.getButtonTypes().add(ButtonType.YES);
     		alerta1.getButtonTypes().add(ButtonType.NO);
@@ -1033,6 +1038,7 @@ public class TelaLogadaController {
     		alerta1.setTitle("Remover todo mundo");
     		alerta1.setHeaderText("Deseja realmente excluir tudo?");
     		alerta1.setContentText("Confirme a remoção de tudo.");
+    		((Stage)alerta1.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/images/icon1.png"));
     		alerta1.getButtonTypes().remove(ButtonType.CANCEL);
     		alerta1.getButtonTypes().remove(ButtonType.OK);
     		alerta1.getButtonTypes().add(ButtonType.YES);
@@ -1049,6 +1055,7 @@ public class TelaLogadaController {
 			Alert alerta1 = new Alert(AlertType.CONFIRMATION);
     		alerta1.setTitle("Confirmar convite");
     		alerta1.setHeaderText(usuarioTerraplanista.toString()+" já te enviou um convite, deseja aceitar o convite?");
+    		((Stage)alerta1.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/images/icon1.png"));
     		alerta1.setContentText("Confirme o convite.");
     		alerta1.getButtonTypes().remove(ButtonType.CANCEL);
     		alerta1.getButtonTypes().remove(ButtonType.OK);
