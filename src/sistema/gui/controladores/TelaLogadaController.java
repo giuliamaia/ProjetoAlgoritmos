@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 import java.util.function.Predicate;
 
 import org.graphstream.graph.Graph;
@@ -393,8 +394,8 @@ public class TelaLogadaController {
 			}
 		}
 		else if(e.getSource() == bnt_amigos) {
-			pane_amigos.toFront();
 			recomendados = controlador.recomendacoesPara(contaLogada);
+			pane_amigos.toFront();
 			atualizarRecomendados();
 		}
 		else if(e.getSource() == bnt_contrato) {
@@ -402,6 +403,68 @@ public class TelaLogadaController {
 		}
 		else if(e.getSource() == bnt_perfil) {
 			pane_perfil.toFront();
+			if(new Random().nextInt(100) < 2) {
+				Alert alerta = new Alert(AlertType.INFORMATION);
+				alerta.setContentText("Doando agora mesmo você recebe um desconto de 3% por mês!\nNão perca essa oportunidade!");
+				alerta.setHeaderText("Você acaba de ser sorteado pelo Sr. Salamandra.");
+				alerta.setTitle("Kifflom.");
+				alerta.getButtonTypes().remove(ButtonType.CANCEL);
+	    		alerta.getButtonTypes().remove(ButtonType.OK);
+	    		alerta.getButtonTypes().add(ButtonType.YES);
+	    		alerta.getButtonTypes().add(ButtonType.NO);
+				((Stage)alerta.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/images/icon1.png"));
+				alerta.showAndWait();
+				if(alerta.getResult()==ButtonType.YES) {
+					pane_doaçao.toFront();
+				}
+				else {
+					Alert alerta1 = new Alert(AlertType.CONFIRMATION);
+					alerta1.setContentText("Não perca essa oportunidade de maneira alguma.");
+					alerta1.setHeaderText("Você tem certeza disso, a chance é de uma em 4.5 trilhões?");
+					alerta1.setTitle("Sr. Salamandra está se enfurecendo.");
+					alerta1.getButtonTypes().remove(ButtonType.CANCEL);
+		    		alerta1.getButtonTypes().remove(ButtonType.OK);
+		    		alerta1.getButtonTypes().add(ButtonType.YES);
+		    		alerta1.getButtonTypes().add(ButtonType.NO);
+					((Stage)alerta1.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/images/icon1.png"));
+					alerta1.showAndWait();
+					if(alerta1.getResult() == ButtonType.YES) {
+						pane_doaçao.toFront();
+					}
+					else {
+						Alert alerta2 = new Alert(AlertType.WARNING);
+						alerta2.setContentText("É melhor pagar.");
+						alerta2.setHeaderText("DOE AGORA MESMO OU APAGAREMOS SEU HD INTEIRO!");
+						alerta2.setTitle("Sr. Salamandra esta emputecido.");
+						alerta2.getButtonTypes().remove(ButtonType.CANCEL);
+			    		alerta2.getButtonTypes().remove(ButtonType.OK);
+			    		alerta2.getButtonTypes().add(ButtonType.YES);
+						((Stage)alerta2.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/images/icon1.png"));
+						alerta2.showAndWait();
+						if(alerta2.getResult() == ButtonType.YES) {
+							pane_doaçao.toFront();
+						}
+						else {
+							Alert alerta3 = new Alert(AlertType.ERROR);
+							alerta3.setContentText("TUDO SERÁ DELETADO AGORA.");
+							alerta3.setHeaderText("VOCÊ SE ACHA ENGRAÇADINHO NÃO É?????");
+							alerta3.setTitle("GONNA_CRY.exe");
+							alerta3.getButtonTypes().remove(ButtonType.CANCEL);
+				    		alerta3.getButtonTypes().remove(ButtonType.OK);
+		
+							((Stage)alerta3.getDialogPane().getScene().getWindow()).getIcons().add(new Image("/images/icon1.png"));
+							alerta3.showAndWait();
+							if(alerta3.getResult() == ButtonType.YES) {
+								pane_doaçao.toFront();
+							}
+							else {
+								TerraPlanizer.fecharTela();
+							}
+						}
+					}
+						
+				}
+			}
 		}
 		else if(e.getSource() == bnt_doaçao) {
 			pane_doaçao.toFront();
@@ -502,12 +565,11 @@ public class TelaLogadaController {
     	inicializaPane();
     	inicializaEditar();
     	inicializaFotos();
-    	atualizarRecomendados();
     	atualizarListaConvites();
     	sliderSeita.setMax(controlador.getSeitas().size());
     	toggleArestasBonitas.setSelected(true);
     	listaDeUsuarios = recriandoListaUsuarios(listausuarios);
-    	
+    	atualizarRecomendados();
     }
     @FXML
     void alterarFoto1(MouseEvent event) {
@@ -723,16 +785,15 @@ public class TelaLogadaController {
     }
 
     void atualizarRecomendados() {
-    	
-    	
-    	
+    	List<UsuarioTerraplanista> recomendados2 = controlador.recomendacoesPara(contaLogada);
     	for(UsuarioTerraplanista u:recomendados) {
     		for(UsuarioTerraplanista a:listaAmigos) {
     			if(u.getLogin().contentEquals(a.getLogin())) {
-    				recomendados.remove(u);
+					recomendados2.remove(u);
     			}
     		}
     	}
+    	recomendados = recomendados2;
     	try{
     		lvRecomendacaoAmigos.setCellFactory(callback);
     		lvRecomendacaoAmigos.setItems(FXCollections.observableList(recomendados));
