@@ -1299,6 +1299,15 @@ public class TelaLogadaController {
     	grafo.mudarAresta(arestasBonitas);
     	//grafo.setarArestas(arestasBonitas);
     	grafo.construirgrafo(arestasBonitas);
+    	if(toggleVerPastores.isSelected()) {
+    		grafo.setarNosPossiveisPastores();
+    	}
+    	else if(toggleRecomendacao.isSelected()) {
+    		verRecomendacaoGrafo(null);
+    	}
+    	else {
+    		verSeitasGrafo(null);
+    	}
     }
 
     @FXML
