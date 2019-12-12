@@ -96,9 +96,6 @@ public class Controlador {
 	public List<List<UsuarioTerraplanista>> seitasDe3Pessoas() {
 		return repositorioUsuarioTerraPlanistas.seitasDe3Pessoas();
 	}
-	public List<List<UsuarioTerraplanista>> pessoasParaSeita(){
-		return this.repositorioUsuarioTerraPlanistas.pessoasParaSeita();
-	}
 	public List<UsuarioTerraplanista> possiveisPastores() {
 		return repositorioUsuarioTerraPlanistas.possiveisPastores();
 	}

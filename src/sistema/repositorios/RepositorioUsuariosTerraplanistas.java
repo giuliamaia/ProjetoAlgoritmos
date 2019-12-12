@@ -408,107 +408,6 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 			return retorno;
 		}
 		
-		public List<UsuarioTerraplanista> getAmigosComuns(UsuarioTerraplanista user, UsuarioTerraplanista outro) {
-			List<UsuarioTerraplanista> amigosComuns = new ArrayList<UsuarioTerraplanista>();
-			
-			if(user.equals(outro) || user == null || outro == null) {
-				return null;
-			}
-			
-			for(int i = 0; i<user.getAmigos().size(); i++) {
-				if(outro.getAmigos().contains(user.getAmigos().get(i))) {
-					amigosComuns.add(user.getAmigos().get(i));
-				}
-			}
-			
-			return amigosComuns;
-		}
-		
-		public List<UsuarioTerraplanista> addSemRepetir(List<UsuarioTerraplanista> lista, List<UsuarioTerraplanista> outra) {
-			
-			List<UsuarioTerraplanista> list = new ArrayList<UsuarioTerraplanista>(lista);
-			
-			for(int i = 0; i<outra.size(); i++) {
-				if(!(lista.contains(outra.get(i)))){
-					if(checkSeTemTodosAmg(lista, outra.get(i)) == true) {
-						lista.add(outra.get(i));
-					}
-				}
-			}
-			
-			return list;
-		}
-		
-		public List<UsuarioTerraplanista> tratarPanelinha(List<UsuarioTerraplanista> panelinha) {
-			
-			if(panelinha == null) {
-				return null;
-			}
-			
-			for(int i = 0; i<panelinha.size(); i++) {
-				if(checkSeTemTodosAmg(panelinha, panelinha.get(i)) == false) {
-					panelinha.remove(i);
-				}
-				
-			}
-			
-			return panelinha;
-		}
-		
-		public boolean checkSeTemTodosAmg(List<UsuarioTerraplanista> lista, UsuarioTerraplanista user) {
-			
-			boolean result = false;
-			
-			boolean lixo;
-			
-			List<UsuarioTerraplanista> temp = new ArrayList<UsuarioTerraplanista>(lista);
-			
-			if(temp.contains(user)) {
-				lixo = temp.remove(user);
-			}
-			
-			if(user.getAmigos().containsAll(temp)){
-				result = true;
-			}
-			
-			return result;
-		}
-		
-		public List<List<UsuarioTerraplanista>> pessoasParaSeita(){
-			
-			List<List<UsuarioTerraplanista>> panelinhas = new ArrayList<List<UsuarioTerraplanista>>();
-			
-			for(int i = 0; i<this.usuarios.size(); i++) {
-				
-				UsuarioTerraplanista user1 = new UsuarioTerraplanista(this.usuarios.get(i));
-				
-				List<UsuarioTerraplanista> temp = new ArrayList<UsuarioTerraplanista>();
-				
-				temp.add(user1);
-				
-				for(int j = 0; j<user1.getAmigos().size(); j++) {
-					UsuarioTerraplanista user2 = new UsuarioTerraplanista(this.usuarios.get(i).getAmigos().get(j));
-					
-					List<UsuarioTerraplanista> amigosC = new ArrayList<UsuarioTerraplanista>(getAmigosComuns(user1, user2));
-					if(amigosC != null) {
-						
-						for(int k = 0; k < amigosC.size(); k++) {
-							List<UsuarioTerraplanista> amgComumUser = new ArrayList<UsuarioTerraplanista>(getAmigosComuns(user1, amigosC.get(k)));
-							amgComumUser.addAll(getAmigosComuns(user2, amigosC.get(k)));
-							
-							temp = addSemRepetir(temp, amgComumUser);
-							//temp.addAll(amgComumUser);
-
-						}
-					}
-				}
-				
-				//temp = tratarPanelinha(temp);
-				panelinhas.add(temp);
-			}
-			return panelinhas;
-		}
-		
 		public List<UsuarioTerraplanista> possiveisPastores() {
 			List<UsuarioTerraplanista> retorno = new ArrayList<>();
 			Map<String, Integer> mapa = new HashMap<>();
@@ -595,7 +494,7 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 	    }
 	    
 	    private void findCliques(List<UsuarioTerraplanista> potential_clique, List<UsuarioTerraplanista> candidates, List<UsuarioTerraplanista> already_found) {
-	    	List<UsuarioTerraplanista> candidates_array = new ArrayList(candidates);
+	    	List<UsuarioTerraplanista> candidates_array = new ArrayList<UsuarioTerraplanista>(candidates);
 	        if (!end(candidates, already_found)) {
 	            // for each candidate_node in candidates do
 	            for (UsuarioTerraplanista candidate : candidates_array) {
