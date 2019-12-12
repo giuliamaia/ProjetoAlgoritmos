@@ -294,9 +294,14 @@ public class TelaLogadaController {
 							circulo.setStroke(Color.GREEN);
 							
 						}
+						else if (lv_pesquisa.getItems().contains(usuario) || lvRecomendacaoAmigos.getItems().contains(usuario)){
+							
+							circulo.setStroke(Color.WHITE);
+							
+						}
 						else {
 							
-							circulo.setStroke(Color.DARKORANGE);
+							circulo.setStroke(Color.CORAL);
 							
 						}
 						circulo.setFill(new ImagePattern(imgView.snapshot(null, null)));
@@ -725,6 +730,7 @@ public class TelaLogadaController {
     		}
     	}
     	try{
+    		lvRecomendacaoAmigos.setCellFactory(callback);
     		lvRecomendacaoAmigos.setItems(FXCollections.observableList(recomendados));
     	}catch(Exception e) {
     		e.printStackTrace();
@@ -766,7 +772,7 @@ public class TelaLogadaController {
                 return f1.toString().compareTo(f2.toString());
             }        
         });
-    	//lv_amigos.setCellFactory(callback);
+    	lv_amigos.setCellFactory(callback);
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
     	
     	grafo.construirgrafo(arestasBonitas);
@@ -788,6 +794,7 @@ public class TelaLogadaController {
                 return f1.toString().compareTo(f2.toString());
             }        
         });
+    	lvConvites.setCellFactory(callback);
     	lvConvites.setItems(FXCollections.observableList(convites));
     	grafo.construirgrafo(arestasBonitas);
     	lvConvites.refresh();
@@ -802,7 +809,7 @@ public class TelaLogadaController {
                 return f1.toString().compareTo(f2.toString());
             }        
         });
-    	//lv_pesquisa.setCellFactory(callback);
+    	lv_pesquisa.setCellFactory(callback);
     	lv_pesquisa.setItems(FXCollections.observableList(listaDeUsuarios));
     	grafo.construirgrafo(arestasBonitas);
     	lv_pesquisa.refresh();
@@ -936,7 +943,7 @@ public class TelaLogadaController {
     @FXML
     void abrirTelaConvite() {
     	paneConvites.toFront();
-    	
+    	lvConvites.setCellFactory(callback);
     	lvConvites.setItems(FXCollections.observableList(controlador.convitesPara(contaLogada)));
     }
     
