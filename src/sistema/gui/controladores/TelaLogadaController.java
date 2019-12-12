@@ -504,7 +504,7 @@ public class TelaLogadaController {
     	inicializaFotos();
     	atualizarRecomendados();
     	atualizarListaConvites();
-    	sliderSeita.setMax(controlador.seitasDe3Pessoas().size());
+    	sliderSeita.setMax(controlador.getSeitas().size());
     	toggleArestasBonitas.setSelected(true);
     	listaDeUsuarios = recriandoListaUsuarios(listausuarios);
     	
@@ -778,7 +778,7 @@ public class TelaLogadaController {
         });
     	lv_amigos.setCellFactory(callback);
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
-    	sliderSeita.setMax(controlador.seitasDe3Pessoas().size());
+    	sliderSeita.setMax(controlador.getSeitas().size());
     	grafo.construirgrafo(arestasBonitas);
     	lv_amigos.refresh();
     }
@@ -1409,7 +1409,7 @@ public class TelaLogadaController {
     @FXML
     void escolherSeitaGrafo() {
     	grafo.setarNos();
-    	if(controlador.seitasDe3Pessoas().size()>0)grafo.setarSeitas(controlador.seitasDe3Pessoas().get((int) (Math.round(sliderSeita.getValue())-1)));
+    	if(controlador.getSeitas().size()>0)grafo.setarSeitas(controlador.getSeitas().get((int) (Math.round(sliderSeita.getValue())-1)));
     }
 }
 
