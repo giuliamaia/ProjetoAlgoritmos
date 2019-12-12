@@ -28,7 +28,7 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 	private static final long serialVersionUID = 132234234L;
 	private List<UsuarioTerraplanista> usuarios = new ArrayList<UsuarioTerraplanista>();
 	private HashMap<String, String> convites = new HashMap<String, String>();
-	private Set<Set<UsuarioTerraplanista>> cliques;
+	private Set<Set<UsuarioTerraplanista>> panelinhas;
 	
 	public boolean temConvitePara(UsuarioTerraplanista esseCara) {
 		if(convites.keySet().contains(esseCara.getLogin())) {
@@ -474,88 +474,79 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 		}
 		
 		public List<List<UsuarioTerraplanista>> maxCliques(){
-	        cliques = new HashSet<>();
-	        List<UsuarioTerraplanista> potential_clique = new ArrayList<UsuarioTerraplanista>();
-	        List<UsuarioTerraplanista> candidates = new ArrayList<UsuarioTerraplanista>();
-	        List<UsuarioTerraplanista> already_found = new ArrayList<UsuarioTerraplanista>();
-	        candidates.addAll(this.usuarios);
-	        findCliques(potential_clique,candidates,already_found);
+	        panelinhas = new HashSet<>();
+	        List<UsuarioTerraplanista> possiveisCliques = new ArrayList<UsuarioTerraplanista>();
+	        List<UsuarioTerraplanista> users = new ArrayList<UsuarioTerraplanista>();
+	        List<UsuarioTerraplanista> cliquesEncontrados = new ArrayList<UsuarioTerraplanista>();
+	        users.addAll(this.usuarios);
+	        findCliques(possiveisCliques,users,cliquesEncontrados);
 	        
-	        List<List<UsuarioTerraplanista>> clique = new ArrayList<List<UsuarioTerraplanista>>();
+	        List<List<UsuarioTerraplanista>> panelinha = new ArrayList<List<UsuarioTerraplanista>>();
 	        
-	        for(Set<UsuarioTerraplanista> c : cliques) {
-	        	if(c.size() >= 3) {
-		        	List<UsuarioTerraplanista> temp = new ArrayList<UsuarioTerraplanista>(c);
-		        	clique.add(temp);
+	        for(Set<UsuarioTerraplanista> p : panelinhas) {
+	        	if(p.size() >= 3) {
+		        	List<UsuarioTerraplanista> temp = new ArrayList<UsuarioTerraplanista>(p);
+		        	panelinha.add(temp);
 	        	}
 	        }
 	        
-	        return clique;
+	        return panelinha;
 	    }
 	    
-	    private void findCliques(List<UsuarioTerraplanista> potential_clique, List<UsuarioTerraplanista> candidates, List<UsuarioTerraplanista> already_found) {
-	    	List<UsuarioTerraplanista> candidates_array = new ArrayList<UsuarioTerraplanista>(candidates);
-	        if (!end(candidates, already_found)) {
-	            // for each candidate_node in candidates do
-	            for (UsuarioTerraplanista candidate : candidates_array) {
-	                List<UsuarioTerraplanista> new_candidates = new ArrayList<UsuarioTerraplanista>();
-	                List<UsuarioTerraplanista> new_already_found = new ArrayList<UsuarioTerraplanista>();
+	    private void findCliques(List<UsuarioTerraplanista> possiveisCliques, List<UsuarioTerraplanista> users, List<UsuarioTerraplanista> cliquesEncontrados) {
+	    	List<UsuarioTerraplanista> candidatos = new ArrayList<UsuarioTerraplanista>(users);
+	        if (!check(users, cliquesEncontrados)) {
 
-	                // move candidate node to potential_clique
-	                potential_clique.add(candidate);
-	                candidates.remove(candidate);
+	        	for (UsuarioTerraplanista candidato : candidatos) {
+	                List<UsuarioTerraplanista> newCandidatos = new ArrayList<UsuarioTerraplanista>();
+	                List<UsuarioTerraplanista> newClique = new ArrayList<UsuarioTerraplanista>();
 
-	                // create new_candidates by removing nodes in candidates not
-	                // connected to candidate node
-	                for (UsuarioTerraplanista new_candidate : candidates) {
-	                    if (candidate.getAmigos().contains(new_candidate))
+	                possiveisCliques.add(candidato);
+	                users.remove(candidato);
+
+	                for (UsuarioTerraplanista newCandidato : users) {
+	                    if (candidato.getAmigos().contains(newCandidato))
 	                    {
-	                        new_candidates.add(new_candidate);
+	                    	newCandidatos.add(newCandidato);
 	                    }
 	                }
 
-	                // create new_already_found by removing nodes in already_found
-	                // not connected to candidate node
-	                for (UsuarioTerraplanista new_found : already_found) {
-	                    if (candidate.getAmigos().contains(new_found)) {
-	                        new_already_found.add(new_found);
+	                for (UsuarioTerraplanista new_found : cliquesEncontrados) {
+	                    if (candidato.getAmigos().contains(new_found)) {
+	                    	newClique.add(new_found);
 	                    }
 	                }
 
-	                // if new_candidates and new_already_found are empty
-	                if (new_candidates.isEmpty() && new_already_found.isEmpty()) {
-	                    // potential_clique is maximal_clique
-	                    cliques.add(new HashSet<UsuarioTerraplanista>(potential_clique));
+	                if (newCandidatos.isEmpty() && newClique.isEmpty()) {
+	                    panelinhas.add(new HashSet<UsuarioTerraplanista>(possiveisCliques));
 	                }
 	                else {
 	                    findCliques(
-	                        potential_clique,
-	                        new_candidates,
-	                        new_already_found);
+	                        possiveisCliques,
+	                        newCandidatos,
+	                        newClique);
 	                }
 
-	                // move candidate_node from potential_clique to already_found;
-	                already_found.add(candidate);
-	                potential_clique.remove(candidate);
+	                cliquesEncontrados.add(candidato);
+	                possiveisCliques.remove(candidato);
 	            }
 	        }
 	    }
-	    private boolean end(List<UsuarioTerraplanista> candidates, List<UsuarioTerraplanista> already_found)
+	    private boolean check(List<UsuarioTerraplanista> users, List<UsuarioTerraplanista> cliquesEncontrados)
 	    {
-	        // if a node in already_found is connected to all nodes in candidates
-	        boolean end = false;
+	        boolean temp = false;
 	        int edgecounter;
-	        for (UsuarioTerraplanista found : already_found) {
+	        for (UsuarioTerraplanista found : cliquesEncontrados) {
 	            edgecounter = 0;
-	            for (UsuarioTerraplanista candidate : candidates) {
-	                if (found.getAmigos().contains(candidate)) {
+	            for (UsuarioTerraplanista candidato : users) {
+	                if (found.getAmigos().contains(candidato)) {
 	                    edgecounter++;
 	                }
 	            }
-	            if (edgecounter == candidates.size()) {
-	                end = true;
+	            if (edgecounter == users.size()) {
+	                temp = true;
 	            }
 	        }
-	        return end;
+	        return temp;
 	    }
 }
