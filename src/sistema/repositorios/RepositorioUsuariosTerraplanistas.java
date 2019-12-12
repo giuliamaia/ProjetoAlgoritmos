@@ -400,16 +400,10 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 			List<UsuarioTerraplanista> list = new ArrayList<UsuarioTerraplanista>(lista);
 			
 			for(int i = 0; i<outra.size(); i++) {
-				int count = 0;
-				for(int j = 0; j < list.size(); j++) {
-					
-					if(outra.get(i).equals(list.get(j))) {
-						count++;
+				if(!(lista.contains(outra.get(i)))){
+					if(checkSeTemTodosAmg(lista, outra.get(i)) == true) {
+						lista.add(outra.get(i));
 					}
-				}
-				
-				if(count == 0) {
-					list.add(outra.get(i));
 				}
 			}
 			
@@ -422,23 +416,33 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 				return null;
 			}
 			
-			List<UsuarioTerraplanista> temp = new ArrayList<UsuarioTerraplanista>();
-			
 			for(int i = 0; i<panelinha.size(); i++) {
-				int count = 0;
-				
-				for(int j = 0; j < panelinha.get(i).getAmigos().size(); j++) {
-					if(panelinha.contains(panelinha.get(i).getAmigos().get(j))) {
-						count++;
-					}
+				if(checkSeTemTodosAmg(panelinha, panelinha.get(i)) == false) {
+					panelinha.remove(i);
 				}
 				
-				if(count == panelinha.size() - 1) {
-					temp.add(panelinha.get(i));
-				}
 			}
 			
-			return temp;
+			return panelinha;
+		}
+		
+		public boolean checkSeTemTodosAmg(List<UsuarioTerraplanista> lista, UsuarioTerraplanista user) {
+			
+			boolean result = false;
+			
+			boolean lixo;
+			
+			List<UsuarioTerraplanista> temp = new ArrayList<UsuarioTerraplanista>(lista);
+			
+			if(temp.contains(user)) {
+				lixo = temp.remove(user);
+			}
+			
+			if(user.getAmigos().containsAll(temp)){
+				result = true;
+			}
+			
+			return result;
 		}
 		
 		public List<List<UsuarioTerraplanista>> pessoasParaSeita(){
@@ -450,6 +454,7 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 				UsuarioTerraplanista user1 = new UsuarioTerraplanista(this.usuarios.get(i));
 				
 				List<UsuarioTerraplanista> temp = new ArrayList<UsuarioTerraplanista>();
+				
 				temp.add(user1);
 				
 				for(int j = 0; j<user1.getAmigos().size(); j++) {
@@ -457,25 +462,27 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 					
 					List<UsuarioTerraplanista> amigosC = new ArrayList<UsuarioTerraplanista>(getAmigosComuns(user1, user2));
 					if(amigosC != null) {
-						temp.add(user2);
+						
 						for(int k = 0; k < amigosC.size(); k++) {
-							List<UsuarioTerraplanista> amgComumUser1 = new ArrayList<UsuarioTerraplanista>(getAmigosComuns(user1, amigosC.get(k)));
-							amgComumUser1.addAll(getAmigosComuns(user2, amigosC.get(k)));
+							List<UsuarioTerraplanista> amgComumUser = new ArrayList<UsuarioTerraplanista>(getAmigosComuns(user1, amigosC.get(k)));
+							amgComumUser.addAll(getAmigosComuns(user2, amigosC.get(k)));
 							
-							temp = addSemRepetir(temp, amgComumUser1);
+							temp = addSemRepetir(temp, amgComumUser);
+							//temp.addAll(amgComumUser);
 
 						}
 					}
 				}
 				
-				temp = tratarPanelinha(temp);
+				//temp = tratarPanelinha(temp);
 				panelinhas.add(temp);
 			}
 			return panelinhas;
-		}
-		
-		public void panelinhas() {
 			
 		}
 		
+
+		public void teste(){
+			System.out.println("lalala");
+		}
 }
