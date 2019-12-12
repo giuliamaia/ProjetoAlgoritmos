@@ -61,7 +61,8 @@ public class TelaLogadaController {
 	
 	private String imageAux ="/images/user.png";
 	private boolean arestasBonitas = true;
-	/*Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>> callback = new Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>>() {
+	/*
+	Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>> callback = new Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>>() {
 		
 		@Override
 		public ListCell<UsuarioTerraplanista> call(ListView<UsuarioTerraplanista> arg0) {
@@ -70,12 +71,26 @@ public class TelaLogadaController {
 				protected void updateItem(UsuarioTerraplanista usuario, boolean btl) {
 					super.updateItem(usuario, btl);
 					if(usuario!=null) {
-						Image img = new Image(usuario.getImage());
-						ImageView imgView = new ImageView(img);
-						imgView.setFitHeight(25);
-						imgView.setFitWidth(25);
-						setGraphic(imgView);
-						setText(usuario.getNome());
+						if(isAmigo(usuario)) {
+							Circle circulo = new Circle(15, Color.BLUE);
+							Image img = new Image(usuario.getImage());
+							ImageView imgView = new ImageView(img);
+							imgView.resize(25, 25);
+							circulo.setStroke(Color.GREEN);
+							circulo.setFill(new ImagePattern(imgView.snapshot(null, null)));
+							setGraphic(circulo);
+							setText(usuario.getNome());
+						}
+						else {
+							Circle circulo = new Circle(15, Color.BLUE);
+							Image img = new Image(usuario.getImage());
+							ImageView imgView = new ImageView(img);
+							imgView.resize(25, 25);
+							circulo.setStroke(Color.YELLOW);
+							circulo.setFill(new ImagePattern(imgView.snapshot(null, null)));
+							setGraphic(circulo);
+							setText(usuario.getNome());
+						}
 						
 					}
 				}
@@ -746,8 +761,8 @@ public class TelaLogadaController {
     }
     
     boolean isAmigo(UsuarioTerraplanista usuario) {
-    	for(int i=0; i<listaAmigos.size(); i++) {
-    		if(listaAmigos.get(i).equals(usuario)) {
+    	for(int i=0; i<contaLogada.getAmigos().size(); i++) {
+    		if(contaLogada.getAmigos().get(i).equals(usuario)) {
     			return true;
     		}
     	}
@@ -886,7 +901,7 @@ public class TelaLogadaController {
     @FXML
     void abrirTelaConvite() {
     	paneConvites.toFront();
-    	//lvConvites.setCellFactory(callback);
+    	
     	lvConvites.setItems(FXCollections.observableList(controlador.convitesPara(contaLogada)));
     }
     
@@ -903,7 +918,6 @@ public class TelaLogadaController {
     		if(controlador.removerConvite(contaLogada, lvConvites.getSelectionModel().getSelectedItem())) listaAmigos.remove(lvConvites.getSelectionModel().getSelectedItem());;
     		controlador.salvarConvites();
     		controlador.salvar();
-    		//TODO deixar esse nome verde na lista de amigos
     		listaAmigos.add(lvConvites.getSelectionModel().getSelectedItem());
     		listaDeUsuarios.remove(lvConvites.getSelectionModel().getSelectedItem());
     		if(recomendados.contains(lvConvites.getSelectionModel().getSelectedItem()))recomendados.remove(lvConvites.getSelectionModel().getSelectedItem());
@@ -1025,7 +1039,6 @@ public class TelaLogadaController {
             		if(controlador.removerConvite(contaLogada, lv_pesquisa.getSelectionModel().getSelectedItem())) listaAmigos.remove(lv_pesquisa.getSelectionModel().getSelectedItem());
             		controlador.salvarConvites();
             		controlador.salvar();
-            		//TODO deixar esse nome verde na lista de amigos
             		listaAmigos.add(lv_pesquisa.getSelectionModel().getSelectedItem());
             		listaDeUsuarios.remove(lv_pesquisa.getSelectionModel().getSelectedItem());
             		if(recomendados.contains(lv_pesquisa.getSelectionModel().getSelectedItem()))recomendados.remove(lv_pesquisa.getSelectionModel().getSelectedItem());
@@ -1050,7 +1063,6 @@ public class TelaLogadaController {
     		controlador.enviarConvite(contaLogada, lv_pesquisa.getSelectionModel().getSelectedItem());
         	controlador.salvarConvites();
         	listaAmigos.add(lv_pesquisa.getSelectionModel().getSelectedItem());
-        	//TODO trocar a cor do texto pra amarelo
         	listaDeUsuarios.remove(lv_pesquisa.getSelectionModel().getSelectedItem());
         	recomendados.remove(lv_pesquisa.getSelectionModel().getSelectedItem());
         	atualizarListaAmigos();
@@ -1077,7 +1089,6 @@ public class TelaLogadaController {
                 		if(controlador.removerConvite(contaLogada, listaDeUsuarios.get(i))) listaAmigos.remove(listaDeUsuarios.get(i));
                 		controlador.salvarConvites();
                 		controlador.salvar();
-                		//TODO deixar esse nome verde na lista de amigos
                 		listaAmigos.add(listaDeUsuarios.get(i));
                 		listaDeUsuarios.remove(listaDeUsuarios.get(i));
                 		if(recomendados.contains(listaDeUsuarios.get(i)))recomendados.remove(listaDeUsuarios.get(i));
@@ -1103,7 +1114,6 @@ public class TelaLogadaController {
     			
     		}
     		controlador.salvarConvites();
-    		//TODO trocar cor do nome pra amarelo
     		listaAmigos.addAll(listaDeUsuarios);
     		listaDeUsuarios.removeAll(listaDeUsuarios);
     		recomendados.removeAll(listaDeUsuarios);
@@ -1127,7 +1137,6 @@ public class TelaLogadaController {
             		if(controlador.removerConvite(contaLogada, lvRecomendacaoAmigos.getSelectionModel().getSelectedItem())) listaAmigos.remove(lvRecomendacaoAmigos.getSelectionModel().getSelectedItem());
             		controlador.salvarConvites();
             		controlador.salvar();
-            		//TODO deixar esse nome verde na lista de amigos
             		listaAmigos.add(lvRecomendacaoAmigos.getSelectionModel().getSelectedItem());
             		listaDeUsuarios.remove(lvRecomendacaoAmigos.getSelectionModel().getSelectedItem());
             		if(recomendados.contains(lvRecomendacaoAmigos.getSelectionModel().getSelectedItem()))recomendados.remove(lvRecomendacaoAmigos.getSelectionModel().getSelectedItem());
@@ -1152,7 +1161,6 @@ public class TelaLogadaController {
     		controlador.enviarConvite(contaLogada, lvRecomendacaoAmigos.getSelectionModel().getSelectedItem());
     		controlador.salvarConvites();
     		listaAmigos.add(lvRecomendacaoAmigos.getSelectionModel().getSelectedItem());
-    		//TODO troca cor do nome pra amarelo
     		recomendados.remove(lvRecomendacaoAmigos.getSelectionModel().getSelectedItem());
     		listaDeUsuarios.remove(lvRecomendacaoAmigos.getSelectionModel().getSelectedItem());
     		atualizarListaAmigos();
@@ -1179,7 +1187,6 @@ public class TelaLogadaController {
                 		if(controlador.removerConvite(contaLogada, recomendados.get(i))) listaAmigos.remove(recomendados.get(i));
                 		controlador.salvarConvites();
                 		controlador.salvar();
-                		//TODO deixar esse nome verde na lista de amigos
                 		listaAmigos.add(recomendados.get(i));
                 		listaDeUsuarios.remove(recomendados.get(i));
                 		if(recomendados.contains(recomendados.get(i)))recomendados.remove(recomendados.get(i));
@@ -1205,7 +1212,6 @@ public class TelaLogadaController {
     			
     		}
     		controlador.salvarConvites();
-    		//TODO trocar cor do nome pra amarelo
     		listaAmigos.addAll(recomendados);
     		listaDeUsuarios.removeAll(recomendados);
     		recomendados.removeAll(recomendados);
