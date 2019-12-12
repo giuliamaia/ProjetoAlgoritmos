@@ -388,7 +388,7 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 			for(int i = 0; i<outra.size(); i++) {
 				if(!(lista.contains(outra.get(i)))){
 					if(checkSeTemTodosAmg(lista, outra.get(i)) == true) {
-						lista.add(outra.get(i));
+						list.add(outra.get(i));
 					}
 				}
 			}
@@ -402,29 +402,32 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 				return null;
 			}
 			
+			List<UsuarioTerraplanista> tempList = new ArrayList<UsuarioTerraplanista>(panelinha);
+			
 			for(int i = 0; i<panelinha.size(); i++) {
 				if(checkSeTemTodosAmg(panelinha, panelinha.get(i)) == false) {
-					panelinha.remove(i);
+					tempList.remove(panelinha.get(i));
 				}
 				
 			}
 			
-			return panelinha;
+			return tempList;
 		}
 		
 		public boolean checkSeTemTodosAmg(List<UsuarioTerraplanista> lista, UsuarioTerraplanista user) {
 			
 			boolean result = false;
+		
+			List<UsuarioTerraplanista> temp = new ArrayList<UsuarioTerraplanista>();
 			
-			boolean lixo;
-			
-			List<UsuarioTerraplanista> temp = new ArrayList<UsuarioTerraplanista>(lista);
-			
-			if(temp.contains(user)) {
-				lixo = temp.remove(user);
+			for(UsuarioTerraplanista u : lista) {
+				if(!(u.equals(user)) && !(temp.contains(u))) {
+					temp.add(u);
+				}
 			}
 			
 			if(user.getAmigos().containsAll(temp)){
+				System.out.println("tem os migo comum");
 				result = true;
 			}
 			
@@ -449,18 +452,22 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 					List<UsuarioTerraplanista> amigosC = new ArrayList<UsuarioTerraplanista>(getAmigosComuns(user1, user2));
 					if(amigosC != null) {
 						
+						//temp.add(user2);
+						
 						for(int k = 0; k < amigosC.size(); k++) {
 							List<UsuarioTerraplanista> amgComumUser = new ArrayList<UsuarioTerraplanista>(getAmigosComuns(user1, amigosC.get(k)));
-							amgComumUser.addAll(getAmigosComuns(user2, amigosC.get(k)));
+							List<UsuarioTerraplanista> amgComumUser2 = new ArrayList<UsuarioTerraplanista>(getAmigosComuns(user2, amigosC.get(k)));
 							
 							temp = addSemRepetir(temp, amgComumUser);
-							//temp.addAll(amgComumUser);
+							temp = addSemRepetir(temp, amgComumUser2);
+							temp.addAll(amgComumUser);
+							temp.addAll(amgComumUser2);
 
 						}
 					}
 				}
 				
-				//temp = tratarPanelinha(temp);
+				temp = tratarPanelinha(temp);
 				panelinhas.add(temp);
 			}
 			return panelinhas;
