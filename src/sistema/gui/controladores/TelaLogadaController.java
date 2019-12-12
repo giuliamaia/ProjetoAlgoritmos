@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.graphstream.graph.Graph;
 import org.graphstream.ui.fx_viewer.FxViewPanel;
@@ -62,8 +63,8 @@ public class TelaLogadaController {
 	
 	private String imageAux ="/images/user.png";
 	private boolean arestasBonitas = true;
-	/*
-	Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>> callback = new Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>>() {
+	
+	/*Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>> callback = new Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>>() {
 		
 		@Override
 		public ListCell<UsuarioTerraplanista> call(ListView<UsuarioTerraplanista> arg0) {
@@ -72,27 +73,24 @@ public class TelaLogadaController {
 				protected void updateItem(UsuarioTerraplanista usuario, boolean btl) {
 					super.updateItem(usuario, btl);
 					if(usuario!=null) {
+						Circle circulo = new Circle(15, Color.BLUE);
+						Image img = new Image(usuario.getImage());
+						ImageView imgView = new ImageView(img);
+						imgView.resize(25, 25);
 						if(isAmigo(usuario)) {
-							Circle circulo = new Circle(15, Color.BLUE);
-							Image img = new Image(usuario.getImage());
-							ImageView imgView = new ImageView(img);
-							imgView.resize(25, 25);
+							
 							circulo.setStroke(Color.GREEN);
-							circulo.setFill(new ImagePattern(imgView.snapshot(null, null)));
-							setGraphic(circulo);
-							setText(usuario.getNome());
+							
 						}
 						else {
-							Circle circulo = new Circle(15, Color.BLUE);
-							Image img = new Image(usuario.getImage());
-							ImageView imgView = new ImageView(img);
-							imgView.resize(25, 25);
+							
 							circulo.setStroke(Color.YELLOW);
-							circulo.setFill(new ImagePattern(imgView.snapshot(null, null)));
-							setGraphic(circulo);
-							setText(usuario.getNome());
+							
 						}
-						
+						circulo.setFill(new ImagePattern(imgView.snapshot(null, null)));
+						//setTextFill(Color.AQUAMARINE);
+						setText(usuario.getNome());
+						setGraphic(circulo);
 					}
 				}
 			
@@ -461,7 +459,6 @@ public class TelaLogadaController {
     	inicializaComboBoxInteresses();
     	inicializaPerfil();
     	inicializaPane();
-    	
     	inicializaEditar();
     	inicializaFotos();
     	atualizarRecomendados();
@@ -528,16 +525,15 @@ public class TelaLogadaController {
     }
     
     private void inicializaAmigos() {
-    	//lv_pesquisa.setCellFactory(callback);
-    	//lv_amigos.setCellFactory(callback);
-    	
     	for(UsuarioTerraplanista u : controlador.convitesEnviadosPor(contaLogada)) {
     		listaAmigos.add(u);
     	}
     	
+    	//lv_amigos.setCellFactory(callback);
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
+    	//lv_pesquisa.setCellFactory(callback);
     	lv_pesquisa.setItems(FXCollections.observableList(listaDeUsuarios));
-    	
+    	System.out.println(lv_amigos.getItems().toString());
     }
     
     private List<UsuarioTerraplanista> copiandoListasDoRep(List<UsuarioTerraplanista> lista){
@@ -739,6 +735,7 @@ public class TelaLogadaController {
         });
     	//lv_amigos.setCellFactory(callback);
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
+    	System.out.println(lv_amigos.getItems().toString());
     	grafo.construirgrafo(arestasBonitas);
     	lv_amigos.refresh();
     }
@@ -758,7 +755,6 @@ public class TelaLogadaController {
                 return f1.toString().compareTo(f2.toString());
             }        
         });
-    	//lvConvites.setCellFactory(callback);
     	lvConvites.setItems(FXCollections.observableList(convites));
     	grafo.construirgrafo(arestasBonitas);
     	lvConvites.refresh();
@@ -1041,6 +1037,7 @@ public class TelaLogadaController {
     			if(mostrarAlerta(4,lv_pesquisa.getSelectionModel().getSelectedItem())) {
     				contaLogada.addAmigo(lv_pesquisa.getSelectionModel().getSelectedItem());
             		convites.remove(lv_pesquisa.getSelectionModel().getSelectedItem());
+            		
             		controlador.removerConvite(lv_pesquisa.getSelectionModel().getSelectedItem(), contaLogada);
             		if(controlador.removerConvite(contaLogada, lv_pesquisa.getSelectionModel().getSelectedItem())) listaAmigos.remove(lv_pesquisa.getSelectionModel().getSelectedItem());
             		controlador.salvarConvites();
