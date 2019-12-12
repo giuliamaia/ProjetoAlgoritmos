@@ -7,6 +7,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -480,6 +481,16 @@
             <JFXRadioButton fx:id="toggleSeitasGrafo" layoutX="363.0" layoutY="474.0" onAction="#verSeitasGrafo" text="Ver possiveis seitas" />
             <JFXRadioButton fx:id="toggleVerPastores" layoutX="512.0" layoutY="474.0" onAction="#verPastoresGrafo" text="Ver possiveis pastores" />
             <JFXRadioButton fx:id="toggleRecomendacao" layoutX="190.0" layoutY="474.0" onAction="#verRecomendacaoGrafo" selected="true" text=" " />
+            <JFXTextField fx:id="tfAddPastor" layoutX="283.0" layoutY="25.0" onAction="#AddPastor" promptText="Adicione Pastores">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </JFXTextField>
+            <Label fx:id="labelSetarPastor" alignment="CENTER" layoutX="249.0" layoutY="52.0" prefHeight="20.0" prefWidth="203.0" textFill="#ff2020">
+               <font>
+                  <Font name="System Italic" size="11.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

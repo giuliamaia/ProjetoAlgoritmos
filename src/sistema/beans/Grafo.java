@@ -62,7 +62,7 @@ public class Grafo {
 					aresta = grafo.addEdge(u.getLogin()  + a.getLogin(), u.getLogin(), a.getLogin());
 				else
 					aresta = getEdge(u.getLogin()  + a.getLogin());
-				//System.out.println(aresta);
+				
 				if(aresta != null) {
 					if(éBonito)
 						aresta.setAttribute("ui.style", "shape: cubic-curve;");

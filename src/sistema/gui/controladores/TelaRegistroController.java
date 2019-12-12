@@ -220,7 +220,7 @@ public class TelaRegistroController {
     	tfRecomendacao.setText("");
     	pfSenha.setText("");
     	datePickerDataNascimento.setValue(null);
-    	listaInteresses.getItems().clear();
+    	listaInteresses.setItems(FXCollections.emptyObservableList());
     	labelErroData.setText("");
     	labelErroGeral.setText("");
     	labelErroLogin.setText("");

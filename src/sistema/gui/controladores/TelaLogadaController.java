@@ -278,45 +278,72 @@ public class TelaLogadaController {
 
     Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>> callback = new Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>>() {
 	
-	@Override
-	public ListCell<UsuarioTerraplanista> call(ListView<UsuarioTerraplanista> arg0) {
-		ListCell<UsuarioTerraplanista> cell = new ListCell<UsuarioTerraplanista>() {
-			@Override
-			protected void updateItem(UsuarioTerraplanista usuario, boolean btl) {
-				super.updateItem(usuario, btl);
-				if(usuario!=null) {
-					Circle circulo = new Circle(15, Color.BLUE);
-					Image img = new Image(usuario.getImage());
-					ImageView imgView = new ImageView(img);
-					imgView.resize(25, 25);
-					if(isAmigo(usuario)) {
-						
-						circulo.setStroke(Color.GREEN);
-						
+		@Override
+		public ListCell<UsuarioTerraplanista> call(ListView<UsuarioTerraplanista> arg0) {
+			ListCell<UsuarioTerraplanista> cell = new ListCell<UsuarioTerraplanista>() {
+				@Override
+				protected void updateItem(UsuarioTerraplanista usuario, boolean btl) {
+					super.updateItem(usuario, btl);
+					if(usuario!=null) {
+						Circle circulo = new Circle(15, Color.BLUE);
+						Image img = new Image(usuario.getImage());
+						ImageView imgView = new ImageView(img);
+						imgView.resize(25, 25);
+						if(isAmigo(usuario)) {
+							
+							circulo.setStroke(Color.GREEN);
+							
+						}
+						else {
+							
+							circulo.setStroke(Color.DARKORANGE);
+							
+						}
+						circulo.setFill(new ImagePattern(imgView.snapshot(null, null)));
+						//setTextFill(Color.AQUAMARINE);
+						setText(usuario.getNome());
+						setGraphic(circulo);
 					}
 					else {
-						
-						circulo.setStroke(Color.YELLOW);
-						
+						 setText(null);
+				         setGraphic(null);
 					}
-					circulo.setFill(new ImagePattern(imgView.snapshot(null, null)));
-					//setTextFill(Color.AQUAMARINE);
-					setText(usuario.getNome());
-					setGraphic(circulo);
 				}
-				else {
-					 setText(null);
-			         setGraphic(null);
-				}
-			}
-		
-		};
-		return cell;
-	}
-};
+			
+			};
+			return cell;
+		}
+	};
+
+	@FXML
+	private JFXTextField tfAddPastor;
+	
+	@FXML
+	private Label labelSetarPastor;
+	
     @FXML
     private Label labelAvisoConvites;
     
+    @FXML
+    void AddPastor(ActionEvent event) {
+    	if(controlador.pesquisarPorLogin(tfAddPastor.getText())!=null) {
+    		labelSetarPastor.setText("");
+    		controlador.pesquisarPorLogin(tfAddPastor.getText()).setPastor(true);
+    		controlador.salvar();
+    		if(toggleRecomendacao.isSelected()) {
+				verRecomendacaoGrafo(null);
+			}
+			else if (toggleSeitasGrafo.isSelected()){
+				verSeitasGrafo(null);
+			}
+			else {
+				verPastoresGrafo(null);
+			}
+    	}
+    	else {
+    		labelSetarPastor.setText("Não existe usuário com esse login");
+    	}
+    }
     public void setarContaLogada(UsuarioTerraplanista contaLogada) {
 		this.contaLogada = contaLogada;
 	}
@@ -360,6 +387,7 @@ public class TelaLogadaController {
 		}
 		else if(e.getSource() == bnt_amigos) {
 			pane_amigos.toFront();
+			recomendados = controlador.recomendacoesPara(contaLogada);
 			atualizarRecomendados();
 		}
 		else if(e.getSource() == bnt_contrato) {
@@ -457,6 +485,7 @@ public class TelaLogadaController {
     //PAGAMENTO ACIMA
     @FXML
     void initialize() {
+    	
     	recomendados = controlador.recomendacoesPara(contaLogada);
     	pane_perfil.toFront();
     	inicializaAmigos();
@@ -537,7 +566,7 @@ public class TelaLogadaController {
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
     	lv_pesquisa.setCellFactory(callback);
     	lv_pesquisa.setItems(FXCollections.observableList(listaDeUsuarios));
-    	System.out.println(lv_amigos.getItems().toString());
+    	
     }
     
     private List<UsuarioTerraplanista> copiandoListasDoRep(List<UsuarioTerraplanista> lista){
@@ -631,7 +660,7 @@ public class TelaLogadaController {
     		controlador.salvar();
     	}
     	else if (!verificaSeJaTem(comboboxInteresses.getSelectionModel().getSelectedItem())) {
-    		//System.out.println(comboboxInteresses.getSelectionModel().getSelectedItem());
+    		
     		controlador.getUsuarioLogado().getInteresses().add(comboboxInteresses.getSelectionModel().getSelectedItem());
     		controlador.salvar();
     		listaInteresses.add(comboboxInteresses.getSelectionModel().getSelectedItem());
@@ -739,7 +768,7 @@ public class TelaLogadaController {
         });
     	//lv_amigos.setCellFactory(callback);
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
-    	System.out.println(lv_amigos.getItems().toString());
+    	
     	grafo.construirgrafo(arestasBonitas);
     	lv_amigos.refresh();
     }
@@ -1058,6 +1087,7 @@ public class TelaLogadaController {
     				controlador.removerConvite(lv_pesquisa.getSelectionModel().getSelectedItem(), contaLogada);
             		controlador.salvarConvites();
             		convites.remove(lv_pesquisa.getSelectionModel().getSelectedItem());
+            		recomendados = controlador.recomendacoesPara(contaLogada);
             		atualizarListaConvites();
             		atualizarListaAmigos();
             		atualizarListaUsuarios();
