@@ -477,7 +477,7 @@
             </JFXButton>
             <Pane fx:id="painel" layoutX="22.0" layoutY="90.0" onMouseClicked="#abrirGrafoGrande" prefHeight="361.0" prefWidth="634.0" style="-fx-background-color: blue;" />
             <JFXTextField fx:id="tfRecomendacaoGrafo" layoutX="212.0" layoutY="470.0" onAction="#recomendarAmigosGrafo" promptText="Recomendação de amigo" />
-            <Label fx:id="labelNaoAchouLoginGrafo" layoutX="214.0" layoutY="454.0" prefHeight="17.0" prefWidth="135.0" />
+            <Label fx:id="labelNaoAchouLoginGrafo" layoutX="189.0" layoutY="454.0" prefHeight="17.0" prefWidth="160.0" />
             <JFXToggleButton fx:id="toggleArestasBonitas" layoutX="22.0" layoutY="454.0" onAction="#verArestasBonitas" text="Ver aresta bonita" />
             <JFXRadioButton fx:id="toggleSeitasGrafo" layoutX="361.0" layoutY="461.0" onAction="#verSeitasGrafo" text="Ver possiveis seitas" />
             <JFXRadioButton fx:id="toggleVerPastores" layoutX="512.0" layoutY="474.0" onAction="#verPastoresGrafo" text="Ver possiveis pastores" />
@@ -492,7 +492,7 @@
                   <Font name="System Italic" size="11.0" />
                </font>
             </Label>
-            <JFXSlider fx:id="sliderSeita" layoutX="361.0" layoutY="480.0" max="5.0" min="1.0" onDragDone="#escolherSeitaGrafo" showTickLabels="true" showTickMarks="true" />
+            <JFXSlider fx:id="sliderSeita" layoutX="361.0" layoutY="480.0" max="5.0" min="1.0" onMouseDragged="#escolherSeitaGrafo" showTickLabels="true" showTickMarks="true" />
          </children>
       </Pane>
    </children>

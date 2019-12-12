@@ -153,14 +153,16 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 	                 {
 	                     public int compare(UsuarioTerraplanista f1, UsuarioTerraplanista f2)
 	                     {
-	                         return f1.toString().compareTo(f2.toString());
+	                         return f1.getLogin().compareTo(f2.getLogin());
 	                     }        
 	                 }); //função pra ordenar a lista baseado no tostring
+					//System.out.println(listaAux);
 					if(!listaDeListas.contains(listaAux)) // se ainda não tem essa seita bota ela na lista
 						listaDeListas.add(listaAux);
 				}
 			}
 		}
+		//System.out.println(listaDeListas);
 		return listaDeListas;
 	}
 	

@@ -1350,6 +1350,7 @@ public class TelaLogadaController {
 
     @FXML
     void verPastoresGrafo(ActionEvent event) {
+    	grafo.setarNos();
     	toggleRecomendacao.setSelected(false);
     	toggleSeitasGrafo.setSelected(false);
     	tfRecomendacaoGrafo.setDisable(true);
@@ -1375,7 +1376,8 @@ public class TelaLogadaController {
     		recomendarAmigosGrafo(null);
     	}
     	else {
-    		grafo.construirgrafo(arestasBonitas);
+    		grafo.setarNos();
+    		//grafo.construirgrafo(arestasBonitas);
     	}
     }
 
@@ -1390,15 +1392,15 @@ public class TelaLogadaController {
     		return;
     	}
         if(toggleSeitasGrafo.isSelected()) {
-        	escolherSeitaGrafo(null);
+        	escolherSeitaGrafo();
         }
         
     }
 
     @FXML
-    void escolherSeitaGrafo(DragEvent event) {
-    	System.out.println("olá");
-    	if(controlador.seitasDe3Pessoas().size()>0)grafo.setarSeitas(controlador.seitasDe3Pessoas().get((int)sliderSeita.getValue()-1));
+    void escolherSeitaGrafo() {
+    	grafo.setarNos();
+    	if(controlador.seitasDe3Pessoas().size()>0)grafo.setarSeitas(controlador.seitasDe3Pessoas().get((int) (Math.round(sliderSeita.getValue())-1)));
     }
 }
 
