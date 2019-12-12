@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXSlider?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
@@ -478,7 +479,7 @@
             <JFXTextField fx:id="tfRecomendacaoGrafo" layoutX="212.0" layoutY="470.0" onAction="#recomendarAmigosGrafo" promptText="Recomendação de amigo" />
             <Label fx:id="labelNaoAchouLoginGrafo" layoutX="214.0" layoutY="454.0" prefHeight="17.0" prefWidth="135.0" />
             <JFXToggleButton fx:id="toggleArestasBonitas" layoutX="22.0" layoutY="454.0" onAction="#verArestasBonitas" text="Ver aresta bonita" />
-            <JFXRadioButton fx:id="toggleSeitasGrafo" layoutX="363.0" layoutY="474.0" onAction="#verSeitasGrafo" text="Ver possiveis seitas" />
+            <JFXRadioButton fx:id="toggleSeitasGrafo" layoutX="361.0" layoutY="461.0" onAction="#verSeitasGrafo" text="Ver possiveis seitas" />
             <JFXRadioButton fx:id="toggleVerPastores" layoutX="512.0" layoutY="474.0" onAction="#verPastoresGrafo" text="Ver possiveis pastores" />
             <JFXRadioButton fx:id="toggleRecomendacao" layoutX="190.0" layoutY="474.0" onAction="#verRecomendacaoGrafo" selected="true" text=" " />
             <JFXTextField fx:id="tfAddPastor" layoutX="283.0" layoutY="25.0" onAction="#AddPastor" promptText="Adicione Pastores">
@@ -491,6 +492,7 @@
                   <Font name="System Italic" size="11.0" />
                </font>
             </Label>
+            <JFXSlider fx:id="sliderSeita" layoutX="361.0" layoutY="480.0" max="5.0" min="1.0" onDragDone="#escolherSeitaGrafo" showTickLabels="true" showTickMarks="true" />
          </children>
       </Pane>
    </children>

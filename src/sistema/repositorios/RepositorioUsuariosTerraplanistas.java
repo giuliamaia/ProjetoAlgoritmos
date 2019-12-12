@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -137,6 +138,43 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 		} catch (ClassNotFoundException | IOException e) {
 			System.out.println("deu rim no carregar");
 		}
+	}
+	public List<List<UsuarioTerraplanista>> seitasDe3Pessoas(){
+		List<List<UsuarioTerraplanista>> listaDeListas = new ArrayList<>(); //criando uma lista de seitas, ou seja uma lista de lista
+		for(UsuarioTerraplanista usuario:usuarios) { //para cada usuario do programa
+			for(UsuarioTerraplanista amigo:usuario.getAmigos()) { //para cada amigo desse usuario
+				for(UsuarioTerraplanista comum:compararListaAmigos(usuario.getAmigos(), amigo.getAmigos())) { //para cada pessoas em comum na lista dos 2
+					List<UsuarioTerraplanista> listaAux = new ArrayList<>(); 
+					listaAux.add(comum);
+					listaAux.add(usuario);
+					listaAux.add(amigo);//bota eu, o amigo e o cara em comum na lista
+					Collections.sort(listaAux,
+			                 new Comparator<UsuarioTerraplanista>()
+	                 {
+	                     public int compare(UsuarioTerraplanista f1, UsuarioTerraplanista f2)
+	                     {
+	                         return f1.toString().compareTo(f2.toString());
+	                     }        
+	                 }); //função pra ordenar a lista baseado no tostring
+					if(!listaDeListas.contains(listaAux)) // se ainda não tem essa seita bota ela na lista
+						listaDeListas.add(listaAux);
+				}
+			}
+		}
+		return listaDeListas;
+	}
+	
+	private List<UsuarioTerraplanista> compararListaAmigos(List<UsuarioTerraplanista> lista1, List<UsuarioTerraplanista> lista2) {
+		List<UsuarioTerraplanista> listaAux = new ArrayList<>(); 
+		for(UsuarioTerraplanista u: lista1) { //para cada cara da lista 1
+			for(UsuarioTerraplanista a: lista2) { //para cada cara da lista 2
+				if(u.getLogin().contentEquals(a.getLogin())) { 
+					listaAux.add(u); // se os 2 tem o mesmo amigo é uma interseção, bota na lista de em comum
+				}
+			}
+		}
+		
+		return listaAux;
 	}
 	public void salvar()  {
 		

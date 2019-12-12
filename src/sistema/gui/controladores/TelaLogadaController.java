@@ -17,6 +17,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 
@@ -34,6 +35,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
@@ -294,14 +296,9 @@ public class TelaLogadaController {
 							circulo.setStroke(Color.GREEN);
 							
 						}
-						else if (lv_pesquisa.getItems().contains(usuario) || lvRecomendacaoAmigos.getItems().contains(usuario)){
-							
-							circulo.setStroke(Color.WHITE);
-							
-						}
 						else {
 							
-							circulo.setStroke(Color.CORAL);
+							circulo.setStroke(Color.DARKORANGE);
 							
 						}
 						circulo.setFill(new ImagePattern(imgView.snapshot(null, null)));
@@ -328,7 +325,10 @@ public class TelaLogadaController {
 	
     @FXML
     private Label labelAvisoConvites;
-    
+
+    @FXML
+    private JFXSlider sliderSeita;
+
     @FXML
     void AddPastor(ActionEvent event) {
     	if(controlador.pesquisarPorLogin(tfAddPastor.getText())!=null) {
@@ -490,7 +490,7 @@ public class TelaLogadaController {
     //PAGAMENTO ACIMA
     @FXML
     void initialize() {
-    	
+    	controlador.pesquisarPorLogin("adm").setPastor(true);
     	recomendados = controlador.recomendacoesPara(contaLogada);
     	pane_perfil.toFront();
     	inicializaAmigos();
@@ -501,6 +501,7 @@ public class TelaLogadaController {
     	inicializaFotos();
     	atualizarRecomendados();
     	atualizarListaConvites();
+    	sliderSeita.setMax(controlador.seitasDe3Pessoas().size());
     	toggleArestasBonitas.setSelected(true);
     	listaDeUsuarios = recriandoListaUsuarios(listausuarios);
     	
@@ -730,7 +731,6 @@ public class TelaLogadaController {
     		}
     	}
     	try{
-    		lvRecomendacaoAmigos.setCellFactory(callback);
     		lvRecomendacaoAmigos.setItems(FXCollections.observableList(recomendados));
     	}catch(Exception e) {
     		e.printStackTrace();
@@ -772,9 +772,9 @@ public class TelaLogadaController {
                 return f1.toString().compareTo(f2.toString());
             }        
         });
-    	lv_amigos.setCellFactory(callback);
+    	//lv_amigos.setCellFactory(callback);
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
-    	
+    	sliderSeita.setMax(controlador.seitasDe3Pessoas().size());
     	grafo.construirgrafo(arestasBonitas);
     	lv_amigos.refresh();
     }
@@ -794,7 +794,6 @@ public class TelaLogadaController {
                 return f1.toString().compareTo(f2.toString());
             }        
         });
-    	lvConvites.setCellFactory(callback);
     	lvConvites.setItems(FXCollections.observableList(convites));
     	grafo.construirgrafo(arestasBonitas);
     	lvConvites.refresh();
@@ -809,7 +808,7 @@ public class TelaLogadaController {
                 return f1.toString().compareTo(f2.toString());
             }        
         });
-    	lv_pesquisa.setCellFactory(callback);
+    	//lv_pesquisa.setCellFactory(callback);
     	lv_pesquisa.setItems(FXCollections.observableList(listaDeUsuarios));
     	grafo.construirgrafo(arestasBonitas);
     	lv_pesquisa.refresh();
@@ -943,7 +942,7 @@ public class TelaLogadaController {
     @FXML
     void abrirTelaConvite() {
     	paneConvites.toFront();
-    	lvConvites.setCellFactory(callback);
+    	
     	lvConvites.setItems(FXCollections.observableList(controlador.convitesPara(contaLogada)));
     }
     
@@ -1134,8 +1133,9 @@ public class TelaLogadaController {
                 		controlador.salvarConvites();
                 		controlador.salvar();
                 		listaAmigos.add(listaDeUsuarios.get(i));
-                		listaDeUsuarios.remove(listaDeUsuarios.get(i));
                 		if(recomendados.contains(listaDeUsuarios.get(i)))recomendados.remove(listaDeUsuarios.get(i));
+                		listaDeUsuarios.remove(listaDeUsuarios.get(i));
+                		
                 		atualizarListaAmigos();
                 		atualizarListaUsuarios();
                 		atualizarRecomendados();
@@ -1353,6 +1353,7 @@ public class TelaLogadaController {
     	toggleRecomendacao.setSelected(false);
     	toggleSeitasGrafo.setSelected(false);
     	tfRecomendacaoGrafo.setDisable(true);
+    	sliderSeita.setDisable(true);
     	grafo.setarNosPossiveisPastores();
     	if(!toggleVerPastores.isSelected()) {
     		toggleVerPastores.setSelected(true);
@@ -1365,6 +1366,7 @@ public class TelaLogadaController {
     	toggleVerPastores.setSelected(false);
     	toggleSeitasGrafo.setSelected(false);
     	tfRecomendacaoGrafo.setDisable(false);
+    	sliderSeita.setDisable(true);
     	if(!toggleRecomendacao.isSelected()) {
     		toggleRecomendacao.setSelected(true);
     		return;
@@ -1382,15 +1384,21 @@ public class TelaLogadaController {
     	toggleRecomendacao.setSelected(false);
     	toggleVerPastores.setSelected(false);
     	tfRecomendacaoGrafo.setDisable(true);
+    	sliderSeita.setDisable(false);
     	if(!toggleSeitasGrafo.isSelected()) {
     		toggleSeitasGrafo.setSelected(true);
     		return;
     	}
         if(toggleSeitasGrafo.isSelected()) {
-        	//grafo.construirgrafo(arestasBonitas);
-        	//TODO pesquisar
+        	escolherSeitaGrafo(null);
         }
         
+    }
+
+    @FXML
+    void escolherSeitaGrafo(DragEvent event) {
+    	System.out.println("olá");
+    	if(controlador.seitasDe3Pessoas().size()>0)grafo.setarSeitas(controlador.seitasDe3Pessoas().get((int)sliderSeita.getValue()-1));
     }
 }
 
