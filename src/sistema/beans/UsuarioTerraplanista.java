@@ -124,6 +124,12 @@ public class UsuarioTerraplanista implements Serializable{
 		this.image = user.getImage();
 		this.recomendacoes = user.getRecomendacoes();
 	}
+	public boolean temInteressePor(String interesse) {
+		for(String str : interesses) {
+			if(str.toUpperCase().contentEquals(interesse.toUpperCase())) return true;
+		}
+		return false;
+	}
 	
 	
 }

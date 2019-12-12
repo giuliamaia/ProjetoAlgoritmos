@@ -13,6 +13,10 @@ public class TesteFX {
 		System.out.println(controlador.getUsuarios());
 		
 		System.out.println(controlador.pessoasParaSeita());
+		controlador.pesquisarPorLogin("adm").getAmigos();
+		System.out.println(controlador.pesquisarPorLogin("adm").getInteresses());
+		System.out.println(controlador.possiveisPastores());
+		
 		
 	}
 }

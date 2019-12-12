@@ -6,12 +6,15 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import sistema.beans.UsuarioTerraplanista;
 
@@ -275,24 +278,7 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 			return indicados;
 		}
 	 
-	 /*
-		public List<UsuarioTerraplanista> indicadosAmigosRodrigues(UsuarioTerraplanista user){
-			
-			List<UsuarioTerraplanista> lista = new ArrayList<>();
-			HashMap<String, Integer> mapa = new HashMap<>();
-			for(UsuarioTerraplanista u : user.getAmigos()) {
-				if(!mapa.containsKey(u.getLogin())) {
-					mapa.put(u.getLogin(), 0);
-				}
-				else {
-					mapa.replace(u.getLogin(), mapa.get(u.getLogin())+1);
-				}
-			}
-			
-			return null;
-		}
-		
-		*/
+	 
 	 
 	 
 		public List<UsuarioTerraplanista> indicacaoAmigoComum(UsuarioTerraplanista user)
@@ -474,8 +460,71 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 			return panelinhas;
 		}
 		
-		public void panelinhas() {
+		public List<UsuarioTerraplanista> possiveisPastores() {
+			List<UsuarioTerraplanista> retorno = new ArrayList<>();
+			Map<String, Integer> mapa = new HashMap<>();
 			
+			for (int i = 0; i < usuarios.size() ; i++) {
+				if(!usuarios.get(i).isPastor()) {
+					if(mapa.containsKey(usuarios.get(i).getLogin())) {
+						mapa.replace(usuarios.get(i).getLogin(), mapa.get(usuarios.get(i).getLogin()) + (usuarios.get(i).getRecomendacoes()));
+					}
+					else {
+						mapa.put(usuarios.get(i).getLogin(), usuarios.get(i).getRecomendacoes());
+					}
+				}
+			}
+			
+			List<LocalDateTime> listaDeDatas = new ArrayList<> (0);
+			for(UsuarioTerraplanista u : usuarios) {
+				listaDeDatas.add(u.getHoraCriaçãoConta());
+			}
+			Collections.sort(listaDeDatas);
+			Collections.reverse(listaDeDatas);
+			for (int i = 0; i < usuarios.size() ; i++) {
+				for(LocalDateTime ldt : listaDeDatas) {
+					if(!usuarios.get(i).isPastor() && ldt.isEqual(usuarios.get(i).getHoraCriaçãoConta())) {
+						if(mapa.containsKey(usuarios.get(i).getLogin())) {
+							mapa.replace(usuarios.get(i).getLogin(), mapa.get(usuarios.get(i).getLogin()) + (usuarios.size() - listaDeDatas.indexOf(ldt)));
+						}
+						else {
+							mapa.put(usuarios.get(i).getLogin(),usuarios.size() - listaDeDatas.indexOf(ldt));
+						}
+					}
+				}												
+			}
+			for(UsuarioTerraplanista u : usuarios) {
+				if(!u.isPastor()) {
+					if(mapa.containsKey(u.getLogin())) {
+						mapa.replace(u.getLogin(), mapa.get(u.getLogin()) + u.getAmigos().size()/5);
+					}
+					else {
+						mapa.put(u.getLogin(), u.getAmigos().size()/5);
+					}
+				}
+			}
+			for(UsuarioTerraplanista u : usuarios) {
+				if(!u.isPastor()) {
+					if(mapa.containsKey(u.getLogin())) {
+						mapa.replace(u.getLogin(), mapa.get(u.getLogin()) + (u.temInteressePor("salamandras")?5:0));
+					}
+					else {
+						mapa.put(u.getLogin(), 5);
+					}
+				}
+			}
+			Map<String, Integer> mapaOrdenado = mapa.entrySet()
+			        .stream()
+			        .sorted(Map.Entry.comparingByValue())
+			        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+			
+			for(String str : mapaOrdenado.keySet()) {
+				retorno.add(pesquisarPorLogin(str));
+			}
+			//mapaOrdenado.forEach((key, value) -> System.out.println(value + " - " + key));
+			Collections.reverse(retorno);
+			return retorno;
 		}
+		
 		
 }

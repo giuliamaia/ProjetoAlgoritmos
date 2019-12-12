@@ -38,6 +38,7 @@ public class TerraPlanizer extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			
 			inicializa();
 			URL url = new File("src/sistema/gui/view/TelaLogin.fxml").toURI().toURL();
 			Parent rootMain = FXMLLoader.load(url);

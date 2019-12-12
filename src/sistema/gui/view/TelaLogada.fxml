@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
@@ -157,35 +158,6 @@
             <FontAwesomeIconView fill="#0eeec1" glyphName="CHECK_CIRCLE" layoutX="33.0" layoutY="139.0" size="13" />
             <FontAwesomeIconView fill="#0eeec1" glyphName="CHECK_CIRCLE" layoutX="33.0" layoutY="165.0" size="13" />
             <FontAwesomeIconView fill="#0eeec1" glyphName="CHECK_CIRCLE" layoutX="33.0" layoutY="226.0" size="13" />
-         </children>
-      </Pane>
-      <Pane fx:id="pane_grafo" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
-         <children>
-            <Text fill="#6d7a7c" layoutX="21.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grafo" wrappingWidth="282.0">
-               <font>
-                  <Font name="System Bold" size="32.0" />
-               </font>
-            </Text>
-            <Text fill="#607072" layoutX="22.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="À pedido do nosso Deus Sr Salamandra" wrappingWidth="258.591796875">
-               <font>
-                  <Font name="System Italic" size="11.0" />
-               </font>
-            </Text>
-            <JFXButton fx:id="bnt_minimizar" layoutX="557.0" layoutY="12.0" onAction="#minimizar" style="-fx-background-color: white;" text="Minimizar">
-               <graphic>
-                  <FontAwesomeIconView fill="#2411f2" glyphName="MINUS" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="bnt_sair" layoutX="636.0" layoutY="12.0" onAction="#sair" style="-fx-background-color: white;" text="Sair">
-               <graphic>
-                  <FontAwesomeIconView fill="#ee0a0a" glyphName="POWER_OFF" />
-               </graphic>
-            </JFXButton>
-            <Pane fx:id="painel" layoutX="22.0" layoutY="90.0" onMouseClicked="#abrirGrafoGrande" prefHeight="361.0" prefWidth="634.0" style="-fx-background-color: blue;" />
-            <JFXTextField fx:id="tfRecomendacaoGrafo" layoutX="95.0" layoutY="469.0" onAction="#recomendarAmigosGrafo" promptText="Recomendação de amigo" />
-            <JFXToggleButton fx:id="toggleSeitasGrafo" layoutX="430.0" layoutY="453.0" onAction="#verSeitasGrafo" text="Ver possiveis seitas" />
-            <Label fx:id="labelNaoAchouLoginGrafo" layoutX="241.0" layoutY="474.0" prefHeight="17.0" prefWidth="150.0" />
-            <JFXToggleButton fx:id="toggleArestasBonitas" layoutX="253.0" layoutY="453.0" onAction="#verArestasBonitas" text="Ver aresta bonita" />
          </children>
       </Pane>
       <Pane fx:id="paneConvites" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
@@ -418,16 +390,6 @@
                   <Font name="System Italic" size="11.0" />
                </font>
             </Text>
-            <JFXButton fx:id="bnt_minimizar" layoutX="557.0" layoutY="12.0" onAction="#minimizar" text="Minimizar">
-               <graphic>
-                  <FontAwesomeIconView fill="#3f12f2" glyphName="MINUS" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="bnt_sair" layoutX="636.0" layoutY="12.0" onAction="#sair" text="Sair">
-               <graphic>
-                  <FontAwesomeIconView fill="#f81010" glyphName="POWER_OFF" />
-               </graphic>
-            </JFXButton>
             <Pane layoutX="14.0" layoutY="74.0" prefHeight="208.0" prefWidth="330.0" style="-fx-background-color: #28d4c8;">
                <children>
                   <JFXTextField fx:id="tfNumCartao" focusColor="BLACK" layoutX="15.0" layoutY="100.0" prefHeight="45.0" prefWidth="300.0" promptText="Número do cartão" unFocusColor="#545151">
@@ -477,6 +439,47 @@
             <FontAwesomeIconView fill="#2e9a33" glyphName="BANK" layoutX="441.0" layoutY="62.0" size="40" />
             <JFXButton defaultButton="true" layoutX="604.0" layoutY="474.0" onAction="#confirmar" text="Confirmar" />
             <Separator layoutX="392.0" orientation="VERTICAL" prefHeight="514.0" prefWidth="32.0" />
+            <JFXButton fx:id="bnt_minimizar" layoutX="557.0" layoutY="12.0" onAction="#minimizar" text="Minimizar">
+               <graphic>
+                  <FontAwesomeIconView fill="#3f12f2" glyphName="MINUS" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="bnt_sair" layoutX="636.0" layoutY="12.0" onAction="#sair" text="Sair">
+               <graphic>
+                  <FontAwesomeIconView fill="#f81010" glyphName="POWER_OFF" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </Pane>
+      <Pane fx:id="pane_grafo" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Text fill="#6d7a7c" layoutX="21.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grafo" wrappingWidth="282.0">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Text>
+            <Text fill="#607072" layoutX="22.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="À pedido do nosso Deus Sr Salamandra" wrappingWidth="258.591796875">
+               <font>
+                  <Font name="System Italic" size="11.0" />
+               </font>
+            </Text>
+            <JFXButton fx:id="bnt_minimizar" layoutX="557.0" layoutY="12.0" onAction="#minimizar" style="-fx-background-color: white;" text="Minimizar">
+               <graphic>
+                  <FontAwesomeIconView fill="#2411f2" glyphName="MINUS" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="bnt_sair" layoutX="636.0" layoutY="12.0" onAction="#sair" style="-fx-background-color: white;" text="Sair">
+               <graphic>
+                  <FontAwesomeIconView fill="#ee0a0a" glyphName="POWER_OFF" />
+               </graphic>
+            </JFXButton>
+            <Pane fx:id="painel" layoutX="22.0" layoutY="90.0" onMouseClicked="#abrirGrafoGrande" prefHeight="361.0" prefWidth="634.0" style="-fx-background-color: blue;" />
+            <JFXTextField fx:id="tfRecomendacaoGrafo" layoutX="212.0" layoutY="470.0" onAction="#recomendarAmigosGrafo" promptText="Recomendação de amigo" />
+            <Label fx:id="labelNaoAchouLoginGrafo" layoutX="214.0" layoutY="454.0" prefHeight="17.0" prefWidth="135.0" />
+            <JFXToggleButton fx:id="toggleArestasBonitas" layoutX="22.0" layoutY="454.0" onAction="#verArestasBonitas" text="Ver aresta bonita" />
+            <JFXRadioButton fx:id="toggleSeitasGrafo" layoutX="363.0" layoutY="474.0" onAction="#verSeitasGrafo" text="Ver possiveis seitas" />
+            <JFXRadioButton fx:id="toggleVerPastores" layoutX="512.0" layoutY="474.0" onAction="#verPastoresGrafo" text="Ver possiveis pastores" />
+            <JFXRadioButton fx:id="toggleRecomendacao" layoutX="190.0" layoutY="474.0" onAction="#verRecomendacaoGrafo" selected="true" text=" " />
          </children>
       </Pane>
    </children>

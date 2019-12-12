@@ -15,6 +15,7 @@ import org.graphstream.ui.javafx.FxGraphRenderer;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 
@@ -145,6 +146,7 @@ public class TelaLogadaController {
 
     @FXML
     private FontAwesomeIconView removeInteresses;
+    
     @FXML
     private Circle circuloImg;
 
@@ -257,11 +259,9 @@ public class TelaLogadaController {
 
     @FXML
     private Label labelAvisoAmigos;
+    
     @FXML
     private JFXTextField tfRecomendacaoGrafo;
-
-    @FXML
-    private JFXToggleButton toggleSeitasGrafo;
 
     @FXML
     private JFXButton bnt_removeGeral;
@@ -282,9 +282,6 @@ public class TelaLogadaController {
     private DatePicker dpDataNascimentoNova;
     
     @FXML
-    private JFXToggleButton toggleArestasBonitas;
-
-    @FXML
     private Label labelNaoAchouLoginGrafo;
 	
     @FXML
@@ -301,6 +298,18 @@ public class TelaLogadaController {
     
     @FXML
     private Label labelNumConvites;
+    
+    @FXML
+    private JFXToggleButton toggleArestasBonitas;
+
+    @FXML
+    private JFXRadioButton toggleSeitasGrafo;
+
+    @FXML
+    private JFXRadioButton toggleVerPastores;
+
+    @FXML
+    private JFXRadioButton toggleRecomendacao;
 
 
     @FXML
@@ -327,14 +336,24 @@ public class TelaLogadaController {
     	if(e.getSource() == bnt_grafo) {
 			if(contaLogada.isPastor()==true) {
 				pane_grafo.toFront();
+				if(toggleRecomendacao.isSelected()) {
+					verRecomendacaoGrafo(null);
+				}
+				else if (toggleSeitasGrafo.isSelected()){
+					verSeitasGrafo(null);
+				}
+				else {
+					verPastoresGrafo(null);
+				}
 			}
 			else {
-				pane_doaçao.toFront();
+				
 				Alert alerta = new Alert(AlertType.WARNING);
-				alerta.setContentText("Enquanto isso, faça uma doação... Vai que Ele fica feliz e lhe dá autorização. :)");
-				alerta.setHeaderText("Para ele deixar, você precisa ser uma pessoa influente na comunidade.");
-				alerta.setTitle("Sr Salamandra ainda não deixa você visualizar essa página!");
+				alerta.setContentText("Deixe de ser mão de vaca, SrSalamandra não gosta disso.");
+				alerta.setHeaderText("Você ainda não doou o suficiente para obter essa função.");
+				alerta.setTitle("Sr Salamandra ainda não deixa você visualizar essa página, doe mais!");
 				alerta.showAndWait();
+				pane_doaçao.toFront();
 			}
 		}
 		else if(e.getSource() == bnt_amigos) {
@@ -612,7 +631,7 @@ public class TelaLogadaController {
     		controlador.salvar();
     	}
     	else if (!verificaSeJaTem(comboboxInteresses.getSelectionModel().getSelectedItem())) {
-    		System.out.println(comboboxInteresses.getSelectionModel().getSelectedItem());
+    		//System.out.println(comboboxInteresses.getSelectionModel().getSelectedItem());
     		controlador.getUsuarioLogado().getInteresses().add(comboboxInteresses.getSelectionModel().getSelectedItem());
     		controlador.salvar();
     		listaInteresses.add(comboboxInteresses.getSelectionModel().getSelectedItem());
@@ -870,17 +889,11 @@ public class TelaLogadaController {
     	pane_perfil.toFront();
     }
 
-    @FXML
-    void verSeitasGrafo(ActionEvent event) {
-    	if(toggleSeitasGrafo.isSelected()) {
-    		grafo.construirgrafo(arestasBonitas);
-    		//TODO pesquisar
-    	}
-    }
+    
 
     @FXML
     void recomendarAmigosGrafo(ActionEvent event) {
-    	grafo.construirgrafo(arestasBonitas);
+    	//grafo.construirgrafo(arestasBonitas);
     	if(!tfRecomendacaoGrafo.getText().isEmpty()) {
     		if(controlador.pesquisarPorLogin(tfRecomendacaoGrafo.getText() )!= null){
     			grafo.setarNosRecomendacao(controlador.pesquisarPorLogin(tfRecomendacaoGrafo.getText()));
@@ -891,13 +904,6 @@ public class TelaLogadaController {
     	}
     }
 
-    @FXML
-    void verArestasBonitas() {
-    	arestasBonitas=toggleArestasBonitas.isSelected();
-    	grafo.setarArestas(arestasBonitas);
-    	grafo.construirgrafo(toggleArestasBonitas.isSelected());
-    }
-    
     @FXML
     void abrirTelaConvite() {
     	paneConvites.toFront();
@@ -1285,6 +1291,59 @@ public class TelaLogadaController {
     		labelAvisoAmigos.setText("Sua lista de amigos já está vazia!");
     	}
     	
+    }
+
+    @FXML
+    void verArestasBonitas(ActionEvent event) {
+    	arestasBonitas=toggleArestasBonitas.isSelected();
+    	grafo.mudarAresta(arestasBonitas);
+    	//grafo.setarArestas(arestasBonitas);
+    	grafo.construirgrafo(arestasBonitas);
+    }
+
+    @FXML
+    void verPastoresGrafo(ActionEvent event) {
+    	toggleRecomendacao.setSelected(false);
+    	toggleSeitasGrafo.setSelected(false);
+    	tfRecomendacaoGrafo.setDisable(true);
+    	grafo.setarNosPossiveisPastores();
+    	if(!toggleVerPastores.isSelected()) {
+    		toggleVerPastores.setSelected(true);
+    		return;
+    	}
+    }
+
+    @FXML
+    void verRecomendacaoGrafo(ActionEvent event) {
+    	toggleVerPastores.setSelected(false);
+    	toggleSeitasGrafo.setSelected(false);
+    	tfRecomendacaoGrafo.setDisable(false);
+    	if(!toggleRecomendacao.isSelected()) {
+    		toggleRecomendacao.setSelected(true);
+    		return;
+    	}
+    	if(!tfRecomendacaoGrafo.getText().isEmpty() && controlador.pesquisarPorLogin(tfRecomendacaoGrafo.getText())!=null) {
+    		recomendarAmigosGrafo(null);
+    	}
+    	else {
+    		grafo.construirgrafo(arestasBonitas);
+    	}
+    }
+
+    @FXML
+    void verSeitasGrafo(ActionEvent event) {
+    	toggleRecomendacao.setSelected(false);
+    	toggleVerPastores.setSelected(false);
+    	tfRecomendacaoGrafo.setDisable(true);
+    	if(!toggleSeitasGrafo.isSelected()) {
+    		toggleSeitasGrafo.setSelected(true);
+    		return;
+    	}
+        if(toggleSeitasGrafo.isSelected()) {
+        	//grafo.construirgrafo(arestasBonitas);
+        	//TODO pesquisar
+        }
+        
     }
 }
 

@@ -73,6 +73,16 @@ public class Grafo {
 		}
 		
 	}
+	public void mudarAresta(boolean éBonito) {
+		for(int i = 0; i < getEdgeCount(); i++) {
+			if(éBonito)
+				getEdge(i).setAttribute("ui.style", "shape: cubic-curve;");
+			else {
+				
+				getEdge(i).removeAttribute("ui.style");
+			}
+		}
+	}
 	public void setarNos() {
 		for (UsuarioTerraplanista u : controlador.getUsuarios()) {
 			Node no;
@@ -96,6 +106,7 @@ public class Grafo {
 	}
 	public void setarNosRecomendacao(UsuarioTerraplanista usuario) {
 		List<UsuarioTerraplanista> recomendação = controlador.recomendacoesPara(usuario);
+		setarNos();
 		getNode(usuario.getLogin()).setAttribute("ui.style", "fill-color: #c9e322; text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #A7CC; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
 		for(UsuarioTerraplanista u : recomendação) {
 			getNode(u.getLogin()).setAttribute("ui.style", "fill-color: #1fad3c; text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #A7CC; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
@@ -392,6 +403,11 @@ public class Grafo {
 	}
 	public void write(FileSink output, String filename) throws IOException {
 		grafo.write(output, filename);
+	}
+	public void setarNosPossiveisPastores() {
+		for(int i = 0; i < 3 && i < controlador.possiveisPastores().size(); i++) {
+			getNode(controlador.possiveisPastores().get(i).getLogin()).setAttribute("ui.style", "fill-color: #3220ba; text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #A7CC; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
+		}
 	}
 	
 }
