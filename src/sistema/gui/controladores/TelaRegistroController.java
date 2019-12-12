@@ -187,6 +187,7 @@ public class TelaRegistroController {
     
     @FXML
     void cancelar(ActionEvent event) {
+    	limparTelaDeRegistro();
     	TerraPlanizer.trocarTela("login");
     }
 
@@ -218,7 +219,7 @@ public class TelaRegistroController {
     	tfOutroInteresse.setText("");
     	tfRecomendacao.setText("");
     	pfSenha.setText("");
-    	datePickerDataNascimento.getEditor().clear();
+    	datePickerDataNascimento.setValue(null);
     	listaInteresses.getItems().clear();
     	labelErroData.setText("");
     	labelErroGeral.setText("");
@@ -226,6 +227,7 @@ public class TelaRegistroController {
     	labelErroNome.setText("");
     	labelErroRecomedacao.setText("");
     	labelErroTermos.setText("");
+    	imageAux = "/images/user.png";
     }
     private boolean isTudoPreenchido() {
     	if (tfNome.getText().isEmpty()) {
@@ -308,6 +310,7 @@ public class TelaRegistroController {
     }
     @FXML
     void initialize() {
+    	
     	
     	
     	inicializaComboBoxInteresses();

@@ -421,16 +421,19 @@ public class TelaLogadaController {
     //PAGAMENTO ACIMA
     @FXML
     void initialize() {
-    	
+    	recomendados = controlador.recomendacoesPara(contaLogada);
     	pane_perfil.toFront();
+    	inicializaAmigos();
     	inicializaComboBoxInteresses();
     	inicializaPerfil();
     	inicializaPane();
-    	inicializaAmigos();
+    	
     	inicializaEditar();
     	inicializaFotos();
     	atualizarRecomendados();
+    	atualizarListaConvites();
     	toggleArestasBonitas.setSelected(true);
+    	listaDeUsuarios = recriandoListaUsuarios(listausuarios);
     	
     }
     @FXML
@@ -493,8 +496,14 @@ public class TelaLogadaController {
     private void inicializaAmigos() {
     	//lv_pesquisa.setCellFactory(callback);
     	//lv_amigos.setCellFactory(callback);
+    	
+    	for(UsuarioTerraplanista u : controlador.convitesEnviadosPor(contaLogada)) {
+    		listaAmigos.add(u);
+    	}
+    	
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
     	lv_pesquisa.setItems(FXCollections.observableList(listaDeUsuarios));
+    	
     }
     
     private List<UsuarioTerraplanista> copiandoListasDoRep(List<UsuarioTerraplanista> lista){
@@ -644,7 +653,14 @@ public class TelaLogadaController {
     void atualizarRecomendados() {
     	
     	
-    	recomendados = controlador.recomendacoesPara(contaLogada);
+    	
+    	for(UsuarioTerraplanista u:recomendados) {
+    		for(UsuarioTerraplanista a:listaAmigos) {
+    			if(u.getLogin().contentEquals(a.getLogin())) {
+    				recomendados.remove(u);
+    			}
+    		}
+    	}
     	try{
     		lvRecomendacaoAmigos.setItems(FXCollections.observableList(recomendados));
     	}catch(Exception e) {
@@ -674,15 +690,7 @@ public class TelaLogadaController {
     			e.remove(listaAmigos.get(i));
     		}
     	}
-    	recomendados = controlador.recomendacoesPara(contaLogada);
-    	/*System.out.println(recomendados);
-    	System.out.println(e);
-    	for(UsuarioTerraplanista u : recomendados) {
-    		if(e.contains(u)) {
-    			e.remove(u);
-    		}
-    	}
-    	*/
+    	
     	
     	return ret;
     }
@@ -702,7 +710,7 @@ public class TelaLogadaController {
     }
     
     void atualizarListaConvites() {
-    	
+    	labelNumConvites.setText(""+controlador.numeroDeConvitesPara(controlador.getUsuarioLogado()));
     	Collections.sort(convites, new Comparator<UsuarioTerraplanista>()
         {
             public int compare(UsuarioTerraplanista f1, UsuarioTerraplanista f2)
@@ -884,6 +892,10 @@ public class TelaLogadaController {
     	else {
     		labelAvisoConvites.setText("");
     		contaLogada.addAmigo(lvConvites.getSelectionModel().getSelectedItem());
+    		convites.remove(lvConvites.getSelectionModel().getSelectedItem());
+    		controlador.removerConvite(lvConvites.getSelectionModel().getSelectedItem(), contaLogada);
+    		if(controlador.removerConvite(contaLogada, lvConvites.getSelectionModel().getSelectedItem())) listaAmigos.remove(lvConvites.getSelectionModel().getSelectedItem());;
+    		controlador.salvarConvites();
     		controlador.salvar();
     		//TODO deixar esse nome verde na lista de amigos
     		listaAmigos.add(lvConvites.getSelectionModel().getSelectedItem());
@@ -904,14 +916,76 @@ public class TelaLogadaController {
     		labelAvisoConvites.setText("Selecione algum convite!");
     	}
     	else {
-    		labelAvisoConvites.setText("");
-    		controlador.removerConvite(lvConvites.getSelectionModel().getSelectedItem(), contaLogada);
-    		controlador.salvarConvites();
-    		atualizarListaConvites();
+    		
+    		if(mostrarAlerta(1)) {
+        		labelAvisoConvites.setText("");
+        		controlador.removerConvite(lvConvites.getSelectionModel().getSelectedItem(), contaLogada);
+        		controlador.salvarConvites();
+        		convites.remove(lvConvites.getSelectionModel().getSelectedItem());
+        		atualizarListaConvites();
+    		}
     	}
     }
     
-    @FXML
+    private boolean mostrarAlerta(int tipo) {
+    	switch (tipo) {
+    	case 1:{
+    		Alert alerta = new Alert(AlertType.CONFIRMATION);
+    		alerta.setTitle("Remover convite");
+    		alerta.setHeaderText("Deseja realmente excluir esse convite?");
+    		alerta.setContentText("Confirme a remoção do convite.");
+    		alerta.getButtonTypes().remove(ButtonType.CANCEL);
+    		alerta.getButtonTypes().remove(ButtonType.OK);
+    		alerta.getButtonTypes().add(ButtonType.YES);
+    		alerta.getButtonTypes().add(ButtonType.NO);
+    		alerta.showAndWait();
+    		if(alerta.getResult() == ButtonType.YES) {
+    			return true;
+    		}
+    		else {
+    			return false;
+    		}
+    	}
+		case 2:{
+			Alert alerta1 = new Alert(AlertType.CONFIRMATION);
+    		alerta1.setTitle("Remover amigo");
+    		alerta1.setHeaderText("Deseja realmente excluir esse amigo?");
+    		alerta1.setContentText("Confirme a remoção do amigo.");
+    		alerta1.getButtonTypes().remove(ButtonType.CANCEL);
+    		alerta1.getButtonTypes().remove(ButtonType.OK);
+    		alerta1.getButtonTypes().add(ButtonType.YES);
+    		alerta1.getButtonTypes().add(ButtonType.NO);
+    		alerta1.showAndWait();
+    		if(alerta1.getResult() == ButtonType.YES) {
+    			return true;
+    		}
+    		else {
+    			return false;
+    		}
+		}
+		case 3:{
+			Alert alerta1 = new Alert(AlertType.CONFIRMATION);
+    		alerta1.setTitle("Remover todo mundo");
+    		alerta1.setHeaderText("Deseja realmente excluir tudo?");
+    		alerta1.setContentText("Confirme a remoção de tudo.");
+    		alerta1.getButtonTypes().remove(ButtonType.CANCEL);
+    		alerta1.getButtonTypes().remove(ButtonType.OK);
+    		alerta1.getButtonTypes().add(ButtonType.YES);
+    		alerta1.getButtonTypes().add(ButtonType.NO);
+    		alerta1.showAndWait();
+    		if(alerta1.getResult() == ButtonType.YES) {
+    			return true;
+    		}
+    		else {
+    			return false;
+    		}
+		}
+    	default:
+    		return false;
+    	}
+	}
+
+	@FXML
     void enviarConvite() {
     	if(lv_pesquisa.getSelectionModel().getSelectedItem()!=null) {
     		labelAvisoConvites.setText("");
@@ -936,8 +1010,9 @@ public class TelaLogadaController {
     		labelAvisoConvites.setText("");
     		for(int i = 0; i < listaDeUsuarios.size(); i++) {
     			controlador.enviarConvite(contaLogada, listaDeUsuarios.get(i));
-    			controlador.salvarConvites();
+    			
     		}
+    		controlador.salvarConvites();
     		//TODO trocar cor do nome pra amarelo
     		listaAmigos.addAll(listaDeUsuarios);
     		listaDeUsuarios.removeAll(listaDeUsuarios);
@@ -964,6 +1039,7 @@ public class TelaLogadaController {
     		atualizarListaAmigos();
     		atualizarRecomendados();
     		atualizarListaUsuarios();
+    		atualizarListaConvites();
     	}
     	else {
     		labelAvisoAmigos.setText("Selecione alguém!");
@@ -995,21 +1071,29 @@ public class TelaLogadaController {
     void removerAmigo() {
     	if(lv_amigos.getSelectionModel().getSelectedItem()!=null) {
     		labelAvisoAmigos.setText("");
-    		/*if(texto amarelo) {
-    			
+    		if(controlador.convitesEnviadosPor(contaLogada).contains(lv_amigos.getSelectionModel().getSelectedItem())) {
+    			if(mostrarAlerta(1)) {
+        			controlador.removerConvite(contaLogada, lv_amigos.getSelectionModel().getSelectedItem());
+        			listaAmigos.remove(lv_amigos.getSelectionModel().getSelectedItem());
+            		listaDeUsuarios.add(lv_amigos.getSelectionModel().getSelectedItem());
+        			controlador.salvar();
+        			recomendados = controlador.recomendacoesPara(contaLogada);
+        			atualizarListaAmigos();
+            		atualizarListaUsuarios();
+            		atualizarRecomendados();
+    			}
     		}
-    		else if(texto verde) {
-    			if(recomendados.contains(lv_amigos.getSelectionModel().getSelectedItem())) {
-        			recomendados.remove(lv_amigos.getSelectionModel().getSelectedItem());
-        		}
-        		controlador.getUsuarioLogado().getAmigos().remove(lv_amigos.getSelectionModel().getSelectedItem());
-        		controlador.salvar();
-        		listaAmigos.remove(lv_amigos.getSelectionModel().getSelectedItem());
-        		listaDeUsuarios.add(lv_amigos.getSelectionModel().getSelectedItem());
-        		atualizarListaAmigos();
-        		atualizarListaUsuarios();
-        		atualizarRecomendados();
-    		}*/
+    		else {
+    			if(mostrarAlerta(2)) {
+            		controlador.getUsuarioLogado().removerAmigo(lv_amigos.getSelectionModel().getSelectedItem());
+            		controlador.salvar();
+            		listaAmigos.remove(lv_amigos.getSelectionModel().getSelectedItem());
+            		listaDeUsuarios.add(lv_amigos.getSelectionModel().getSelectedItem());
+            		atualizarListaAmigos();
+            		atualizarListaUsuarios();
+            		atualizarRecomendados();
+    			}
+    		}
     		
     	}
     	else {
@@ -1021,21 +1105,23 @@ public class TelaLogadaController {
     @FXML 
     void removeGeral() {
     	if(!listaAmigos.isEmpty()) {
-    		//TODO adaptar para o esquema de convites
-    		
-    		/*labelAvisoAmigos.setText("");
-    		controlador.getUsuarioLogado().getAmigos().removeAll(listaAmigos);
-    		controlador.salvar();
-    		for(UsuarioTerraplanista u : listaAmigos) {
-    			if(recomendados.contains(u)) {
-    				recomendados.remove(u);
-    			}
+    		if(mostrarAlerta(3)) {
+    			for(UsuarioTerraplanista u : listaAmigos) {
+        			if(contaLogada.getAmigos().contains(u))contaLogada.removerAmigo(u);
+        			else controlador.removerConvite(contaLogada, u);
+        			
+        		}
+        		controlador.salvar();
+    			
+    			listaDeUsuarios.addAll(listaAmigos);
+            	listaAmigos.removeAll(listaAmigos);
+            	recomendados = controlador.recomendacoesPara(contaLogada);
+            	atualizarListaAmigos();
+            	atualizarListaUsuarios();
+        		atualizarRecomendados();
     		}
-    		listaDeUsuarios.addAll(listaAmigos);
-        	listaAmigos.removeAll(listaAmigos);
-        	atualizarListaAmigos();
-        	atualizarListaUsuarios();
-    		atualizarRecomendados();*/
+    		
+    		
     	}
     	else {
     		labelAvisoAmigos.setText("Sua lista de amigos já está vazia!");

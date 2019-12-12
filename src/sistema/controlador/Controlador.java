@@ -2,6 +2,7 @@ package sistema.controlador;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import sistema.beans.UsuarioTerraplanista;
 import sistema.repositorios.RepositorioUsuariosTerraplanistas;
@@ -73,6 +74,9 @@ public class Controlador {
 		return repositorioUsuarioTerraPlanistas.pesquisarPorLogin(login);
 	}
 	static private Controlador instancia = null;
+	public HashMap<String, String> getConvites() {
+		return repositorioUsuarioTerraPlanistas.getConvites();
+	}
 	static public Controlador getInstancia() {
 		if (instancia == null) {
 			instancia = new Controlador();
@@ -81,6 +85,9 @@ public class Controlador {
 	}
 	private Controlador () {
 		repositorioUsuarioTerraPlanistas = new RepositorioUsuariosTerraplanistas();
+	}
+	public List<UsuarioTerraplanista> convitesEnviadosPor(UsuarioTerraplanista esseCara) {
+		return repositorioUsuarioTerraPlanistas.convitesEnviadosPor(esseCara);
 	}
 	
 }
