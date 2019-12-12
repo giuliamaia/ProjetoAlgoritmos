@@ -711,6 +711,12 @@ public class TelaLogadaController {
     
     void atualizarListaConvites() {
     	labelNumConvites.setText(""+controlador.numeroDeConvitesPara(controlador.getUsuarioLogado()));
+    	if(controlador.numeroDeConvitesPara(controlador.getUsuarioLogado())>0) {
+    		labelNumConvites.setStyle("-fx-background-color: #fcba03");
+    	}
+    	else {
+    		labelNumConvites.setStyle("-fx-background-color: #47cad1");
+    	}
     	Collections.sort(convites, new Comparator<UsuarioTerraplanista>()
         {
             public int compare(UsuarioTerraplanista f1, UsuarioTerraplanista f2)
