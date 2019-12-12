@@ -46,7 +46,7 @@ import sistema.beans.UsuarioTerraplanista;
 import sistema.controlador.Controlador;
 import sistema.gui.TerraPlanizer;
 import javafx.scene.shape.Rectangle;
-//import javafx.util.Callback;
+import javafx.util.Callback;
 
 public class TelaLogadaController {
 	
@@ -64,40 +64,7 @@ public class TelaLogadaController {
 	private String imageAux ="/images/user.png";
 	private boolean arestasBonitas = true;
 	
-	/*Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>> callback = new Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>>() {
-		
-		@Override
-		public ListCell<UsuarioTerraplanista> call(ListView<UsuarioTerraplanista> arg0) {
-			ListCell<UsuarioTerraplanista> cell = new ListCell<UsuarioTerraplanista>() {
-				@Override
-				protected void updateItem(UsuarioTerraplanista usuario, boolean btl) {
-					super.updateItem(usuario, btl);
-					if(usuario!=null) {
-						Circle circulo = new Circle(15, Color.BLUE);
-						Image img = new Image(usuario.getImage());
-						ImageView imgView = new ImageView(img);
-						imgView.resize(25, 25);
-						if(isAmigo(usuario)) {
-							
-							circulo.setStroke(Color.GREEN);
-							
-						}
-						else {
-							
-							circulo.setStroke(Color.YELLOW);
-							
-						}
-						circulo.setFill(new ImagePattern(imgView.snapshot(null, null)));
-						//setTextFill(Color.AQUAMARINE);
-						setText(usuario.getNome());
-						setGraphic(circulo);
-					}
-				}
-			
-			};
-			return cell;
-		}
-	};*/
+	
 	
     
 	@FXML
@@ -309,7 +276,44 @@ public class TelaLogadaController {
     @FXML
     private JFXRadioButton toggleRecomendacao;
 
-
+    Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>> callback = new Callback<ListView<UsuarioTerraplanista>, ListCell<UsuarioTerraplanista>>() {
+	
+	@Override
+	public ListCell<UsuarioTerraplanista> call(ListView<UsuarioTerraplanista> arg0) {
+		ListCell<UsuarioTerraplanista> cell = new ListCell<UsuarioTerraplanista>() {
+			@Override
+			protected void updateItem(UsuarioTerraplanista usuario, boolean btl) {
+				super.updateItem(usuario, btl);
+				if(usuario!=null) {
+					Circle circulo = new Circle(15, Color.BLUE);
+					Image img = new Image(usuario.getImage());
+					ImageView imgView = new ImageView(img);
+					imgView.resize(25, 25);
+					if(isAmigo(usuario)) {
+						
+						circulo.setStroke(Color.GREEN);
+						
+					}
+					else {
+						
+						circulo.setStroke(Color.YELLOW);
+						
+					}
+					circulo.setFill(new ImagePattern(imgView.snapshot(null, null)));
+					//setTextFill(Color.AQUAMARINE);
+					setText(usuario.getNome());
+					setGraphic(circulo);
+				}
+				else {
+					 setText(null);
+			         setGraphic(null);
+				}
+			}
+		
+		};
+		return cell;
+	}
+};
     @FXML
     private Label labelAvisoConvites;
     
@@ -529,9 +533,9 @@ public class TelaLogadaController {
     		listaAmigos.add(u);
     	}
     	
-    	//lv_amigos.setCellFactory(callback);
+    	lv_amigos.setCellFactory(callback);
     	lv_amigos.setItems(FXCollections.observableList(listaAmigos));
-    	//lv_pesquisa.setCellFactory(callback);
+    	lv_pesquisa.setCellFactory(callback);
     	lv_pesquisa.setItems(FXCollections.observableList(listaDeUsuarios));
     	System.out.println(lv_amigos.getItems().toString());
     }
