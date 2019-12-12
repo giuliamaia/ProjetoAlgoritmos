@@ -47,7 +47,15 @@ public class Grafo {
 		//grafo.setAttribute("ui.stylesheet", "graph { fill-color: #DCC; }");
 		//construirgrafo();
 	}
-	
+	public void setarSeitas(List<UsuarioTerraplanista> lista) {
+		for(int i = 0; i<getNodeCount(); i++) {
+			for(int j = 0; j < lista.size() ; j++) {
+				if(getNode(i).getId().contains(lista.get(j).getLogin())) {
+					getNode(i).setAttribute("ui.style", "fill-color: #de141b; text-alignment: at-right; text-padding: 3px, 2px; text-background-mode: rounded-box; text-background-color: #A7CC; text-color: white; text-style: bold-italic; text-color: #FFF; text-offset: 5px, 0px;");
+				}
+			}
+		}
+	}
 	public void construirgrafo(boolean éEstilizado) {
 		clear();
 		setarNos();
@@ -113,9 +121,7 @@ public class Grafo {
 		}
 		
 	}
-	public void setarArestas() {
-		//TODO
-	}
+	
 	public void addAttributeSink(AttributeSink arg0) {
 		grafo.addAttributeSink(arg0);
 	}
