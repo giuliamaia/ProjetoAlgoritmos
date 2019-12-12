@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
 public class Splash {
 	private final int LARGURA_SPLASH = 480;
 	private final int ALTURA_SPLASH = 270;
-	private final int TEMPO_SPLASH = 6000;
+	private final int TEMPO_SPLASH = 6500;
 	private final String CAMINHO_SPLASH = "/images/homicomendoterra.gif";
 	private final String CAMINHO_SPLASH2 = "/images/moçotirafototerra.gif";
 	
@@ -20,8 +20,8 @@ public class Splash {
 		Random rand = new Random();
 		int x=rand.nextInt(11);
 		JWindow janelaSplash = new JWindow();
-		
-		if(x>0&&x<6) {
+		System.out.println(x);
+		if(x>=0 && x<=5) {
 			janelaSplash.getContentPane().add(new JLabel("", new ImageIcon(getClass().getResource(CAMINHO_SPLASH)), SwingConstants.CENTER));
 		}
 		else {
