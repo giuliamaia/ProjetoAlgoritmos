@@ -90,4 +90,8 @@ public class Controlador {
 		return repositorioUsuarioTerraPlanistas.convitesEnviadosPor(esseCara);
 	}
 	
+	public List<List<UsuarioTerraplanista>> pessoasParaSeita(){
+		return this.repositorioUsuarioTerraPlanistas.pessoasParaSeita();
+	}
+	
 }

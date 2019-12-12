@@ -378,4 +378,100 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 			}
 			return retorno;
 		}
+		
+		public List<UsuarioTerraplanista> getAmigosComuns(UsuarioTerraplanista user, UsuarioTerraplanista outro) {
+			List<UsuarioTerraplanista> amigosComuns = new ArrayList<UsuarioTerraplanista>();
+			
+			if(user.equals(outro) || user == null || outro == null) {
+				return null;
+			}
+			
+			for(int i = 0; i<user.getAmigos().size(); i++) {
+				if(outro.getAmigos().contains(user.getAmigos().get(i))) {
+					amigosComuns.add(user.getAmigos().get(i));
+				}
+			}
+			
+			return amigosComuns;
+		}
+		
+		public List<UsuarioTerraplanista> addSemRepetir(List<UsuarioTerraplanista> lista, List<UsuarioTerraplanista> outra) {
+			
+			List<UsuarioTerraplanista> list = new ArrayList<UsuarioTerraplanista>(lista);
+			
+			for(int i = 0; i<outra.size(); i++) {
+				int count = 0;
+				for(int j = 0; j < list.size(); j++) {
+					
+					if(outra.get(i).equals(list.get(j))) {
+						count++;
+					}
+				}
+				
+				if(count == 0) {
+					list.add(outra.get(i));
+				}
+			}
+			
+			return list;
+		}
+		
+		public List<UsuarioTerraplanista> tratarPanelinha(List<UsuarioTerraplanista> panelinha) {
+			
+			if(panelinha == null) {
+				return null;
+			}
+			
+			List<UsuarioTerraplanista> temp = new ArrayList<UsuarioTerraplanista>();
+			
+			for(int i = 0; i<panelinha.size(); i++) {
+				int count = 0;
+				
+				for(int j = 0; j < panelinha.get(i).getAmigos().size(); j++) {
+					if(panelinha.contains(panelinha.get(i).getAmigos().get(j))) {
+						count++;
+					}
+				}
+				
+				if(count == panelinha.size() - 1) {
+					temp.add(panelinha.get(i));
+				}
+			}
+			
+			return temp;
+		}
+		
+		public List<List<UsuarioTerraplanista>> pessoasParaSeita(){
+			
+			List<List<UsuarioTerraplanista>> panelinhas = new ArrayList<List<UsuarioTerraplanista>>();
+			
+			for(int i = 0; i<this.usuarios.size(); i++) {
+				
+				UsuarioTerraplanista user1 = new UsuarioTerraplanista(this.usuarios.get(i));
+				
+				List<UsuarioTerraplanista> temp = new ArrayList<UsuarioTerraplanista>();
+				temp.add(user1);
+				
+				for(int j = 0; j<user1.getAmigos().size(); j++) {
+					UsuarioTerraplanista user2 = new UsuarioTerraplanista(this.usuarios.get(i).getAmigos().get(j));
+					
+					List<UsuarioTerraplanista> amigosC = new ArrayList<UsuarioTerraplanista>(getAmigosComuns(user1, user2));
+					if(amigosC != null) {
+						temp.add(user2);
+						for(int k = 0; k < amigosC.size(); k++) {
+							List<UsuarioTerraplanista> amgComumUser1 = new ArrayList<UsuarioTerraplanista>(getAmigosComuns(user1, amigosC.get(k)));
+							amgComumUser1.addAll(getAmigosComuns(user2, amigosC.get(k)));
+							
+							temp = addSemRepetir(temp, amgComumUser1);
+
+						}
+					}
+				}
+				
+				//temp = tratarPanelinha(temp);
+				panelinhas.add(temp);
+			}
+			return panelinhas;
+		}
+		
 }

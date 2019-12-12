@@ -113,4 +113,17 @@ public class UsuarioTerraplanista implements Serializable{
 	public String toString() {
 		return  nome + " (" +login + ")";
 	}
+	public UsuarioTerraplanista(UsuarioTerraplanista user) {
+		this.amigos = user.getAmigos();
+		this.interesses = user.getInteresses();
+		this.nome = user.getNome();
+		this.login = user.getLogin();
+		this.senha = user.getSenha();
+		this.dataNascimento = user.getDataNascimento();
+		this.horaCriaçãoConta = user.getHoraCriaçãoConta();
+		this.image = user.getImage();
+		this.recomendacoes = user.getRecomendacoes();
+	}
+	
+	
 }
