@@ -23,79 +23,6 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="513.0" prefWidth="844.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sistema.gui.controladores.TelaLogadaController">
    <children>
       <FontAwesomeIconView fill="#28d4c8" glyphName="CREDIT_CARD_ALT" layoutX="367.0" layoutY="53.0" size="40" />
-      <Pane fx:id="pane_doaçao" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
-         <children>
-            <Text fill="#6d7a7c" layoutX="15.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Doação" wrappingWidth="282.0">
-               <font>
-                  <Font name="System Bold" size="32.0" />
-               </font>
-            </Text>
-            <Text fill="#607072" layoutX="16.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cumpra suas obrigações!" wrappingWidth="258.591796875">
-               <font>
-                  <Font name="System Italic" size="11.0" />
-               </font>
-            </Text>
-            <JFXButton fx:id="bnt_minimizar" layoutX="557.0" layoutY="12.0" onAction="#minimizar" text="Minimizar">
-               <graphic>
-                  <FontAwesomeIconView fill="#3f12f2" glyphName="MINUS" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="bnt_sair" layoutX="636.0" layoutY="12.0" onAction="#sair" text="Sair">
-               <graphic>
-                  <FontAwesomeIconView fill="#f81010" glyphName="POWER_OFF" />
-               </graphic>
-            </JFXButton>
-            <Pane layoutX="14.0" layoutY="74.0" prefHeight="208.0" prefWidth="330.0" style="-fx-background-color: #28d4c8;">
-               <children>
-                  <JFXTextField fx:id="tfNumCartao" focusColor="BLACK" layoutX="15.0" layoutY="100.0" prefHeight="45.0" prefWidth="300.0" promptText="Número do cartão" unFocusColor="#545151">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXTextField fx:id="tfNomeTitular" focusColor="BLACK" layoutX="15.0" layoutY="165.0" prefHeight="25.0" prefWidth="176.0" promptText="Nome do titular" unFocusColor="#545151">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXTextField fx:id="tfMes" focusColor="BLACK" layoutX="229.0" layoutY="165.0" onKeyReleased="#tentaPular" prefHeight="30.0" prefWidth="32.0" promptText="Mês" unFocusColor="#545151">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXTextField fx:id="tfAno" focusColor="BLACK" layoutX="275.0" layoutY="165.0" onKeyReleased="#tentaPular" prefHeight="30.0" prefWidth="32.0" promptText="Ano" unFocusColor="#545151">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </JFXTextField>
-                  <FontAwesomeIconView fill="#e8e8e8" glyphName="CLOUD" layoutX="270.0" layoutY="64.0" selectionEnd="0" selectionFill="#683535" size="40" text="" />
-                  <Text fill="#3c3c3c" layoutX="264.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
-                  <Text fill="WHITE" layoutX="21.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SalaCred">
-                     <font>
-                        <Font name="Corbel Light Italic" size="46.0" />
-                     </font>
-                  </Text>
-                  <Label fx:id="labelNumero" layoutX="14.0" layoutY="76.0" prefHeight="25.0" prefWidth="300.0" />
-                  <Label fx:id="labelNome" layoutX="14.0" layoutY="148.0" prefHeight="25.0" prefWidth="176.0" />
-                  <Label fx:id="labelMesAno" layoutX="233.0" layoutY="147.0" prefHeight="25.0" prefWidth="85.0" />
-               </children>
-            </Pane>
-            <Pane layoutX="14.0" layoutY="288.0" prefHeight="208.0" prefWidth="330.0" style="-fx-background-color: #28d4c8;">
-               <children>
-                  <Pane layoutY="42.0" prefHeight="40.0" prefWidth="330.0" style="-fx-background-color: #1c1b1a;" />
-                  <JFXTextField fx:id="tfCVV" focusColor="BLACK" layoutX="90.0" layoutY="138.0" onKeyReleased="#tentaPular" prefHeight="25.0" prefWidth="43.0" promptText="CVV" unFocusColor="#575756" />
-                  <Label fx:id="labelCVV" layoutX="86.0" layoutY="113.0" prefHeight="25.0" prefWidth="51.0" />
-               </children>
-            </Pane>
-            <Text fill="#807b7b" layoutX="462.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Em breve...">
-               <font>
-                  <Font size="32.0" />
-               </font>
-            </Text>
-            <FontAwesomeIconView fill="#2e9a33" glyphName="BANK" layoutX="441.0" layoutY="62.0" size="40" />
-            <JFXButton defaultButton="true" layoutX="604.0" layoutY="474.0" onAction="#confirmar" text="Confirmar" />
-            <Separator layoutX="392.0" orientation="VERTICAL" prefHeight="514.0" prefWidth="32.0" />
-         </children>
-      </Pane>
       <Pane fx:id="pane_editar" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
          <children>
             <Text layoutX="438.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" />
@@ -477,6 +404,79 @@
                   <Font name="System Bold" size="8.0" />
                </font>
             </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="pane_doaçao" layoutX="144.0" prefHeight="513.0" prefWidth="700.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Text fill="#6d7a7c" layoutX="15.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Doação" wrappingWidth="282.0">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Text>
+            <Text fill="#607072" layoutX="16.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cumpra suas obrigações!" wrappingWidth="258.591796875">
+               <font>
+                  <Font name="System Italic" size="11.0" />
+               </font>
+            </Text>
+            <JFXButton fx:id="bnt_minimizar" layoutX="557.0" layoutY="12.0" onAction="#minimizar" text="Minimizar">
+               <graphic>
+                  <FontAwesomeIconView fill="#3f12f2" glyphName="MINUS" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="bnt_sair" layoutX="636.0" layoutY="12.0" onAction="#sair" text="Sair">
+               <graphic>
+                  <FontAwesomeIconView fill="#f81010" glyphName="POWER_OFF" />
+               </graphic>
+            </JFXButton>
+            <Pane layoutX="14.0" layoutY="74.0" prefHeight="208.0" prefWidth="330.0" style="-fx-background-color: #28d4c8;">
+               <children>
+                  <JFXTextField fx:id="tfNumCartao" focusColor="BLACK" layoutX="15.0" layoutY="100.0" prefHeight="45.0" prefWidth="300.0" promptText="Número do cartão" unFocusColor="#545151">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="tfNomeTitular" focusColor="BLACK" layoutX="15.0" layoutY="165.0" prefHeight="25.0" prefWidth="176.0" promptText="Nome do titular" unFocusColor="#545151">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="tfMes" focusColor="BLACK" layoutX="229.0" layoutY="165.0" onKeyReleased="#tentaPular" prefHeight="30.0" prefWidth="32.0" promptText="Mês" unFocusColor="#545151">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="tfAno" focusColor="BLACK" layoutX="275.0" layoutY="165.0" onKeyReleased="#tentaPular" prefHeight="30.0" prefWidth="32.0" promptText="Ano" unFocusColor="#545151">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXTextField>
+                  <FontAwesomeIconView fill="#e8e8e8" glyphName="CLOUD" layoutX="270.0" layoutY="64.0" selectionEnd="0" selectionFill="#683535" size="40" text="" />
+                  <Text fill="#3c3c3c" layoutX="264.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/" />
+                  <Text fill="WHITE" layoutX="21.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SalaCred">
+                     <font>
+                        <Font name="Corbel Light Italic" size="46.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="labelNumero" layoutX="14.0" layoutY="76.0" prefHeight="25.0" prefWidth="300.0" />
+                  <Label fx:id="labelNome" layoutX="14.0" layoutY="148.0" prefHeight="25.0" prefWidth="176.0" />
+                  <Label fx:id="labelMesAno" layoutX="233.0" layoutY="147.0" prefHeight="25.0" prefWidth="85.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="14.0" layoutY="288.0" prefHeight="208.0" prefWidth="330.0" style="-fx-background-color: #28d4c8;">
+               <children>
+                  <Pane layoutY="42.0" prefHeight="40.0" prefWidth="330.0" style="-fx-background-color: #1c1b1a;" />
+                  <JFXTextField fx:id="tfCVV" focusColor="BLACK" layoutX="90.0" layoutY="138.0" onKeyReleased="#tentaPular" prefHeight="25.0" prefWidth="43.0" promptText="CVV" unFocusColor="#575756" />
+                  <Label fx:id="labelCVV" layoutX="86.0" layoutY="113.0" prefHeight="25.0" prefWidth="51.0" />
+               </children>
+            </Pane>
+            <Text fill="#807b7b" layoutX="462.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Em breve...">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Text>
+            <FontAwesomeIconView fill="#2e9a33" glyphName="BANK" layoutX="441.0" layoutY="62.0" size="40" />
+            <JFXButton defaultButton="true" layoutX="604.0" layoutY="474.0" onAction="#confirmar" text="Confirmar" />
+            <Separator layoutX="392.0" orientation="VERTICAL" prefHeight="514.0" prefWidth="32.0" />
          </children>
       </Pane>
    </children>
