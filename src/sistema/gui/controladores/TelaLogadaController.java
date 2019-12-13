@@ -700,6 +700,16 @@ public class TelaLogadaController {
     @FXML
     void abrirGrafoGrande(MouseEvent event) {
     	TerraPlanizer.abrirGrafo();
+    	grafo.construirgrafo(arestasBonitas);
+    	if(toggleVerPastores.isSelected()) {
+    		grafo.setarNosPossiveisPastores();
+    	}
+    	else if(toggleRecomendacao.isSelected()) {
+    		verRecomendacaoGrafo(null);
+    	}
+    	else {
+    		verSeitasGrafo(null);
+    	}
     }
     
 	private void inicializaComboBoxInteresses() {

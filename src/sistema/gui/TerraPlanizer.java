@@ -191,7 +191,7 @@ public class TerraPlanizer extends Application{
 			Graph g = g1.getGrafo();
 			
 			FxViewer v = new FxViewer(g, FxViewer.ThreadingModel.GRAPH_IN_GUI_THREAD);
-			g1.construirgrafo(true);
+			g1.construirgrafo(false);
 			g.setAttribute("ui.antialias");
 			g.setAttribute("ui.quality");
 			g.setAttribute("ui.stylesheet", "graph {padding: 60px;}");
