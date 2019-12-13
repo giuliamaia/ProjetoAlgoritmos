@@ -431,7 +431,7 @@ public class RepositorioUsuariosTerraplanistas implements Serializable {
 				for(LocalDateTime ldt : listaDeDatas) {
 					if(!usuarios.get(i).isPastor() && ldt.isEqual(usuarios.get(i).getHoraCriaçãoConta())) {
 						if(mapa.containsKey(usuarios.get(i).getLogin())) {
-							System.out.println(usuarios.get(i).getLogin());
+							//System.out.println(usuarios.get(i).getLogin());
 							mapa.replace(usuarios.get(i).getLogin(), mapa.get(usuarios.get(i).getLogin()) + (int)(usuarios.size() - listaDeDatas.indexOf(ldt)/6));
 						}
 						else {
