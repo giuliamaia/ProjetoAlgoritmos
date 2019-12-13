@@ -221,6 +221,7 @@ public class TelaRegistroController {
     	pfSenha.setText("");
     	datePickerDataNascimento.setValue(null);
     	listaInteresses.setItems(FXCollections.emptyObservableList());
+    	arrayListInteresses = new ArrayList<>();
     	labelErroData.setText("");
     	labelErroGeral.setText("");
     	labelErroLogin.setText("");

@@ -20,7 +20,6 @@ public class Splash {
 		Random rand = new Random();
 		int x=rand.nextInt(11);
 		JWindow janelaSplash = new JWindow();
-		System.out.println(x);
 		if(x>=0 && x<=5) {
 			janelaSplash.getContentPane().add(new JLabel("", new ImageIcon(getClass().getResource(CAMINHO_SPLASH)), SwingConstants.CENTER));
 		}
