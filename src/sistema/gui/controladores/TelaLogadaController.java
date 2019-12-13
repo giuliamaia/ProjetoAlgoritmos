@@ -508,7 +508,19 @@ public class TelaLogadaController {
 	
     @FXML
     void tentaPular() {
-    	//TODO
+    	if(tfAno.getText().length()>=2) {
+    		tfAno.setText(tfAno.getText().substring(0, 2));
+    		tfCVV.requestFocus();
+    	}
+    	if(tfMes.getText().length()>=2) {
+    		tfMes.setText(tfMes.getText().substring(0, 2));
+    		if(tfMes.getText().length() == 2 && tfAno.getText().length()!=2) {
+    			tfAno.requestFocus();
+    		}
+    	}
+    	if(tfCVV.getText().length() >= 3) {
+    		tfCVV.setText(tfCVV.getText().substring(0, 3));
+    	}
     }
     
 	private boolean isTudoVálido() throws Exception {

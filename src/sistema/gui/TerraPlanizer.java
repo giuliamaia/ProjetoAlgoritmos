@@ -110,7 +110,7 @@ public class TerraPlanizer extends Application{
         try {
 			rootLogada = FXMLLoader.load(new File("src/sistema/gui/view/TelaLogada.fxml").toURI().toURL());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		rootLogada.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -168,7 +168,7 @@ public class TerraPlanizer extends Application{
 		try {
 			conteudoDialog = (AnchorPane) FXMLLoader.load(new File("src/sistema/gui/view/TelaPagamento.fxml").toURI().toURL());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
